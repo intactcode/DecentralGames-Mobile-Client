@@ -1,7 +1,7 @@
-import HomePage from './components/HomePage';
-import Layout from './components/Layout';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import HomePage from '../components/content/HomePage';
+import Layout from '../components/Layout';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 
 const Home = () => {
