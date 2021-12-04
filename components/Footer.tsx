@@ -1,18 +1,8 @@
-import styles from '../styles/Home.module.css'
-
+import type { NextPage } from 'next';
+import styles from '../styles/Home.module.css';
 
 const Footer = () => {
-  return (
-    
-    <footer className={styles.footer}>
-    &copy;2021 Decentral Games
-  </footer>
+  return <footer className={styles.footer}>&copy;2021 Decentral Games</footer>;
+};
 
-      
-
-      
-    
-  )
-}
-
-export default Footer
+export default Footer;
