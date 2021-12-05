@@ -21,7 +21,7 @@ const HomePage = () => {
 
       <h1 className={styles.title}>Mobile ICE</h1>
 
-      <p className={styles.description}>Play-to-Earn Games</p>
+      <p className={styles.description}>Decentral Games</p>
     </main>
   );
 };
