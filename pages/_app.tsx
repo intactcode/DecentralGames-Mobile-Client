@@ -1,12 +1,16 @@
 import NextNProgress from 'nextjs-progressbar';
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+import Aux from '../components/_Aux';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <>
-  <NextNProgress />
-  <Component {...pageProps} />
-  </>
+  return (
+    <Aux>
+      <NextNProgress />
+
+      <Component {...pageProps} />
+    </Aux>
+  );
 }
 
-export default MyApp
+export default MyApp;
