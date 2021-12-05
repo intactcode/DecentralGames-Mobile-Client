@@ -2,7 +2,7 @@ import Layout from '../components/Layout';
 import Header from '../components/Header';
 import Constants from '../components/Constants';
 import Images from '../components/Images';
-import styles from '../components/styles/Home.module.css';
+import styles from '../styles/Home.module.css';
 
 const Offline = () => {
   return (
