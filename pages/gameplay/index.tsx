@@ -9,7 +9,7 @@ import ProgressBar from "../../components/ProgressBar";
 import Card from "../../components/Card";
 import { useEffect, useState } from "react";
 
-export default function gameplay() {
+export default function Gameplay() {
     const [turn, setTurn] = useState(0);
     const [active, setActive] = useState<boolean[]>([]);
     useEffect(() => {
@@ -31,13 +31,13 @@ export default function gameplay() {
         <Character image="images/character.png" left="calc(50% - 36px)" top="460px" active={active[0]} user turn={turn == 0} />
         <Box position="absolute" top="200px" left="calc(50% - 80px)">
             <Box display="flex">
-                <Card type="Carreau" number="A" />
-                <Card type="Pique" number="J" />
-                <Card type="Carreau" number="A" />
+                <Card type="Carreau" number="A" transform="" />
+                <Card type="Pique" number="J" transform="" />
+                <Card type="Carreau" number="A" transform="" />
             </Box>
             <Box display="flex" pl="30px">
-                <Card type="Carreau" number="A" />
-                <Card type="Carreau" number="A" />
+                <Card type="Carreau" number="A" transform="" />
+                <Card type="Carreau" number="A" transform="" />
             </Box>
         </Box>
         <Box display="flex" justifyContent="center">

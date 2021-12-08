@@ -7,11 +7,11 @@ import Card from './../components/Card';
 
 interface Props {
     image: string,
-    left: number,
-    top: number,
+    left: string,
+    top: string,
     active: boolean,
-    user: boolean,
-    raise: number,
+    user?: any,
+    raise?: any,
     turn: boolean
 }
 
