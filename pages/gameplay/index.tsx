@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function gameplay() {
     const [turn, setTurn] = useState(0);
-    const [active, setActive] = useState([]);
+    const [active, setActive] = useState<boolean[]>([]);
     useEffect(() => {
         let temp = [...active];
         temp[0] = true;
@@ -53,9 +53,9 @@ export default function gameplay() {
                     <Dot mt="2px" />
                 </TurnButton>
                 <Box display="flex" justifyContent="space-between" mt="10px" style={{ opacity: turn == 0 ? 1 : 0.2 }}>
-                    <ActionButton backgroundColor="#A82822">Fold</ActionButton>
-                    <ActionButton backgroundColor="#3D86A6">Call 300</ActionButton>
-                    <ActionButton backgroundColor="#3DA65A">Raise</ActionButton>
+                    <ActionButton style={{ backgroundColor: "#A82822" }}>Fold</ActionButton>
+                    <ActionButton style={{ backgroundColor: "#3D86A6" }}>Call 300</ActionButton>
+                    <ActionButton style={{ backgroundColor: "#3DA65A" }}>Raise</ActionButton>
                 </Box>
             </Box>
         </Box>
