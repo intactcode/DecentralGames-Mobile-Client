@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <Layout>
       <Header title={Constants.TITLE} image={Images.SOCIAL_SHARE} />
-
+      
       <HomePage />
     </Layout>
   );

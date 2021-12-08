@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 const Footer = () => {
   return (
     <div className={styles.footer}>
-      <Link href="">
+      <Link href="/gameplay">
         <a className={styles.card}>
           <h2>Gameplay</h2>
         </a>
