@@ -2,12 +2,10 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Larsseit-BoldItalic';
-  background-color: #1c1c1e;
-}
-html{
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #1c1c1e;
+
 }
 a {
   color: inherit;
@@ -19,6 +17,6 @@ a {
 }
 
 @font-face {
-  font-family: 'Larsseit-BoldItalic';
-  src: url('/public/fonts/Larsseit/Larsseit-BoldItalic.otf');
+  font-family: 'Larsseit';
+  src: url('/fonts/Larsseit/Larsseit.otf');
 }

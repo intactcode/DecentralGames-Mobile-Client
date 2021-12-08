@@ -26,7 +26,7 @@ const CardBody = styled(Box)`
 
 const ProgressBar: React.FC<Props> = ({ type, number, transform }) => {
     return (
-        <CardBody style={{ transform: transform, margin: !transform && "5px" }}>
+        <CardBody style={{ transform: transform, margin: transform ? "0px" : "5px" }}>
             <Box fontSize="28px" color={type == 'Carreau' ? "red" : "black"} fontWeight="bold">{number}</Box>
             <img src={`images/${type}.png`} width="19px" />
         </CardBody>

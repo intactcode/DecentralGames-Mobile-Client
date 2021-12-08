@@ -40,7 +40,7 @@ const Character: React.FC<Props> = ({ image, left, top, active, user, raise, tur
                 <img src={image} width="60px" style={{ opacity: active ? "1" : "0.2" }} />
             </PlayerCircle>
             {raise && <RaiseMoney>
-                <Box fontWeight="bold">300</Box>
+                <Box fontWeight="bold" mt="-3px">300</Box>
                 <img src="images/freecoin.png" />
             </RaiseMoney>}
             <Box style={{ opacity: active ? "1" : "0.6" }} mt="7px">

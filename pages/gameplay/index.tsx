@@ -19,10 +19,10 @@ export default function gameplay() {
         setActive(temp);
     }, [])
 
-    return <Box position="relative" mt="20px">
+    return <Body >
         <Table />
-        <BlackEllipse left="40px" cursor="pointer"><BsBoxArrowLeft /></BlackEllipse>
-        <BlackEllipse right="40px" cursor="pointer"><MdOutlineLeaderboard /></BlackEllipse>
+        <BlackEllipse left="40px"><BsBoxArrowLeft /></BlackEllipse>
+        <BlackEllipse right="40px"><MdOutlineLeaderboard /></BlackEllipse>
         <Character image="images/character.png" left="calc(50% - 36px)" top="0px" active={active[3]} turn={turn == 3} />
         <Character image="images/character.png" left="calc(50% - 160px)" top="120px" active={active[4]} turn={turn == 4} />
         <Character image="images/character.png" left="calc(50% + 90px)" top="120px" active={active[2]} turn={turn == 2} />
@@ -43,9 +43,9 @@ export default function gameplay() {
         <Box display="flex" justifyContent="center">
             <Box pt="540px" px="20px" width="374px">
                 <TurnButton ml="calc(100% - 90px)" zIndex={10} position="relative" onClick={() => {
-                    setTurn((turn + 1) % 5);
+                    setTurn((turn + 1) % 6);
                     let temp = [...active];
-                    temp[(turn + 1) % 5] = true;
+                    temp[(turn + 1) % 6] = true;
                     setActive(temp);
                 }}
                 >
@@ -74,8 +74,15 @@ export default function gameplay() {
                 <ProgressBar type={2} percent={3 / 4} text="3/4" />
             </Box>
         </Box>
-    </Box >
+    </Body >
 }
+
+
+const Body = styled(Box)`
+    position:relative;
+    margin-top : 20px;
+    font-family: 'Larsseit';
+`
 
 const Table = styled(Box)`
     background-image: url("images/Table.png");
@@ -86,6 +93,7 @@ const Table = styled(Box)`
     left : calc(50% - 187px);
 `
 const BlackEllipse = styled(Box)`
+    cursor : pointer;
     width : 40px;
     height : 40px;
     background : #2A2A2A;
