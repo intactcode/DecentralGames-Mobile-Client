@@ -36,20 +36,22 @@ const Character: React.FC<Props> = ({ image, left, top, active, user, raise, tur
                 </SpinCircle>
             </>
             }
-            <PlayerCircle position="relative" zIndex={1}>
-                <img src={image} width="60px" style={{ opacity: active ? "1" : "0.2" }} />
+            <PlayerCircle active={active}>
+                <img src={image} width="60px" />
             </PlayerCircle>
-            {raise && <RaiseMoney>
-                <Box fontWeight="bold" mt="-3px">300</Box>
-                <img src="images/freecoin.png" />
-            </RaiseMoney>}
-            <Box style={{ opacity: active ? "1" : "0.6" }} mt="7px">
-                <Box sx={{ fontSize: "12px", color: "#FFFFFFBF", textAlign: "center", fontWeight: "bold" }}>Guest#129</Box>
-                <Box display="flex" alignItems="center" justifyContent="center">
+            {raise &&
+                <RaiseMoney>
+                    <Box fontWeight="bold" mt="-3px">300</Box>
+                    <img src="images/freecoin.png" />
+                </RaiseMoney>
+            }
+            <PlayerInfo active={active}>
+                <Box >Guest#129</Box>
+                <Box >
                     <Box fontWeight="bold" color="white">4000</Box>
                     <img src="images/freecoin.png" />
                 </Box>
-            </Box>
+            </PlayerInfo>
             {active && !user && <Box display="flex" mt="-135px" ml="5px">
                 <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
                 <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
@@ -62,19 +64,53 @@ const Character: React.FC<Props> = ({ image, left, top, active, user, raise, tur
     );
 };
 
-const PlayerCircle = styled(Box)`
-    width : 72px;
-    height : 72px;
-    border: 6px solid #292929;
-    box-sizing: border-box;
-    border-radius : 50%;
-    background-color : #292929;
-    filter: drop-shadow(0px 12px 12px rgba(0, 0, 0, 0.25));
-    display : flex;
-    justify-content : center;
-    align-items : center;
-    overflow : hidden;
-`
+
+type PlayerCircleProps = {
+    active: boolean;
+}
+
+const PlayerCircle = styled(Box)<PlayerCircleProps>(({ active }) => ({
+    position: "relative",
+    zIndex: 1,
+    width: '72px',
+    height: '72px',
+    border: '6px solid #292929',
+    boxSizing: 'border-box',
+    borderRadius: '50%',
+    backgroundColor: '#292929',
+    filter: 'drop-shadow(0px 12px 12px rgba(0, 0, 0, 0.25))',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    [`& >img`]: {
+        opacity: active ? "1" : "0.2"
+    }
+})
+);
+
+type PlayerInfoProps = {
+    active: boolean;
+}
+
+const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
+    opacity: active ? "1" : "0.6",
+    marginTop: "7px",
+    [`& :nth-child(1)`]: {
+        fontSize: "12px",
+        color: "#FFFFFFBF",
+        textAlign: "center",
+        fontWeight: "bold"
+    },
+
+    [`& :nth-child(2)`]: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    }
+})
+);
+
 const RaiseMoney = styled(Box)`
     display: flex;
     flex-direction: row;
