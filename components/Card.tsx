@@ -4,30 +4,42 @@ import { styled, createTheme, ThemeProvider } from '@mui/system';
 interface Props {
     type: string,
     number: string,
-    transform: string,
+    transform?: string,
 }
 
+type CardBodyProps = {
+    transform?: string;
+    type: string;
+}
 
-const CardBody = styled(Box)`
-    background: #F2F2F2;
-    border: 0.159898px solid #D2D2D2;
-    box-sizing: border-box;
-    /* Card Shadow */
-    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
-    border-radius: 5px;
-    width : 45px;
-    height : 63px;
-    display : flex;
-    justify-content : center;
-    flex-direction : column;
-    align-items : center;
-`
+const CardBody = styled(Box)<CardBodyProps>(({ transform, type }) => ({
+    background: '#F2F2F2',
+    border: '0.159898px solid #D2D2D2',
+    boxSizing: 'border-box',
+    boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.16)',
+    borderRadius: '5px',
+    width: '45px',
+    height: '63px',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: transform ? "0px" : "5px",
+    transform: transform,
+    [`& :nth-child(1)`]: {
+        fontSize: '28px',
+        color: type == 'Carreau' ? "red" : "black",
+        fontWeight: "bold"
+    }
+})
+);
+
 
 
 const ProgressBar: React.FC<Props> = ({ type, number, transform }) => {
     return (
-        <CardBody style={{ transform: transform, margin: transform.length? "0px" : "5px" }}>
-            <Box fontSize="28px" color={type == 'Carreau' ? "red" : "black"} fontWeight="bold">{number}</Box>
+        <CardBody transform={transform} type={type}>
+            <Box >{number}</Box>
             <img src={`images/${type}.png`} width="19px" />
         </CardBody>
     );
