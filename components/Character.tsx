@@ -12,10 +12,15 @@ interface Props {
     active: boolean,
     user?: any,
     raise?: any,
-    turn: boolean
+    turn: boolean,
+    index: number,
+    onFold: any,
 }
 
-const Character: React.FC<Props> = ({ image, left, top, active, user, raise, turn }) => {
+const Character: React.FC<Props> = ({ image, left, top, active, user, raise, turn, index, onFold }) => {
+    const rpositionx = ["10px", "-40px", "-40px", "10px", "58px", "58px"];
+    const rpositiony = ["-80px", "20px", "20px", "120px", "20px", "20px"];
+
     return (
         <Box left={left} top={top} position="absolute" >
             {turn && <>
@@ -31,7 +36,10 @@ const Character: React.FC<Props> = ({ image, left, top, active, user, raise, tur
                         size={90}
                         trailColor="transparent"
                     >
-                        {({ remainingTime }) => remainingTime}
+                        {({ remainingTime }) => {
+                            if (remainingTime === 0)
+                                onFold();
+                        }}
                     </CountdownCircleTimer>
                 </SpinCircle>
             </>
@@ -40,16 +48,16 @@ const Character: React.FC<Props> = ({ image, left, top, active, user, raise, tur
                 <img src={image} width="60px" />
             </PlayerCircle>
             {raise &&
-                <RaiseMoney>
-                    <Box fontWeight="bold" mt="-3px">300</Box>
-                    <img src="images/freecoin.png" />
+                <RaiseMoney left={rpositionx[index]} top={rpositiony[index]}>
+                    <Box fontWeight="bold" mt="-3px">{raise}</Box>
+                    <img src="images/freecoin.svg" width="15px" height="15px" />
                 </RaiseMoney>
             }
             <PlayerInfo active={active}>
                 <Box >Guest#129</Box>
                 <Box >
-                    <Box fontWeight="bold" color="white">4000</Box>
-                    <img src="images/freecoin.png" />
+                    <Box fontWeight="bold" color="white" mb="3px">4000</Box>
+                    <img src="images/freecoin.svg" width="15px" height="15px" />
                 </Box>
             </PlayerInfo>
             {active && !user && <Box display="flex" mt="-135px" ml="5px">
@@ -121,8 +129,7 @@ const RaiseMoney = styled(Box)`
     position: absolute;
     width: 53px;
     height: 24px;
-    left: 58px;
-    top: 20px;
+    
     background: #ECFC7D;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
     border-radius: 29px;
