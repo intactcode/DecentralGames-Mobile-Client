@@ -16,7 +16,22 @@ a {
   box-sizing: border-box;
 }
 
+
 @font-face {
   font-family: 'Larsseit';
   src: url('/fonts/Larsseit/Larsseit.otf');
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.css-1480iag-MuiInputBase-root-MuiInput-root:before{
+  border-bottom: none!important;
+}
+
+.css-1480iag-MuiInputBase-root-MuiInput-root:after{
+  border-bottom: none!important;
 }

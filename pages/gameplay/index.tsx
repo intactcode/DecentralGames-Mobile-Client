@@ -1,4 +1,4 @@
-import { Box, } from "@mui/material"
+import { Box, TextField } from "@mui/material"
 import { styled } from '@mui/system'
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs'
@@ -9,31 +9,85 @@ import Character from "../../components/Character"
 import ProgressBar from "../../components/ProgressBar";
 import Card from "../../components/Card";
 
-
 export default function Gameplay() {
     const [turn, setTurn] = useState(0);
     const [active, setActive] = useState<boolean[]>([]);
+    const [raiseamount, setRaiseAmount] = useState(600);
+    const [raiseshow, setRaiseShow] = useState(false);
+    const [raise, setRaise] = useState<number[]>([]);
+
     useEffect(() => {
         let temp = [...active];
-        temp[0] = true;
-        temp[5] = true;
+        for (let i = 0; i < 6; i++)
+            temp[i] = true;
         setActive(temp);
     }, [])
+
+    const setNextTurn = () => {
+        let temp = (turn + 1) % 6;
+        while (active[temp] === false && temp !== turn)
+            temp = (temp + 1) % 6;
+        if (temp === turn) setTurn(-1);
+        else setTurn(temp);
+    }
+    const onFold = () => {
+        let tempactive = [...active];
+        tempactive[turn] = false;
+        setActive(tempactive);
+        setNextTurn();
+    }
+
+    const onRaise = () => {
+        if (raiseamount == 0) {
+            alert("Input correct amount");
+            return;
+        }
+        let temp = [...raise];
+        temp[turn] = raiseamount;
+        setRaise(temp);
+        setNextTurn();
+        setRaiseShow(false);
+    }
+
+    const onCall = () => {
+        let temp = [...raise];
+        temp[turn] = 300;
+        setRaise(temp);
+        setNextTurn();
+    }
+
+    const onReset = () => {
+        let temp = [...active];
+        for (let i = 0; i < 6; i++)
+            temp[i] = true;
+        setActive(temp);
+        setRaise([]);
+        setTurn(0);
+    }
+    const positionx = ["calc(50% - 36px)", "calc(50% + 90px)", "calc(50% + 90px)", "calc(50% - 36px)", "calc(50% - 160px)", "calc(50% - 160px)"];
+    const positiony = ["460px", "330px", "140px", "0px", "140px", "330px"];
 
     return <Body >
         <Table />
         <Links>
             <Link href="/"><BlackEllipse left="40px"><BsBoxArrowLeft /></BlackEllipse></Link>
-            <BlackEllipse right="40px"><MdOutlineLeaderboard /></BlackEllipse>
+            <BlackEllipse right="40px" onClick={() => onReset()}><MdOutlineLeaderboard /></BlackEllipse>
         </Links>
-
-        <Character image="images/character.png" left="calc(50% - 36px)" top="460px" active={active[0]} user turn={turn == 0} />
-        <Character image="images/character.png" left="calc(50% + 90px)" top="330px" active={active[1]} turn={turn == 1} />
-        <Character image="images/character.png" left="calc(50% + 90px)" top="120px" active={active[2]} turn={turn == 2} />
-        <Character image="images/character.png" left="calc(50% - 36px)" top="0px" active={active[3]} turn={turn == 3} />
-        <Character image="images/character.png" left="calc(50% - 160px)" top="120px" active={active[4]} turn={turn == 4} />
-        <Character image="images/character.png" left="calc(50% - 160px)" top="330px" active={active[5]} raise={300} turn={turn == 5} />
-
+        {
+            positionx.map((data, i) => {
+                return <Character
+                    key = {data}
+                    image="images/character.png"
+                    left={positionx[i]}
+                    top={positiony[i]}
+                    active={active[i]}
+                    user={i === 0}
+                    turn={turn == i}
+                    index={i}
+                    raise={raise[i]}
+                    onFold={onFold} />
+            })
+        }
         <CardPanel>
             <Box display="flex">
                 <Card type="Carreau" number="A" />
@@ -48,38 +102,62 @@ export default function Gameplay() {
 
         <Box display="flex" justifyContent="center">
             <Box pt="540px" px="20px" width="374px">
-                <TurnButton onClick={() => {
-                    setTurn((turn + 1) % 6);
-                    let temp = [...active];
-                    temp[(turn + 1) % 6] = true;
-                    setActive(temp);
-                }}
-                >
+                <TurnButton>
                     <Box color="white" fontSize="11px" mr="5px">Your Turn</Box>
                     <Dot />
                 </TurnButton>
-                <ActionButtonGroup turn={turn}>
-                    <Box>Fold</Box>
-                    <Box>Call 300</Box>
-                    <Box>Raise</Box>
-                </ActionButtonGroup>
             </Box>
         </Box>
 
-        <Box display="flex" justifyContent="center">
-            <Progress>
-                <Box>See the river 15 times</Box>
-                <ProgressBar type={0} percent={7 / 15} text="7/15" />
-            </Progress>
-            <Progress>
-                <Box>Win the hand X times</Box>
-                <ProgressBar type={1} percent={1 / 8} text="1/8" />
-            </Progress>
-            <Progress>
-                <Box >Get a three of a kind X times</Box>
-                <ProgressBar type={2} percent={3 / 4} text="3/4" />
-            </Progress>
-        </Box>
+        {raiseshow ?
+            <Box display="flex" justifyContent="center">
+                <RaisePanel >
+                    <RaiseInput >
+                        <Box color="#FFFFFF80" width="85px" fontWeight="bold" mr="5px">Your Bet:</Box>
+                        <TextField
+                            className="raise"
+                            inputProps={{
+                                style: { textAlign: 'center', color: "white", fontSize: "30px", width: "100px" }
+                            }}
+                            variant="standard"
+                            type="number"
+                            value={raiseamount}
+                            onChange={(event) => setRaiseAmount(Number(event.target.value))}
+                        />
+                        <img src="/images/freecoin.svg" />
+                        <RaiseButton ml="10px" onClick={() => onRaise()}>Raise</RaiseButton>
+                    </RaiseInput>
+                    <RaiseAction>
+                        <Box>1/2</Box>
+                        <Box>3/4</Box>
+                        <Box>Pot</Box>
+                        <Box>Max</Box>
+                    </RaiseAction>
+                </RaisePanel>
+            </Box>
+            :
+            <><Box display="flex" justifyContent="center">
+                <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
+                    <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
+                    <Box onClick={() => onCall()}>Call 300</Box>
+                    <Box onClick={() => setRaiseShow(true)}>Raise</Box>
+                </ActionButtonGroup>
+            </Box>
+                <Box display="flex" justifyContent="center">
+                    <Progress>
+                        <Box>See the river 15 times</Box>
+                        <ProgressBar type={0} percent={7 / 15} text="7/15" />
+                    </Progress>
+                    <Progress>
+                        <Box>Win the hand X times</Box>
+                        <ProgressBar type={1} percent={1 / 8} text="1/8" />
+                    </Progress>
+                    <Progress>
+                        <Box >Get a three of a kind X times</Box>
+                        <ProgressBar type={2} percent={3 / 4} text="3/4" />
+                    </Progress>
+                </Box></>
+        }
     </Body >
 }
 
@@ -97,7 +175,7 @@ const Progress = styled(Box)`
 
 const Body = styled(Box)`
     position:relative;
-    margin-top : 20px;
+    margin-top : 40px;
     font-family: 'Larsseit';
 `
 
@@ -197,4 +275,55 @@ const CardPanel = styled(Box)`
     position : absolute;
     top : 200px;
     left : calc(50% - 80px);
+`
+
+const RaisePanel = styled(Box)`
+    padding : 0px 16px 0px 16px;
+    margin-top : 20px;
+    background: #1F1F1F;
+    box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 16px 16px 0px 0px;
+    width : 374px;
+    height : 156px;
+`
+
+const RaiseInput = styled(Box)`
+    margin-top:16px;
+    padding:6px 6px 6px 18px;
+    display : flex;
+    align-items : center;
+    border: 1px solid #2A2A2A;
+    box-sizing: border-box;
+    border-radius: 16px;
+    height : 58px;
+`
+
+const RaiseButton = styled(Box)`
+    background: #3DA65A;
+    color : white;
+    border-radius: 12px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    width : 90px;
+    height : 46px;
+    cursor : pointer;
+`
+
+const RaiseAction = styled(Box)`
+    > div{
+        background: #2A2A2A;
+        border-radius: 8px;
+        display : flex;
+        justify-content : center;
+        align-items : center;
+        cursor : pointer;
+        width : 80px;
+        height : 48px;
+    }
+    margin-top : 12px;
+    color : white;
+    fontWeight : bold;
+    display : flex;
+    justify-content : space-between;
 `
