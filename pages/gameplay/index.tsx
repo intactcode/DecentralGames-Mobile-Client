@@ -76,6 +76,7 @@ export default function Gameplay() {
         {
             positionx.map((data, i) => {
                 return <Character
+                    key = {data}
                     image="images/character.png"
                     left={positionx[i]}
                     top={positiony[i]}
