@@ -1,18 +1,18 @@
 import NextNProgress from 'nextjs-progressbar';
-import Head from 'next/head'
-import type { AppProps } from 'next/app';
-import Aux from '../components/_Aux';
+import { Provider } from '../store';
+import UserStatus from '../store/UserStatus';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function Application(props: { Component: any; pageProps: any; store: any }) {
   return (
-    <Aux>
+    <Provider store={props.store}>
       <NextNProgress />
-      <Head >
-      </Head>
-      <Component {...pageProps} />
-    </Aux>
+
+      <props.Component {...props.pageProps} />
+
+      <UserStatus />
+    </Provider>
   );
 }
 
-export default MyApp;
+export default Application;
