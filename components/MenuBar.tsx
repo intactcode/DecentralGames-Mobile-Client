@@ -10,25 +10,25 @@ const Footer = () => {
         </a>
       </Link>
 
-      <Link href="">
+      <Link href="/">
         <a className={styles.card}>
           <h2>Player Stats</h2>
         </a>
       </Link>
 
-      <Link href="">
+      <Link href="/">
         <a className={styles.card}>
           <h2>Daily Leaderboard</h2>
         </a>
       </Link>
 
-      <Link href="">
+      <Link href="/">
         <a className={styles.card}>
           <h2>Find an Open Table</h2>
         </a>
       </Link>
 
-      <Link href="">
+      <Link href="/">
         <a className={styles.card}>
           <h2>Daily ICE Challenges</h2>
         </a>
