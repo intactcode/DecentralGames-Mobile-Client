@@ -26,7 +26,7 @@ const CardBody = styled(Box)<CardBodyProps>(({ transform, type }) => ({
     alignItems: 'center',
     margin: transform ? "0px" : "5px",
     transform: transform,
-    [`& :nth-child(1)`]: {
+    [`& :nth-of-type(1)`]: {
         fontSize: '28px',
         color: type == 'Carreau' ? "red" : "black",
         fontWeight: "bold"
