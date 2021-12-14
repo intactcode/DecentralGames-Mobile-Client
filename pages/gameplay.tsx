@@ -6,14 +6,14 @@ import Images from '../components/Images';
 
 const Gameplay = () => {
   return (
-    <Layout>
+    <>
       <Header
         title={Constants.TITLE + ' | Gameplay '}
         image={Images.SOCIAL_SHARE}
       />
 
       <Game />
-    </Layout>
+    </>
   );
 };
 
