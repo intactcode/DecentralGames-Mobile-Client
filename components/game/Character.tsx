@@ -60,7 +60,7 @@ const Character: React.FC<Props> = ({ image, left, top, active, user, raise, tur
             </PlayerCircle>
             {raise &&
                 <RaiseMoney left={rpositionx[index]} top={rpositiony[index]}>
-                    <Box fontWeight="bold" mt="-3px">{raise}</Box>
+                    <Box fontWeight="bold" mt="-3px" color = "black">{raise}</Box>
                     <img src="images/freecoin.svg" width="15px" height="15px" />
                 </RaiseMoney>
             }

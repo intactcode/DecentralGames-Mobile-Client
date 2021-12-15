@@ -1,14 +1,26 @@
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 // import styles from '../styles/Home.module.css';
 
 const Hamburger = () => {
+
+  const menuRef = useRef<any>(null);
+
+  useEffect(() => {
+    document.addEventListener('mouseup', function (event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        let form = document.getElementById('check')
+        if(form) (form as HTMLFormElement).checked = false; 
+      }
+    })
+  }, [])
   return (
     <nav role="navigation">
-      <div id="menuToggle">
+      <div id="menuToggle" ref={menuRef}>
         {/* A fake / hidden checkbox is used as click reciever,
     so you can use the :checked selector on it. */}
 
-        <input type="checkbox" />
+        <input type="checkbox" id="check" />
 
         {/* Some spans to act as a hamburger.
     

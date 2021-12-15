@@ -28,7 +28,7 @@ const Progress = styled(Box)`
 `;
 
 interface TitleProps {
-    type?: boolean
+    type?: any
 }
 
 const Title = styled(Box)<TitleProps>(({ type }) => ({
@@ -37,7 +37,6 @@ const Title = styled(Box)<TitleProps>(({ type }) => ({
     right: type ? '5px' : '-30px',
     top: '5px',
     color: 'white',
-
 }))
 
 const ProgressBar: React.FC<Props> = ({ type, percent, text, width, height }) => {
@@ -67,7 +66,6 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width, height }) =>
         const { offsetLeft, offsetWidth } = offset.current;
         const textlist = text.includes('/') ? text.split('/') : text.split(' of ');
         const per = offsetWidth / Number(textlist[1]);
-        console.log(textlist);
         const times = Math.min(Number(textlist[1]), Math.max(0, Math.ceil(((event.type === "touchmove" ? event.changedTouches[0].clientX : event.clientX) - offsetLeft) / per)));
         setCurPercent(times * per);
         if (text.includes('/')) setCurText(`${times}/${textlist[1]}`);
