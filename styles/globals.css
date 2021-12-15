@@ -39,3 +39,7 @@ input::-webkit-inner-spin-button {
 .css-1480iag-MuiInputBase-root-MuiInput-root:after {
   border-bottom: none !important;
 }
+@font-face {
+  font-family: 'Larsseit';
+  src: url('/fonts/Larsseit/Larsseit.otf');
+}

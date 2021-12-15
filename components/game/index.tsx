@@ -195,8 +195,9 @@ const Progress = styled(Box)`
 `
 
 const Body = styled(Box)`
+    width : 100%;
     position:relative;
-    margin-top : 40px;
+    margin-top : 60px;
     font-family: 'Larsseit';
 `
 
