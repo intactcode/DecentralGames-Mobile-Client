@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
-import { styled, createTheme, ThemeProvider } from '@mui/system';
+import { styled } from '@mui/system';
+import Image from 'next/image';
 
 interface Props {
   type: string;
@@ -26,7 +27,7 @@ const CardBody = styled(Box)<CardBodyProps>(({ transform, type }) => ({
   alignItems: 'center',
   margin: transform ? '0px' : '5px',
   transform: transform,
-  [`& :nth-of-type(1)`]: {
+  ['& :nth-of-type(1)']: {
     fontSize: '28px',
     color: type == 'Carreau' ? 'red' : 'black',
     fontWeight: 'bold',
@@ -37,7 +38,12 @@ const ProgressBar: React.FC<Props> = ({ type, number, transform }) => {
   return (
     <CardBody transform={transform} type={type}>
       <Box>{number}</Box>
-      <img src={`images/${type}.png`} width="19px" />
+      <Image
+        src={`/images/${type}.png`}
+        width="19px"
+        height="19px"
+        alt="progressBar"
+      />
     </CardBody>
   );
 };
