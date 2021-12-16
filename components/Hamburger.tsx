@@ -3,17 +3,16 @@ import { useEffect, useRef } from 'react';
 // import styles from '../styles/Home.module.css';
 
 const Hamburger = () => {
-
   const menuRef = useRef<any>(null);
 
   useEffect(() => {
     document.addEventListener('mouseup', function (event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        let form = document.getElementById('check')
-        if(form) (form as HTMLFormElement).checked = false; 
+        let form = document.getElementById('check');
+        if (form) (form as HTMLFormElement).checked = false;
       }
-    })
-  }, [])
+    });
+  }, []);
   return (
     <nav role="navigation">
       <div id="menuToggle" ref={menuRef}>
