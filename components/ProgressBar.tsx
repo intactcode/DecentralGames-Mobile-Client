@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled, createTheme, ThemeProvider } from '@mui/system';
 import { useEffect, useRef, useState } from 'react';
 
 interface Props {
@@ -38,7 +38,13 @@ const Title = styled(Box)<TitleProps>(({ type }) => ({
   color: 'white',
 }));
 
-const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
+const ProgressBar: React.FC<Props> = ({
+  type,
+  percent,
+  text,
+  width,
+  height,
+}) => {
   const backgrounds = [
     'radial-gradient(227.45% 196.14% at 21.78% -82.5%, #FF8FD9 0%, #865DFF 56.25%, #4021FF 94.65%)',
     'radial-gradient(195.01% 168.18% at 22.02% -54.55%, #93F8FF 0%, #5882FF 62.16%, #2144FF 94.65%)',
@@ -48,7 +54,6 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
   const [curpercent, setCurPercent] = useState(percent);
   const [curtext, setCurText] = useState(text);
   const [ismove, setIsMove] = useState(false);
-  const offset = useRef<any>();
 
   useEffect(() => {
     document.addEventListener('mouseup', function (event) {
@@ -57,6 +62,11 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
       }
     });
   }, []);
+
+  const handleClick = (event: any) => {
+    setIsMove(true);
+    MoveAction(event, true);
+  };
 
   const MoveAction = (event: any, click?: any) => {
     if (!ismove && !click && event.type !== 'touchmove') return;
@@ -81,15 +91,11 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
     else setCurText(`${times} of ${textlist[1]}`);
   };
 
-  const handleClick = (event: any) => {
-    setIsMove(true);
-    MoveAction(event, true);
-  };
-
-  const handleUp = () => {
+  const handleUp = (event: any) => {
     setIsMove(false);
   };
 
+  const offset = useRef<any>();
   return (
     <ProgressBarBack
       position="relative"

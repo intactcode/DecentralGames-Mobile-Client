@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
-import { styled } from '@mui/system';
-import Image from 'next/image';
+import { styled, createTheme, ThemeProvider } from '@mui/system';
 
 interface Props {
   transform: string;
@@ -21,12 +20,7 @@ const CardBody = styled(Box)`
 const CardBack: React.FC<Props> = ({ transform }) => {
   return (
     <CardBody style={{ transform: transform }}>
-      <Image
-        src="/images/cardback.png"
-        width="13px"
-        height="13px"
-        alt="cardback"
-      />
+      <img src="images/cardback.png" width="13px" />
     </CardBody>
   );
 };
