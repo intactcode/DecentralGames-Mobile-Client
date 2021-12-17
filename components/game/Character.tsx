@@ -28,7 +28,7 @@ const PlayerCircle = styled(Box)<PlayerCircleProps>(({ active }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   overflow: 'hidden',
-  ['& >img']: {
+  [' > span > img']: {
     opacity: active ? '1' : '0.2',
   },
 }));
