@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Box, TextField } from '@mui/material';
+import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
-import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/image'
 
 import Card from './Card';
 import Character from './Character';
 import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
 import ProgressBar from '../ProgressBar';
+import RaiseSetting from './RaiseSetting';
 
 const Progress = styled(Box)`
   display: flex;
@@ -128,57 +128,6 @@ const CardPanel = styled(Box)`
   left: calc(50% - 80px);
 `;
 
-const RaisePanel = styled(Box)`
-  padding: 0px 16px 0px 16px;
-  margin-top: 20px;
-  background: #1f1f1f;
-  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
-  border-radius: 16px 16px 0px 0px;
-  width: 374px;
-  height: 156px;
-`;
-
-const RaiseInput = styled(Box)`
-  margin-top: 16px;
-  padding: 6px 6px 6px 18px;
-  display: flex;
-  align-items: center;
-  border: 1px solid #2a2a2a;
-  box-sizing: border-box;
-  border-radius: 16px;
-  height: 58px;
-`;
-
-const RaiseButton = styled(Box)`
-  background: #3da65a;
-  color: white;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90px;
-  height: 46px;
-  cursor: pointer;
-`;
-
-const RaiseAction = styled(Box)`
-  > div {
-    background: #2a2a2a;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 80px;
-    height: 48px;
-  }
-  margin-top: 12px;
-  color: white;
-  fontweight: bold;
-  display: flex;
-  justify-content: space-between;
-`;
-
 export default function Gameplay() {
   const [turn, setTurn] = useState(0);
   const [active, setActive] = useState<boolean[]>([]);
@@ -193,25 +142,13 @@ export default function Gameplay() {
   const [roundcount, setRoundCount] = useState(0);
   const [win, setWin] = useState<boolean[]>([]);
 
-  useEffect(() => {
-    let temp = [...active];
-    for (let i = 0; i < 6; i++) temp[i] = true;
-    setActive(temp);
-
-    temp = [...win];
-    for (let i = 0; i < 6; i++) temp[i] = false;
-    setWin(temp);
-
-    // eslint-disable-next-line
-  }, []);
-
   const setNextTurn = () => {
     let temp = (turn + 1) % 6;
     while (active[temp] === false && temp !== turn) temp = (temp + 1) % 6;
     if (temp === 0) {
       console.log(roundcount);
       setRoundCount(roundcount + 1);
-      if (roundcount + 1 === 15) {
+      if (roundcount + 1 === 3) {
         setTurn(-1);
         let t = [...win];
         t[temp] = true;
@@ -250,12 +187,20 @@ export default function Gameplay() {
 
   // eslint-disable-next-line
   const onReset = () => {
-    let temp = [...active];
+    let temp = [...active], temp1 = [...win];
     for (let i = 0; i < 6; i++) temp[i] = true;
     setActive(temp);
     setRaise([]);
     setTurn(0);
+    for (let i = 0; i < 6; i++) temp1[i] = false;
+    setWin(temp1);
   };
+
+  useEffect(() => {
+    onReset();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const positionx = [
     'calc(50% - 36px)',
     'calc(50% + 90px)',
@@ -284,15 +229,10 @@ export default function Gameplay() {
     <Body>
       <Table />
       <Links>
-        <Link href="/" passHref={true}>
-          <BlackEllipse left="40px">
-            <BsBoxArrowLeft />
-          </BlackEllipse>
-        </Link>
-        <BlackEllipse
-          right="40px"
-          onClick={() => setIsLeaderBoard(!isleaderboard)}
-        >
+        <BlackEllipse left="40px" onClick={() => onReset()}>
+          <BsBoxArrowLeft />
+        </BlackEllipse>
+        <BlackEllipse right="40px" onClick={() => setIsLeaderBoard(!isleaderboard)}>
           <MdOutlineLeaderboard />
         </BlackEllipse>
       </Links>
@@ -339,91 +279,43 @@ export default function Gameplay() {
         </Box>
       </Box>
 
-      {raiseshow ? (
-        <Box display="flex" justifyContent="center">
-          <RaisePanel>
-            <RaiseInput>
-              <Box color="#FFFFFF80" width="85px" fontWeight="bold" mr="5px">
-                Your Bet:
-              </Box>
-              <TextField
-                className="raise"
-                inputProps={{
-                  style: {
-                    textAlign: 'center',
-                    color: 'white',
-                    fontSize: '30px',
-                    width: '100px',
-                  },
-                }}
-                variant="standard"
-                type="number"
-                value={raiseamount}
-                onChange={(event) => setRaiseAmount(Number(event.target.value))}
-              />
-              <Image
-                src="/images/freecoin.svg"
-                width="20px"
-                height="20px"
-                alt="freecoin"
-              />
-              <RaiseButton ml="10px" onClick={() => onRaise()}>
-                Raise
-              </RaiseButton>
-            </RaiseInput>
-            <RaiseAction>
-              <Box>1/2</Box>
-              <Box>3/4</Box>
-              <Box>Pot</Box>
-              <Box>Max</Box>
-            </RaiseAction>
-          </RaisePanel>
-        </Box>
-      ) : (
-        <>
-          <Box display="flex" justifyContent="center">
-            <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
-              <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
-              <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
-              <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
-            </ActionButtonGroup>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent="center"
-            onClick={() => setIsSetting(!issetting)}
-          >
-            <Progress>
-              <Box>See the river 15 times</Box>
-              <ProgressBar type={0} percent={7 / 15} text="7/15" width="74px" />
-            </Progress>
-            <Progress>
-              <Box>Win the hand X times</Box>
-              <ProgressBar type={1} percent={1 / 8} text="1/8" width="74px" />
-            </Progress>
-            <Progress>
-              <Box>Get a three of a kind X times</Box>
-              <ProgressBar type={2} percent={3 / 4} text="3/4" width="74px" />
-            </Progress>
-          </Box>
-          {issetting && <Setting />}
-          {isleaderboard && <LeaderBoard />}
-          {win[0] && (
-            <Box position="absolute" left="100px" top="570px">
-              <Image src="/images/200ice.svg" alt="200ice" layout="fill" />
-            </Box>
-          )}
-          {win[0] && (
-            <Box position="absolute" left="145px" top="450px" zIndex={19}>
-              <Image
-                src="/images/fullhouse.svg"
-                layout="fill"
-                alt="fullhouse"
-              />
-            </Box>
-          )}
-        </>
-      )}
+      <Box display="flex" justifyContent="center">
+        <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
+          <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
+          <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
+          <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
+        </ActionButtonGroup>
+      </Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        onClick={() => setIsSetting(!issetting)}
+        mb="15px"
+      >
+        <Progress>
+          <Box>See the river 15 times</Box>
+          <ProgressBar type={0} percent={7 / 15} text="7/15" width="74px" />
+        </Progress>
+        <Progress>
+          <Box>Win the hand X times</Box>
+          <ProgressBar type={1} percent={1 / 8} text="1/8" width="74px" />
+        </Progress>
+        <Progress>
+          <Box>Get a three of a kind X times</Box>
+          <ProgressBar type={2} percent={3 / 4} text="3/4" width="74px" />
+        </Progress>
+      </Box>
+      <RaiseSetting open={raiseshow} setOpen={setRaiseShow} raiseamount={raiseamount} setRaiseAmount={setRaiseAmount} onRaise={onRaise} />
+      <Setting open={issetting} setOpen={setIsSetting} />
+      <LeaderBoard open={isleaderboard} setOpen={setIsLeaderBoard} />
+      {win[0] &&
+        <Box position="absolute" left="calc(50% - 90px)" top="570px">
+          <Image src="/images/200ice.svg" alt="200ice" width={176} height={111} />
+        </Box>}
+      {win[0] &&
+        <Box position="absolute" left="calc(50% - 43px)" top="450px" zIndex={19}>
+          <Image src="/images/fullhouse.svg" alt="fullhouse" width={84} height={35} />
+        </Box>}
     </Body>
   );
 }
