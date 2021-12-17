@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
+import Image from 'next/image';
 import ProgressBar from '../ProgressBar';
 
 interface Props {}
@@ -82,11 +83,16 @@ const Setting: React.FC<Props> = ({}) => {
           <Box mt="15px" display="flex">
             <ItemField type={0}>
               <Box mt="-5px">200</Box>
-              <img src="/images/diamond.svg" />
+              <Image
+                src="/images/diamond.svg"
+                width="13px"
+                height="13px"
+                alt="diamond"
+              />
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">1</Box>
-              <img src="/images/xp.svg" />
+              <Image src="/images/xp.svg" width="13px" height="13px" alt="xp" />
             </ItemField>
           </Box>
         </Box>
@@ -99,11 +105,16 @@ const Setting: React.FC<Props> = ({}) => {
           <Box mt="15px" display="flex">
             <ItemField type={0}>
               <Box mt="-5px">750</Box>
-              <img src="/images/diamond.svg" />
+              <Image
+                src="/images/diamond.svg"
+                width="15px"
+                height="15px"
+                alt="diamond"
+              />
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">2</Box>
-              <img src="/images/xp.svg" />
+              <Image src="/images/xp.svg" width="15px" height="15px" alt="xp" />
             </ItemField>
           </Box>
         </Box>
@@ -116,11 +127,16 @@ const Setting: React.FC<Props> = ({}) => {
           <Box mt="15px" display="flex">
             <ItemField type={0}>
               <Box mt="-5px">1000</Box>
-              <img src="/images/diamond.svg" />
+              <Image
+                src="/images/diamond.svg"
+                width="17px"
+                height="17px"
+                alt="diamond"
+              />
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">3</Box>
-              <img src="/images/xp.svg" />
+              <Image src="/images/xp.svg" width="17px" height="17px" alt="xp" />
             </ItemField>
           </Box>
         </Box>
@@ -131,7 +147,12 @@ const Setting: React.FC<Props> = ({}) => {
             <ItemField type={1}>
               <Box>- -&nbsp;&nbsp;</Box>
               <Box mt="5px">
-                <img src="/images/diamond.svg" width="18px" height="18px" />
+                <Image
+                  src="/images/diamond.svg"
+                  width="18px"
+                  height="18px"
+                  alt="diamond"
+                />
               </Box>
             </ItemField>
           </Box>
@@ -140,7 +161,12 @@ const Setting: React.FC<Props> = ({}) => {
             <ItemField type={2}>
               <Box>+0</Box>
               <Box mt="5px">
-                <img src="/images/freecoin.svg" width="18px" height="18px" />
+                <Image
+                  src="/images/freecoin.svg"
+                  width="18px"
+                  height="18px"
+                  alt="freecoin"
+                />
               </Box>
             </ItemField>
             <Box>ICE Multiplier</Box>
@@ -157,7 +183,12 @@ const Setting: React.FC<Props> = ({}) => {
             <ItemField type={2}>
               <Box>+4,291</Box>
               <Box mt="5px">
-                <img src="/images/freecoin.svg" width="18px" height="18px" />
+                <Image
+                  src="/images/freecoin.svg"
+                  width="18px"
+                  height="18px"
+                  alt="freecoin"
+                />
               </Box>
             </ItemField>
           </Box>

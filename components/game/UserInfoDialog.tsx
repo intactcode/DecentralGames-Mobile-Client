@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { AiOutlineClose } from 'react-icons/ai';
+import Image from 'next/image';
 interface Props {
   index?: number;
   open: boolean;
@@ -131,21 +132,26 @@ const UserInfoDialog: React.FC<Props> = ({
             <span>ICE BALANCE</span>
             <ItemField mt="8px">
               <Box mb="4px">{ice}</Box>
-              <img src="/images/diamond.svg" height={20} />
+              <Image
+                src="/images/diamond.svg"
+                width={20}
+                height={20}
+                alt="diamond"
+              />
             </ItemField>
           </Box>
           <Box display="flex" alignItems="center" flexDirection="column">
             <span>XP BALANCE</span>
             <ItemField mt="8px">
               <Box mb="4px">{xp}</Box>
-              <img src="/images/xp.svg" height={20} />
+              <Image src="/images/xp.svg" width={20} height={20} alt="xp" />
             </ItemField>
           </Box>
           <Box display="flex" alignItems="center" flexDirection="column">
             <span>DG BALANCE</span>
             <ItemField mt="8px">
               <Box mb="4px">{dg}</Box>
-              <img src="/images/dg.png" height={20} />
+              <Image src="/images/dg.png" width={20} height={20} alt="dg" />
             </ItemField>
           </Box>
         </Box>
@@ -165,7 +171,13 @@ const UserInfoDialog: React.FC<Props> = ({
               >
                 {data !== '' && (
                   <>
-                    <img src={data} key={i} />
+                    <Image
+                      src={`${data}`}
+                      key={i}
+                      width="100%"
+                      height="100%"
+                      alt="line"
+                    />
                     <span>+31%</span>
                   </>
                 )}

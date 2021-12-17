@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { useState } from 'react';
 import { styled } from '@mui/system';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import Image from 'next/image';
 
 import CardBack from './CardBack';
 import Card from './Card';
@@ -164,18 +165,28 @@ const Character: React.FC<Props> = ({
         active={active}
         onClick={() => setInfoModalOpen(!infomodalopen)}
       >
-        <img src={image} width="60px" />
+        <Image
+          src={`/${image}`}
+          width="60px"
+          height="60px"
+          alt="player-circle"
+        />
       </PlayerCircle>
       {raise && (
         <RaiseMoney left={rpositionx[index]} top={rpositiony[index]}>
           <Box fontWeight="bold" mt="-3px" color="black">
             {raise}
           </Box>
-          <img src="images/freecoin.svg" width="15px" height="15px" />
+          <Image
+            src="/images/freecoin.svg"
+            width="15px"
+            height="15px"
+            alt="freecoin"
+          />
         </RaiseMoney>
       )}
       <Box position="absolute" left={dealerx[index]} top={dealery[index]}>
-        <img src="/images/DealerChip.svg" />
+        <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
         <Box>Guest#129</Box>
@@ -183,7 +194,12 @@ const Character: React.FC<Props> = ({
           <Box fontWeight="bold" color="white" mb="3px">
             4000
           </Box>
-          <img src="images/freecoin.svg" width="15px" height="15px" />
+          <Image
+            src="/images/freecoin.svg"
+            width="15px"
+            height="15px"
+            alt="freecoin"
+          />
         </Box>
       </PlayerInfo>
       {active && !user && (

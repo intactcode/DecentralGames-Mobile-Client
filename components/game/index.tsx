@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Box, TextField } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import Card from './Card';
 import Character from './Character';
@@ -360,7 +361,12 @@ export default function Gameplay() {
                 value={raiseamount}
                 onChange={(event) => setRaiseAmount(Number(event.target.value))}
               />
-              <img src="/images/freecoin.svg" />
+              <Image
+                src="/images/freecoin.svg"
+                width="20px"
+                height="20px"
+                alt="freecoin"
+              />
               <RaiseButton ml="10px" onClick={() => onRaise()}>
                 Raise
               </RaiseButton>
@@ -404,12 +410,16 @@ export default function Gameplay() {
           {isleaderboard && <LeaderBoard />}
           {win[0] && (
             <Box position="absolute" left="100px" top="570px">
-              <img src="/images/200ice.svg" />
+              <Image src="/images/200ice.svg" alt="200ice" layout="fill" />
             </Box>
           )}
           {win[0] && (
             <Box position="absolute" left="145px" top="450px" zIndex={19}>
-              <img src="/images/fullhouse.svg" />
+              <Image
+                src="/images/fullhouse.svg"
+                layout="fill"
+                alt="fullhouse"
+              />
             </Box>
           )}
         </>

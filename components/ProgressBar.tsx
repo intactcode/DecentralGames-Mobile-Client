@@ -101,7 +101,7 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
       width={width}
     >
       <Progress width={curpercent} style={{ background: backgrounds[type] }} />
-      <Title type={text.includes('/')}>{curtext}</Title>
+      <Title type={text.includes('/').toString()}>{curtext}</Title>
     </ProgressBarBack>
   );
 };

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
+import Image from 'next/image';
 import { AiOutlineClose } from 'react-icons/ai';
 interface Props {
   index?: number;
@@ -100,7 +101,7 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
               marginLeft={i === 0 ? '16px!important' : ''}
               marginRight={i === items.length - 1 ? '16px!important' : ''}
             >
-              <img src={data} key={i} />
+              <Image src={data} key={i} alt="line" layout="fill" />
               <span>+31%</span>
             </Box>
           );

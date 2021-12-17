@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
-import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface Props {}
 
@@ -106,7 +107,12 @@ const LeaderBoard: React.FC<Props> = ({}) => {
           return (
             <Box key={2000 + i} display="flex" mt="2px">
               <Box width="16px" height="16px" mt="-10px" mr="10px">
-                <img src="/images/star.svg" />
+                <Image
+                  src="/images/star.svg"
+                  alt="star"
+                  width="13px"
+                  height="13px"
+                />
               </Box>
               <ScoreField>
                 <Box width="75px">{data.percentile}</Box>
@@ -116,7 +122,12 @@ const LeaderBoard: React.FC<Props> = ({}) => {
                 <ChipField>
                   <Box mr="4px">{data.chips}</Box>
                   <Box pt="5px">
-                    <img src="/images/freecoin.svg" width="13px" />
+                    <Image
+                      src="/images/freecoin.svg"
+                      width="13px"
+                      height="13px"
+                      alt="freecoin"
+                    />
                   </Box>
                 </ChipField>
               </ScoreField>

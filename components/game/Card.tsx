@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
+import Image from 'next/image';
 
 interface Props {
   type: string;
@@ -37,7 +38,12 @@ const ProgressBar: React.FC<Props> = ({ type, number, transform }) => {
   return (
     <CardBody transform={transform} type={type}>
       <Box>{number}</Box>
-      <img src={`images/${type}.png`} width="19px" />
+      <Image
+        src={`/images/${type}.png`}
+        width="19px"
+        height="19px"
+        alt="card"
+      />
     </CardBody>
   );
 };
