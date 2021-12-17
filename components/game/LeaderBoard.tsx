@@ -1,71 +1,9 @@
-import { Box } from '@mui/material';
-import { styled, createTheme, ThemeProvider } from '@mui/system';
 import { useEffect, useState } from 'react';
-import ProgressBar from '../ProgressBar';
+import { Box } from '@mui/material';
+import { styled } from '@mui/system';
+import Image from 'next/image';
 
 interface Props {}
-
-const LeaderBoard: React.FC<Props> = ({}) => {
-  const [scoredata, setScoreData] = useState<any[]>([]);
-
-  useEffect(() => {
-    let temp = [];
-    for (let i = 0; i < 20; i++) {
-      let data: any = { percentile: '', ice: '', chips: '' };
-      data.percentile = `${i * 5} - ${i * 5 + 5}%`;
-      data.ice = `${(1.5 - 0.05 * i).toFixed(2)}x`;
-      data.chips = '+4000';
-      temp.push(data);
-    }
-    setScoreData(temp);
-  }, []);
-
-  return (
-    <LeaderBoardBody>
-      <LeaderBoardField>
-        <Box width={295} textAlign={'center'}>
-          Daily Leaderboard & Winnings Percentile
-        </Box>
-        <ScoreTab mt="26px">
-          <Box>Percentile</Box>
-          <Box>ICE Multiplier</Box>
-          <Box>Net Chips</Box>
-        </ScoreTab>
-        {scoredata.map((data: any, i: any) => {
-          let radius: any, color: any;
-          if (i < 10) {
-            radius = 0.05 * i;
-            color = '#91FF95';
-          } else {
-            radius = 1 - 0.1 * (i - 10);
-            color = '#FF9191';
-          }
-          return (
-            <Box key={2000 + i} display="flex" mt="2px">
-              <Box width="16px" height="16px" mt="-10px" mr="10px">
-                <img src="/images/star.svg" />
-              </Box>
-              <ScoreField>
-                <Box width="75px">{data.percentile}</Box>
-                <Ice width="45px" radius={radius} color={color}>
-                  {data.ice}
-                </Ice>
-                <ChipField>
-                  <Box mr="4px">{data.chips}</Box>
-                  <Box pt="5px">
-                    <img src="/images/freecoin.svg" width="13px" />
-                  </Box>
-                </ChipField>
-              </ScoreField>
-            </Box>
-          );
-        })}
-      </LeaderBoardField>
-    </LeaderBoardBody>
-  );
-};
-
-export default LeaderBoard;
 
 const Ice = styled(Box)<{ radius: number; color: string }>`
   background-image: ${({ radius, color }) =>
@@ -130,3 +68,75 @@ const ChipField = styled(Box)`
   font-size: 12px;
   font-weight: 600px;
 `;
+
+const LeaderBoard: React.FC<Props> = ({}) => {
+  const [scoredata, setScoreData] = useState<any[]>([]);
+
+  useEffect(() => {
+    let temp = [];
+    for (let i = 0; i < 20; i++) {
+      let data: any = { percentile: '', ice: '', chips: '' };
+      data.percentile = `${i * 5} - ${i * 5 + 5}%`;
+      data.ice = `${(1.5 - 0.05 * i).toFixed(2)}x`;
+      data.chips = '+4000';
+      temp.push(data);
+    }
+    setScoreData(temp);
+  }, []);
+
+  return (
+    <LeaderBoardBody>
+      <LeaderBoardField>
+        <Box width={295} textAlign={'center'}>
+          Daily Leaderboard & Winnings Percentile
+        </Box>
+        <ScoreTab mt="26px">
+          <Box>Percentile</Box>
+          <Box>ICE Multiplier</Box>
+          <Box>Net Chips</Box>
+        </ScoreTab>
+        {scoredata.map((data: any, i: any) => {
+          let radius: any, color: any;
+          if (i < 10) {
+            radius = 0.05 * i;
+            color = '#91FF95';
+          } else {
+            radius = 1 - 0.1 * (i - 10);
+            color = '#FF9191';
+          }
+          return (
+            <Box key={2000 + i} display="flex" mt="2px">
+              <Box width="16px" height="16px" mt="-10px" mr="10px">
+                <Image
+                  src="/images/star.svg"
+                  alt="star"
+                  width="13px"
+                  height="13px"
+                />
+              </Box>
+              <ScoreField>
+                <Box width="75px">{data.percentile}</Box>
+                <Ice width="45px" radius={radius} color={color}>
+                  {data.ice}
+                </Ice>
+                <ChipField>
+                  <Box mr="4px">{data.chips}</Box>
+                  <Box pt="5px">
+                    <Image
+                      src="/images/freecoin.svg"
+                      width="13px"
+                      height="13px"
+                      alt="freecoin"
+                    />
+                  </Box>
+                </ChipField>
+              </ScoreField>
+            </Box>
+          );
+        })}
+      </LeaderBoardField>
+    </LeaderBoardBody>
+  );
+};
+
+export default LeaderBoard;

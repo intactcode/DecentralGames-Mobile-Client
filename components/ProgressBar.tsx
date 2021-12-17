@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { styled, createTheme, ThemeProvider } from '@mui/system';
+import { styled } from '@mui/system';
 import { useEffect, useRef, useState } from 'react';
 
 interface Props {
@@ -38,35 +38,17 @@ const Title = styled(Box)<TitleProps>(({ type }) => ({
   color: 'white',
 }));
 
-const ProgressBar: React.FC<Props> = ({
-  type,
-  percent,
-  text,
-  width,
-  height,
-}) => {
+const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
   const backgrounds = [
     'radial-gradient(227.45% 196.14% at 21.78% -82.5%, #FF8FD9 0%, #865DFF 56.25%, #4021FF 94.65%)',
     'radial-gradient(195.01% 168.18% at 22.02% -54.55%, #93F8FF 0%, #5882FF 62.16%, #2144FF 94.65%)',
     'radial-gradient(166.55% 143.64% at 22.09% -30%, #C6FFEA 0%, #5CDAEA 56.25%, #21AFFF 94.65%)',
   ];
+  const offset = useRef<any>();
 
   const [curpercent, setCurPercent] = useState(percent);
   const [curtext, setCurText] = useState(text);
   const [ismove, setIsMove] = useState(false);
-
-  useEffect(() => {
-    document.addEventListener('mouseup', function (event) {
-      if (offset.current && !offset.current.contains(event.target)) {
-        setIsMove(false);
-      }
-    });
-  }, []);
-
-  const handleClick = (event: any) => {
-    setIsMove(true);
-    MoveAction(event, true);
-  };
 
   const MoveAction = (event: any, click?: any) => {
     if (!ismove && !click && event.type !== 'touchmove') return;
@@ -91,23 +73,35 @@ const ProgressBar: React.FC<Props> = ({
     else setCurText(`${times} of ${textlist[1]}`);
   };
 
-  const handleUp = (event: any) => {
+  useEffect(() => {
+    document.addEventListener('mouseup', function (event) {
+      if (offset.current && !offset.current.contains(event.target)) {
+        setIsMove(false);
+      }
+    });
+  }, []);
+
+  const handleClick = (event: any) => {
+    setIsMove(true);
+    MoveAction(event, true);
+  };
+
+  const handleUp = () => {
     setIsMove(false);
   };
 
-  const offset = useRef<any>();
   return (
     <ProgressBarBack
       position="relative"
       onMouseDown={(e) => handleClick(e)}
       onTouchMove={(e) => MoveAction(e)}
       onMouseMove={(e) => MoveAction(e)}
-      onMouseUp={(e) => handleUp(e)}
+      onMouseUp={() => handleUp()}
       ref={offset}
       width={width}
     >
       <Progress width={curpercent} style={{ background: backgrounds[type] }} />
-      <Title type={text.includes('/')}>{curtext}</Title>
+      <Title type={text.includes('/').toString()}>{curtext}</Title>
     </ProgressBarBack>
   );
 };
