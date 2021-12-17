@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { styled, createTheme, ThemeProvider } from '@mui/system';
+import { styled } from '@mui/system';
 
 interface Props {
   transform: string;

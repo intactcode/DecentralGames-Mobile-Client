@@ -11,6 +11,173 @@ import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
 import ProgressBar from '../ProgressBar';
 
+const Progress = styled(Box)`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  > div {
+    color: #ffffffbf;
+    font-size: 8px;
+    line-height: normal;
+    font-weight: normal;
+  }
+`;
+
+const Body = styled(Box)`
+  width: 100%;
+  position: relative;
+  margin-top: 80px;
+  font-family: 'Larsseit';
+`;
+
+const Table = styled(Box)`
+  background-image: url('images/Table.png');
+  width: 100%;
+  max-width: 374px;
+  height: 568px;
+  position: absolute;
+  left: calc(50% - 187px);
+`;
+const Links = styled(Box)`
+  position: absolute;
+  width: 340px;
+  display: flex;
+  justify-content: space-between;
+  left: calc(50% - 170px);
+`;
+const BlackEllipse = styled(Box)`
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: #2a2a2a;
+  border-radius: 50%;
+  color: #616161;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
+`;
+
+type ActionButtonGroupProps = {
+  turn: number;
+};
+
+const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginTop: '10px',
+  opacity: turn === 0 ? 1 : 0.2,
+  ['& >div']: {
+    borderRadius: '8px',
+    width: '103px',
+    height: '69px',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    margin: '5px',
+    color: 'white',
+  },
+  ['& :nth-of-type(1)']: {
+    background: '#A82822',
+  },
+  ['& :nth-of-type(2)']: {
+    background: '#3D86A6',
+  },
+  ['& :nth-of-type(3)']: {
+    background: '#3DA65A',
+  },
+}));
+
+const TurnButton = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+
+  width: 84px;
+  height: 31px;
+
+  border: 1px solid #67dd6c;
+  box-sizing: border-box;
+  border-radius: 8px;
+  cursor: pointer;
+
+  margin-left: calc(100% - 90px);
+  zindex: 10;
+  position: relative;
+`;
+
+const Dot = styled(Box)`
+  margin-top: 2px;
+  background: #00ff0a;
+  box-shadow: 0px 0px 4px rgba(4, 235, 68, 0.5);
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+`;
+const CardPanel = styled(Box)`
+  position: absolute;
+  top: 200px;
+  left: calc(50% - 80px);
+`;
+
+const RaisePanel = styled(Box)`
+  padding: 0px 16px 0px 16px;
+  margin-top: 20px;
+  background: #1f1f1f;
+  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 16px 16px 0px 0px;
+  width: 374px;
+  height: 156px;
+`;
+
+const RaiseInput = styled(Box)`
+  margin-top: 16px;
+  padding: 6px 6px 6px 18px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #2a2a2a;
+  box-sizing: border-box;
+  border-radius: 16px;
+  height: 58px;
+`;
+
+const RaiseButton = styled(Box)`
+  background: #3da65a;
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 46px;
+  cursor: pointer;
+`;
+
+const RaiseAction = styled(Box)`
+  > div {
+    background: #2a2a2a;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 80px;
+    height: 48px;
+  }
+  margin-top: 12px;
+  color: white;
+  fontweight: bold;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export default function Gameplay() {
   const [turn, setTurn] = useState(0);
   const [active, setActive] = useState<boolean[]>([]);
@@ -19,9 +186,9 @@ export default function Gameplay() {
   const [raise, setRaise] = useState<number[]>([]);
   const [issetting, setIsSetting] = useState(false);
   const [isleaderboard, setIsLeaderBoard] = useState(false);
-  const [iceamount, setIceAmount] = useState(22000);
-  const [xpamount, setXPAmount] = useState(22);
-  const [dgamount, setDGAmount] = useState(0.01);
+  const [iceamount, setIceAmount] = useState(22000); // eslint-disable-line
+  const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
+  const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
   const [roundcount, setRoundCount] = useState(0);
   const [win, setWin] = useState<boolean[]>([]);
 
@@ -33,6 +200,8 @@ export default function Gameplay() {
     temp = [...win];
     for (let i = 0; i < 6; i++) temp[i] = false;
     setWin(temp);
+
+    // eslint-disable-next-line
   }, []);
 
   const setNextTurn = () => {
@@ -78,6 +247,7 @@ export default function Gameplay() {
     setNextTurn();
   };
 
+  // eslint-disable-next-line
   const onReset = () => {
     let temp = [...active];
     for (let i = 0; i < 6; i++) temp[i] = true;
@@ -113,7 +283,7 @@ export default function Gameplay() {
     <Body>
       <Table />
       <Links>
-        <Link href="/">
+        <Link href="/" passHref={true}>
           <BlackEllipse left="40px">
             <BsBoxArrowLeft />
           </BlackEllipse>
@@ -247,170 +417,3 @@ export default function Gameplay() {
     </Body>
   );
 }
-
-const Progress = styled(Box)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px;
-  > div {
-    color: #ffffffbf;
-    font-size: 8px;
-    line-height: normal;
-    font-weight: normal;
-  }
-`;
-
-const Body = styled(Box)`
-  width: 100%;
-  position: relative;
-  margin-top: 80px;
-  font-family: 'Larsseit';
-`;
-
-const Table = styled(Box)`
-  background-image: url('images/Table.png');
-  width: 100%;
-  max-width: 374px;
-  height: 568px;
-  position: absolute;
-  left: calc(50% - 187px);
-`;
-const Links = styled(Box)`
-  position: absolute;
-  width: 340px;
-  display: flex;
-  justify-content: space-between;
-  left: calc(50% - 170px);
-`;
-const BlackEllipse = styled(Box)`
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  background: #2a2a2a;
-  border-radius: 50%;
-  color: #616161;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
-`;
-
-type ActionButtonGroupProps = {
-  turn: number;
-};
-
-const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginTop: '10px',
-  opacity: turn === 0 ? 1 : 0.2,
-  [`& >div`]: {
-    borderRadius: '8px',
-    width: '103px',
-    height: '69px',
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    margin: '5px',
-    color: 'white',
-  },
-  [`& :nth-of-type(1)`]: {
-    background: '#A82822',
-  },
-  [`& :nth-of-type(2)`]: {
-    background: '#3D86A6',
-  },
-  [`& :nth-of-type(3)`]: {
-    background: '#3DA65A',
-  },
-}));
-
-const TurnButton = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 12px;
-
-  width: 84px;
-  height: 31px;
-
-  border: 1px solid #67dd6c;
-  box-sizing: border-box;
-  border-radius: 8px;
-  cursor: pointer;
-
-  margin-left: calc(100% - 90px);
-  zindex: 10;
-  position: relative;
-`;
-
-const Dot = styled(Box)`
-  margin-top: 2px;
-  background: #00ff0a;
-  box-shadow: 0px 0px 4px rgba(4, 235, 68, 0.5);
-  border-radius: 50%;
-  width: 7px;
-  height: 7px;
-`;
-const CardPanel = styled(Box)`
-  position: absolute;
-  top: 200px;
-  left: calc(50% - 80px);
-`;
-
-const RaisePanel = styled(Box)`
-  padding: 0px 16px 0px 16px;
-  margin-top: 20px;
-  background: #1f1f1f;
-  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
-  border-radius: 16px 16px 0px 0px;
-  width: 374px;
-  height: 156px;
-`;
-
-const RaiseInput = styled(Box)`
-  margin-top: 16px;
-  padding: 6px 6px 6px 18px;
-  display: flex;
-  align-items: center;
-  border: 1px solid #2a2a2a;
-  box-sizing: border-box;
-  border-radius: 16px;
-  height: 58px;
-`;
-
-const RaiseButton = styled(Box)`
-  background: #3da65a;
-  color: white;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90px;
-  height: 46px;
-  cursor: pointer;
-`;
-
-const RaiseAction = styled(Box)`
-  > div {
-    background: #2a2a2a;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 80px;
-    height: 48px;
-  }
-  margin-top: 12px;
-  color: white;
-  fontweight: bold;
-  display: flex;
-  justify-content: space-between;
-`;

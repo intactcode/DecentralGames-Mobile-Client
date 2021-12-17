@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
-// import styles from '../styles/Home.module.css';
 
 const Hamburger = () => {
   const menuRef = useRef<any>(null);

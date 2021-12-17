@@ -1,8 +1,68 @@
 import { Box } from '@mui/material';
-import { styled, createTheme, ThemeProvider } from '@mui/system';
+import { styled } from '@mui/system';
 import ProgressBar from '../ProgressBar';
 
 interface Props {}
+
+const BottomSetting = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  > div {
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: rgb(255, 255, 255, 0.75);
+    align-items: center;
+  }
+`;
+
+interface ItemFieldProps {
+  type?: number;
+}
+
+const ItemField = styled(Box)<ItemFieldProps>(({ type }) => ({
+  background: 'rgba(0, 0, 0, 0.5)',
+  borderRadius: '8px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontWeight: '800',
+  flexDirection: type === 0 ? 'column' : 'row',
+  fontSize: type === 0 ? '8px' : '12px',
+  fontStyle: type === 0 ? 'italic' : 'unset',
+  lineHeight: '15px',
+  color: 'white',
+  width: type === 0 ? '40px' : type === 1 ? '116px' : '90px',
+  height: type === 0 ? '40px' : type === 1 ? '100px' : '36px',
+}));
+
+const SettingField = styled(Box)`
+  background: #1f1f1f;
+  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 16px 16px 0px 0px;
+  padding: 24px;
+  width: 374px;
+  :nth-of-type(1) {
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 33px;
+    color: white;
+  }
+`;
+const Progress = styled(Box)`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  > div {
+    color: #ffffffbf;
+    font-size: 8px;
+    line-height: normal;
+    font-weight: normal;
+  }
+`;
 
 const Setting: React.FC<Props> = ({}) => {
   return (
@@ -108,63 +168,3 @@ const Setting: React.FC<Props> = ({}) => {
 };
 
 export default Setting;
-
-const BottomSetting = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  > div {
-    font-size: 11px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    color: rgb(255, 255, 255, 0.75);
-    align-items: center;
-  }
-`;
-
-interface ItemFieldProps {
-  type?: number;
-}
-
-const ItemField = styled(Box)<ItemFieldProps>(({ type }) => ({
-  background: 'rgba(0, 0, 0, 0.5)',
-  borderRadius: '8px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontWeight: '800',
-  flexDirection: type === 0 ? 'column' : 'row',
-  fontSize: type === 0 ? '8px' : '12px',
-  fontStyle: type === 0 ? 'italic' : 'unset',
-  lineHeight: '15px',
-  color: 'white',
-  width: type === 0 ? '40px' : type === 1 ? '116px' : '90px',
-  height: type === 0 ? '40px' : type === 1 ? '100px' : '36px',
-}));
-
-const SettingField = styled(Box)`
-  background: #1f1f1f;
-  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
-  border-radius: 16px 16px 0px 0px;
-  padding: 24px;
-  width: 374px;
-  :nth-of-type(1) {
-    font-weight: 800;
-    font-size: 24px;
-    line-height: 33px;
-    color: white;
-  }
-`;
-const Progress = styled(Box)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px;
-  > div {
-    color: #ffffffbf;
-    font-size: 8px;
-    line-height: normal;
-    font-weight: normal;
-  }
-`;

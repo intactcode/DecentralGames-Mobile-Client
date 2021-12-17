@@ -1,11 +1,11 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import { GlobalContext } from '../../store';
 import Image from 'next/image';
 import styles from '../../styles/Home.module.css';
 
 const HomePage = () => {
   // get user's status from the Context API store
-  const [state, dispatch]: any = useContext(GlobalContext);
+  const [state]: any = useContext(GlobalContext);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////

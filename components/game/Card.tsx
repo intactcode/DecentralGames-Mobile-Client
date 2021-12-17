@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { styled, createTheme, ThemeProvider } from '@mui/system';
+import { styled } from '@mui/system';
 
 interface Props {
   type: string;
@@ -26,7 +26,7 @@ const CardBody = styled(Box)<CardBodyProps>(({ transform, type }) => ({
   alignItems: 'center',
   margin: transform ? '0px' : '5px',
   transform: transform,
-  [`& :nth-of-type(1)`]: {
+  ['& :nth-of-type(1)']: {
     fontSize: '28px',
     color: type == 'Carreau' ? 'red' : 'black',
     fontWeight: 'bold',
