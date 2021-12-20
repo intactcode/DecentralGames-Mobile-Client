@@ -45,7 +45,7 @@ const assignToken = async (accountSwitch = false) => {
 
 const HomePage = () => {
   // get user's status from the Context API store
-  const [state, dispatch]: any = useContext(GlobalContext);
+  const [state]: any = useContext(GlobalContext);
 
   // define local variables
   const router = useRouter();

@@ -1,252 +1,16 @@
-import { Box, TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Image from 'next/image'
 
 import Card from './Card';
 import Character from './Character';
 import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
 import ProgressBar from '../ProgressBar';
-
-export default function Gameplay() {
-  const [turn, setTurn] = useState(0);
-  const [active, setActive] = useState<boolean[]>([]);
-  const [raiseamount, setRaiseAmount] = useState(600);
-  const [raiseshow, setRaiseShow] = useState(false);
-  const [raise, setRaise] = useState<number[]>([]);
-  const [issetting, setIsSetting] = useState(false);
-  const [isleaderboard, setIsLeaderBoard] = useState(false);
-  const [iceamount, setIceAmount] = useState(22000);
-  const [xpamount, setXPAmount] = useState(22);
-  const [dgamount, setDGAmount] = useState(0.01);
-  const [roundcount, setRoundCount] = useState(0);
-  const [win, setWin] = useState<boolean[]>([]);
-
-  useEffect(() => {
-    let temp = [...active];
-    for (let i = 0; i < 6; i++) temp[i] = true;
-    setActive(temp);
-
-    temp = [...win];
-    for (let i = 0; i < 6; i++) temp[i] = false;
-    setWin(temp);
-  }, []);
-
-  const setNextTurn = () => {
-    let temp = (turn + 1) % 6;
-    while (active[temp] === false && temp !== turn) temp = (temp + 1) % 6;
-    if (temp === 0) {
-      console.log(roundcount);
-      setRoundCount(roundcount + 1);
-      if (roundcount + 1 === 15) {
-        setTurn(-1);
-        let t = [...win];
-        t[temp] = true;
-        setWin(t);
-        return;
-      }
-    }
-    if (temp === turn) setTurn(-1);
-    else setTurn(temp);
-  };
-  const onFold = () => {
-    let tempactive = [...active];
-    tempactive[turn] = false;
-    setActive(tempactive);
-    setNextTurn();
-  };
-
-  const onRaise = () => {
-    if (raiseamount == 0) {
-      alert('Input correct amount');
-      return;
-    }
-    let temp = [...raise];
-    temp[turn] = raiseamount;
-    setRaise(temp);
-    setNextTurn();
-    setRaiseShow(false);
-  };
-
-  const onCall = () => {
-    let temp = [...raise];
-    temp[turn] = 300;
-    setRaise(temp);
-    setNextTurn();
-  };
-
-  const onReset = () => {
-    let temp = [...active];
-    for (let i = 0; i < 6; i++) temp[i] = true;
-    setActive(temp);
-    setRaise([]);
-    setTurn(0);
-  };
-  const positionx = [
-    'calc(50% - 36px)',
-    'calc(50% + 90px)',
-    'calc(50% + 90px)',
-    'calc(50% - 36px)',
-    'calc(50% - 160px)',
-    'calc(50% - 160px)',
-  ];
-  const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
-  const items = [
-    ['/images/item1.svg'],
-    ['/images/item1.svg'],
-    ['/images/item1.svg', '/images/item1.svg', '/images/item1.svg'],
-    ['/images/item1.svg', '/images/item1.svg', '/images/item1.svg'],
-    ['/images/item1.svg'],
-    [
-      '/images/item1.svg',
-      '/images/item1.svg',
-      '/images/item1.svg',
-      '/images/item1.svg',
-      '/images/item1.svg',
-    ],
-  ];
-
-  return (
-    <Body>
-      <Table />
-      <Links>
-        <Link href="/">
-          <BlackEllipse left="40px">
-            <BsBoxArrowLeft />
-          </BlackEllipse>
-        </Link>
-        <BlackEllipse
-          right="40px"
-          onClick={() => setIsLeaderBoard(!isleaderboard)}
-        >
-          <MdOutlineLeaderboard />
-        </BlackEllipse>
-      </Links>
-      {positionx.map((data, i) => {
-        return (
-          <Character
-            key={data}
-            image="images/character.png"
-            left={positionx[i]}
-            top={positiony[i]}
-            active={active[i]}
-            user={i === 0}
-            turn={turn == i}
-            index={i}
-            raise={raise[i]}
-            onFold={onFold}
-            items={items[i]}
-            ice={iceamount}
-            xp={xpamount}
-            dg={dgamount}
-          />
-        );
-      })}
-      <CardPanel>
-        <Box display="flex">
-          <Card type="Carreau" number="A" />
-          <Card type="Pique" number="J" />
-          <Card type="Carreau" number="A" />
-        </Box>
-        <Box display="flex" pl="30px">
-          <Card type="Carreau" number="A" />
-          <Card type="Carreau" number="A" />
-        </Box>
-      </CardPanel>
-
-      <Box display="flex" justifyContent="center">
-        <Box pt="540px" px="20px" width="374px">
-          <TurnButton>
-            <Box color="white" fontSize="11px" mr="5px">
-              Your Turn
-            </Box>
-            <Dot />
-          </TurnButton>
-        </Box>
-      </Box>
-
-      {raiseshow ? (
-        <Box display="flex" justifyContent="center">
-          <RaisePanel>
-            <RaiseInput>
-              <Box color="#FFFFFF80" width="85px" fontWeight="bold" mr="5px">
-                Your Bet:
-              </Box>
-              <TextField
-                className="raise"
-                inputProps={{
-                  style: {
-                    textAlign: 'center',
-                    color: 'white',
-                    fontSize: '30px',
-                    width: '100px',
-                  },
-                }}
-                variant="standard"
-                type="number"
-                value={raiseamount}
-                onChange={(event) => setRaiseAmount(Number(event.target.value))}
-              />
-              <img src="/images/freecoin.svg" />
-              <RaiseButton ml="10px" onClick={() => onRaise()}>
-                Raise
-              </RaiseButton>
-            </RaiseInput>
-            <RaiseAction>
-              <Box>1/2</Box>
-              <Box>3/4</Box>
-              <Box>Pot</Box>
-              <Box>Max</Box>
-            </RaiseAction>
-          </RaisePanel>
-        </Box>
-      ) : (
-        <>
-          <Box display="flex" justifyContent="center">
-            <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
-              <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
-              <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
-              <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
-            </ActionButtonGroup>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent="center"
-            onClick={() => setIsSetting(!issetting)}
-          >
-            <Progress>
-              <Box>See the river 15 times</Box>
-              <ProgressBar type={0} percent={7 / 15} text="7/15" width="74px" />
-            </Progress>
-            <Progress>
-              <Box>Win the hand X times</Box>
-              <ProgressBar type={1} percent={1 / 8} text="1/8" width="74px" />
-            </Progress>
-            <Progress>
-              <Box>Get a three of a kind X times</Box>
-              <ProgressBar type={2} percent={3 / 4} text="3/4" width="74px" />
-            </Progress>
-          </Box>
-          {issetting && <Setting />}
-          {isleaderboard && <LeaderBoard />}
-          {win[0] && (
-            <Box position="absolute" left="100px" top="570px">
-              <img src="/images/200ice.svg" />
-            </Box>
-          )}
-          {win[0] && (
-            <Box position="absolute" left="145px" top="450px" zIndex={19}>
-              <img src="/images/fullhouse.svg" />
-            </Box>
-          )}
-        </>
-      )}
-    </Body>
-  );
-}
+import RaiseSetting from './RaiseSetting';
 
 const Progress = styled(Box)`
   display: flex;
@@ -306,7 +70,7 @@ const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
   justifyContent: 'space-between',
   marginTop: '10px',
   opacity: turn === 0 ? 1 : 0.2,
-  [`& >div`]: {
+  ['& >div']: {
     borderRadius: '8px',
     width: '103px',
     height: '69px',
@@ -319,13 +83,13 @@ const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
     margin: '5px',
     color: 'white',
   },
-  [`& :nth-of-type(1)`]: {
+  ['& :nth-of-type(1)']: {
     background: '#A82822',
   },
-  [`& :nth-of-type(2)`]: {
+  ['& :nth-of-type(2)']: {
     background: '#3D86A6',
   },
-  [`& :nth-of-type(3)`]: {
+  ['& :nth-of-type(3)']: {
     background: '#3DA65A',
   },
 }));
@@ -364,53 +128,194 @@ const CardPanel = styled(Box)`
   left: calc(50% - 80px);
 `;
 
-const RaisePanel = styled(Box)`
-  padding: 0px 16px 0px 16px;
-  margin-top: 20px;
-  background: #1f1f1f;
-  box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
-  border-radius: 16px 16px 0px 0px;
-  width: 374px;
-  height: 156px;
-`;
+export default function Gameplay() {
+  const [turn, setTurn] = useState(0);
+  const [active, setActive] = useState<boolean[]>([]);
+  const [raiseamount, setRaiseAmount] = useState(600);
+  const [raiseshow, setRaiseShow] = useState(false);
+  const [raise, setRaise] = useState<number[]>([]);
+  const [issetting, setIsSetting] = useState(false);
+  const [isleaderboard, setIsLeaderBoard] = useState(false);
+  const [iceamount, setIceAmount] = useState(22000); // eslint-disable-line
+  const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
+  const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
+  const [roundcount, setRoundCount] = useState(0);
+  const [win, setWin] = useState<boolean[]>([]);
 
-const RaiseInput = styled(Box)`
-  margin-top: 16px;
-  padding: 6px 6px 6px 18px;
-  display: flex;
-  align-items: center;
-  border: 1px solid #2a2a2a;
-  box-sizing: border-box;
-  border-radius: 16px;
-  height: 58px;
-`;
+  const setNextTurn = () => {
+    let temp = (turn + 1) % 6;
+    while (active[temp] === false && temp !== turn) temp = (temp + 1) % 6;
+    if (temp === 0) {
+      console.log(roundcount);
+      setRoundCount(roundcount + 1);
+      if (roundcount + 1 === 3) {
+        setTurn(-1);
+        let t = [...win];
+        t[temp] = true;
+        setWin(t);
+        return;
+      }
+    }
+    if (temp === turn) setTurn(-1);
+    else setTurn(temp);
+  };
+  const onFold = () => {
+    let tempactive = [...active];
+    tempactive[turn] = false;
+    setActive(tempactive);
+    setNextTurn();
+  };
 
-const RaiseButton = styled(Box)`
-  background: #3da65a;
-  color: white;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90px;
-  height: 46px;
-  cursor: pointer;
-`;
+  const onRaise = () => {
+    if (raiseamount == 0) {
+      alert('Input correct amount');
+      return;
+    }
+    let temp = [...raise];
+    temp[turn] = raiseamount;
+    setRaise(temp);
+    setNextTurn();
+    setRaiseShow(false);
+  };
 
-const RaiseAction = styled(Box)`
-  > div {
-    background: #2a2a2a;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 80px;
-    height: 48px;
-  }
-  margin-top: 12px;
-  color: white;
-  fontweight: bold;
-  display: flex;
-  justify-content: space-between;
-`;
+  const onCall = () => {
+    let temp = [...raise];
+    temp[turn] = 300;
+    setRaise(temp);
+    setNextTurn();
+  };
+
+  // eslint-disable-next-line
+  const onReset = () => {
+    let temp = [...active], temp1 = [...win];
+    for (let i = 0; i < 6; i++) temp[i] = true;
+    setActive(temp);
+    setRaise([]);
+    setTurn(0);
+    for (let i = 0; i < 6; i++) temp1[i] = false;
+    setWin(temp1);
+  };
+
+  useEffect(() => {
+    onReset();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const positionx = [
+    'calc(50% - 36px)',
+    'calc(50% + 90px)',
+    'calc(50% + 90px)',
+    'calc(50% - 36px)',
+    'calc(50% - 160px)',
+    'calc(50% - 160px)',
+  ];
+  const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
+  const items = [
+    ['/images/item1.svg'],
+    ['/images/item1.svg'],
+    ['/images/item1.svg', '/images/item1.svg', '/images/item1.svg'],
+    ['/images/item1.svg', '/images/item1.svg', '/images/item1.svg'],
+    ['/images/item1.svg'],
+    [
+      '/images/item1.svg',
+      '/images/item1.svg',
+      '/images/item1.svg',
+      '/images/item1.svg',
+      '/images/item1.svg',
+    ],
+  ];
+
+  return (
+    <Body>
+      <Table />
+      <Links>
+        <BlackEllipse left="40px" onClick={() => onReset()}>
+          <BsBoxArrowLeft />
+        </BlackEllipse>
+        <BlackEllipse right="40px" onClick={() => setIsLeaderBoard(!isleaderboard)}>
+          <MdOutlineLeaderboard />
+        </BlackEllipse>
+      </Links>
+      {positionx.map((data, i) => {
+        return (
+          <Character
+            key={data}
+            image="images/character.png"
+            left={positionx[i]}
+            top={positiony[i]}
+            active={active[i]}
+            user={i === 0}
+            turn={turn == i}
+            index={i}
+            raise={raise[i]}
+            onFold={onFold}
+            items={items[i]}
+            ice={iceamount}
+            xp={xpamount}
+            dg={dgamount}
+          />
+        );
+      })}
+      <CardPanel>
+        <Box display="flex">
+          <Card type="Carreau" number="A" />
+          <Card type="Pique" number="J" />
+          <Card type="Carreau" number="A" />
+        </Box>
+        <Box display="flex" pl="30px">
+          <Card type="Carreau" number="A" />
+          <Card type="Carreau" number="A" />
+        </Box>
+      </CardPanel>
+
+      <Box display="flex" justifyContent="center">
+        <Box pt="540px" px="20px" width="374px">
+          <TurnButton>
+            <Box color="white" fontSize="11px" mr="5px">
+              Your Turn
+            </Box>
+            <Dot />
+          </TurnButton>
+        </Box>
+      </Box>
+
+      <Box display="flex" justifyContent="center">
+        <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
+          <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
+          <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
+          <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
+        </ActionButtonGroup>
+      </Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        onClick={() => setIsSetting(!issetting)}
+        mb="15px"
+      >
+        <Progress>
+          <Box>See the river 15 times</Box>
+          <ProgressBar type={0} percent={7 / 15} text="7/15" width="74px" />
+        </Progress>
+        <Progress>
+          <Box>Win the hand X times</Box>
+          <ProgressBar type={1} percent={1 / 8} text="1/8" width="74px" />
+        </Progress>
+        <Progress>
+          <Box>Get a three of a kind X times</Box>
+          <ProgressBar type={2} percent={3 / 4} text="3/4" width="74px" />
+        </Progress>
+      </Box>
+      <RaiseSetting open={raiseshow} setOpen={setRaiseShow} raiseamount={raiseamount} setRaiseAmount={setRaiseAmount} onRaise={onRaise} />
+      <Setting open={issetting} setOpen={setIsSetting} />
+      <LeaderBoard open={isleaderboard} setOpen={setIsLeaderBoard} />
+      {win[0] &&
+        <Box position="absolute" left="calc(50% - 90px)" top="570px">
+          <Image src="/images/200ice.svg" alt="200ice" width={176} height={111} />
+        </Box>}
+      {win[0] &&
+        <Box position="absolute" left="calc(50% - 43px)" top="450px" zIndex={19}>
+          <Image src="/images/fullhouse.svg" alt="fullhouse" width={84} height={35} />
+        </Box>}
+    </Body>
+  );
+}
