@@ -1,6 +1,9 @@
 import React from 'react';
 
 export function useMediaQuery(query) {
+  if (typeof window === 'undefined' || typeof window.matchMedia === 'undefined')
+    return false;
+
   const mediaQuery = window.matchMedia(query);
   const [match, setMatch] = React.useState(!!mediaQuery.matches);
 
@@ -9,9 +12,6 @@ export function useMediaQuery(query) {
     mediaQuery.addListener(handler);
     return () => mediaQuery.removeListener(handler);
   }, []);
-
-  if (typeof window === 'undefined' || typeof window.matchMedia === 'undefined')
-    return false;
 
   return match;
 }
