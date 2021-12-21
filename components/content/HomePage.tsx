@@ -1,7 +1,6 @@
 import { useEffect, useContext, useState } from 'react';
 import Web3 from 'web3';
 import { Button } from '@mui/material';
-import { useRouter } from 'next/router';
 import { useMediaQuery } from '../../hooks';
 import { GlobalContext } from '../../store';
 import { API_BASE_URL } from '../../common/Fetch';
@@ -45,17 +44,16 @@ const assignToken = async (accountSwitch = false) => {
 
 const HomePage = () => {
   // get user's status from the Context API store
-  const [state]: any = useContext(GlobalContext);
+  const [state, dispatch]: any = useContext(GlobalContext);
 
   // define local variables
-  const router = useRouter();
   const [metamaskEnabled, setMetamaskEnabled] = useState(false);
-  const [binance, setBinance] = useState(false);
   const tablet = useMediaQuery('(max-width: 992px)');
 
   // get network ID
   useEffect(() => {
     if (window.ethereum) {
+      setMetamaskEnabled(true);
       window.web3 = new Web3(window.ethereum); // pass MetaMask provider to Web3 constructor
 
       (async () => {
@@ -87,8 +85,10 @@ const HomePage = () => {
           window.location.reload();
         });
       });
+    } else {
+      setMetamaskEnabled(false);
     }
-  }, []);
+  }, [dispatch]);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -99,50 +99,8 @@ const HomePage = () => {
 
   let userAddress = '';
 
-  useEffect(() => {
-    if (window.ethereum) {
-      setMetamaskEnabled(true);
-    } else {
-      setMetamaskEnabled(false);
-    }
-  });
-
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
-
-  async function openMetaMask() {
-    if (metamaskEnabled) {
-      // open MetaMask for login then get the user's wallet address
-
-      await window?.ethereum.enable();
-
-      userAddress = window.ethereum?.selectedAddress;
-
-      // track MetaMask connect event
-      // analytics.track('Connected MetaMask', {
-      //   userAddress: userAddress,
-      // });
-
-      assignToken();
-
-      // dispatch user address to the Context API store
-      dispatch({
-        type: 'user_address',
-        data: userAddress,
-      });
-
-      // set global user status based on value stored in database
-      // if new wallet update user status to 4 both locally and in the database
-      // (/websiteLogin API call will return error with new wallet address)
-      const response = await getUserStatus();
-
-      if (response) {
-        updateStatus(response, false);
-      } else {
-        updateStatus(4, true);
-      }
-    }
-  }
 
   async function updateStatus(value: any, post: boolean) {
     if (post) {
@@ -183,6 +141,40 @@ const HomePage = () => {
     return 4;
   }
 
+  async function openMetaMask() {
+    if (metamaskEnabled) {
+      // open MetaMask for login then get the user's wallet address
+
+      await window?.ethereum.enable();
+
+      userAddress = window.ethereum?.selectedAddress;
+
+      // track MetaMask connect event
+      // analytics.track('Connected MetaMask', {
+      //   userAddress: userAddress,
+      // });
+
+      assignToken();
+
+      // dispatch user address to the Context API store
+      dispatch({
+        type: 'user_address',
+        data: userAddress,
+      });
+
+      // set global user status based on value stored in database
+      // if new wallet update user status to 4 both locally and in the database
+      // (/websiteLogin API call will return error with new wallet address)
+      const response = await getUserStatus();
+
+      if (response) {
+        updateStatus(response, false);
+      } else {
+        updateStatus(4, true);
+      }
+    }
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -221,8 +213,8 @@ const HomePage = () => {
         {state.userAddress
           ? 'Connected'
           : tablet
-          ? 'Connect'
-          : 'Connect MetaMask'}
+            ? 'Connect'
+            : 'Connect MetaMask'}
       </Button>
     </main>
   );
