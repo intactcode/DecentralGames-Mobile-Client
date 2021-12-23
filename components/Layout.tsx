@@ -19,7 +19,7 @@ const Layout = (props: { children: any }) => {
       <Box style={{ position: 'relative', overflowX: 'hidden' }}>
         <Hamburger />
         <Logo>
-          <Link href="https://decentral.games/">
+          <Link href="https://decentral.games/" passHref>
             <Image src="/images/dg-logo.png" alt="logo" width={40} height={40} />
           </Link>
         </Logo>
