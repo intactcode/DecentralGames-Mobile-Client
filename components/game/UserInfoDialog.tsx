@@ -167,7 +167,7 @@ const UserInfoDialog: React.FC<Props> = ({
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
-                key={1000 + i}
+                key={100 + i}
               >
                 {data !== '' && (
                   <>

@@ -188,8 +188,9 @@ const HomePage = () => {
   /////////////////////////////////////////////////////////////////////////////////////////
   return (
     <main className={styles.main}>
-      <div className={styles.back}>
-        <div className={styles.gradient} />
+      <div className={styles.gradient} />
+      <div className={styles.back} />
+      <Box position = "relative" zIndex = {30}>
         <Box className={styles.playtitle}>
           Free To Play.<br />
           Play To Earn.<br />
@@ -217,7 +218,7 @@ const HomePage = () => {
           <Image src="/images/home/metamask.png" alt="metamask" width={35} height={35} />
           <Box>{!state.userAddress ? 'Connect Your Wallet' : ellipsis}</Box>
         </Box>
-      </div>
+      </Box>
     </main >
   );
 };

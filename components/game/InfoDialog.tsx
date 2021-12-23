@@ -97,11 +97,11 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
         {items.map((data: string, i: number) => {
           return (
             <Box
-              key={2000 + i}
+              key={200 + i}
               marginLeft={i === 0 ? '16px!important' : ''}
               marginRight={i === items.length - 1 ? '16px!important' : ''}
             >
-              <Image src={data} key={i} alt="line" layout="fill" />
+              <Image src={data} key={500 + i} alt="line" layout="fill" />
               <span>+31%</span>
             </Box>
           );

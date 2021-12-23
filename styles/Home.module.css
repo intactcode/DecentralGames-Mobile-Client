@@ -9,19 +9,19 @@
   height: 100%;
   background-image: url('/images/home/playback.png');
   background-size : 100% 100%;
-  overflow-y: hidden;
   color: white;
 }
 .gradient {
   top: 0;
   position: absolute;
   width: 100%;
-  height: 115%;
+  height: 100%;
+  z-index: 10;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 70.07%, #000000 79.93%),
     linear-gradient(0deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
 }
 .playtitle {
-  margin-top: 250px;
+  margin-top: 60%;
   font-weight: 800;
   font-size: 36px;
   position: relative;
@@ -156,13 +156,10 @@
   position: relative;
   margin-left :auto;
   margin-right: auto;
-  bottom: -170px;
+  margin-top : 40%;
   cursor : pointer;
-  transition: opacity 0.3s;
 }
-.connectWallet:hover{
-  opacity: 0.5;
-}
+
 .connectWallet > div {
   font-weight: bold;
   color: white;
