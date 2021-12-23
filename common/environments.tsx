@@ -1,5 +1,6 @@
 const useLocalhostApis = false;
 
+// eslint-disable-next-line import/prefer-default-export
 export const ApiUrlsByAppEnv = {
   localhost: useLocalhostApis
     ? 'http://localhost:5000'

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const call = (url, method, withToken = true, data = {}) => {
+const call = (url: string, method: string, withToken = true, data = {}) => {
   const accessToken = localStorage.getItem('token');
 
   const currentTimestamp = new Date().getTime() / 1000;
@@ -13,7 +13,7 @@ const call = (url, method, withToken = true, data = {}) => {
       !(window.ethereum && window.ethereum?.selectedAddress))
   ) {
     return new Promise((resolve, reject) => {
-      reject(`Couldn't get an access token`);
+      reject("Couldn't get an access token");
     });
   }
 
