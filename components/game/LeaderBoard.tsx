@@ -135,7 +135,7 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
                 color = '#FF9191';
               }
               return (
-                <Box key={2000 + i} display="flex" mt="2px">
+                <Box key={400 + i} display="flex" mt="2px">
                   <Box width="16px" height="16px" mt="-10px" mr="10px">
                     <Image src="/images/star.svg" alt="star" width={12} height={13} />
                   </Box>
