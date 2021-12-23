@@ -2,7 +2,7 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "max-classes-per-file": 0,
-    "quotes": ["error", "single"],
+    "quotes": ["error", "single", { "avoidEscape": true }],
     "jsx-quotes": ["error", "prefer-double"],
     "react/jsx-filename-extension": [
       2,
