@@ -1,9 +1,8 @@
 import { useEffect, useContext, useState } from 'react';
 import Web3 from 'web3';
 import { Box } from '@mui/material';
-// import { useMediaQuery } from '../../hooks';
 import { GlobalContext } from '../../store';
-import { API_BASE_URL } from '../../common/Fetch';
+import Fetch, { API_BASE_URL } from '../../common/Fetch';
 import call from '../../common/API';
 import Image from 'next/image';
 import styles from '../../styles/Home.module.css';
@@ -48,7 +47,6 @@ const HomePage = () => {
 
   // define local variables
   const [metamaskEnabled, setMetamaskEnabled] = useState(false);
-  // const tablet = useMediaQuery('(max-width: 992px)');
 
   // get network ID
   useEffect(() => {
@@ -107,7 +105,7 @@ const HomePage = () => {
       console.log('Posting user status to db: ' + value);
 
       // update user status in database
-      // await Fetch.REGISTER(state.affiliateAddress);
+      await Fetch.REGISTER('');
 
       // update global state user status after fetch is complete
       dispatch({
@@ -124,21 +122,19 @@ const HomePage = () => {
   }
 
   async function getUserStatus() {
-    console.log('Get user status: ModalLogin');
+    console.log('Get user status: HomePage');
 
-    // try {
-    //   const responseStatus = await Fetch.USER_STATUS(userAddress, '');
-    //   const jsonStatus = await responseStatus.json();
+    try {
+      const jsonStatus = await Fetch.USER_STATUS();
 
-    //   if (!jsonStatus.status) return false;
+      if (!jsonStatus.status) return false;
 
-    //   return jsonStatus.status;
-    // } catch {
-    //   console.log('Unregistered wallet: ModalLogin');
+      return jsonStatus.status;
+    } catch {
+      console.log('Unregistered wallet: HomePage');
 
-    //   return false;
-    // }
-    return 4;
+      return false;
+    }
   }
 
   async function openMetaMask() {

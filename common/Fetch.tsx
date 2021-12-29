@@ -1,3 +1,4 @@
+import call from './API';
 import getConfig from 'next/config';
 import { ApiUrlsByAppEnv } from './environments';
 
@@ -12,6 +13,15 @@ export const API_BASE_URL =
 console.log('APP_ENV: ', APP_ENV);
 console.log('API_BASE_URL: ', API_BASE_URL);
 
-const Fetch = {};
+const Fetch = {
+  USER_STATUS: () => {
+    return call(`${API_BASE_URL}/order/webLogin`, 'POST', true);
+  },
+  REGISTER: (affiliate: any) => {
+    return call(`${API_BASE_URL}/order/webRegister`, 'POST', true, {
+      affiliate,
+    });
+  },
+};
 
 export default Fetch;

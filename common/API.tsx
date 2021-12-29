@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const call = (url: string, method: string, withToken = true, data = {}) => {
+declare const window: any;
+
+const call = (url: string, method: string, withToken = true, data = {}): any => {
   const accessToken = localStorage.getItem('token');
 
   const currentTimestamp = new Date().getTime() / 1000;
@@ -17,7 +19,7 @@ const call = (url: string, method: string, withToken = true, data = {}) => {
     });
   }
 
-  let header = {
+  let header: any = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
   };
@@ -26,7 +28,7 @@ const call = (url: string, method: string, withToken = true, data = {}) => {
     header['Authorization'] = `Bearer ${accessToken}`;
   }
 
-  const options = {
+  const options: any = {
     url,
     method,
     headers: header,

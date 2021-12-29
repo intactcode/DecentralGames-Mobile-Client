@@ -1,7 +1,7 @@
 const useLocalhostApis = false;
 
 // eslint-disable-next-line import/prefer-default-export
-export const ApiUrlsByAppEnv = {
+export const ApiUrlsByAppEnv: any = {
   localhost: useLocalhostApis
     ? 'http://localhost:5000'
     : 'https://api.decentral.games',
