@@ -1,26 +1,26 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
-import {FaChevronDown} from 'react-icons/fa'
+import { FaChevronDown } from 'react-icons/fa';
 import Image from 'next/image';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from './ProgressBar';
 
 interface Props {
   open: boolean;
   setOpen: any;
 }
 
-const SettingBody = styled(Box) <{ open: boolean }>`
-  display : flex;
-  justify-content : center;
-  position : absolute;
-  bottom : 0;
-  z-index : 20;
-  max-height : ${({ open }) => open ? '600px' : '0px'};
-  transition : max-height 0.5s;
+const SettingBody = styled(Box)<{ open: boolean }>`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  z-index: 20;
+  max-height: ${({ open }) => (open ? '600px' : '0px')};
+  transition: max-height 0.5s;
 `;
 
 const SettingField = styled(Box)`
-  overflow : hidden;
+  overflow: hidden;
   background: #1f1f1f;
   box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
   border-radius: 16px 16px 0px 0px;
@@ -34,19 +34,19 @@ const SettingField = styled(Box)`
   }
 `;
 
-const CloseIcon = styled(Box) <{ open: boolean }>`
-  top : -55px;
-  left : 15px;
-  position : absolute;
-  background: #1F1F1F;
+const CloseIcon = styled(Box)<{ open: boolean }>`
+  top: -55px;
+  left: 15px;
+  position: absolute;
+  background: #1f1f1f;
   box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
   border-radius: 24px;
-  width : 48px;
-  height : 48px;
-  display  :${({ open }) => open ? 'flex' : 'none'};
-  justify-content : center;
-  align-items : center;
-  cursor : pointer;
+  width: 48px;
+  height: 48px;
+  display: ${({ open }) => (open ? 'flex' : 'none')};
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `;
 
 const BottomSetting = styled(Box)`
@@ -83,7 +83,6 @@ const ItemField = styled(Box)<ItemFieldProps>(({ type }) => ({
   height: type === 0 ? '40px' : type === 1 ? '100px' : '36px',
 }));
 
-
 const Progress = styled(Box)`
   display: flex;
   align-items: center;
@@ -97,12 +96,13 @@ const Progress = styled(Box)`
   }
 `;
 
-
 const Setting: React.FC<Props> = ({ open, setOpen }) => {
   return (
     <SettingBody open={open}>
       <SettingField>
-        <CloseIcon onClick={() => setOpen(false)} open={open}><FaChevronDown fontSize="20px" /></CloseIcon>
+        <CloseIcon onClick={() => setOpen(false)} open={open}>
+          <FaChevronDown fontSize="20px" />
+        </CloseIcon>
         <Box mt="24px">Daily ICE Challenges & Tournament Info</Box>
         <Box display="flex" justifyContent="space-between">
           <Progress justifyContent="none!important">
@@ -117,7 +117,12 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
           <Box mt="15px" display="flex">
             <ItemField type={0}>
               <Box mt="-5px">200</Box>
-              <Image src="/images/diamond.svg" alt="diamond" width={18} height={15} />
+              <Image
+                src="/images/diamond.svg"
+                alt="diamond"
+                width={18}
+                height={15}
+              />
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">1</Box>
@@ -134,7 +139,12 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
           <Box mt="15px" display="flex">
             <ItemField type={0}>
               <Box mt="-5px">750</Box>
-              <Image src="/images/diamond.svg" alt="diamond" width={18} height={15} />
+              <Image
+                src="/images/diamond.svg"
+                alt="diamond"
+                width={18}
+                height={15}
+              />
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">2</Box>
@@ -151,7 +161,12 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
           <Box mt="15px" display="flex">
             <ItemField type={0}>
               <Box mt="-5px">1000</Box>
-              <Image src="/images/diamond.svg" alt="diamond" width={18} height={15} />
+              <Image
+                src="/images/diamond.svg"
+                alt="diamond"
+                width={18}
+                height={15}
+              />
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">3</Box>
@@ -166,7 +181,12 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             <ItemField type={1}>
               <Box>- -&nbsp;&nbsp;</Box>
               <Box mt="5px">
-                <Image src="/images/diamond.svg" width={18} height={18} alt="diamond" />
+                <Image
+                  src="/images/diamond.svg"
+                  width={18}
+                  height={18}
+                  alt="diamond"
+                />
               </Box>
             </ItemField>
           </Box>
@@ -175,7 +195,12 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             <ItemField type={2}>
               <Box>+0</Box>
               <Box mt="5px">
-                <Image src="/images/freecoin.svg" width={18} height={18} alt="freecoin" />
+                <Image
+                  src="/images/freecoin.svg"
+                  width={18}
+                  height={18}
+                  alt="freecoin"
+                />
               </Box>
             </ItemField>
             <Box>ICE Multiplier</Box>
@@ -192,7 +217,12 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             <ItemField type={2}>
               <Box>+4,291</Box>
               <Box mt="5px">
-                <Image src="/images/freecoin.svg" width={18} height={18} alt="freecoin" />
+                <Image
+                  src="/images/freecoin.svg"
+                  width={18}
+                  height={18}
+                  alt="freecoin"
+                />
               </Box>
             </ItemField>
           </Box>

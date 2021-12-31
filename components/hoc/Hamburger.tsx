@@ -12,6 +12,7 @@ const Hamburger = () => {
       }
     });
   }, []);
+
   return (
     <nav role="navigation">
       <div id="menuToggle" ref={menuRef}>

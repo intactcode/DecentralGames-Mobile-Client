@@ -113,13 +113,6 @@ const HomePage = () => {
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
-  // helper functions
-  const disconnect = () => {
-    dispatch({
-      type: 'user_address',
-      data: '',
-    });
-  };
 
   async function updateStatus(value: any, post: boolean) {
     if (post) {
@@ -193,12 +186,20 @@ const HomePage = () => {
     }
   }
 
+  const disconnect = () => {
+    dispatch({
+      type: 'user_address',
+      data: '',
+    });
+  };
+
   const ellipsis = state.userAddress
     ? state.userAddress.substring(0, 4) +
       '....' +
       state.userAddress.substring(state.userAddress.length - 4)
     : '';
-
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
   return (
     <main className={styles.main}>
       <div className={styles.gradient} />
@@ -285,7 +286,6 @@ const HomePage = () => {
             </Box>
           </Box>
         </Box>
-
         <Box
           className={styles.connectWallet}
           onClick={() => (state.userAddress ? disconnect() : openMetaMask())}
