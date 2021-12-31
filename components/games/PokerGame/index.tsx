@@ -128,7 +128,7 @@ const CardPanel = styled(Box)`
   left: calc(50% - 80px);
 `;
 
-export default function Gameplay() {
+const PokerGame = () => {
   const [turn, setTurn] = useState(0);
   const [active, setActive] = useState<boolean[]>([]);
   const [raiseamount, setRaiseAmount] = useState(600);
@@ -345,4 +345,6 @@ export default function Gameplay() {
       )}
     </Body>
   );
-}
+};
+
+export default PokerGame;

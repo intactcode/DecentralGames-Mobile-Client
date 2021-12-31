@@ -1,20 +1,20 @@
-import Game from '../components/game/';
+import PokerGame from '../components/games/PokerGame';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import Constants from '../components/common/Constants';
 import Images from '../components/common/Images';
 
-const Gameplay = () => {
+const Poker = () => {
   return (
     <Layout>
       <Header
-        title={Constants.TITLE + ' | Gameplay '}
+        title={Constants.TITLE + ' | ICE Poker '}
         image={Images.SOCIAL_SHARE}
       />
 
-      <Game />
+      <PokerGame />
     </Layout>
   );
 };
 
-export default Gameplay;
+export default Poker;
