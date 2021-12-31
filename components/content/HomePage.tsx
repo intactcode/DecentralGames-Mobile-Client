@@ -2,8 +2,11 @@ import { useEffect, useContext, useState } from 'react';
 import Web3 from 'web3';
 import { Box } from '@mui/material';
 import { GlobalContext } from '../../store';
-import Fetch, { API_BASE_URL } from '../../common/Fetch';
-import call from '../../common/API';
+
+// import Fetch, { API_BASE_URL } from '../../api/Fetch';
+// import call from '../../api/API';
+import Fetch from '../../api/Fetch';
+
 import Image from 'next/image';
 import styles from '../../styles/Home.module.css';
 
@@ -11,6 +14,7 @@ declare const window: any;
 
 const assignToken = async (accountSwitch = false) => {
   const userAddress = window.ethereum?.selectedAddress;
+
   if (userAddress && document.visibilityState === 'visible') {
     const timestamp = Date.now();
 
@@ -23,11 +27,21 @@ const assignToken = async (accountSwitch = false) => {
       null
     );
 
-    const token = await call(
-      `${API_BASE_URL}/authentication/getWebAuthToken?address=${userAddress}&signature=${signature}&timestamp=${timestamp}`,
-      'GET',
-      false
-    );
+    // console.log('signature: ' + signature);
+    // console.log('timestamp...');
+    // console.log(timestamp);
+
+    // get JWT token
+    const token = await Fetch.GET_TOKEN(userAddress, signature, timestamp);
+
+    // const token = await call(
+    //   `${API_BASE_URL}/authentication/getWebAuthToken?address=${userAddress}&signature=${signature}&timestamp=${timestamp}`,
+    //   'GET',
+    //   false
+    // );
+
+    // console.log('token...');
+    // console.log(token);
 
     localStorage.setItem('token', token);
     localStorage.setItem(
@@ -149,7 +163,8 @@ const HomePage = () => {
       // analytics.track('Connected MetaMask', {
       //   userAddress: userAddress,
       // });
-      console.log(userAddress);
+      // console.log(userAddress);
+
       assignToken();
 
       // dispatch user address to the Context API store
@@ -176,46 +191,115 @@ const HomePage = () => {
       type: 'user_address',
       data: '',
     });
-  }
+  };
 
-  const ellipsis = state.userAddress ? (state.userAddress.substring(0, 4) + '....' +
-    state.userAddress.substring(state.userAddress.length - 4)) : '';
+  const ellipsis = state.userAddress
+    ? state.userAddress.substring(0, 4) +
+      '....' +
+      state.userAddress.substring(state.userAddress.length - 4)
+    : '';
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   return (
     <main className={styles.main}>
       <div className={styles.gradient} />
       <div className={styles.back} />
-      <Box position = "relative" zIndex = {30}>
+      <Box position="relative" zIndex={30}>
         <Box className={styles.playtitle}>
-          Free To Play.<br />
-          Play To Earn.<br />
+          Free To Play.
+          <br />
+          Play To Earn.
+          <br />
           Poker.
         </Box>
-        <Box display="flex" justifyContent="center" position="relative" mt="32px">
+        <Box
+          display="flex"
+          justifyContent="center"
+          position="relative"
+          mt="32px"
+        >
           <Box display="flex" justifyContent="space-between" width="70%">
-            <Box width={64} display="flex" flexDirection="column" alignItems="center">
-              <Image src="/images/home/cloth.png" alt="cloth" width={34} height={31} />
-              <Box textAlign="center" fontWeight="bold" fontSize="14px" mt="12px">Get a Wearable</Box>
+            <Box
+              width={64}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Image
+                src="/images/home/cloth.png"
+                alt="cloth"
+                width={34}
+                height={31}
+              />
+              <Box
+                textAlign="center"
+                fontWeight="bold"
+                fontSize="14px"
+                mt="12px"
+              >
+                Get a Wearable
+              </Box>
             </Box>
 
-            <Box width={64} display="flex" flexDirection="column" alignItems="center">
-              <Image src="/images/home/freepoker.png" alt="cloth" width={28} height={36} />
-              <Box textAlign="center" fontWeight="bold" fontSize="14px" mt="12px">Play Free Poker</Box>
+            <Box
+              width={64}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Image
+                src="/images/home/freepoker.png"
+                alt="cloth"
+                width={28}
+                height={36}
+              />
+              <Box
+                textAlign="center"
+                fontWeight="bold"
+                fontSize="14px"
+                mt="12px"
+              >
+                Play Free Poker
+              </Box>
             </Box>
 
-            <Box width={58} display="flex" flexDirection="column" alignItems="center">
-              <Image src="/images/home/earnice.png" alt="cloth" width={38} height={35} />
-              <Box textAlign="center" fontWeight="bold" fontSize="14px" mt="12px">Earn ICE</Box>
+            <Box
+              width={58}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Image
+                src="/images/home/earnice.png"
+                alt="cloth"
+                width={38}
+                height={35}
+              />
+              <Box
+                textAlign="center"
+                fontWeight="bold"
+                fontSize="14px"
+                mt="12px"
+              >
+                Earn ICE
+              </Box>
             </Box>
           </Box>
         </Box>
-        <Box className={styles.connectWallet} onClick={() => state.userAddress ? disconnect() : openMetaMask()}>
-          <Image src="/images/home/metamask.png" alt="metamask" width={35} height={35} />
+        <Box
+          className={styles.connectWallet}
+          onClick={() => (state.userAddress ? disconnect() : openMetaMask())}
+        >
+          <Image
+            src="/images/home/metamask.png"
+            alt="metamask"
+            width={35}
+            height={35}
+          />
           <Box>{!state.userAddress ? 'Connect Your Wallet' : ellipsis}</Box>
         </Box>
       </Box>
-    </main >
+    </main>
   );
 };
 
