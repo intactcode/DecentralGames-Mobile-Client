@@ -3,13 +3,13 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
-import Image from 'next/image'
+import Image from 'next/image';
 
 import Card from './Card';
 import Character from './Character';
 import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 
 const Progress = styled(Box)`
@@ -187,7 +187,8 @@ export default function Gameplay() {
 
   // eslint-disable-next-line
   const onReset = () => {
-    let temp = [...active], temp1 = [...win];
+    let temp = [...active],
+      temp1 = [...win];
     for (let i = 0; i < 6; i++) temp[i] = true;
     setActive(temp);
     setRaise([]);
@@ -198,7 +199,7 @@ export default function Gameplay() {
 
   useEffect(() => {
     onReset();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const positionx = [
@@ -232,7 +233,10 @@ export default function Gameplay() {
         <BlackEllipse left="40px" onClick={() => onReset()}>
           <BsBoxArrowLeft />
         </BlackEllipse>
-        <BlackEllipse right="40px" onClick={() => setIsLeaderBoard(!isleaderboard)}>
+        <BlackEllipse
+          right="40px"
+          onClick={() => setIsLeaderBoard(!isleaderboard)}
+        >
           <MdOutlineLeaderboard />
         </BlackEllipse>
       </Links>
@@ -305,17 +309,40 @@ export default function Gameplay() {
           <ProgressBar type={2} percent={3 / 4} text="3/4" width="74px" />
         </Progress>
       </Box>
-      <RaiseSetting open={raiseshow} setOpen={setRaiseShow} raiseamount={raiseamount} setRaiseAmount={setRaiseAmount} onRaise={onRaise} />
+      <RaiseSetting
+        open={raiseshow}
+        setOpen={setRaiseShow}
+        raiseamount={raiseamount}
+        setRaiseAmount={setRaiseAmount}
+        onRaise={onRaise}
+      />
       <Setting open={issetting} setOpen={setIsSetting} />
       <LeaderBoard open={isleaderboard} setOpen={setIsLeaderBoard} />
-      {win[0] &&
+      {win[0] && (
         <Box position="absolute" left="calc(50% - 90px)" top="570px">
-          <Image src="/images/200ice.svg" alt="200ice" width={176} height={111} />
-        </Box>}
-      {win[0] &&
-        <Box position="absolute" left="calc(50% - 43px)" top="450px" zIndex={19}>
-          <Image src="/images/fullhouse.svg" alt="fullhouse" width={84} height={35} />
-        </Box>}
+          <Image
+            src="/images/200ice.svg"
+            alt="200ice"
+            width={176}
+            height={111}
+          />
+        </Box>
+      )}
+      {win[0] && (
+        <Box
+          position="absolute"
+          left="calc(50% - 43px)"
+          top="450px"
+          zIndex={19}
+        >
+          <Image
+            src="/images/fullhouse.svg"
+            alt="fullhouse"
+            width={84}
+            height={35}
+          />
+        </Box>
+      )}
     </Body>
   );
 }

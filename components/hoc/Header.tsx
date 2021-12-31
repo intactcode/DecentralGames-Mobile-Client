@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Constants from './Constants';
+import Constants from '../common/Constants';
 
 const Header = (props: { title: string; image: string }) => {
   return (
