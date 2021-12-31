@@ -14,10 +14,19 @@ console.log('APP_ENV: ', APP_ENV);
 console.log('API_BASE_URL: ', API_BASE_URL);
 
 const Fetch = {
+  GET_TOKEN: (address: string, signature: string, timestamp: number) => {
+    return call(
+      `${API_BASE_URL}/authentication/getWebAuthToken?address=${address}&signature=${signature}&timestamp=${timestamp}`,
+      'GET',
+      false
+    );
+  },
+
   USER_STATUS: () => {
     return call(`${API_BASE_URL}/order/webLogin`, 'POST', true);
   },
-  REGISTER: (affiliate: any) => {
+
+  REGISTER: (affiliate: string) => {
     return call(`${API_BASE_URL}/order/webRegister`, 'POST', true, {
       affiliate,
     });
