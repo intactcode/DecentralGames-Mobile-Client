@@ -1,20 +1,9 @@
-import { useEffect, useContext } from 'react';
 import { Box } from '@mui/material';
-import { GlobalContext } from '../../store';
 import Image from 'next/image';
 import ButtonLogin from '../buttons/ButtonLogin';
 import styles from '../../styles/Home.module.css';
 
 const HomePage = () => {
-  // returns current state paired with dispatch method from Context API
-  const [state, dispatch]: any = useContext(GlobalContext);
-
-  /////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////
-  useEffect(() => {
-    console.log('User status: ' + state.userStatus);
-  }, [state.userStatus]);
-
   return (
     <main className={styles.main}>
       <div className={styles.gradient} />
