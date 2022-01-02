@@ -38,7 +38,7 @@ const assignToken = async (accountSwitch = false) => {
   }
 };
 
-const ButtonLogin = (props: { page: string }) => {
+const ButtonLogin = () => {
   // returns current state paired with dispatch method from Context API
   const [state, dispatch]: any = useContext(GlobalContext);
 
@@ -117,8 +117,8 @@ const ButtonLogin = (props: { page: string }) => {
 
   const disconnect = () => {
     dispatch({
-      type: 'update_status',
-      data: 0,
+      type: 'user_address',
+      data: '',
     });
   };
 
@@ -146,11 +146,11 @@ const ButtonLogin = (props: { page: string }) => {
 
       userAddress = window.ethereum?.selectedAddress;
 
-      // Segment: track MetaMask connect event
-      analytics.track('Connected MetaMask: ' + props.page, {
-        userAddress: userAddress,
-      });
-      console.log(userAddress);
+      // track MetaMask connect event
+      // analytics.track('Connected MetaMask', {
+      //   userAddress: userAddress,
+      // });
+      // console.log(userAddress);
 
       assignToken();
 
@@ -173,7 +173,6 @@ const ButtonLogin = (props: { page: string }) => {
     }
   }
 
-  // write the user's wallet address with ellipsis added
   const ellipsis = state.userAddress
     ? state.userAddress.substring(0, 4) +
       '....' +
@@ -183,7 +182,7 @@ const ButtonLogin = (props: { page: string }) => {
   return (
     <Box
       className={styles.connectWallet}
-      onClick={() => (state.userStatus >= 4 ? disconnect() : openMetaMask())}
+      onClick={() => (state.userAddress ? disconnect() : openMetaMask())}
     >
       <Image
         src="/images/home/metamask.png"
@@ -191,7 +190,7 @@ const ButtonLogin = (props: { page: string }) => {
         width={35}
         height={35}
       />
-      <Box>{state.userStatus < 4 ? 'Connect Your Wallet' : ellipsis}</Box>
+      <Box>{!state.userAddress ? 'Connect Your Wallet' : ellipsis}</Box>
     </Box>
   );
 };
