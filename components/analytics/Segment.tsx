@@ -15,7 +15,7 @@ const Segment = () => {
     console.log('User status: ' + state.userStatus);
   }, [state.userStatus]);
 
-  // send current page data to Segment analytics
+  // Segment: send current page data
   useEffect(() => {
     analytics.page(document.title, {});
   }, [router.pathname]);
