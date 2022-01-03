@@ -55,46 +55,78 @@ const ButtonLogin = (props: { page: string }) => {
   useEffect(() => {
     if (window.ethereum) {
       setMetamaskEnabled(true);
+
       window.web3 = new Web3(window.ethereum); // pass MetaMask provider to Web3 constructor
 
-      (async () => {
-        const networkID = await window.web3.eth.net.getId();
+      // const web3 = new Web3(window.ethereum); // pass MetaMask provider to Web3 constructor
+    } else {
+      setMetamaskEnabled(false);
+    }
+  }, []);
 
+  // if user switches accounts re-assign JWT token
+  useEffect(() => {
+    window.addEventListener('load', function () {
+      if (window.ethereum?.selectedAddress) {
         dispatch({
-          type: 'network_id',
-          data: networkID,
+          type: 'user_address',
+          data: window.ethereum?.selectedAddress,
         });
-      })();
+      }
 
-      window.addEventListener('load', function () {
+      window.ethereum.on('accountsChanged', () => {
+        console.log('Account changed');
+
         if (window.ethereum?.selectedAddress) {
           dispatch({
             type: 'user_address',
             data: window.ethereum?.selectedAddress,
           });
+
+          assignToken(true);
         }
-        window.ethereum.on('accountsChanged', () => {
-          if (window.ethereum?.selectedAddress) {
-            dispatch({
-              type: 'user_address',
-              data: window.ethereum?.selectedAddress,
-            });
-            assignToken(true);
-          }
-        });
-        window.ethereum.on('close', () => {
-          window.location.reload();
-        });
       });
-    } else {
-      setMetamaskEnabled(false);
-    }
+
+      window.ethereum.on('disconnect', () => {
+        window.location.reload();
+      });
+    });
   }, [dispatch]);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   // helper functions
-  async function updateStatus(value: any, post: boolean) {
+
+  const disconnect = () => {
+    dispatch({
+      type: 'update_status',
+      data: 0,
+    });
+
+    // dispatch({
+    //   type: 'user_address',
+    //   data: '',
+    // });
+  };
+
+  async function getUserStatus() {
+    console.log('Get user status: ' + props.page);
+
+    try {
+      const jsonStatus = await Fetch.USER_STATUS();
+
+      if (!jsonStatus.status) return false;
+
+      return jsonStatus.status;
+    } catch (error) {
+      console.log('Unregistered wallet: ' + props.page);
+      console.log(error);
+
+      return false;
+    }
+  }
+
+  async function updateStatus(value: number, post: boolean) {
     if (post) {
       console.log('Posting user status to db: ' + value);
 
@@ -115,29 +147,6 @@ const ButtonLogin = (props: { page: string }) => {
     }
   }
 
-  const disconnect = () => {
-    dispatch({
-      type: 'update_status',
-      data: 0,
-    });
-  };
-
-  async function getUserStatus() {
-    console.log('Get user status: HomePage');
-
-    try {
-      const jsonStatus = await Fetch.USER_STATUS();
-
-      if (!jsonStatus.status) return false;
-
-      return jsonStatus.status;
-    } catch {
-      console.log('Unregistered wallet: HomePage');
-
-      return false;
-    }
-  }
-
   async function openMetaMask() {
     if (metamaskEnabled) {
       // open MetaMask for login then get the user's wallet address
@@ -150,19 +159,28 @@ const ButtonLogin = (props: { page: string }) => {
       analytics.track('Connected MetaMask: ' + props.page, {
         userAddress: userAddress,
       });
-      console.log(userAddress);
 
-      assignToken();
+      // set user status to 3 to denote fetching user status
+      dispatch({
+        type: 'update_status',
+        data: 3,
+      });
+
+      await assignToken();
+
+      // const foo = await assignToken();
+      // console.log('foo... ');
+      // console.log(foo);
 
       // dispatch user address to the Context API store
-      dispatch({
-        type: 'user_address',
-        data: userAddress,
-      });
+      // dispatch({
+      //   type: 'user_address',
+      //   data: userAddress,
+      // });
 
       // set global user status based on value stored in database
       // if new wallet update user status to 4 both locally and in the database
-      // (/websiteLogin API call will return error with new wallet address)
+      // (/websiteLogin API call will return error with unregistered wallet address)
       const response = await getUserStatus();
 
       if (response) {
@@ -191,7 +209,13 @@ const ButtonLogin = (props: { page: string }) => {
         width={35}
         height={35}
       />
-      <Box>{state.userStatus < 4 ? 'Connect Your Wallet' : ellipsis}</Box>
+      <Box>
+        {state.userStatus < 3
+          ? 'Connect Your Wallet'
+          : state.userStatus === 3
+          ? 'Connecting'
+          : ellipsis}
+      </Box>
     </Box>
   );
 };
