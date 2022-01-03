@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { ReactChild, ReactFragment, ReactPortal, useReducer } from 'react';
 import { GlobalContext } from './Context';
 
@@ -19,38 +20,39 @@ const initialState = {
 
 const reducer = (state: any, action: { type: any; data: any }) => {
   switch (action.type) {
-  case 'network_id':
-    return {
-      ...state,
-      networkID: action.data,
-    };
-
-  case 'update_status':
-    return {
-      ...state,
-      userStatus: action.data,
-    };
-
-  case 'user_address':
-    return {
-      ...state,
-      userAddress: action.data,
-    };
-
-  case 'user_info':
-    return {
-      ...state,
-      userInfo: action.data,
-    };
-
-  case 'token_amounts':
-    return {
-      ...state,
-      tokenAmounts: action.data,
-    };
-
-  default:
-    throw new Error('Wrong action type got dispatched');
+    case 'network_id': {
+      return {
+        ...state,
+        networkID: action.data,
+      };
+    }
+    case 'update_status': {
+      return {
+        ...state,
+        userStatus: action.data,
+      };
+    }
+    case 'user_address': {
+      return {
+        ...state,
+        userAddress: action.data,
+      };
+    }
+    case 'user_info': {
+      return {
+        ...state,
+        userInfo: action.data,
+      };
+    }
+    case 'token_amounts': {
+      return {
+        ...state,
+        tokenAmounts: action.data,
+      };
+    }
+    default: {
+      throw new Error('Wrong action type got dispatched');
+    }
   }
 };
 
