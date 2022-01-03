@@ -8,9 +8,6 @@ function UserStatus() {
   // returns current state paired with dispatch method from Context API
   const [state, dispatch]: any = useContext(GlobalContext);
 
-  // define local variables
-  // let userAddress = '';
-
   async function getUserStatus() {
     console.log('Get user status: UserStatus');
 
@@ -30,10 +27,6 @@ function UserStatus() {
 
   useEffect(() => {
     if (window.ethereum) {
-      // userAddress = window.ethereum?.selectedAddress;
-
-      // console.log('foo foo foo...');
-
       if (window.ethereum?.selectedAddress) {
         // set user status to 3 to denote fetching user status, and dispatch the user address
         dispatch({
@@ -51,19 +44,12 @@ function UserStatus() {
           const response = await getUserStatus();
 
           // if the response is truthy set the user's respective status, else set status back to 0
-          // (/websiteLogin API call will return error if this is a new wallet address)
+          // (/websiteLogin API call will return error if this is an unregistered wallet address)
           if (response) {
             dispatch({
               type: 'update_status',
               data: response,
             });
-
-            // console.log('foo foo foo...');
-
-            // dispatch({
-            //   type: 'user_address',
-            //   data: window.ethereum?.selectedAddress,
-            // });
           } else {
             dispatch({
               type: 'update_status',

@@ -47,8 +47,6 @@ const ButtonLogin = (props: { page: string }) => {
 
   let userAddress = '';
 
-  // const window: any = {};
-
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -57,8 +55,6 @@ const ButtonLogin = (props: { page: string }) => {
       setMetamaskEnabled(true);
 
       window.web3 = new Web3(window.ethereum); // pass MetaMask provider to Web3 constructor
-
-      // const web3 = new Web3(window.ethereum); // pass MetaMask provider to Web3 constructor
     } else {
       setMetamaskEnabled(false);
     }
@@ -83,7 +79,7 @@ const ButtonLogin = (props: { page: string }) => {
             data: window.ethereum?.selectedAddress,
           });
 
-          assignToken(true);
+          assignToken(true); // assing JWT authentication token
         }
       });
 
@@ -102,11 +98,6 @@ const ButtonLogin = (props: { page: string }) => {
       type: 'update_status',
       data: 0,
     });
-
-    // dispatch({
-    //   type: 'user_address',
-    //   data: '',
-    // });
   };
 
   async function getUserStatus() {
@@ -130,8 +121,7 @@ const ButtonLogin = (props: { page: string }) => {
     if (post) {
       console.log('Posting user status to db: ' + value);
 
-      // update user status in database
-      await Fetch.REGISTER('');
+      await Fetch.REGISTER(''); // update user status in database
 
       // update global state user status after fetch is complete
       dispatch({
@@ -149,9 +139,7 @@ const ButtonLogin = (props: { page: string }) => {
 
   async function openMetaMask() {
     if (metamaskEnabled) {
-      // open MetaMask for login then get the user's wallet address
-
-      await window?.ethereum.enable();
+      await window?.ethereum.enable(); // open MetaMask for login then get the user's wallet address
 
       userAddress = window.ethereum?.selectedAddress;
 
@@ -166,17 +154,7 @@ const ButtonLogin = (props: { page: string }) => {
         data: 3,
       });
 
-      await assignToken();
-
-      // const foo = await assignToken();
-      // console.log('foo... ');
-      // console.log(foo);
-
-      // dispatch user address to the Context API store
-      // dispatch({
-      //   type: 'user_address',
-      //   data: userAddress,
-      // });
+      await assignToken(); // assing JWT authentication token
 
       // set global user status based on value stored in database
       // if new wallet update user status to 4 both locally and in the database
