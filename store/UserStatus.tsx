@@ -32,6 +32,8 @@ function UserStatus() {
     if (window.ethereum) {
       // userAddress = window.ethereum?.selectedAddress;
 
+      // console.log('foo foo foo...');
+
       if (window.ethereum?.selectedAddress) {
         // set user status to 3 to denote fetching user status, and dispatch the user address
         dispatch({
@@ -55,6 +57,13 @@ function UserStatus() {
               type: 'update_status',
               data: response,
             });
+
+            // console.log('foo foo foo...');
+
+            // dispatch({
+            //   type: 'user_address',
+            //   data: window.ethereum?.selectedAddress,
+            // });
           } else {
             dispatch({
               type: 'update_status',
