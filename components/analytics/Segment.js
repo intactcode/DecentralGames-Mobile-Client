@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 
 const Segment = () => {
   // returns current state paired with dispatch method from Context API
-  const [state, dispatch]: any = useContext(GlobalContext);
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useContext(GlobalContext);
 
   // define local variables
   const router = useRouter();
