@@ -46,7 +46,7 @@ const ButtonLogin = (props: { page: string }) => {
   // define local variables
   const [metamaskEnabled, setMetamaskEnabled] = useState(false);
 
-  let userAddress = '';
+  // let userAddress = '';
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -142,12 +142,12 @@ const ButtonLogin = (props: { page: string }) => {
     if (metamaskEnabled) {
       await window?.ethereum.enable(); // open MetaMask for login then get the user's wallet address
 
-      userAddress = window.ethereum?.selectedAddress;
+      // userAddress = window.ethereum?.selectedAddress;
 
       // Segment: track MetaMask connect event
-      window.analytics.track('Connected MetaMask: ' + props.page, {
-        userAddress: userAddress,
-      });
+      // window.analytics.track('Connected MetaMask: ' + props.page, {
+      //   userAddress: userAddress,
+      // });
 
       // set user status to 3 to denote fetching user status
       dispatch({
