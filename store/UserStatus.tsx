@@ -6,6 +6,7 @@ declare const window: any;
 
 function UserStatus() {
   // returns current state paired with dispatch method from Context API
+  // eslint-disable-next-line no-unused-vars
   const [state, dispatch]: any = useContext(GlobalContext);
 
   async function getUserStatus() {
