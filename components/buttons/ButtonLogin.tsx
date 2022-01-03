@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useEffect, useContext, useState } from 'react';
 import { GlobalContext } from '../../store';
 import Web3 from 'web3';
@@ -144,7 +145,7 @@ const ButtonLogin = (props: { page: string }) => {
       userAddress = window.ethereum?.selectedAddress;
 
       // Segment: track MetaMask connect event
-      analytics.track('Connected MetaMask: ' + props.page, {
+      window.analytics.track('Connected MetaMask: ' + props.page, {
         userAddress: userAddress,
       });
 

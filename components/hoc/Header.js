@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import Constants from '../common/Constants';
 
-const Header = (props: { title: string; image: string }) => {
+// const Header = (props: { title: string, image: string }) => {
+
+const Header = (props) => {
   function segmentSnippet() {
     // create a queue, but don't obliterate an existing one
     var analytics = (window.analytics = window.analytics || []);
@@ -46,7 +48,10 @@ const Header = (props: { title: string; image: string }) => {
 
     // define a factory to create stubs. These are placeholders for methods in Analytics.js so that you never have to wait
     // for it to load to actually record data. The `method` is stored as the first argument, so we can replay the data
-    analytics.factory = function (method: any) {
+
+    // analytics.factory = function (method: any) {
+
+    analytics.factory = function (method) {
       return function () {
         var args = Array.prototype.slice.call(arguments);
         args.unshift(method);
@@ -62,7 +67,9 @@ const Header = (props: { title: string; image: string }) => {
     }
 
     // define a method to load Analytics.js from our CDN, and that will be sure to only ever load it once
-    analytics.load = function (key: string, options: any) {
+    // analytics.load = function (key: string, options: any) {
+
+    analytics.load = function (key, options) {
       // create an async script element based on your key
       var script = document.createElement('script');
       script.type = 'text/javascript';
@@ -84,6 +91,7 @@ const Header = (props: { title: string; image: string }) => {
   }
 
   return (
+    // eslint-disable-next-line react/jsx-filename-extension
     <Head>
       <title>{props.title}</title>
 
