@@ -43,6 +43,8 @@ function UserStatus() {
         (async () => {
           const response = await getUserStatus();
 
+          console.log('User status: ' + response);
+
           // if the response is truthy set the user's respective status, else set status back to 0
           // (/websiteLogin API call will return error if this is an unregistered wallet address)
           if (response) {
