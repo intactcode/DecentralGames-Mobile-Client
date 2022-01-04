@@ -143,7 +143,7 @@ const ButtonLogin = (props: { page: string }) => {
       });
 
       window.analytics.track('Connected MetaMask: ' + props.page, {
-        userAddress: window.ethereum?.selectedAddress,
+        userAddress: state.userAddress,
       });
       await assignToken(new Web3(window.ethereum)); // assing JWT authentication token
 
