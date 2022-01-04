@@ -56,7 +56,6 @@
     "implicit-arrow-linebreak": 0,
     "object-curly-newline": 0,
     "function-paren-newline": 0,
-    "indent": ["error", 2],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
     "react/jsx-one-expression-per-line": "off",
