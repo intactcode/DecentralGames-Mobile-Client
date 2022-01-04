@@ -142,6 +142,9 @@ const ButtonLogin = (props: { page: string }) => {
         data: 3,
       });
 
+      window.analytics.track('Connected MetaMask: ' + props.page, {
+        userAddress: state.userAddress,
+      });
       await assignToken(new Web3(window.ethereum)); // assing JWT authentication token
 
       // set global user status based on value stored in database
