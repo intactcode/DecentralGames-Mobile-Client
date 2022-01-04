@@ -176,7 +176,9 @@ const ButtonLogin = (props: { page: string }) => {
         height={35}
       />
       <Box>
-        {(state.userStatus < 3 ? 'Connect Your Wallet' : state.userStatus === 3)
+        {state.userStatus < 3
+          ? 'Connect Your Wallet'
+          : state.userStatus === 3
           ? 'Connecting'
           : ellipsis}
       </Box>
