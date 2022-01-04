@@ -1,13 +1,12 @@
-import { useEffect, useContext } from 'react';
-import { GlobalContext } from './index';
+import { useEffect } from 'react';
 import Web3 from 'web3';
+import { useStoreDispatch } from './hooks';
 
 declare const window: any;
 
 function NetworkId() {
   // returns current state paired with dispatch method from Context API
-  // eslint-disable-next-line no-unused-vars
-  const [state, dispatch]: any = useContext(GlobalContext);
+  const dispatch = useStoreDispatch();
 
   useEffect(() => {
     if (window.ethereum) {

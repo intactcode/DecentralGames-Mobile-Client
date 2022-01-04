@@ -1,24 +1,23 @@
-/* eslint-disable indent */
-import { useEffect, useContext, useState } from 'react';
-import { GlobalContext } from '../../store';
-import Web3 from 'web3';
+import { useEffect } from 'react';
 import { Box } from '@mui/material';
+import Web3 from 'web3';
 import Image from 'next/image';
 import Fetch from '../../api/Fetch';
 import styles from '../../styles/Home.module.css';
+import { useStoreDispatch, useStoreState } from '../../store/hooks';
 
 declare const window: any;
 
-const assignToken = async (accountSwitch = false) => {
+const assignToken = async (web3: any, accountSwitch = false) => {
   const userAddress = window.ethereum?.selectedAddress;
 
   if (userAddress && document.visibilityState === 'visible') {
     const timestamp = Date.now();
 
-    const msg = window.web3.utils.utf8ToHex(
+    const msg = web3.utils.utf8ToHex(
       `Decentral Games Login\nTimestamp: ${timestamp}`
     );
-    const signature = await window.web3.eth.personal.sign(
+    const signature = await web3.eth.personal.sign(
       msg,
       window.ethereum?.selectedAddress,
       null
@@ -41,25 +40,13 @@ const assignToken = async (accountSwitch = false) => {
 
 const ButtonLogin = (props: { page: string }) => {
   // returns current state paired with dispatch method from Context API
-  const [state, dispatch]: any = useContext(GlobalContext);
-
-  // define local variables
-  const [metamaskEnabled, setMetamaskEnabled] = useState(false);
+  const dispatch = useStoreDispatch();
+  const state = useStoreState();
 
   // let userAddress = '';
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
-
-  useEffect(() => {
-    if (window.ethereum) {
-      setMetamaskEnabled(true);
-
-      window.web3 = new Web3(window.ethereum); // pass MetaMask provider to Web3 constructor
-    } else {
-      setMetamaskEnabled(false);
-    }
-  }, []);
 
   // if user switches accounts re-assign JWT token
   useEffect(() => {
@@ -80,7 +67,7 @@ const ButtonLogin = (props: { page: string }) => {
             data: window.ethereum?.selectedAddress,
           });
 
-          assignToken(true); // assing JWT authentication token
+          assignToken(new Web3(window.ethereum), true); // assing JWT authentication token
         }
       });
 
@@ -139,8 +126,8 @@ const ButtonLogin = (props: { page: string }) => {
   }
 
   async function openMetaMask() {
-    if (metamaskEnabled) {
-      await window?.ethereum.enable(); // open MetaMask for login then get the user's wallet address
+    if (window.ethereum) {
+      await window.ethereum.request({ method: 'eth_requestAccounts' }); // open MetaMask for login then get the user's wallet address
 
       // userAddress = window.ethereum?.selectedAddress;
 
@@ -155,7 +142,7 @@ const ButtonLogin = (props: { page: string }) => {
         data: 3,
       });
 
-      await assignToken(); // assing JWT authentication token
+      await assignToken(new Web3(window.ethereum)); // assing JWT authentication token
 
       // set global user status based on value stored in database
       // if new wallet update user status to 4 both locally and in the database
@@ -189,9 +176,7 @@ const ButtonLogin = (props: { page: string }) => {
         height={35}
       />
       <Box>
-        {state.userStatus < 3
-          ? 'Connect Your Wallet'
-          : state.userStatus === 3
+        {(state.userStatus < 3 ? 'Connect Your Wallet' : state.userStatus === 3)
           ? 'Connecting'
           : ellipsis}
       </Box>
