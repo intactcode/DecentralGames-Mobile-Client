@@ -4,10 +4,12 @@ import UserStatus from '../store/UserStatus';
 import NetworkId from '../store/NetworkId';
 import '../styles/globals.css';
 import '../styles/menu.css';
+import Segment from '../components/common/Segment';
 
 function Application(props: { Component: any; pageProps: any; store: any }) {
   return (
     <Provider store={props.store}>
+      <Segment />
       <NextNProgress />
 
       <props.Component {...props.pageProps} />
