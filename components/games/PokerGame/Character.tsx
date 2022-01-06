@@ -41,7 +41,6 @@ const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
   opacity: active ? '1' : '0.6',
   marginTop: '7px',
   ['& :nth-of-type(1)']: {
-    fontSize: '12px',
     color: '#FFFFFFBF',
     textAlign: 'center',
     fontWeight: 'bold',
@@ -189,8 +188,8 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
-        <Box>Guest#129</Box>
-        <Box>
+        <Box fontSize="12px">Guest#129</Box>
+        <Box fontSize="14px">
           <Box fontWeight="bold" color="white" mb="3px">
             4000
           </Box>

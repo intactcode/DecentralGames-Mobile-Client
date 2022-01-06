@@ -99,7 +99,7 @@ const TurnButton = styled(Box)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 8px 12px;
+  padding: 8px 11px;
 
   width: 84px;
   height: 31px;
