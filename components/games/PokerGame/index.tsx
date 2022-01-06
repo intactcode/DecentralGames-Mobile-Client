@@ -130,7 +130,7 @@ const CardPanel = styled(Box)`
 
 const PokerGame = () => {
   const [turn, setTurn] = useState(0);
-  const [active, setActive] = useState<boolean[]>([]);
+  const [active, setActive] = useState<boolean[]>(new Array(6).fill(true));
   const [raiseamount, setRaiseAmount] = useState(600);
   const [raiseshow, setRaiseShow] = useState(false);
   const [raise, setRaise] = useState<number[]>([]);
@@ -140,13 +140,12 @@ const PokerGame = () => {
   const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
   const [roundcount, setRoundCount] = useState(0);
-  const [win, setWin] = useState<boolean[]>([]);
+  const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
 
   const setNextTurn = () => {
     let temp = (turn + 1) % 6;
     while (active[temp] === false && temp !== turn) temp = (temp + 1) % 6;
     if (temp === 0) {
-      console.log(roundcount);
       setRoundCount(roundcount + 1);
       if (roundcount + 1 === 3) {
         setTurn(-1);
@@ -159,11 +158,14 @@ const PokerGame = () => {
     if (temp === turn) setTurn(-1);
     else setTurn(temp);
   };
+
   const onFold = () => {
-    let tempactive = [...active];
-    tempactive[turn] = false;
-    setActive(tempactive);
-    setNextTurn();
+    if (turn >= 0) {
+      let tempactive = [...active];
+      tempactive[turn] = false;
+      setActive(tempactive);
+      setNextTurn();
+    }
   };
 
   const onRaise = () => {
@@ -185,16 +187,9 @@ const PokerGame = () => {
     setNextTurn();
   };
 
-  // eslint-disable-next-line
   const onReset = () => {
-    let temp = [...active],
-      temp1 = [...win];
-    for (let i = 0; i < 6; i++) temp[i] = true;
-    setActive(temp);
     setRaise([]);
     setTurn(0);
-    for (let i = 0; i < 6; i++) temp1[i] = false;
-    setWin(temp1);
   };
 
   useEffect(() => {
