@@ -86,8 +86,6 @@ const ButtonLogin = (props: { page: string }) => {
   };
 
   async function getUserStatus() {
-    // console.log('Get user status: ' + props.page);
-
     try {
       const jsonStatus = await Fetch.USER_STATUS();
 
@@ -114,6 +112,8 @@ const ButtonLogin = (props: { page: string }) => {
         data: value,
       });
     } else {
+      console.log('Connected to wallet: ' + props.page);
+
       // update global state user status immediately
       dispatch({
         type: 'update_status',
