@@ -134,11 +134,10 @@ const Character: React.FC<Props> = ({
               colors={[['#FFFFFF', 1]]}
               size={90}
               trailColor="transparent"
-            >
-              {({ remainingTime }) => {
-                if (remainingTime === 0) onFold();
+              onComplete={() => {
+                onFold();
               }}
-            </CountdownCircleTimer>
+            />
           </SpinCircle>
         </>
       )}
@@ -184,7 +183,7 @@ const Character: React.FC<Props> = ({
           />
         </RaiseMoney>
       )}
-      <Box position="absolute" left={dealerx[index]} top={dealery[index]}>
+      <Box position="relative" left={dealerx[index]} top={dealery[index]}>
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
