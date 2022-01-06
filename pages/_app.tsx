@@ -1,16 +1,23 @@
 import NextNProgress from 'nextjs-progressbar';
-import type { AppProps } from 'next/app';
-import Aux from '../components/_Aux';
+import { Provider } from '../store';
+import UserStatus from '../store/UserStatus';
+import NetworkId from '../store/NetworkId';
 import '../styles/globals.css';
+import '../styles/menu.css';
+import Segment from '../components/common/Segment';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function Application(props: { Component: any; pageProps: any; store: any }) {
   return (
-    <Aux>
+    <Provider store={props.store}>
+      <Segment />
       <NextNProgress />
 
-      <Component {...pageProps} />
-    </Aux>
+      <props.Component {...props.pageProps} />
+
+      <UserStatus />
+      <NetworkId />
+    </Provider>
   );
 }
 
-export default MyApp;
+export default Application;

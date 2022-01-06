@@ -1,7 +1,7 @@
-import Layout from '../components/Layout';
-import Header from '../components/Header';
-import Constants from '../components/Constants';
-import Images from '../components/Images';
+import Layout from '../components/hoc/Layout';
+import Header from '../components/hoc/Header';
+import Constants from '../components/common/Constants';
+import Images from '../components/common/Images';
 import styles from '../styles/Home.module.css';
 
 const Offline = () => {
