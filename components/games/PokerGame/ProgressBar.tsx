@@ -31,11 +31,12 @@ interface TitleProps {
 }
 
 const Title = styled(Box)<TitleProps>(({ type }) => ({
+  minWidth : '30px',
   position: 'absolute',
-  fontSize: '8px',
-  right: type ? '5px' : '-30px',
+  fontSize: type ? '8px' : '10px',
+  right: type ? '5px' : '-36px',
   top: '5px',
-  color: 'white',
+  color: type ? 'white' : 'rgb(255,255,255,0.75)',
 }));
 
 const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
@@ -64,7 +65,7 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
             ? event.changedTouches[0].clientX
             : event.clientX) -
             offsetLeft) /
-            per
+          per
         )
       )
     );
@@ -101,7 +102,7 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
       width={width}
     >
       <Progress width={curpercent} style={{ background: backgrounds[type] }} />
-      <Title type={text.includes('/').toString()}>{curtext}</Title>
+      <Title type={curtext.includes('/')}>{curtext}</Title>
     </ProgressBarBack>
   );
 };

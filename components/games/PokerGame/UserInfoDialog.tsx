@@ -171,13 +171,15 @@ const UserInfoDialog: React.FC<Props> = ({
               >
                 {data !== '' && (
                   <>
-                    <Image
-                      src={`${data}`}
-                      key={i}
-                      width="100%"
-                      height="100%"
-                      alt="line"
-                    />
+                    <Box width={37} height={37}>
+                      <Image
+                        src={`${data}`}
+                        key={i}
+                        alt="line"
+                        width="100%"
+                        height="100%"
+                      />
+                    </Box>
                     <span>+31%</span>
                   </>
                 )}

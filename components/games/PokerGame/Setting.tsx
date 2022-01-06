@@ -9,7 +9,7 @@ interface Props {
   setOpen: any;
 }
 
-const SettingBody = styled(Box)<{ open: boolean }>`
+const SettingBody = styled(Box) <{ open: boolean }>`
   display: flex;
   justify-content: center;
   position: absolute;
@@ -34,7 +34,7 @@ const SettingField = styled(Box)`
   }
 `;
 
-const CloseIcon = styled(Box)<{ open: boolean }>`
+const CloseIcon = styled(Box) <{ open: boolean }>`
   top: -55px;
   left: 15px;
   position: absolute;
@@ -75,7 +75,7 @@ const ItemField = styled(Box)<ItemFieldProps>(({ type }) => ({
   alignItems: 'center',
   fontWeight: '800',
   flexDirection: type === 0 ? 'column' : 'row',
-  fontSize: type === 0 ? '8px' : '12px',
+  fontSize: type === 0 ? '8px' : '14px',
   fontStyle: type === 0 ? 'italic' : 'unset',
   lineHeight: '15px',
   color: 'white',
@@ -85,7 +85,6 @@ const ItemField = styled(Box)<ItemFieldProps>(({ type }) => ({
 
 const Progress = styled(Box)`
   display: flex;
-  align-items: center;
   flex-direction: column;
   margin: 10px;
   > div {
@@ -192,13 +191,13 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
           </Box>
           <Box>
             <Box> Net Chips</Box>
-            <ItemField type={2}>
+            <ItemField type={2} position="relative">
               <Box>+0</Box>
-              <Box mt="5px">
+              <Box position="absolute" right="4px" top="8px">
                 <Image
                   src="/images/freecoin.svg"
-                  width={18}
-                  height={18}
+                  width={22}
+                  height={22}
                   alt="freecoin"
                 />
               </Box>
@@ -215,12 +214,12 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             </ItemField>
             <Box> Next Tier</Box>
             <ItemField type={2}>
-              <Box>+4,291</Box>
+              <Box mr="3px">+4,291</Box>
               <Box mt="5px">
                 <Image
                   src="/images/freecoin.svg"
-                  width={18}
-                  height={18}
+                  width={22}
+                  height={22}
                   alt="freecoin"
                 />
               </Box>
