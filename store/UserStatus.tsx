@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import Fetch from '../api/Fetch';
-import { useStoreDispatch } from './hooks';
+import { useStoreDispatch } from './Hooks';
 
 declare const window: any;
 
 function UserStatus() {
-  // returns current state paired with dispatch method from Context API
-  const dispatch = useStoreDispatch();
+  const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
   async function getUserStatus() {
-    console.log('Get user status: UserStatus');
+    // console.log('Get user status: UserStatus');
 
     try {
       const jsonStatus = await Fetch.USER_STATUS();
@@ -43,7 +42,7 @@ function UserStatus() {
         (async () => {
           const response = await getUserStatus();
 
-          console.log('User status: ' + response);
+          // console.log('User status: ' + response);
 
           // if the response is truthy set the user's respective status, else set status back to 0
           // (/websiteLogin API call will return error if this is an unregistered wallet address)

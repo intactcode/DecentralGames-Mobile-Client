@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import Web3 from 'web3';
-import { useStoreDispatch } from './hooks';
+import { useStoreDispatch } from './Hooks';
 
 declare const window: any;
 
 function NetworkId() {
-  // returns current state paired with dispatch method from Context API
-  const dispatch = useStoreDispatch();
+  const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
   useEffect(() => {
     if (window.ethereum) {
