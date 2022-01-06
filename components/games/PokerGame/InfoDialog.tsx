@@ -31,7 +31,7 @@ const Close = styled(Box)<CloseProps>(({ open, index, items }) => ({
   height: '32px',
   zIndex: '15',
   top: '-15px',
-  right: (index === 1 || index === 2 ? '-15px' : index === 3)
+  right: (index === 1 || index === 2) ? '-15px' : index === 3
     ? `-${(items * 32 + 8 * items - 8) / 2}px`
     : '50px',
   transition: 'background 0.3s',
@@ -55,7 +55,7 @@ const Dialog = styled(Box)<DialogProps>(({ index, open, items }) => ({
   padding: '16px 0px 8px 0px',
   zIndex: 10,
   overflow: 'hidden',
-  right: (index === 1 || index === 2 ? '0px' : index === 3)
+  right: (index === 1 || index === 2) ? '0px' : index === 3
     ? `-${(items * 32 + 8 * items - 32) / 2}px`
     : 'unset',
   width: 'fit-content',
@@ -69,7 +69,12 @@ const Dialog = styled(Box)<DialogProps>(({ index, open, items }) => ({
     flexDirection: 'column',
   },
 
-  ['>div>span']: {
+  ['>div>span>span']: {
+    width: '37px!important',
+    height: '37px!important',
+  },
+
+  ['>div>span:nth-of-type(2)']: {
     fontSize: '9px',
     color: 'rgb(255,255,255,0.75)',
     fontWeight: 'bold',
@@ -101,7 +106,7 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
               marginLeft={i === 0 ? '16px!important' : ''}
               marginRight={i === items.length - 1 ? '16px!important' : ''}
             >
-              <Image src={data} key={500 + i} alt="line" layout="fill" />
+              <Image src={data} key={data} alt="line" width="37px" height="37px" />
               <span>+31%</span>
             </Box>
           );
