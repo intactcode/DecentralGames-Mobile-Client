@@ -1,17 +1,15 @@
-import call from './API';
+import call from './Call';
 import getConfig from 'next/config';
-import { ApiUrlsByAppEnv } from './environments';
+import environment from './Environment';
 
-// This imports NODE_ENV from next.config.js
+// This imports APP_ENV from next.config.js
+// APP_ENV must be set in the .env file
 const { publicRuntimeConfig } = getConfig();
 const { APP_ENV } = publicRuntimeConfig;
+export const API_BASE_URL = environment[APP_ENV] || process.env.API_URL;
 
-// APP_ENV must be set in the .env.{environment} files
-export const API_BASE_URL =
-  ApiUrlsByAppEnv[APP_ENV] || 'https://api.decentral.games';
-
-console.log('APP_ENV: ', APP_ENV);
-console.log('API_BASE_URL: ', API_BASE_URL);
+console.log('App environment: ', APP_ENV);
+console.log('API base URL: ', API_BASE_URL);
 
 const Fetch = {
   GET_TOKEN: (address: string, signature: string, timestamp: number) => {
