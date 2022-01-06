@@ -2,7 +2,12 @@ import axios from 'axios';
 
 declare const window: any;
 
-const call = (url: string, method: string, withToken = true, data = {}): any => {
+const call = (
+  url: string,
+  method: string,
+  withToken = true,
+  data = {}
+): any => {
   const accessToken = localStorage.getItem('token');
 
   const currentTimestamp = new Date().getTime() / 1000;
