@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import Image from 'next/image';
 import Fetch from '../../api/Fetch';
 import styles from '../../styles/Home.module.css';
-import { useStoreDispatch, useStoreState } from '../../store/hooks';
+import { useStoreDispatch, useStoreState } from '../../store/Hooks';
 
 declare const window: any;
 
@@ -39,11 +39,8 @@ const assignToken = async (web3: any, accountSwitch = false) => {
 };
 
 const ButtonLogin = (props: { page: string }) => {
-  // returns current state paired with dispatch method from Context API
-  const dispatch = useStoreDispatch();
-  const state = useStoreState();
-
-  // let userAddress = '';
+  const state = useStoreState(); // returns current state from Context API store
+  const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +64,7 @@ const ButtonLogin = (props: { page: string }) => {
             data: window.ethereum?.selectedAddress,
           });
 
-          assignToken(new Web3(window.ethereum), true); // assing JWT authentication token
+          assignToken(new Web3(window.ethereum), true); // assign JWT authentication token
         }
       });
 
@@ -89,7 +86,7 @@ const ButtonLogin = (props: { page: string }) => {
   };
 
   async function getUserStatus() {
-    console.log('Get user status: ' + props.page);
+    // console.log('Get user status: ' + props.page);
 
     try {
       const jsonStatus = await Fetch.USER_STATUS();
@@ -129,22 +126,17 @@ const ButtonLogin = (props: { page: string }) => {
     if (window.ethereum) {
       await window.ethereum.request({ method: 'eth_requestAccounts' }); // open MetaMask for login then get the user's wallet address
 
-      // userAddress = window.ethereum?.selectedAddress;
-
-      // Segment: track MetaMask connect event
-      // window.analytics.track('Connected MetaMask: ' + props.page, {
-      //   userAddress: userAddress,
-      // });
-
       // set user status to 3 to denote fetching user status
       dispatch({
         type: 'update_status',
         data: 3,
       });
 
+      // Segment: track MetaMask connect event
       window.analytics.track('Connected MetaMask: ' + props.page, {
         userAddress: state.userAddress,
       });
+
       await assignToken(new Web3(window.ethereum)); // assing JWT authentication token
 
       // set global user status based on value stored in database

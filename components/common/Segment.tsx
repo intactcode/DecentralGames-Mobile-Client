@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../store/hooks';
+import { useStoreState } from '../../store/Hooks';
 
 declare const window: any;
 
 const Segment = () => {
-  // get user status from the Context API store
-  const state = useStoreState();
+  const state = useStoreState(); // returns current state from Context API store
 
   // define local variables
   const router = useRouter();
