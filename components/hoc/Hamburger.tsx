@@ -42,19 +42,19 @@ const Hamburger = () => {
             <h2>New Table</h2>
           </Link>
 
-          <Link href="/" passHref>
+          <Link href="/stats" passHref>
             <h2>Player Stats</h2>
           </Link>
 
-          <Link href="/" passHref>
+          <Link href="/leaderboard" passHref>
             <h2>Daily Leaderboard</h2>
           </Link>
 
-          <Link href="/" passHref>
+          <Link href="/challenges" passHref>
             <h2>ICE Challenges</h2>
           </Link>
 
-          <Link href="/" passHref>
+          <Link href="/settings" passHref>
             <h2>Settings</h2>
           </Link>
         </ul>

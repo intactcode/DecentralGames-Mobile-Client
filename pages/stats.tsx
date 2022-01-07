@@ -1,20 +1,20 @@
-import PageNotFound from '../components/content/PageNotFound';
+import PlayerStats from '../components/content/PlayerStats';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
 
-const Offline = () => {
+const Stats = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Decentral Games'}
+        title={constants.TITLE + ' | Player Statistics'}
         image={images.SOCIAL_SHARE}
       />
 
-      <PageNotFound />
+      <PlayerStats />
     </Layout>
   );
 };
 
-export default Offline;
+export default Stats;

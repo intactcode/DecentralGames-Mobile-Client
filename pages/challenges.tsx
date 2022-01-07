@@ -1,20 +1,20 @@
-import PageNotFound from '../components/content/PageNotFound';
+import ICEChallenges from '../components/content/ICEChallenges';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
 
-const Offline = () => {
+const Challenges = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Decentral Games'}
+        title={constants.TITLE + ' | ICE Challenges'}
         image={images.SOCIAL_SHARE}
       />
 
-      <PageNotFound />
+      <ICEChallenges />
     </Layout>
   );
 };
 
-export default Offline;
+export default Challenges;

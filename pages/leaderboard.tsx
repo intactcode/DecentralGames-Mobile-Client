@@ -1,20 +1,20 @@
-import PageNotFound from '../components/content/PageNotFound';
+import DailyLeaderboard from '../components/content/DailyLeaderboard';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
 
-const Offline = () => {
+const Leaderboard = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Decentral Games'}
+        title={constants.TITLE + ' | Daily Leaderboard'}
         image={images.SOCIAL_SHARE}
       />
 
-      <PageNotFound />
+      <DailyLeaderboard />
     </Layout>
   );
 };
 
-export default Offline;
+export default Leaderboard;
