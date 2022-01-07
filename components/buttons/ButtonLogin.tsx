@@ -124,7 +124,7 @@ const ButtonLogin = (props: { page: string }) => {
 
   async function openMetaMask() {
     if (window.ethereum) {
-      await window.ethereum.request({ method: 'eth_requestAccounts' }); // open MetaMask for login then get the user's wallet address
+      await window.ethereum.request({ method: 'eth_requestAccounts' }); // open MetaMask for login
 
       // set user status to 3 to denote fetching user status
       dispatch({
