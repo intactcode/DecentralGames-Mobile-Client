@@ -18,7 +18,9 @@ const Segment = () => {
 
   // send current page data to Segment analytics
   useEffect(() => {
-    window.analytics.page(document.title, {});
+    if (window.analytics) {
+      window.analytics.page(document.title, {});
+    }
   }, [router.pathname]);
 
   return null;
