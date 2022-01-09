@@ -3,6 +3,7 @@ import { Provider } from '../store';
 import Segment from '../components/common/Segment';
 import UserStatus from '../store/UserStatus';
 import NetworkId from '../store/NetworkId';
+import Socket from '../socket';
 import '../styles/globals.css';
 import '../styles/menu.css';
 
@@ -16,6 +17,7 @@ function Application(props: { Component: any; pageProps: any; store: any }) {
 
       <UserStatus />
       <NetworkId />
+      <Socket />
     </Provider>
   );
 }
