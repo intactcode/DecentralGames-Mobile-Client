@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../store/Hooks';
+import { useStoreState } from '../../store/hooks';
 
 declare const window: any;
 

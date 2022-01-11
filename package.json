@@ -21,20 +21,21 @@
     "react-countdown-circle-timer": "^2.5.4",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
+    "react-motion": "^0.5.2",
     "socket.io-client": "4.0.1",
     "web3": "1.5.2-rc.0"
   },
   "devDependencies": {
     "@types/node": "16.11.9",
     "@types/react": "^17.0.36",
+    "@typescript-eslint/eslint-plugin": "4.13.0",
+    "@typescript-eslint/parser": "4.13.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
     "eslint-config-prettier": "^8.3.0",
     "husky": "^7.0.4",
     "prettier": "2.5.1",
-    "typescript": "^4.5.2",
-    "@typescript-eslint/eslint-plugin": "4.13.0",
-    "@typescript-eslint/parser": "4.13.0"
+    "typescript": "^4.5.2"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
