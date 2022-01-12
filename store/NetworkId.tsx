@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Web3 from 'web3';
-import { useStoreDispatch } from './hooks';
+import { useStoreDispatch } from './Hooks';
 
 declare const window: any;
 

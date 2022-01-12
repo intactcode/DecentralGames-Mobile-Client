@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Fetch from '../api/Fetch';
-import { useStoreDispatch } from './hooks';
+import { useStoreDispatch } from './Hooks';
 
 declare const window: any;
 

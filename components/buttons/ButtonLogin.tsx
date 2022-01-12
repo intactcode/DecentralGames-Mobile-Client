@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import Image from 'next/image';
 import Fetch from '../../api/Fetch';
 import styles from '../../styles/Home.module.css';
-import { useStoreDispatch, useStoreState } from '../../store/hooks';
+import { useStoreDispatch, useStoreState } from '../../store/Hooks';
 
 declare const window: any;
 
