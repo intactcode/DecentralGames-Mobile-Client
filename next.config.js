@@ -13,4 +13,5 @@ module.exports = withPWA({
     disable: process.env.APP_ENV === 'development',
   },
   reactStrictMode: true,
+  swcMinify: false,
 });
