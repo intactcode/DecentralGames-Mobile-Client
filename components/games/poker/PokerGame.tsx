@@ -10,7 +10,7 @@ import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
-import TableCard from './TableCard'
+import TableCard from './tableCard/TableCard';
 
 const Progress = styled(Box)`
   display: flex;
@@ -217,12 +217,12 @@ const PokerGame = () => {
     tablecard.current.newRound();
     setTimeout(function () {
       tablecard.current.progressDeal();
-    }, 100)
+    }, 100);
   };
 
   useEffect(() => {
     onReset();
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,5 +1,5 @@
 // import { useEffect } from 'react';
-import io from 'socket.io-client'; // using sockent.io-client version 4.0.1 as latest version has issues with next.js
+import io from 'socket.io-client'; // using version 4.0.1 as latest version has issues with Next.js
 import mobileServerURL from './MobileServerURL';
 
 const Socket = () => {
