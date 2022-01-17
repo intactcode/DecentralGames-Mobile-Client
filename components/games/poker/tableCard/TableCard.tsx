@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 
 import Deck from './Deck';
 
@@ -52,7 +52,9 @@ const getDeck = () =>
       .reduce((prev, curr) => prev.concat(curr))
   );
 
-export interface TableCardProps {}
+export interface TableCardProps {
+  ref: { children?: ReactNode };
+}
 
 const TableCard: FC<TableCardProps> = () => {
   const [board, setBoard] = useState<any>([]);
