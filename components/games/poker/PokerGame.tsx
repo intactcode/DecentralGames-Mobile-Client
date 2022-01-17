@@ -214,9 +214,9 @@ const PokerGame = () => {
     setTurn(0);
     setWin(new Array(6).fill(false));
     setActive(new Array(6).fill(true));
-    tablecard.current.newRound();
+    tablecard.current?.newRound();
     setTimeout(function () {
-      tablecard.current.progressDeal();
+      tablecard.current?.progressDeal();
     }, 100);
   };
 
