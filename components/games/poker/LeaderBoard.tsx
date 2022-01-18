@@ -32,6 +32,7 @@ const Ice = styled(Box) <{ radius: number, color: string }>`
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 `;
+
 const ScoreField = styled(Box)`
   display : flex;
   justify-content : space-between;
@@ -62,7 +63,6 @@ const LeaderBoardBody = styled(Box) <{ open: boolean }>`
   transition : max-height 0.5s;
 `;
 
-
 const LeaderBoardField = styled(Box)`
   overflow : hidden;
   background: #1f1f1f;
@@ -89,7 +89,6 @@ const ChipField = styled(Box)`
   font-size: 12px;
   font-weight: 600px;
 `;
-
 
 interface Props {
   open: boolean;
@@ -144,7 +143,14 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
                     <Ice width="45px" radius={radius} color={color}>{data.ice}</Ice>
                     <ChipField>
                       <Box mr="4px">{data.chips}</Box>
-                      <Box pt="5px"><Image src="/images/freecoin.svg" alt="freecoin" width={13} height={13} /></Box>
+                      <Box pt="5px">
+                        <Image 
+                          src="/images/freecoin.svg" 
+                          alt="freecoin" 
+                          width={13} 
+                          height={13} 
+                        />
+                      </Box>
                     </ChipField>
                   </ScoreField>
                 </Box>
