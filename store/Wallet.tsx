@@ -218,15 +218,20 @@ function Wallet() {
 
       // add event listeners for desktop wallet
       if (window.ethereum) {
-        window.ethereum.on('accountsChanged', () => {
-          console.log('Account changed');
-          disconnectWallet(dispatch);
-          window.location.reload();
+        window.ethereum.on('accountsChanged', (account: string) => {
+          console.log('Account changed to:', account);
+          if (localStorage.getItem('userAddress')) {
+            disconnectWallet(dispatch);
+            window.location.reload();
+          }
         });
 
         window.ethereum.on('disconnect', () => {
-          disconnectWallet(dispatch);
-          window.location.reload();
+          console.log('Wallet disconnected');
+          if (localStorage.getItem('userAddress')) {
+            disconnectWallet(dispatch);
+            window.location.reload();
+          }
         });
       }
     })();
