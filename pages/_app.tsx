@@ -1,13 +1,14 @@
 import NextNProgress from 'nextjs-progressbar';
-import { Provider } from '../store';
+import { Provider } from '../store/Store';
+import Socket from '../socket/Socket';
 import Segment from '../components/common/Segment';
-import Socket from '../socket';
 import '../styles/globals.css';
 import '../styles/menu.css';
 
 function Application(props: { Component: any; pageProps: any; store: any }) {
   return (
     <Provider store={props.store}>
+      <Socket />
       <Segment />
       <NextNProgress />
 

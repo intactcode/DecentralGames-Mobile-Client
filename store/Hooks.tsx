@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { GlobalContext } from './index';
+import { GlobalContext } from './Store';
 
 export function useStoreDispatch(): any {
   const store = useContext(GlobalContext);

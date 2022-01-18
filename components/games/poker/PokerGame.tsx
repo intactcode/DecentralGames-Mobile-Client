@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
 import Image from 'next/image';
 
-import Card from './Card';
 import Character from './Character';
 import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
+import TableCard from './tableCard/TableCard';
 
 const Progress = styled(Box)`
   display: flex;
@@ -122,11 +122,30 @@ const Dot = styled(Box)`
   width: 7px;
   height: 7px;
 `;
-const CardPanel = styled(Box)`
-  position: absolute;
-  top: 200px;
-  left: calc(50% - 80px);
-`;
+
+const positionx = [
+  'calc(50% - 36px)',
+  'calc(50% + 90px)',
+  'calc(50% + 90px)',
+  'calc(50% - 36px)',
+  'calc(50% - 160px)',
+  'calc(50% - 160px)',
+];
+const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
+const items = [
+  ['/images/item1.svg'],
+  ['/images/item1.svg'],
+  ['/images/item1.svg', '/images/item1.svg', '/images/item1.svg'],
+  ['/images/item1.svg', '/images/item1.svg', '/images/item1.svg'],
+  ['/images/item1.svg'],
+  [
+    '/images/item1.svg',
+    '/images/item1.svg',
+    '/images/item1.svg',
+    '/images/item1.svg',
+    '/images/item1.svg',
+  ],
+];
 
 const PokerGame = () => {
   const [turn, setTurn] = useState(0);
@@ -142,11 +161,14 @@ const PokerGame = () => {
   const [roundcount, setRoundCount] = useState(0);
   const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
 
+  const tablecard: any = useRef(null);
+
   const setNextTurn = () => {
     let temp = (turn + 1) % 6;
     while (active[temp] === false && temp !== turn) temp = (temp + 1) % 6;
     if (temp === 0) {
       setRoundCount(roundcount + 1);
+      tablecard.current.progressDeal();
       if (roundcount + 1 === 3) {
         setTurn(-1);
         let t = [...win];
@@ -190,39 +212,23 @@ const PokerGame = () => {
   const onReset = () => {
     setRaise([]);
     setTurn(0);
+    setWin(new Array(6).fill(false));
+    setActive(new Array(6).fill(true));
+    tablecard.current?.newRound();
+    setTimeout(function () {
+      tablecard.current?.progressDeal();
+    }, 100);
   };
 
   useEffect(() => {
     onReset();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const positionx = [
-    'calc(50% - 36px)',
-    'calc(50% + 90px)',
-    'calc(50% + 90px)',
-    'calc(50% - 36px)',
-    'calc(50% - 160px)',
-    'calc(50% - 160px)',
-  ];
-  const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
-  const items = [
-    ['/images/item1.svg'],
-    ['/images/item1.svg'],
-    ['/images/item1.svg', '/images/item1.svg', '/images/item1.svg'],
-    ['/images/item1.svg', '/images/item1.svg', '/images/item1.svg'],
-    ['/images/item1.svg'],
-    [
-      '/images/item1.svg',
-      '/images/item1.svg',
-      '/images/item1.svg',
-      '/images/item1.svg',
-      '/images/item1.svg',
-    ],
-  ];
-
   return (
     <Body>
+      <TableCard ref={tablecard} />
       <Table />
       <Links>
         <BlackEllipse left="40px" onClick={() => onReset()}>
@@ -255,17 +261,18 @@ const PokerGame = () => {
           />
         );
       })}
-      <CardPanel>
+      {/* <CardPanel>
         <Box display="flex">
-          <Card type="Carreau" number="A" />
-          <Card type="Pique" number="J" />
-          <Card type="Carreau" number="A" />
+
+          <Box margin="5px"><Card type="Carreau" number="A" /></Box>
+          <Box margin="5px"><Card type="Pique" number="J" /></Box>
+          <Box margin="5px"><Card type="Carreau" number="A" /></Box>
         </Box>
         <Box display="flex" pl="30px">
-          <Card type="Carreau" number="A" />
-          <Card type="Carreau" number="A" />
+          <Box margin="5px"><Card type="Carreau" number="A" /></Box>
+          <Box margin="5px"><Card type="Carreau" number="A" /></Box>
         </Box>
-      </CardPanel>
+      </CardPanel> */}
 
       <Box display="flex" justifyContent="center">
         <Box pt="540px" px="20px" width="374px">

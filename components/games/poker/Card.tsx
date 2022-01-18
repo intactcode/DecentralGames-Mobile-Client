@@ -25,11 +25,10 @@ const CardBody = styled(Box)<CardBodyProps>(({ transform, type }) => ({
   justifyContent: 'center',
   flexDirection: 'column',
   alignItems: 'center',
-  margin: transform ? '0px' : '5px',
   transform: transform,
   ['& :nth-of-type(1)']: {
     fontSize: '28px',
-    color: type == 'Carreau' ? 'red' : 'black',
+    color: (type === 'Carreau' || type === 'Coeur') ? 'red' : 'black',
     fontWeight: 'bold',
   },
 }));

@@ -22,12 +22,14 @@
     "react-countdown-circle-timer": "^2.5.4",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
+    "react-motion": "^0.5.2",
     "socket.io-client": "4.0.1",
     "web3": "1.5.2-rc.0"
   },
   "devDependencies": {
     "@types/node": "16.11.9",
     "@types/react": "^17.0.36",
+    "@types/react-motion": "^0.0.32",
     "@typescript-eslint/eslint-plugin": "4.13.0",
     "@typescript-eslint/parser": "4.13.0",
     "eslint": "7.32.0",
