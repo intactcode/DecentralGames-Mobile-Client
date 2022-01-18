@@ -10,7 +10,7 @@ module.exports = withPWA({
   },
   pwa: {
     dest: 'public',
-    disable: process.env.APP_ENV === 'development',
+    disable: process.env.APP_ENV !== 'production',
   },
   reactStrictMode: true,
 });

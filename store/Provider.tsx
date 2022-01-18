@@ -20,12 +20,6 @@ const initialState = {
 
 const reducer = (state: any, action: { type: any; data: any }) => {
   switch (action.type) {
-    case 'network_id': {
-      return {
-        ...state,
-        networkID: action.data,
-      };
-    }
     case 'update_status': {
       return {
         ...state,

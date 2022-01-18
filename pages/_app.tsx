@@ -1,8 +1,6 @@
 import NextNProgress from 'nextjs-progressbar';
 import { Provider } from '../store';
 import Segment from '../components/common/Segment';
-import UserStatus from '../store/UserStatus';
-import NetworkId from '../store/NetworkId';
 import Socket from '../socket';
 import '../styles/globals.css';
 import '../styles/menu.css';
@@ -15,8 +13,6 @@ function Application(props: { Component: any; pageProps: any; store: any }) {
 
       <props.Component {...props.pageProps} />
 
-      <UserStatus />
-      <NetworkId />
       <Socket />
     </Provider>
   );

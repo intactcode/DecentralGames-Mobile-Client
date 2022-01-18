@@ -19,6 +19,10 @@ const Fetch = {
     );
   },
 
+  REFRESH_TOKEN: () => {
+    return call(`${API_BASE_URL}/authentication/extendToken`, 'POST', true);
+  },
+
   USER_STATUS: () => {
     return call(`${API_BASE_URL}/order/webLogin`, 'POST', true);
   },
