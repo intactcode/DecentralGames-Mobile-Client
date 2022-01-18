@@ -12,7 +12,7 @@ const DailyLeaderboard = () => {
       <Box position="relative" zIndex={30}>
         <Box className={styles.playtitle}>Daily Leaderboard.</Box>
 
-        <ButtonLogin page={'leaderboard'} />
+        <ButtonLogin />
       </Box>
     </main>
   );

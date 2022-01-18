@@ -12,7 +12,7 @@ const ICEChallenges = () => {
       <Box position="relative" zIndex={30}>
         <Box className={styles.playtitle}>ICE Challenges.</Box>
 
-        <ButtonLogin page={'challenges'} />
+        <ButtonLogin />
       </Box>
     </main>
   );

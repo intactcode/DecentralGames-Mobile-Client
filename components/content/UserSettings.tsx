@@ -12,7 +12,7 @@ const UserSettings = () => {
       <Box position="relative" zIndex={30}>
         <Box className={styles.playtitle}>User Settings.</Box>
 
-        <ButtonLogin page={'settings'} />
+        <ButtonLogin />
       </Box>
     </main>
   );

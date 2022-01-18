@@ -92,7 +92,7 @@ const HomePage = () => {
           </Box>
         </Box>
 
-        <ButtonLogin page={'home'} />
+        <ButtonLogin />
       </Box>
     </main>
   );
