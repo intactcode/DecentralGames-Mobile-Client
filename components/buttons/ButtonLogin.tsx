@@ -79,8 +79,9 @@ const ButtonLogin = (props: { page: string }) => {
     (async () => {
       // check if user is already logged in on app launch
       const userAddress = localStorage.getItem('userAddress');
+      const token = localStorage.getItem('token');
 
-      if (userAddress) {
+      if (userAddress && token) {
         const userStatus = await loginUser(userAddress);
         if (userStatus !== false) {
           // get new access token to extend expiration time by 12 hours
@@ -101,6 +102,11 @@ const ButtonLogin = (props: { page: string }) => {
 
     // get JWT token
     const token = await Fetch.GET_TOKEN(userAddress, signature, timestamp);
+
+    if (!token) {
+      console.log('Error retrieving token');
+      return;
+    }
 
     console.log('Assigned token:', token);
 
