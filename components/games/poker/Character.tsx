@@ -55,19 +55,20 @@ const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
 
 const RaiseMoney = styled(Box)`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 3px 8px 2px;
+  padding: 3px 0px 0px 6px;
   z-index: 2;
   position: absolute;
   width: 53px;
   height: 24px;
-
   background: #ecfc7d;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
   border-radius: 29px;
 `;
+
+const RaiseAmount = styled(Box)`
+  margin-top: 3px !important;
+`;
+
 const SpinCircle = styled(Box)`
   position: absolute;
   left: -9px;
@@ -80,6 +81,10 @@ const Gradient = styled(Box)`
   height: 72px;
   border-radius: 50%;
   box-shadow: 0px 0px 36px #ffe976;
+`;
+
+const ChipImage = styled(Image)`
+  margin-top: -1px !important;
 `;
 
 interface Props {
@@ -172,13 +177,13 @@ const Character: React.FC<Props> = ({
       </PlayerCircle>
       {raise && (
         <RaiseMoney left={rpositionx[index]} top={rpositiony[index]}>
-          <Box fontWeight="bold" mt="-3px" color="black">
+          <RaiseAmount fontWeight="bold" mt="-3px" color="black">
             {raise}
-          </Box>
+          </RaiseAmount>
           <Image
             src="/images/freecoin.svg"
-            width="15px"
-            height="15px"
+            width="18px"
+            height="18px"
             alt="freecoin"
           />
         </RaiseMoney>
@@ -189,14 +194,14 @@ const Character: React.FC<Props> = ({
       <PlayerInfo active={active}>
         <Box fontSize="12px">Guest#129</Box>
         <Box fontSize="14px">
-          <Box fontWeight="bold" color="white" mb="3px">
+          <Box fontWeight="bold" color="white" mb="1.5px">
             4000
           </Box>
-          <Image
+          <ChipImage
             src="/images/freecoin.svg"
             width="15px"
             height="15px"
-            alt="freecoin"
+            className="chip"
           />
         </Box>
       </PlayerInfo>
