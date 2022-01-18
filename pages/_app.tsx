@@ -8,7 +8,6 @@ import '../styles/menu.css';
 function Application(props: { Component: any; pageProps: any; store: any }) {
   return (
     <Provider store={props.store}>
-      <Socket />
       <Segment />
       <NextNProgress />
 
