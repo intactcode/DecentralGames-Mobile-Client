@@ -1,19 +1,17 @@
 import { Box, TextField } from '@mui/material';
 import { styled } from '@mui/system';
-import Image from 'next/image'
+import Image from 'next/image';
 
-
-const RaiseField = styled(Box) <{ open: boolean }>`
-    display : flex;
-  justify-content : center;
-  position : absolute;
-  bottom : 0;
-  z-index : 20;
-  max-height : ${({ open }) => open ? '400px' : '0px'};
-    overflow : hidden;
-    transition : max-height 0.5s;
-
-`
+const RaiseField = styled(Box)<{ open: boolean }>`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  z-index: 20;
+  max-height: ${({ open }) => (open ? '400px' : '0px')};
+  overflow: hidden;
+  transition: max-height 0.5s;
+`;
 const RaisePanel = styled(Box)`
   padding: 0px 16px;
   margin-top: 20px;
@@ -66,20 +64,26 @@ const RaiseAction = styled(Box)`
 `;
 
 interface Props {
-    open: boolean;
-    setOpen: any;
-    setRaiseAmount: any;
-    raiseamount: number;
-    onRaise: any;
+  open: boolean;
+  setOpen: any;
+  setRaiseAmount: any;
+  raiseamount: number;
+  onRaise: any;
 }
 
-const RaiseSetting: React.FC<Props> = ({ open, setOpen, raiseamount, setRaiseAmount, onRaise }) => {
+const RaiseSetting: React.FC<Props> = ({
+  open,
+  setOpen,
+  raiseamount,
+  setRaiseAmount,
+  onRaise,
+}) => {
   return (
     <RaiseField open={open}>
       <RaisePanel>
         <RaiseInput>
           <Box color="#FFFFFF80" width="85px" fontWeight="bold" mr="5px">
-                        Your Bet:
+            Your Bet:
           </Box>
           <TextField
             className="raise"
@@ -96,9 +100,20 @@ const RaiseSetting: React.FC<Props> = ({ open, setOpen, raiseamount, setRaiseAmo
             value={raiseamount}
             onChange={(event) => setRaiseAmount(Number(event.target.value))}
           />
-          <Image src="/images/freecoin.svg" alt="freecoin" width={44} height={44} />
-          <RaiseButton ml="10px" onClick={() => { onRaise(); setOpen(false) }}>
-                        Raise
+          <Image
+            src="/images/freecoin.svg"
+            alt="freecoin"
+            width={44}
+            height={44}
+          />
+          <RaiseButton
+            ml="10px"
+            onClick={() => {
+              onRaise();
+              setOpen(false);
+            }}
+          >
+            Raise
           </RaiseButton>
         </RaiseInput>
         <RaiseAction>

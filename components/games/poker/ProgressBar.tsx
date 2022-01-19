@@ -31,7 +31,7 @@ interface TitleProps {
 }
 
 const Title = styled(Box)<TitleProps>(({ type }) => ({
-  minWidth : '30px',
+  minWidth: '30px',
   position: 'absolute',
   fontSize: type ? '8px' : '10px',
   right: type ? '5px' : '-36px',
@@ -65,7 +65,7 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
             ? event.changedTouches[0].clientX
             : event.clientX) -
             offsetLeft) /
-          per
+            per
         )
       )
     );
