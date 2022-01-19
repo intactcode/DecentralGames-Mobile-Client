@@ -12,7 +12,7 @@ const PlayerStats = () => {
       <Box position="relative" zIndex={30}>
         <Box className={styles.playtitle}>Player Statistics.</Box>
 
-        <ButtonLogin page={'statistics'} />
+        <ButtonLogin />
       </Box>
     </main>
   );
