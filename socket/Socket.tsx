@@ -19,6 +19,10 @@ const Socket = () => {
     console.log('Incoming data: ' + data);
   });
 
+  socket.on('connection', (data) => {
+    console.log(data);
+  })
+
   // useEffect(() => {
   //   fetch('/api/socketio').finally(() => {
   //     const socket = io(mobileServerURL);
