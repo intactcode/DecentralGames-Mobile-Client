@@ -1,8 +1,8 @@
 import NextNProgress from 'nextjs-progressbar';
 import { Provider } from '../store/Store';
-import Socket from '../socket/Socket';
 import Segment from '../components/common/Segment';
 import Wallet from '../store/Wallet';
+import Socket from '../socket/Socket';
 import '../styles/globals.css';
 import '../styles/menu.css';
 

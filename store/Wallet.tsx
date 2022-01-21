@@ -44,10 +44,12 @@ export const disconnectWallet = (dispatch: any) => {
     type: 'update_status',
     data: 0,
   });
+
   dispatch({
     type: 'user_address',
     data: '',
   });
+
   localStorage.removeItem('userAddress');
   localStorage.removeItem('token');
 };
@@ -161,6 +163,7 @@ export const connectWallet = async (dispatch: any) => {
       type: 'update_status',
       data: 3,
     });
+
     connectDesktopWallet(dispatch);
   } else {
     connectMobileWallet(dispatch);
@@ -173,6 +176,7 @@ const refreshToken = async (dispatch: any) => {
 
     if (!token) {
       console.log('Error refreshing token');
+
       dispatch({
         type: 'update_status',
         data: 0,
@@ -208,6 +212,12 @@ function Wallet() {
         if (userStatus !== false) {
           // get new access token to extend expiration time by 12 hours
           refreshToken(dispatch);
+
+          // connect to mobile socket server
+          dispatch({
+            type: 'socket_connect',
+            data: true,
+          });
         } else {
           dispatch({
             type: 'update_status',
