@@ -4,13 +4,13 @@ import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
 import Image from 'next/image';
-
 import Character from './Character';
 import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
+
 
 const Progress = styled(Box)`
   display: flex;
@@ -40,6 +40,7 @@ const Table = styled(Box)`
   position: absolute;
   left: calc(50% - 187px);
 `;
+
 const Links = styled(Box)`
   position: absolute;
   width: 340px;
@@ -47,6 +48,7 @@ const Links = styled(Box)`
   justify-content: space-between;
   left: calc(50% - 170px);
 `;
+
 const BlackEllipse = styled(Box)`
   cursor: pointer;
   width: 40px;
@@ -87,10 +89,37 @@ const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
     background: '#A82822',
   },
   ['& :nth-of-type(2)']: {
-    background: '#3D86A6',
+    width: '103px',
+    height: '69px',
+    borderRadius: '8px',
+    marginLeft: '-108px',
+    zIndex: '-1',
+    marginTop: '8px',
+    background: '#92120C',
   },
   ['& :nth-of-type(3)']: {
+    background: '#3D86A6',
+  },
+  ['& :nth-of-type(4)']: {
+    width: '103px',
+    height: '69px',
+    borderRadius: '8px',
+    marginLeft: '-108px',
+    zIndex: '-1',
+    marginTop: '8px',
+    background: '#267CA1',
+  },
+  ['& :nth-of-type(5)']: {
     background: '#3DA65A',
+  },
+  ['& :nth-of-type(6)']: {
+    width: '103px',
+    height: '69px',
+    borderRadius: '8px',
+    marginLeft: '-108px',
+    zIndex: '-1',
+    marginTop: '8px',
+    background: '#2B8C46',
   },
 }));
 
@@ -115,7 +144,7 @@ const TurnButton = styled(Box)`
 `;
 
 const Dot = styled(Box)`
-  margin-top: 2px;
+  margin-top: 0px;
   background: #00ff0a;
   box-shadow: 0px 0px 4px rgba(4, 235, 68, 0.5);
   border-radius: 50%;
@@ -277,7 +306,7 @@ const PokerGame = () => {
       <Box display="flex" justifyContent="center">
         <Box pt="540px" px="20px" width="374px">
           <TurnButton>
-            <Box color="white" fontSize="11px" mr="5px">
+            <Box style={{ marginTop: '2px' }} color="white" fontSize="11px" mr="5px">
               Your Turn
             </Box>
             <Dot />
@@ -288,8 +317,11 @@ const PokerGame = () => {
       <Box display="flex" justifyContent="center">
         <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
           <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
+          <Box />
           <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
+          <Box />  
           <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
+          <Box />
         </ActionButtonGroup>
       </Box>
       <Box
