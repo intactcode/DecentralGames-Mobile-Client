@@ -18,6 +18,7 @@ const ProgressBarBack = styled(Box)`
   height: 20px;
   cursor: pointer;
 `;
+
 const Progress = styled(Box)`
   height: 20px;
   box-shadow: inset 0px -4px 8px rgba(255, 255, 255, 0.05);
@@ -35,7 +36,7 @@ const Title = styled(Box)<TitleProps>(({ type }) => ({
   position: 'absolute',
   fontSize: type ? '8px' : '10px',
   right: type ? '5px' : '-36px',
-  top: '5px',
+  top: '6px',
   color: type ? 'white' : 'rgb(255,255,255,0.75)',
 }));
 
