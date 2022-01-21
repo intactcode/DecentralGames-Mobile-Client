@@ -8,7 +8,7 @@ interface Props {
   height?: number;
 }
 
-const CardBody = styled(Box) <{ width: number, height: number }>`
+const CardBody = styled(Box)<{ width: number; height: number }>`
   background: #252525;
   border: 2.5px solid #ffffff;
   box-sizing: border-box;

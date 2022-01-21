@@ -9,7 +9,7 @@ interface Props {
   setOpen: any;
 }
 
-const SettingBody = styled(Box) <{ open: boolean }>`
+const SettingBody = styled(Box)<{ open: boolean }>`
   display: flex;
   justify-content: center;
   position: absolute;
@@ -34,7 +34,7 @@ const SettingField = styled(Box)`
   }
 `;
 
-const CloseIcon = styled(Box) <{ open: boolean }>`
+const CloseIcon = styled(Box)<{ open: boolean }>`
   top: -55px;
   left: 15px;
   position: absolute;

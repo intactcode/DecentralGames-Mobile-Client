@@ -28,7 +28,7 @@ const CardBody = styled(Box)<CardBodyProps>(({ transform, type }) => ({
   transform: transform,
   ['& :nth-of-type(1)']: {
     fontSize: '28px',
-    color: (type === 'Carreau' || type === 'Coeur') ? 'red' : 'black',
+    color: type === 'Carreau' || type === 'Coeur' ? 'red' : 'black',
     fontWeight: 'bold',
   },
 }));

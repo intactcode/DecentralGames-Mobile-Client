@@ -12,6 +12,7 @@ const Socket = () => {
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
 
+
   useEffect(() => {
     if (state.socketConnect) {
       console.log('Connect to mobile socket server');
@@ -31,6 +32,7 @@ const Socket = () => {
       });
     }
   }, [socket, state.createTable]);
+
 
   const tryReconnect = () => {
     setTimeout(() => {
