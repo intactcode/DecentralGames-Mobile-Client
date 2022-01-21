@@ -1,4 +1,4 @@
-const useLocalhostApis = false;
+const useLocalhostApis = true;
 
 const environment: any = {
   localhost: useLocalhostApis

@@ -1,50 +1,48 @@
-// import { useEffect } from 'react';
 import io from 'socket.io-client'; // using version 4.0.1 as latest version has issues with Next.js
 import mobileServerURL from './MobileServerURL';
+import { useEffect } from 'react';
+import { useStoreState } from '../store/Hooks';
 
 const Socket = () => {
+  const state = useStoreState(); // returns current state from Context API store
+
   // define local variables
-  const socket = io(mobileServerURL);
+  const socket = io(mobileServerURL, { transports: ['websocket'] });
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
 
-  //   socket.on('connection', (socket: typeof Socket) => {
-  //     socket.on('my other event', (data) => {
-  //       console.log('I got data. will running another function', data.count);
-  //     });
-  //   });
+  useEffect(() => {
+    if (state.socketConnect) {
+      console.log('Connect to mobile socket server');
 
-  socket.on('createTable', (data: string) => {
-    console.log('Incoming data: ' + data);
-  });
+      socket.on('connection', (socket: typeof Socket) => {
+        console.log('Socket response:', socket);
+      });
+    }
+  }, [socket, state.socketConnect]);
 
-  socket.on('connection', (data) => {
-    console.log(data);
-  })
+  useEffect(() => {
+    if (state.createTable) {
+      console.log('Create new table');
 
-  // useEffect(() => {
-  //   fetch('/api/socketio').finally(() => {
-  //     const socket = io(mobileServerURL);
+      socket.on('createTable', (data: string) => {
+        console.log('Incoming data: ' + data);
+      });
+    }
+  }, [socket, state.createTable]);
 
-  //     socket.on('connect', () => {
-  //       console.log('connect');
-  //       socket.emit('hello');
-  //     });
+  const tryReconnect = () => {
+    setTimeout(() => {
+      socket.io.open((err) => {
+        if (err) {
+          tryReconnect();
+        }
+      });
+    }, 2000);
+  };
 
-  //     socket.on('hello', (data: any) => {
-  //       console.log('hello', data);
-  //     });
-
-  //     socket.on('a user connected', () => {
-  //       console.log('a user connected');
-  //     });
-
-  //     socket.on('disconnect', () => {
-  //       console.log('disconnect');
-  //     });
-  //   });
-  // }, []);
+  socket.on('close', tryReconnect);
 
   return null;
 };

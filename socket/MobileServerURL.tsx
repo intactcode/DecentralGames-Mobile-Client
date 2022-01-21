@@ -6,6 +6,6 @@ const { publicRuntimeConfig } = getConfig();
 const { APP_ENV } = publicRuntimeConfig;
 const mobileServerURL = environment[APP_ENV] || process.env.MOBILE_SERVER_URL;
 
-console.log('Mobile server URL: ', mobileServerURL);
+console.log('Socket server: ', mobileServerURL);
 
 export default mobileServerURL;
