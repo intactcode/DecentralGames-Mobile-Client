@@ -183,14 +183,6 @@ const items = [
     '/images/item1.svg',
   ],
 ];
-const name = [
-  ["Hootie"],
-  ["Guest#129"],
-  ["Guest#266"],
-  ["Guest#312"],
-  ["Guest#578"],
-  ["Guest#977"],
-];
 
 const PokerGame = () => {
   const [turn, setTurn] = useState(0);

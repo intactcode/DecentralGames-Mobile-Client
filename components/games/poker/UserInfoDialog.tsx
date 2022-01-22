@@ -134,8 +134,8 @@ const UserInfoDialog: React.FC<Props> = ({
               <Box mb="4px">{ice}</Box>
               <Image
                 src="/images/diamond.svg"
-                width={20}
-                height={20}
+                width={26}
+                height={23}
                 alt="diamond"
               />
             </ItemField>
@@ -143,15 +143,15 @@ const UserInfoDialog: React.FC<Props> = ({
           <Box display="flex" alignItems="center" flexDirection="column">
             <span>XP BALANCE</span>
             <ItemField mt="8px">
-              <Box mb="4px">{xp}</Box>
-              <Image src="/images/xp.png" width={20} height={20} alt="xp" />
+              <Box mb="4px" style={{ marginTop: '-4px' }}>{xp}</Box>
+              <Image src="/images/xp.png" width={29} height={17} alt="xp" />
             </ItemField>
           </Box>
           <Box display="flex" alignItems="center" flexDirection="column">
             <span>DG BALANCE</span>
             <ItemField mt="8px">
-              <Box mb="4px">{dg}</Box>
-              <Image src="/images/dg.png" width={20} height={20} alt="dg" />
+              <Box mb="2px">{dg}</Box>
+              <Image src="/images/dg-logo.png" width={25} height={25} alt="dg" />
             </ItemField>
           </Box>
         </Box>
