@@ -3,6 +3,7 @@ import Fetch from '../api/Fetch';
 import { useStoreDispatch } from './Hooks';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3 from 'web3';
+import constants from '../components/common/Constants';
 
 declare const window: any;
 
@@ -104,10 +105,8 @@ const assignToken = async (dispatch: any, web3: any, userAddress: string) => {
 
 const getWalletConnectProvider = () => {
   return new WalletConnectProvider({
-    rpc: {
-      137: 'https://polygon-rpc.com',
-    },
-    chainId: 137,
+    rpc: constants.MATIC_RPC,
+    chainId: constants.MATIC_CHAIN_ID,
     qrcode: false,
   });
 };
@@ -145,7 +144,7 @@ const connectMobileWallet = async (dispatch: any) => {
   });
 
   await provider.enable();
-  provider.updateRpcUrl(137);
+  provider.updateRpcUrl(constants.MATIC_CHAIN_ID);
 };
 
 const connectDesktopWallet = async (dispatch: any) => {
@@ -212,12 +211,6 @@ function Wallet() {
         if (userStatus !== false) {
           // get new access token to extend expiration time by 12 hours
           refreshToken(dispatch);
-
-          // connect to mobile socket server
-          dispatch({
-            type: 'socket_connect',
-            data: true,
-          });
         } else {
           dispatch({
             type: 'update_status',

@@ -6,45 +6,31 @@ import { useStoreState } from '../store/Hooks';
 const Socket = () => {
   const state = useStoreState(); // returns current state from Context API store
 
-  // define local variables
-  const socket = io(mobileServerURL, { transports: ['websocket'] });
-
-  /////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////
-
-
   useEffect(() => {
-    if (state.socketConnect) {
-      console.log('Connect to mobile socket server');
+    if (state.userStatus >= 4) {
+      const socket = io(mobileServerURL, { transports: ['websocket'] });
 
       socket.on('connection', (socket: typeof Socket) => {
-        console.log('Socket response:', socket);
+        console.log('Socket server response:', socket);
       });
-    }
-  }, [socket, state.socketConnect]);
-
-  useEffect(() => {
-    if (state.createTable) {
-      console.log('Create new table');
 
       socket.on('createTable', (data: string) => {
         console.log('Incoming data: ' + data);
       });
+
+      const tryReconnect = () => {
+        setTimeout(() => {
+          socket.io.open((err) => {
+            if (err) {
+              tryReconnect();
+            }
+          });
+        }, 2000);
+      };
+
+      socket.on('close', tryReconnect);
     }
-  }, [socket, state.createTable]);
-
-
-  const tryReconnect = () => {
-    setTimeout(() => {
-      socket.io.open((err) => {
-        if (err) {
-          tryReconnect();
-        }
-      });
-    }, 2000);
-  };
-
-  socket.on('close', tryReconnect);
+  }, [state.userStatus]);
 
   return null;
 };
