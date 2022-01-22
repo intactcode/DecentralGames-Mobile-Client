@@ -144,7 +144,7 @@ const UserInfoDialog: React.FC<Props> = ({
             <span>XP BALANCE</span>
             <ItemField mt="8px">
               <Box mb="4px">{xp}</Box>
-              <Image src="/images/xp.svg" width={20} height={20} alt="xp" />
+              <Image src="/images/xp.png" width={20} height={20} alt="xp" />
             </ItemField>
           </Box>
           <Box display="flex" alignItems="center" flexDirection="column">

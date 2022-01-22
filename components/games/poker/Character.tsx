@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { styled } from '@mui/system';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
-
 import CardBack from './CardBack';
 import Card from './Card';
 import InfoDialog from './InfoDialog';
 import UserInfoDialog from './UserInfoDialog';
+
 
 type PlayerCircleProps = {
   active: boolean;
@@ -23,7 +23,7 @@ const PlayerCircle = styled(Box)<PlayerCircleProps>(({ active }) => ({
   boxSizing: 'border-box',
   borderRadius: '50%',
   backgroundColor: '#292929',
-  filter: 'drop-shadow(0px 12px 12px rgba(0, 0, 0, 0.25))',
+  boxShadow: '0px 12px 12px rgba(0, 0, 0, 0.25)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -39,7 +39,7 @@ type PlayerInfoProps = {
 
 const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
   opacity: active ? '1' : '0.6',
-  marginTop: '7px',
+  marginTop: '8px',
   ['& :nth-of-type(1)']: {
     color: '#FFFFFFBF',
     textAlign: 'center',
@@ -192,9 +192,9 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
-        <Box fontSize="12px">Guest#129</Box>
+        <Box> Guest#129 </Box>
         <Box fontSize="14px">
-          <Box fontWeight="bold" color="white" mb="1.5px">
+          <Box style={{ paddingTop: '2px' }} fontWeight="bold" color="white" mb="2px">
             4000
           </Box>
           <ChipImage
