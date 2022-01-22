@@ -68,6 +68,7 @@ const LeaderBoardField = styled(Box)`
   background: #1f1f1f;
   box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
   border-radius: 16px 16px 0px 0px;
+  margin: 0px;
   padding: 0px 40px;
   width: 374px;
   :nth-of-type(1) {
@@ -113,7 +114,7 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
   return (
     <>
       <LeaderBoardBody open={open}>
-        <LeaderBoardField>
+        <LeaderBoardField style={{ width: '100%' }}>
           <CloseIcon onClick={() => setOpen(false)} open={open}>
             <FaChevronDown fontSize="20px" />
           </CloseIcon>
@@ -136,7 +137,7 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
             }
             return (
               <Box key={400 + i} display="flex" mt="2px">
-                <Box width="16px" height="16px" mt="-10px" mr="10px">
+                <Box width="16px" height="16px" mt="-6px" mr="10px">
                   <Image
                     src="/images/star.svg"
                     alt="star"

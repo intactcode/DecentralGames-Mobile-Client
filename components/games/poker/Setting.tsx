@@ -15,6 +15,7 @@ const SettingBody = styled(Box)<{ open: boolean }>`
   position: absolute;
   bottom: 0;
   z-index: 20;
+  padding-left: 0px;
   max-height: ${({ open }) => (open ? '600px' : '0px')};
   transition: max-height 0.5s;
 `;
@@ -24,8 +25,8 @@ const SettingField = styled(Box)`
   background: #1f1f1f;
   box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
   border-radius: 16px 16px 0px 0px;
-  padding: 0px 24px;
-  width: 374px;
+  padding: 0 24px;
+  width: 100%;
   :nth-of-type(1) {
     font-weight: 800;
     font-size: 24px;
@@ -160,7 +161,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">1</Box>
-              <Image src="/images/xp.svg" alt="xp" width={17} height={11} />
+              <Image src="/images/xp.png" alt="xp" width={17} height={11} />
             </ItemField>
           </Box>
         </Box>
@@ -182,7 +183,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">2</Box>
-              <Image src="/images/xp.svg" alt="xp" width={17} height={11} />
+              <Image src="/images/xp.png" alt="xp" width={17} height={11} />
             </ItemField>
           </Box>
         </Box>
@@ -204,7 +205,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             </ItemField>
             <ItemField ml="10px" type={0}>
               <Box mt="-5px">3</Box>
-              <Image src="/images/xp.svg" alt="xp" width={17} height={11} />
+              <Image src="/images/xp.png" alt="xp" width={17} height={11} />
             </ItemField>
           </Box>
         </Box>

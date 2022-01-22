@@ -28,7 +28,7 @@ const Progress = styled(Box)`
 const Body = styled(Box)`
   width: 100%;
   position: relative;
-  margin-top: 80px;
+  margin-top: 72px;
   font-family: 'Larsseit';
 `;
 
@@ -36,7 +36,7 @@ const Table = styled(Box)`
   background-image: url('images/Table.png');
   width: 100%;
   max-width: 374px;
-  height: 568px;
+  height: 578px;
   position: absolute;
   left: calc(50% - 187px);
 `;
@@ -161,6 +161,14 @@ const positionx = [
   'calc(50% - 160px)',
 ];
 const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
+const image = [
+  'images/face.png',
+  'images/character.png',
+  'images/character.png',
+  'images/character.png',
+  'images/character.png',
+  'images/character.png',
+  ];
 const items = [
   ['/images/item1.svg'],
   ['/images/item1.svg'],
@@ -274,7 +282,7 @@ const PokerGame = () => {
         return (
           <Character
             key={300 + i}
-            image="images/character.png"
+            image={image[i]}
             left={positionx[i]}
             top={positiony[i]}
             active={active[i]}
@@ -290,18 +298,6 @@ const PokerGame = () => {
           />
         );
       })}
-      {/* <CardPanel>
-        <Box display="flex">
-
-          <Box margin="5px"><Card type="Carreau" number="A" /></Box>
-          <Box margin="5px"><Card type="Pique" number="J" /></Box>
-          <Box margin="5px"><Card type="Carreau" number="A" /></Box>
-        </Box>
-        <Box display="flex" pl="30px">
-          <Box margin="5px"><Card type="Carreau" number="A" /></Box>
-          <Box margin="5px"><Card type="Carreau" number="A" /></Box>
-        </Box>
-      </CardPanel> */}
 
       <Box display="flex" justifyContent="center">
         <Box pt="540px" px="20px" width="374px">
