@@ -30,6 +30,7 @@ const Body = styled(Box)`
   position: relative;
   margin-top: 72px;
   font-family: 'Larsseit';
+  height: calc(100vh - 72px);
 `;
 
 const Table = styled(Box)`
