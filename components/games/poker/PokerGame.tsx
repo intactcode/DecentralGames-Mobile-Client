@@ -11,7 +11,6 @@ import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
 
-
 const Progress = styled(Box)`
   display: flex;
   align-items: center;
@@ -169,7 +168,7 @@ const image = [
   'images/character.png',
   'images/character.png',
   'images/character.png',
-  ];
+];
 const items = [
   ['/images/item1.svg'],
   ['/images/item1.svg'],
@@ -264,6 +263,18 @@ const PokerGame = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // useEffect(() => {
+  // 	const id = uuidv4();
+  // 	const result = socket.emit('createTable', { tableId: id });
+
+  // 	if (result.connected) {
+  // 		history.push(`/game/${id}`);
+  // 	} else {
+  // 		alert('failed to connect');
+  // 	}
+  // 	// console.log(id);
+  // }, []);
+
   return (
     <Body>
       <TableCard ref={tablecard} />
@@ -303,7 +314,12 @@ const PokerGame = () => {
       <Box display="flex" justifyContent="center">
         <Box pt="540px" px="20px" width="374px">
           <TurnButton>
-            <Box style={{ marginTop: '2px' }} color="white" fontSize="11px" mr="5px">
+            <Box
+              style={{ marginTop: '2px' }}
+              color="white"
+              fontSize="11px"
+              mr="5px"
+            >
               Your Turn
             </Box>
             <Dot />
@@ -316,7 +332,7 @@ const PokerGame = () => {
           <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
           <Box />
           <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
-          <Box />  
+          <Box />
           <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
           <Box />
         </ActionButtonGroup>
