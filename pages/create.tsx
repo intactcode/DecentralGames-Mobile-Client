@@ -8,7 +8,7 @@ const Create = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Create Poker Table'}
+        title={constants.TITLE + ' | ICE Poker'}
         image={images.SOCIAL_SHARE}
       />
 

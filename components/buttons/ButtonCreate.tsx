@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { useStoreState, useStoreDispatch } from '../../store/Hooks';
 import styles from '../../styles/Home.module.css';
+import PokerGame from '../games/poker/PokerGame';
 
 const ButtonCreate = () => {
   const state = useStoreState(); // returns current state from Context API store
@@ -11,7 +12,7 @@ const ButtonCreate = () => {
   // define local variables
   const [message, setMessage] = useState('Create Table');
 
-  const router = useRouter();
+  // const router = useRouter();
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -23,23 +24,33 @@ const ButtonCreate = () => {
 
     console.log('Socker server response: New Table: ' + result.id);
 
-    // dispatch active table ID to global state
-    dispatch({
-      type: 'active_table',
-      data: result.id,
-    });
-
     if (result.connected) {
-      router.push('/poker');
+      // router.push('/poker');
+
+      // dispatch active table ID to global state
+      dispatch({
+        type: 'active_table',
+        data: result.id,
+      });
     } else {
       setMessage('Failed to create new table');
     }
   }
 
   return (
-    <Box className={styles.connectWallet} onClick={() => clickedCreate()}>
-      {message}
-    </Box>
+    <>
+      {console.log('Active table: ' + state.activeTable)}
+
+      {state.userStatus >= 4 ? (
+        !state.activeTable ? (
+          <Box className={styles.connectWallet} onClick={() => clickedCreate()}>
+            <Box>{message}</Box>
+          </Box>
+        ) : (
+          <PokerGame />
+        )
+      ) : null}
+    </>
   );
 };
 
