@@ -16,8 +16,8 @@ const initialState = {
     ICE_AMOUNT: 0,
     XP_AMOUNT: 0,
   },
-  createTable: false,
-  activeTable: {},
+  socket: {},
+  activeTable: 0,
 };
 
 const reducer = (state: any, action: { type: any; data: any }) => {
@@ -46,10 +46,10 @@ const reducer = (state: any, action: { type: any; data: any }) => {
         tokenAmounts: action.data,
       };
     }
-    case 'create_table': {
+    case 'socket_instance': {
       return {
         ...state,
-        createTable: action.data,
+        socket: action.data,
       };
     }
     case 'active_table': {
