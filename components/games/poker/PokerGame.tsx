@@ -263,18 +263,6 @@ const PokerGame = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  // 	const id = uuidv4();
-  // 	const result = socket.emit('createTable', { tableId: id });
-
-  // 	if (result.connected) {
-  // 		history.push(`/game/${id}`);
-  // 	} else {
-  // 		alert('failed to connect');
-  // 	}
-  // 	// console.log(id);
-  // }, []);
-
   return (
     <Body>
       <TableCard ref={tablecard} />

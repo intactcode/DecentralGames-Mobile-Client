@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, memo } from 'react';
 import { Motion, spring } from 'react-motion';
-import { usePrevious } from '../../../../hooks';
+import { usePrevious } from '../../../../store/Hooks';
 import styles from './Card.module.css';
 import Card from './Card';
 

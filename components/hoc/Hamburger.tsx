@@ -54,6 +54,10 @@ const Hamburger = () => {
             <h2>ICE Challenges</h2>
           </Link>
 
+          <Link href="/create" passHref>
+            <h2>Create Table</h2>
+          </Link>
+
           <Link href="/settings" passHref>
             <h2>Settings</h2>
           </Link>
