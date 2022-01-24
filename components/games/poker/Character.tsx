@@ -101,6 +101,7 @@ interface Props {
   ice?: number;
   xp?: number;
   dg?: number;
+  data?: any;
 }
 
 const Character: React.FC<Props> = ({
@@ -117,6 +118,7 @@ const Character: React.FC<Props> = ({
   ice,
   xp,
   dg,
+  data,
 }) => {
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
@@ -192,7 +194,7 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
-        <Box> Guest#129 </Box>
+        <Box> {data?.name || 'Guest'} </Box>
         <Box fontSize="14px">
           <Box style={{ paddingTop: '2px' }} fontWeight="bold" color="white" mb="2px">
             4000

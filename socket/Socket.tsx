@@ -9,7 +9,13 @@ const Socket = () => {
 
   useEffect(() => {
     if (state.userStatus >= 4) {
-      const socket = io(mobileServerURL, { transports: ['websocket'] });
+      const autoToken: string = localStorage.getItem('token') || '';
+      const socket = io(mobileServerURL, {
+        transports: ['websocket'],
+        query: {
+          autoToken
+        }
+      });
 
       // dispatch socket instance to global state
       dispatch({
@@ -21,8 +27,37 @@ const Socket = () => {
         console.log('Socket server response:', socket);
       });
 
-      socket.on('createTable', (data: string) => {
-        console.log('Incoming data: ' + data);
+      socket.on('createdTable', (data: any) => {
+        // dispatch active table ID to global state
+        dispatch({
+          type: 'active_table',
+          data: data.tableId,
+        });
+      });
+
+      socket.on('joinedTable', (data: any) => {
+        if (data.tableId) {
+          // dispatch active table ID to global state
+          dispatch({
+            type: 'active_table',
+            data: data.tableId,
+          });
+        }
+      });
+
+      socket.on('tableData', (data: any) => {
+        dispatch({
+          type: 'table_data',
+          data,
+        });
+      });
+
+      socket.on('playerJoinTable', (data: any) => {
+        console.log('new player joined: ', data.playerId);
+      });
+
+      socket.on('status', (data: any) => {
+        console.log('status: ', data);
       });
 
       const tryReconnect = () => {
