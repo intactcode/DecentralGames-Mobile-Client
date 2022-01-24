@@ -10,6 +10,7 @@ import LeaderBoard from './LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
+import { useStoreState } from '../../../store/Hooks';
 
 const Progress = styled(Box)`
   display: flex;
@@ -185,6 +186,7 @@ const items = [
 ];
 
 const PokerGame = () => {
+  const state = useStoreState(); // returns current state from Context API store
   const [turn, setTurn] = useState(0);
   const [active, setActive] = useState<boolean[]>(new Array(6).fill(true));
   const [raiseamount, setRaiseAmount] = useState(600);
@@ -197,6 +199,8 @@ const PokerGame = () => {
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
   const [roundcount, setRoundCount] = useState(0);
   const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
+  const [players, setPlayers] = useState([]);
+  const [userPosition, setUserPosition] = useState(0);
 
   const tablecard: any = useRef(null);
 
@@ -263,6 +267,20 @@ const PokerGame = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const setSeats = (seats: any) => {
+      for (let i = 0; i < 6; i++) {
+        if (seats[i] && seats[i].name == state.socket.id) {
+          setUserPosition(i);
+        }
+      };
+  
+      setPlayers(seats);
+    };
+
+    setSeats(state.tableData.seats || {});
+  }, [state.tableData, state.socket.id]);
+
   return (
     <Body>
       <TableCard ref={tablecard} />
@@ -279,22 +297,24 @@ const PokerGame = () => {
         </BlackEllipse>
       </Links>
       {positionx.map((data, i) => {
+        const userId = (i + 6 + userPosition) % 6;
         return (
           <Character
-            key={300 + i}
-            image={image[i]}
+            key={300 + userId}
+            image={image[userId]}
             left={positionx[i]}
             top={positiony[i]}
-            active={active[i]}
-            user={i === 0}
-            turn={turn == i}
-            index={i}
-            raise={raise[i]}
+            active={active[userId]}
+            user={userId === 0}
+            turn={turn == userId}
+            index={userId}
+            raise={raise[userId]}
             onFold={onFold}
-            items={items[i]}
+            items={items[userId]}
             ice={iceamount}
             xp={xpamount}
             dg={dgamount}
+            data={players[userId]}
           />
         );
       })}

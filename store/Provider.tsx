@@ -58,6 +58,12 @@ const reducer = (state: any, action: { type: any; data: any }) => {
         activeTable: action.data,
       };
     }
+    case 'table_data': {
+      return {
+        ...state,
+        tableData: action.data,
+      };
+    }
     default: {
       throw new Error('Wrong action type got dispatched');
     }
