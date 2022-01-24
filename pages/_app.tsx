@@ -1,10 +1,10 @@
 import NextNProgress from 'nextjs-progressbar';
-import { Provider } from '../store';
-import UserStatus from '../store/UserStatus';
-import NetworkId from '../store/NetworkId';
+import { Provider } from '../store/Store';
+import Segment from '../components/common/Segment';
+import Wallet from '../store/Wallet';
+import Socket from '../socket/Socket';
 import '../styles/globals.css';
 import '../styles/menu.css';
-import Segment from '../components/common/Segment';
 
 function Application(props: { Component: any; pageProps: any; store: any }) {
   return (
@@ -14,8 +14,8 @@ function Application(props: { Component: any; pageProps: any; store: any }) {
 
       <props.Component {...props.pageProps} />
 
-      <UserStatus />
-      <NetworkId />
+      <Wallet />
+      <Socket />
     </Provider>
   );
 }

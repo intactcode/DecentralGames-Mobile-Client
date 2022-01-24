@@ -18,6 +18,7 @@ const ProgressBarBack = styled(Box)`
   height: 20px;
   cursor: pointer;
 `;
+
 const Progress = styled(Box)`
   height: 20px;
   box-shadow: inset 0px -4px 8px rgba(255, 255, 255, 0.05);
@@ -31,11 +32,11 @@ interface TitleProps {
 }
 
 const Title = styled(Box)<TitleProps>(({ type }) => ({
-  minWidth : '30px',
+  minWidth: '30px',
   position: 'absolute',
   fontSize: type ? '8px' : '10px',
   right: type ? '5px' : '-36px',
-  top: '5px',
+  top: '6px',
   color: type ? 'white' : 'rgb(255,255,255,0.75)',
 }));
 
@@ -65,7 +66,7 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
             ? event.changedTouches[0].clientX
             : event.clientX) -
             offsetLeft) /
-          per
+            per
         )
       )
     );
@@ -102,7 +103,7 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
       width={width}
     >
       <Progress width={curpercent} style={{ background: backgrounds[type] }} />
-      <Title type={curtext.includes('/')}>{curtext}</Title>
+      <Title type={curtext.includes('/').toString()}>{curtext}</Title>
     </ProgressBarBack>
   );
 };

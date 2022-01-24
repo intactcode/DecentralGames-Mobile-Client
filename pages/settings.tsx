@@ -1,20 +1,20 @@
-import PokerGame from '../components/games/poker/PokerGame';
+import UserSettings from '../components/content/UserSettings';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
 
-const Poker = () => {
+const Settings = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | ICE Poker'}
+        title={constants.TITLE + ' | Settings'}
         image={images.SOCIAL_SHARE}
       />
 
-      <PokerGame />
+      <UserSettings />
     </Layout>
   );
 };
 
-export default Poker;
+export default Settings;

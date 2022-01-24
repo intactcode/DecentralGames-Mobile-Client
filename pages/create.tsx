@@ -1,10 +1,10 @@
-import PokerGame from '../components/games/poker/PokerGame';
+import CreateTable from '../components/games/poker/CreateTable';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
 
-const Poker = () => {
+const Create = () => {
   return (
     <Layout>
       <Header
@@ -12,9 +12,9 @@ const Poker = () => {
         image={images.SOCIAL_SHARE}
       />
 
-      <PokerGame />
+      <CreateTable />
     </Layout>
   );
 };
 
-export default Poker;
+export default Create;

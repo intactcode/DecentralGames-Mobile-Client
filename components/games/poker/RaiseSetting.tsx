@@ -1,26 +1,26 @@
 import { Box, TextField } from '@mui/material';
 import { styled } from '@mui/system';
-import Image from 'next/image'
+import Image from 'next/image';
 
 
-const RaiseField = styled(Box) <{ open: boolean }>`
-    display : flex;
-  justify-content : center;
-  position : absolute;
-  bottom : 0;
-  z-index : 20;
-  max-height : ${({ open }) => open ? '400px' : '0px'};
-    overflow : hidden;
-    transition : max-height 0.5s;
+const RaiseField = styled(Box)<{ open: boolean }>`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  z-index: 20;
+  max-height: ${({ open }) => (open ? '400px' : '0px')};
+  overflow: hidden;
+  transition: max-height 0.5s;
+`;
 
-`
 const RaisePanel = styled(Box)`
   padding: 0px 16px;
   margin-top: 20px;
   background: #1f1f1f;
   box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
   border-radius: 16px 16px 0px 0px;
-  width: 374px;
+  width: 100vw;
   height: 156px;
 `;
 
@@ -40,11 +40,28 @@ const RaiseButton = styled(Box)`
   color: white;
   border-radius: 12px;
   display: flex;
+  align-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 1;
+`;
+
+const RaiseButtonBack = styled(Box)`
+  background: #2B8C46;
+  color: white;
+  border-radius: 12px;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 90px;
   height: 46px;
   cursor: pointer;
+  margin-left: -90px;
+  margin-top: 2px;
+  z-index: 0;
 `;
 
 const RaiseAction = styled(Box)`
@@ -55,7 +72,7 @@ const RaiseAction = styled(Box)`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width: 80px;
+    width: calc(25% - 4px);
     height: 48px;
   }
   margin-top: 12px;
@@ -66,20 +83,26 @@ const RaiseAction = styled(Box)`
 `;
 
 interface Props {
-    open: boolean;
-    setOpen: any;
-    setRaiseAmount: any;
-    raiseamount: number;
-    onRaise: any;
+  open: boolean;
+  setOpen: any;
+  setRaiseAmount: any;
+  raiseamount: number;
+  onRaise: any;
 }
 
-const RaiseSetting: React.FC<Props> = ({ open, setOpen, raiseamount, setRaiseAmount, onRaise }) => {
+const RaiseSetting: React.FC<Props> = ({
+  open,
+  setOpen,
+  raiseamount,
+  setRaiseAmount,
+  onRaise,
+}) => {
   return (
     <RaiseField open={open}>
       <RaisePanel>
         <RaiseInput>
-          <Box color="#FFFFFF80" width="85px" fontWeight="bold" mr="5px">
-                        Your Bet:
+          <Box color="#FFFFFF80" width="85px" fontWeight="bold" mr="5px" mt="5px">
+            Your Bet:
           </Box>
           <TextField
             className="raise"
@@ -89,17 +112,30 @@ const RaiseSetting: React.FC<Props> = ({ open, setOpen, raiseamount, setRaiseAmo
                 color: 'white',
                 fontSize: '30px',
                 width: '100px',
+                fontWeight: 'Bold',
               },
+              inputMode: 'numeric',
             }}
             variant="standard"
             type="number"
             value={raiseamount}
             onChange={(event) => setRaiseAmount(Number(event.target.value))}
           />
-          <Image src="/images/freecoin.svg" alt="freecoin" width={44} height={44} />
-          <RaiseButton ml="10px" onClick={() => { onRaise(); setOpen(false) }}>
-                        Raise
+          <Image
+            src="/images/freecoin.svg"
+            alt="freecoin"
+            width={44}
+            height={44}
+          />
+          <RaiseButton
+            onClick={() => {
+              onRaise();
+              setOpen(false);
+            }}
+          >
+            Raise
           </RaiseButton>
+          <RaiseButtonBack />
         </RaiseInput>
         <RaiseAction>
           <Box>1/2</Box>

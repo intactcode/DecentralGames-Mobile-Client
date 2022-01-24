@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { styled } from '@mui/system';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
-
 import CardBack from './CardBack';
 import Card from './Card';
 import InfoDialog from './InfoDialog';
 import UserInfoDialog from './UserInfoDialog';
+
 
 type PlayerCircleProps = {
   active: boolean;
@@ -23,7 +23,7 @@ const PlayerCircle = styled(Box)<PlayerCircleProps>(({ active }) => ({
   boxSizing: 'border-box',
   borderRadius: '50%',
   backgroundColor: '#292929',
-  filter: 'drop-shadow(0px 12px 12px rgba(0, 0, 0, 0.25))',
+  boxShadow: '0px 12px 12px rgba(0, 0, 0, 0.25)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -39,7 +39,7 @@ type PlayerInfoProps = {
 
 const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
   opacity: active ? '1' : '0.6',
-  marginTop: '7px',
+  marginTop: '8px',
   ['& :nth-of-type(1)']: {
     color: '#FFFFFFBF',
     textAlign: 'center',
@@ -55,19 +55,20 @@ const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
 
 const RaiseMoney = styled(Box)`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 3px 8px 2px;
+  padding: 3px 0px 0px 6px;
   z-index: 2;
   position: absolute;
   width: 53px;
   height: 24px;
-
   background: #ecfc7d;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
   border-radius: 29px;
 `;
+
+const RaiseAmount = styled(Box)`
+  margin-top: 3px !important;
+`;
+
 const SpinCircle = styled(Box)`
   position: absolute;
   left: -9px;
@@ -80,6 +81,10 @@ const Gradient = styled(Box)`
   height: 72px;
   border-radius: 50%;
   box-shadow: 0px 0px 36px #ffe976;
+`;
+
+const ChipImage = styled(Image)`
+  margin-top: -1px !important;
 `;
 
 interface Props {
@@ -96,6 +101,7 @@ interface Props {
   ice?: number;
   xp?: number;
   dg?: number;
+  data?: any;
 }
 
 const Character: React.FC<Props> = ({
@@ -112,6 +118,7 @@ const Character: React.FC<Props> = ({
   ice,
   xp,
   dg,
+  data,
 }) => {
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
@@ -134,11 +141,10 @@ const Character: React.FC<Props> = ({
               colors={[['#FFFFFF', 1]]}
               size={90}
               trailColor="transparent"
-            >
-              {({ remainingTime }) => {
-                if (remainingTime === 0) onFold();
+              onComplete={() => {
+                onFold();
               }}
-            </CountdownCircleTimer>
+            />
           </SpinCircle>
         </>
       )}
@@ -173,31 +179,31 @@ const Character: React.FC<Props> = ({
       </PlayerCircle>
       {raise && (
         <RaiseMoney left={rpositionx[index]} top={rpositiony[index]}>
-          <Box fontWeight="bold" mt="-3px" color="black">
+          <RaiseAmount fontWeight="bold" mt="-3px" color="black">
             {raise}
-          </Box>
+          </RaiseAmount>
           <Image
             src="/images/freecoin.svg"
-            width="15px"
-            height="15px"
+            width="18px"
+            height="18px"
             alt="freecoin"
           />
         </RaiseMoney>
       )}
-      <Box position="absolute" left={dealerx[index]} top={dealery[index]}>
+      <Box position="relative" left={dealerx[index]} top={dealery[index]}>
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
-        <Box fontSize="12px">Guest#129</Box>
+        <Box> {data?.name || 'Guest'} </Box>
         <Box fontSize="14px">
-          <Box fontWeight="bold" color="white" mb="3px">
+          <Box style={{ paddingTop: '2px' }} fontWeight="bold" color="white" mb="2px">
             4000
           </Box>
-          <Image
+          <ChipImage
             src="/images/freecoin.svg"
             width="15px"
             height="15px"
-            alt="freecoin"
+            className="chip"
           />
         </Box>
       </PlayerInfo>

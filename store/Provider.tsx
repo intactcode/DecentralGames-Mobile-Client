@@ -16,16 +16,12 @@ const initialState = {
     ICE_AMOUNT: 0,
     XP_AMOUNT: 0,
   },
+  socket: {},
+  activeTable: 0,
 };
 
 const reducer = (state: any, action: { type: any; data: any }) => {
   switch (action.type) {
-    case 'network_id': {
-      return {
-        ...state,
-        networkID: action.data,
-      };
-    }
     case 'update_status': {
       return {
         ...state,
@@ -48,6 +44,24 @@ const reducer = (state: any, action: { type: any; data: any }) => {
       return {
         ...state,
         tokenAmounts: action.data,
+      };
+    }
+    case 'socket_instance': {
+      return {
+        ...state,
+        socket: action.data,
+      };
+    }
+    case 'active_table': {
+      return {
+        ...state,
+        activeTable: action.data,
+      };
+    }
+    case 'table_data': {
+      return {
+        ...state,
+        tableData: action.data,
       };
     }
     default: {
