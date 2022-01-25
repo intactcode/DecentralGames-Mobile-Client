@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 import { useStoreState } from '../../store/Hooks';
 import styles from '../../styles/Home.module.css';
+// import { stat } from 'fs';
 
 // import PokerGame from '../games/poker/PokerGame';
 
@@ -24,11 +25,11 @@ const ButtonCreate = () => {
     const id = Math.floor(Math.random() * 99999);
     const result = await state.socket.emit('createTable', { tableId: id });
 
-    console.log('Socker server response: New Table: ' + result.id);
-
     if (result.connected) {
       // router.push('/poker');
       // redirect();
+
+      console.log('Socker server response: New Table: ' + result.id);
     } else {
       setMessage('Failed to create new table');
     }
@@ -39,16 +40,18 @@ const ButtonCreate = () => {
   }
 
   useEffect(() => {
-    state.socket.emit('joinTable');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     if (state.activeTable) {
       redirect();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.activeTable]);
+
+  useEffect(() => {
+    if (Object.keys(state.socket).length !== 0) {
+      state.socket.emit('joinTable');
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }
+  }, [state.socket]);
 
   return (
     <>

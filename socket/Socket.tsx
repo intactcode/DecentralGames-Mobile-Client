@@ -13,8 +13,8 @@ const Socket = () => {
       const socket = io(mobileServerURL, {
         transports: ['websocket'],
         query: {
-          autoToken
-        }
+          autoToken,
+        },
       });
 
       // dispatch socket instance to global state
@@ -72,7 +72,7 @@ const Socket = () => {
 
       socket.on('close', tryReconnect);
     }
-  }, [state.userStatus]);
+  }, [dispatch, state.userStatus]);
 
   return null;
 };
