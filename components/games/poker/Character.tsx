@@ -7,7 +7,7 @@ import CardBack from './CardBack';
 import Card from './Card';
 import InfoDialog from './InfoDialog';
 import UserInfoDialog from './UserInfoDialog';
-
+import { useStoreState } from '../../../store/Hooks';
 
 type PlayerCircleProps = {
   active: boolean;
@@ -111,15 +111,17 @@ const Character: React.FC<Props> = ({
   active,
   user,
   raise,
-  turn,
   index,
-  onFold,
+  turn,
   items,
   ice,
   xp,
   dg,
   data,
 }) => {
+  const state = useStoreState();
+  const currentSeat = state.currentSeat.currentSeat;
+
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
 
@@ -141,9 +143,7 @@ const Character: React.FC<Props> = ({
               colors={[['#FFFFFF', 1]]}
               size={90}
               trailColor="transparent"
-              onComplete={() => {
-                onFold();
-              }}
+              onComplete={() => {}}
             />
           </SpinCircle>
         </>
@@ -196,7 +196,12 @@ const Character: React.FC<Props> = ({
       <PlayerInfo active={active}>
         <Box> {data?.name || 'Guest'} </Box>
         <Box fontSize="14px">
-          <Box style={{ paddingTop: '2px' }} fontWeight="bold" color="white" mb="2px">
+          <Box
+            style={{ paddingTop: '2px' }}
+            fontWeight="bold"
+            color="white"
+            mb="2px"
+          >
             4000
           </Box>
           <ChipImage
@@ -207,22 +212,22 @@ const Character: React.FC<Props> = ({
           />
         </Box>
       </PlayerInfo>
-      {active && !user && (
+      {active && index !== currentSeat && (
         <Box display="flex" mt="-135px" ml="5px">
           <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
           <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
         </Box>
       )}
-      {active && user && (
-        <Box display="flex" mt="-160px" ml="-5px">
+      {active && index === currentSeat && !!state.cards.length && (
+        <Box display="flex" mt="-175px" ml="-10px">
           <Card
-            type="Carreau"
-            number="A"
+            type={state.cards[0].suit}
+            number={state.cards[0].rank}
             transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)"
           />
           <Card
-            type="Carreau"
-            number="A"
+            type={state.cards[1].suit}
+            number={state.cards[1].rank}
             transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)"
           />
         </Box>

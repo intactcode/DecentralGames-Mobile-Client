@@ -209,7 +209,7 @@ const PokerGame = () => {
     while (active[temp] === false && temp !== turn) temp = (temp + 1) % 6;
     if (temp === 0) {
       setRoundCount(roundcount + 1);
-      tablecard.current.progressDeal();
+      tablecard.current?.progressDeal();
       if (roundcount + 1 === 3) {
         setTurn(-1);
         let t = [...win];
@@ -228,6 +228,7 @@ const PokerGame = () => {
       tempactive[turn] = false;
       setActive(tempactive);
       setNextTurn();
+      state.socket.emit('foldTable');
     }
   };
 
@@ -241,6 +242,7 @@ const PokerGame = () => {
     setRaise(temp);
     setNextTurn();
     setRaiseShow(false);
+    state.socket.emit('raiseTable', { raise: 300 });
   };
 
   const onCall = () => {
@@ -248,6 +250,7 @@ const PokerGame = () => {
     temp[turn] = 300;
     setRaise(temp);
     setNextTurn();
+    state.socket.emit('callTable');
   };
 
   const onReset = () => {
@@ -273,8 +276,8 @@ const PokerGame = () => {
         if (seats[i] && seats[i].name == state.socket.id) {
           setUserPosition(i);
         }
-      };
-  
+      }
+
       setPlayers(seats);
     };
 

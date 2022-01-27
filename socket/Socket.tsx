@@ -60,6 +60,34 @@ const Socket = () => {
         console.log('status: ', data);
       });
 
+      socket.on('chipUpdate', (data: any) => {
+        dispatch({
+          type: 'chip_update',
+          data,
+        });
+      });
+
+      socket.on('currentSeat', (data: any) => {
+        dispatch({
+          type: 'current_seat',
+          data,
+        });
+      });
+
+      socket.on('playerSitDown', (data: any) => {
+        dispatch({
+          type: 'player_sit_down',
+          data,
+        });
+      });
+
+      socket.on('cards', (data: any) => {
+        dispatch({
+          type: 'cards',
+          data,
+        });
+      });
+
       const tryReconnect = () => {
         setTimeout(() => {
           socket.io.open((err) => {

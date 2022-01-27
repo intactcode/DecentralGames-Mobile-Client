@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { ReactChild, ReactFragment, ReactPortal, useReducer } from 'react';
 import { GlobalContext } from './Context';
 
@@ -17,6 +16,11 @@ const initialState = {
     XP_AMOUNT: 0,
   },
   socket: {},
+  tableData: {},
+  chipUpdate: {},
+  currentSeat: {},
+  playerSitDown: {},
+  cards: [],
   activeTable: 0,
 };
 
@@ -62,6 +66,30 @@ const reducer = (state: any, action: { type: any; data: any }) => {
       return {
         ...state,
         tableData: action.data,
+      };
+    }
+    case 'chip_update': {
+      return {
+        ...state,
+        chipUpdate: action.data,
+      };
+    }
+    case 'current_seat': {
+      return {
+        ...state,
+        currentSeat: action.data,
+      };
+    }
+    case 'player_sit_down': {
+      return {
+        ...state,
+        playerSitDown: action.data,
+      };
+    }
+    case 'cards': {
+      return {
+        ...state,
+        cards: action.data,
       };
     }
     default: {

@@ -14,10 +14,10 @@ export interface CardProps {
 }
 
 const cards: any = {
-  D: 'Carreau',
-  C: 'Trefle',
-  H: 'Coeur',
-  S: 'Pique',
+  D: 'diamonds',
+  C: 'clubs',
+  H: 'hearts',
+  S: 'spades',
 };
 
 const Card: FC<CardProps> = ({ card, faceDown, rotationY }) => {
