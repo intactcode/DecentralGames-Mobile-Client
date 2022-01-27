@@ -190,8 +190,8 @@ const PokerGame = () => {
   const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
   const [players, setPlayers] = useState([]);
   const [userPosition, setUserPosition] = useState(0);
-  const forcedBets = state.currentSeat.forced;
-  const currentPlayer = state.currentSeat.currentSeat;
+  const forcedBets = state.currentSeat.forced || {};
+  const currentPlayer = state.currentSeat.currentSeat || 0;
   const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
 
