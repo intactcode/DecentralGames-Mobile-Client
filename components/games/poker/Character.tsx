@@ -194,7 +194,13 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
-        <Box> {data?.name || 'Guest'} </Box>
+        <Box>
+          {data?.name
+            ? data?.name.substring(0, 5) +
+              '...' +
+              data?.name.substring(state.userAddress.length - 4)
+            : 'Guest'}
+        </Box>
         <Box fontSize="14px">
           <Box
             style={{ paddingTop: '2px' }}
@@ -212,7 +218,7 @@ const Character: React.FC<Props> = ({
           />
         </Box>
       </PlayerInfo>
-      {active && index !== currentSeat && (
+      {active && index !== currentSeat && data?.name && (
         <Box display="flex" mt="-135px" ml="5px">
           <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
           <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
