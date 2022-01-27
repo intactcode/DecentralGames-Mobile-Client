@@ -107,6 +107,10 @@ const StyledCommunityCard = styled(Box)`
   z-index: 10000;
   transform: translateX(-50%);
   top: 200px;
+  max-width: 180px;
+  justify-content: center;
+  flex-wrap: wrap;
+  display: flex;
 `;
 
 const TurnButton = styled(Box)`
@@ -186,13 +190,13 @@ const PokerGame = () => {
   const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
   const [players, setPlayers] = useState([]);
   const [userPosition, setUserPosition] = useState(0);
-  const forcedBets = state.currentSeat.forced;
-  const currentPlayer = state.currentSeat.currentSeat;
+  const forcedBets = state.currentSeat.forced || {};
+  const currentPlayer = state.currentSeat.currentSeat || 0;
   const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
 
   const getMaxBet = () => {
-    return maxBy(players, (player: any) => player.betSize);
+    return get(maxBy(players, 'betSize'), 'betSize', 0);
   };
 
   // eslint-disable-next-line
@@ -270,7 +274,7 @@ const PokerGame = () => {
   };
 
   const onRaise = () => {
-    if (raiseamount == 0) {
+    if (!canRaise(raiseamount)) {
       alert('Input correct amount');
       return;
     }
@@ -279,6 +283,10 @@ const PokerGame = () => {
 
   const onCall = () => {
     state.socket.emit('callTable');
+  };
+
+  const onBet = () => {
+    state.socket.emit('betTable', { bet: forcedBets.bigBlind });
   };
 
   const onReset = () => {
@@ -306,7 +314,7 @@ const PokerGame = () => {
         }
       }
 
-      setPlayers(seats);
+      setPlayers(Object.values(seats));
     };
 
     setSeats(state.tableData.seats || {});
@@ -324,7 +332,7 @@ const PokerGame = () => {
         {get(state, 'tableData.community', []).map(
           (card: any, index: number) => {
             return (
-              <Box key={`card_${index}`} mr={0.5} ml={0.5}>
+              <Box key={`card_${index}`} mr={0.5} ml={0.5} mt={1}>
                 <Card type={card.suit} number={card.rank} />
               </Box>
             );
@@ -394,30 +402,44 @@ const PokerGame = () => {
             >
               Fold
             </Button>
-            <Button
-              variant="contained"
-              component="div"
-              disabled={!canCall()}
-              onClick={() => turn !== -1 && onCall()}
-            >
-              Call 300
-            </Button>
-            <Button
-              variant="contained"
-              component="div"
-              disabled={!canRaise(300)}
-              onClick={() => turn !== -1 && setRaiseShow(true)}
-            >
-              Raise
-            </Button>
-            <Button
-              variant="contained"
-              component="div"
-              disabled={!canCheck()}
-              onClick={() => turn !== -1 && onCheck()}
-            >
-              Check
-            </Button>
+            {canCall() && (
+              <Button
+                variant="contained"
+                component="div"
+                disabled={!canCall()}
+                onClick={() => turn !== -1 && onCall()}
+              >
+                Call
+              </Button>
+            )}
+            {canRaise(getMinRaise()) && (
+              <Button
+                variant="contained"
+                component="div"
+                onClick={() => turn !== -1 && setRaiseShow(true)}
+              >
+                Raise
+              </Button>
+            )}
+            {canBet(forcedBets.bigBlind) && (
+              <Button
+                variant="contained"
+                component="div"
+                onClick={() => turn !== -1 && onBet()}
+              >
+                Bet
+              </Button>
+            )}
+            {canCheck() && (
+              <Button
+                variant="contained"
+                component="div"
+                disabled={!canCheck()}
+                onClick={() => turn !== -1 && onCheck()}
+              >
+                Check
+              </Button>
+            )}
           </ActionButtonGroup>
         </Box>
       )}
