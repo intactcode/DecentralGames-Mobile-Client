@@ -137,13 +137,11 @@ const Character: React.FC<Props> = ({
           <Gradient />
           <SpinCircle>
             <CountdownCircleTimer
+              duration={30}
               strokeWidth={10}
-              isPlaying
-              duration={10}
               colors={[['#FFFFFF', 1]]}
               size={90}
               trailColor="transparent"
-              onComplete={() => {}}
             />
           </SpinCircle>
         </>
@@ -218,7 +216,7 @@ const Character: React.FC<Props> = ({
           />
         </Box>
       </PlayerInfo>
-      {active && index !== currentSeat && data?.name && (
+      {active && index !== currentSeat && data?.name && !!state.cards.length && (
         <Box display="flex" mt="-135px" ml="5px">
           <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
           <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
