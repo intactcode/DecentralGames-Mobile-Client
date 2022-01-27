@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/material';
-
-import { useRouter } from 'next/router';
-
 import { useStoreState } from '../../store/Hooks';
 import styles from '../../styles/Home.module.css';
 // import { stat } from 'fs';
@@ -11,11 +8,8 @@ import styles from '../../styles/Home.module.css';
 
 const ButtonCreate = () => {
   const state = useStoreState(); // returns current state from Context API store
-
   // define local variables
   const [message, setMessage] = useState('Create Table');
-
-  const router = useRouter();
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -35,36 +29,14 @@ const ButtonCreate = () => {
     }
   }
 
-  function redirect() {
-    router.push('/poker');
-  }
-
-  useEffect(() => {
-    if (state.activeTable) {
-      redirect();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.activeTable]);
-
-  useEffect(() => {
-    if (Object.keys(state.socket).length !== 0) {
-      state.socket.emit('joinTable');
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }
-  }, [state.socket]);
-
   return (
     <>
       {console.log('Active table: ' + state.activeTable)}
 
       {state.userStatus >= 4 ? (
-        !state.activeTable ? (
-          <Box className={styles.connectWallet} onClick={() => clickedCreate()}>
-            <Box>{message}</Box>
-          </Box>
-        ) : (
-          redirect()
-        )
+        <Box className={styles.connectWallet} onClick={() => clickedCreate()}>
+          <Box>{message}</Box>
+        </Box>
       ) : null}
     </>
   );
