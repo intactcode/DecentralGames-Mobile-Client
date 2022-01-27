@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { ReactChild, ReactFragment, ReactPortal, useReducer } from 'react';
 import { GlobalContext } from './Context';
 
@@ -16,8 +15,14 @@ const initialState = {
     ICE_AMOUNT: 0,
     XP_AMOUNT: 0,
   },
-  socketConnect: false,
-  createTable: false,
+  socket: {},
+  tableData: {},
+  chipUpdate: {},
+  currentSeat: {},
+  playerSitDown: {},
+  cards: [],
+  activeTable: 0,
+  waitTime: 0,
 };
 
 const reducer = (state: any, action: { type: any; data: any }) => {
@@ -46,16 +51,52 @@ const reducer = (state: any, action: { type: any; data: any }) => {
         tokenAmounts: action.data,
       };
     }
-    case 'socket_connect': {
+    case 'socket_instance': {
       return {
         ...state,
-        socketConnect: action.data,
+        socket: action.data,
       };
     }
-    case 'create_table': {
+    case 'active_table': {
       return {
         ...state,
-        createTable: action.data,
+        activeTable: action.data,
+      };
+    }
+    case 'table_data': {
+      return {
+        ...state,
+        tableData: action.data,
+      };
+    }
+    case 'chip_update': {
+      return {
+        ...state,
+        chipUpdate: action.data,
+      };
+    }
+    case 'current_seat': {
+      return {
+        ...state,
+        currentSeat: action.data,
+      };
+    }
+    case 'player_sit_down': {
+      return {
+        ...state,
+        playerSitDown: action.data,
+      };
+    }
+    case 'cards': {
+      return {
+        ...state,
+        cards: action.data,
+      };
+    }
+    case 'wait_time': {
+      return {
+        ...state,
+        waitTime: action.data,
       };
     }
     default: {

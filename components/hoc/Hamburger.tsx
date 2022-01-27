@@ -38,8 +38,8 @@ const Hamburger = () => {
             <h2>Lobby</h2>
           </Link>
 
-          <Link href="/poker" passHref>
-            <h2>New Table</h2>
+          <Link href="/create" passHref>
+            <h2>Play Now</h2>
           </Link>
 
           <Link href="/stats" passHref>

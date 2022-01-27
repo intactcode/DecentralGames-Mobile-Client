@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Box } from '@mui/material';
+import { maxBy, get } from 'lodash';
+import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
@@ -10,7 +11,8 @@ import LeaderBoard from './LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
-
+import Card from './Card';
+import { useStoreState } from '../../../store/Hooks';
 
 const Progress = styled(Box)`
   display: flex;
@@ -73,9 +75,9 @@ const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
   justifyContent: 'space-between',
   marginTop: '10px',
   opacity: turn === 0 ? 1 : 0.2,
-  ['& >div']: {
+  ['& > div']: {
     borderRadius: '8px',
-    width: '103px',
+    width: '110px',
     height: '69px',
     cursor: 'pointer',
     display: 'flex',
@@ -86,43 +88,30 @@ const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
     margin: '5px',
     color: 'white',
   },
-  ['& :nth-of-type(1)']: {
+  ['& div:nth-of-type(1)']: {
     background: '#A82822',
   },
-  ['& :nth-of-type(2)']: {
-    width: '103px',
-    height: '69px',
-    borderRadius: '8px',
-    marginLeft: '-108px',
-    zIndex: '-1',
-    marginTop: '8px',
-    background: '#92120C',
-  },
-  ['& :nth-of-type(3)']: {
+  ['& div:nth-of-type(2)']: {
     background: '#3D86A6',
   },
-  ['& :nth-of-type(4)']: {
-    width: '103px',
-    height: '69px',
-    borderRadius: '8px',
-    marginLeft: '-108px',
-    zIndex: '-1',
-    marginTop: '8px',
-    background: '#267CA1',
-  },
-  ['& :nth-of-type(5)']: {
+  ['& div:nth-of-type(3)']: {
     background: '#3DA65A',
   },
-  ['& :nth-of-type(6)']: {
-    width: '103px',
-    height: '69px',
-    borderRadius: '8px',
-    marginLeft: '-108px',
-    zIndex: '-1',
-    marginTop: '8px',
-    background: '#2B8C46',
+  ['& div:nth-of-type(4)']: {
+    background: '#3DA65A',
   },
 }));
+
+const StyledCommunityCard = styled(Box)`
+  left: 50%;
+  z-index: 10000;
+  transform: translateX(-50%);
+  top: 200px;
+  max-width: 180px;
+  justify-content: center;
+  flex-wrap: wrap;
+  display: flex;
+`;
 
 const TurnButton = styled(Box)`
   display: flex;
@@ -139,9 +128,10 @@ const TurnButton = styled(Box)`
   border-radius: 8px;
   cursor: pointer;
 
-  margin-left: calc(100% - 90px);
+  margin-left: 200px;
+  margin-top: -30px;
   zindex: 10;
-  position: relative;
+  position: absolute;
 `;
 
 const Dot = styled(Box)`
@@ -169,7 +159,7 @@ const image = [
   'images/character.png',
   'images/character.png',
   'images/character.png',
-  ];
+];
 const items = [
   ['/images/item1.svg'],
   ['/images/item1.svg'],
@@ -186,6 +176,7 @@ const items = [
 ];
 
 const PokerGame = () => {
+  const state = useStoreState(); // returns current state from Context API store
   const [turn, setTurn] = useState(0);
   const [active, setActive] = useState<boolean[]>(new Array(6).fill(true));
   const [raiseamount, setRaiseAmount] = useState(600);
@@ -196,55 +187,106 @@ const PokerGame = () => {
   const [iceamount, setIceAmount] = useState(22000); // eslint-disable-line
   const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
-  const [roundcount, setRoundCount] = useState(0);
   const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
-
+  const [players, setPlayers] = useState([]);
+  const [userPosition, setUserPosition] = useState(0);
+  const forcedBets = state.currentSeat.forced || {};
+  const currentPlayer = state.currentSeat.currentSeat || 0;
   const tablecard: any = useRef(null);
+  const activePlayer = state.tableData.active;
 
-  const setNextTurn = () => {
-    let temp = (turn + 1) % 6;
-    while (active[temp] === false && temp !== turn) temp = (temp + 1) % 6;
-    if (temp === 0) {
-      setRoundCount(roundcount + 1);
-      tablecard.current.progressDeal();
-      if (roundcount + 1 === 3) {
-        setTurn(-1);
-        let t = [...win];
-        t[temp] = true;
-        setWin(t);
-        return;
-      }
+  const getMaxBet = () => {
+    return get(maxBy(players, 'betSize'), 'betSize', 0);
+  };
+
+  // eslint-disable-next-line
+  const getMinRaise = () => {
+    return getMaxBet() + forcedBets.bigBlind;
+  };
+
+  // eslint-disable-next-line
+  const canCall = () => {
+    if (players[currentPlayer] === undefined) {
+      return false;
     }
-    if (temp === turn) setTurn(-1);
-    else setTurn(temp);
+    const { betSize } = players[currentPlayer];
+    const maxBetSize = getMaxBet();
+    return betSize !== maxBetSize;
+  };
+
+  const canCheck = () => {
+    if (players[currentPlayer] === undefined) {
+      return false;
+    }
+    const { betSize } = players[currentPlayer];
+    const maxBetSize = getMaxBet();
+    return betSize === maxBetSize;
+  };
+
+  // eslint-disable-next-line
+  const canRaise = (amount: number) => {
+    if (amount < 0 || players[currentPlayer] === undefined) {
+      return false;
+    }
+
+    const maxBetSize = getMaxBet();
+    if (maxBetSize === 0) {
+      return false;
+    }
+
+    const { totalChips } = players[currentPlayer];
+    const minBet = maxBetSize + forcedBets.bigBlind;
+    if (amount < minBet || amount > totalChips) {
+      return false;
+    }
+
+    return amount >= minBet;
+  };
+
+  // eslint-disable-next-line
+  const canBet = (amount: number) => {
+    if (amount < 0 || players[currentPlayer] === undefined) {
+      return false;
+    }
+
+    const maxBet = getMaxBet();
+    if (maxBet > 0) {
+      return false;
+    }
+
+    const { totalChips } = players[currentPlayer];
+    const minBet = forcedBets.bigBlind;
+    if (amount < minBet || amount > totalChips) {
+      return false;
+    }
+
+    return totalChips >= minBet;
   };
 
   const onFold = () => {
-    if (turn >= 0) {
-      let tempactive = [...active];
-      tempactive[turn] = false;
-      setActive(tempactive);
-      setNextTurn();
+    state.socket.emit('foldTable');
+  };
+
+  const onCheck = () => {
+    if (canCheck()) {
+      state.socket.emit('checkTable');
     }
   };
 
   const onRaise = () => {
-    if (raiseamount == 0) {
+    if (!canRaise(raiseamount)) {
       alert('Input correct amount');
       return;
     }
-    let temp = [...raise];
-    temp[turn] = raiseamount;
-    setRaise(temp);
-    setNextTurn();
-    setRaiseShow(false);
+    state.socket.emit('raiseTable', { raise: raiseamount });
   };
 
   const onCall = () => {
-    let temp = [...raise];
-    temp[turn] = 300;
-    setRaise(temp);
-    setNextTurn();
+    state.socket.emit('callTable');
+  };
+
+  const onBet = () => {
+    state.socket.emit('betTable', { bet: forcedBets.bigBlind });
   };
 
   const onReset = () => {
@@ -264,9 +306,39 @@ const PokerGame = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const setSeats = (seats: any) => {
+      for (let i = 0; i < 6; i++) {
+        if (seats[i] && seats[i].name == state.socket.id) {
+          setUserPosition(i);
+        }
+      }
+
+      setPlayers(Object.values(seats));
+    };
+
+    setSeats(state.tableData.seats || {});
+  }, [state.tableData, state.socket.id]);
+
   return (
     <Body>
+      {!!state.waitTime && (
+        <Typography variant="h1" component="h2" ml={6} position="absolute">
+          {state.waitTime}
+        </Typography>
+      )}
       <TableCard ref={tablecard} />
+      <StyledCommunityCard display="flex" position="absolute">
+        {get(state, 'tableData.community', []).map(
+          (card: any, index: number) => {
+            return (
+              <Box key={`card_${index}`} mr={0.5} ml={0.5} mt={1}>
+                <Card type={card.suit} number={card.rank} />
+              </Box>
+            );
+          }
+        )}
+      </StyledCommunityCard>
       <Table />
       <Links>
         <BlackEllipse left="40px" onClick={() => onReset()}>
@@ -280,47 +352,97 @@ const PokerGame = () => {
         </BlackEllipse>
       </Links>
       {positionx.map((data, i) => {
+        const userId = (i + 6 + userPosition) % 6;
         return (
           <Character
-            key={300 + i}
-            image={image[i]}
+            key={300 + userId}
+            image={image[userId]}
             left={positionx[i]}
             top={positiony[i]}
-            active={active[i]}
-            user={i === 0}
-            turn={turn == i}
-            index={i}
-            raise={raise[i]}
+            active={active[userId]}
+            user={userId === 0}
+            turn={turn == userId}
+            index={userId}
+            raise={raise[userId]}
             onFold={onFold}
-            items={items[i]}
+            items={items[userId]}
             ice={iceamount}
             xp={xpamount}
             dg={dgamount}
+            data={players[userId]}
           />
         );
       })}
 
       <Box display="flex" justifyContent="center">
-        <Box pt="540px" px="20px" width="374px">
-          <TurnButton>
-            <Box style={{ marginTop: '2px' }} color="white" fontSize="11px" mr="5px">
-              Your Turn
-            </Box>
-            <Dot />
-          </TurnButton>
+        <Box pt="575px" px="20px" width="374px">
+          {activePlayer === currentPlayer && (
+            <TurnButton>
+              <Box
+                style={{ marginTop: '2px' }}
+                color="white"
+                fontSize="11px"
+                mr="5px"
+              >
+                Your Turn
+              </Box>
+              <Dot />
+            </TurnButton>
+          )}
         </Box>
       </Box>
 
-      <Box display="flex" justifyContent="center">
-        <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
-          <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
-          <Box />
-          <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
-          <Box />  
-          <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
-          <Box />
-        </ActionButtonGroup>
-      </Box>
+      {activePlayer === currentPlayer && (
+        <Box display="flex" justifyContent="center">
+          <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
+            <Button
+              variant="contained"
+              component="div"
+              onClick={() => turn !== -1 && onFold()}
+            >
+              Fold
+            </Button>
+            {canCall() && (
+              <Button
+                variant="contained"
+                component="div"
+                disabled={!canCall()}
+                onClick={() => turn !== -1 && onCall()}
+              >
+                Call
+              </Button>
+            )}
+            {canRaise(getMinRaise()) && (
+              <Button
+                variant="contained"
+                component="div"
+                onClick={() => turn !== -1 && setRaiseShow(true)}
+              >
+                Raise
+              </Button>
+            )}
+            {canBet(forcedBets.bigBlind) && (
+              <Button
+                variant="contained"
+                component="div"
+                onClick={() => turn !== -1 && onBet()}
+              >
+                Bet
+              </Button>
+            )}
+            {canCheck() && (
+              <Button
+                variant="contained"
+                component="div"
+                disabled={!canCheck()}
+                onClick={() => turn !== -1 && onCheck()}
+              >
+                Check
+              </Button>
+            )}
+          </ActionButtonGroup>
+        </Box>
+      )}
       <Box
         display="flex"
         justifyContent="center"
