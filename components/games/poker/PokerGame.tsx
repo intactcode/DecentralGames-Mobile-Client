@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { maxBy } from 'lodash';
-import { Box, Typography } from '@mui/material';
+import { maxBy, get } from 'lodash';
+import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
@@ -11,6 +11,7 @@ import LeaderBoard from './LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
+import Card from './Card';
 import { useStoreState } from '../../../store/Hooks';
 
 const Progress = styled(Box)`
@@ -74,9 +75,9 @@ const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
   justifyContent: 'space-between',
   marginTop: '10px',
   opacity: turn === 0 ? 1 : 0.2,
-  ['& >div']: {
+  ['& > div']: {
     borderRadius: '8px',
-    width: '103px',
+    width: '110px',
     height: '69px',
     cursor: 'pointer',
     display: 'flex',
@@ -87,43 +88,26 @@ const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
     margin: '5px',
     color: 'white',
   },
-  ['& :nth-of-type(1)']: {
+  ['& div:nth-of-type(1)']: {
     background: '#A82822',
   },
-  ['& :nth-of-type(2)']: {
-    width: '103px',
-    height: '69px',
-    borderRadius: '8px',
-    marginLeft: '-108px',
-    zIndex: '-1',
-    marginTop: '8px',
-    background: '#92120C',
-  },
-  ['& :nth-of-type(3)']: {
+  ['& div:nth-of-type(2)']: {
     background: '#3D86A6',
   },
-  ['& :nth-of-type(4)']: {
-    width: '103px',
-    height: '69px',
-    borderRadius: '8px',
-    marginLeft: '-108px',
-    zIndex: '-1',
-    marginTop: '8px',
-    background: '#267CA1',
-  },
-  ['& :nth-of-type(5)']: {
+  ['& div:nth-of-type(3)']: {
     background: '#3DA65A',
   },
-  ['& :nth-of-type(6)']: {
-    width: '103px',
-    height: '69px',
-    borderRadius: '8px',
-    marginLeft: '-108px',
-    zIndex: '-1',
-    marginTop: '8px',
-    background: '#2B8C46',
+  ['& div:nth-of-type(4)']: {
+    background: '#3DA65A',
   },
 }));
+
+const StyledCommunityCard = styled(Box)`
+  left: 50%;
+  z-index: 10000;
+  transform: translateX(-50%);
+  top: 200px;
+`;
 
 const TurnButton = styled(Box)`
   display: flex;
@@ -140,9 +124,10 @@ const TurnButton = styled(Box)`
   border-radius: 8px;
   cursor: pointer;
 
-  margin-left: calc(100% - 90px);
+  margin-left: 200px;
+  margin-top: -30px;
   zindex: 10;
-  position: relative;
+  position: absolute;
 `;
 
 const Dot = styled(Box)`
@@ -204,6 +189,7 @@ const PokerGame = () => {
   const forcedBets = state.currentSeat.forced;
   const currentPlayer = state.currentSeat.currentSeat;
   const tablecard: any = useRef(null);
+  const activePlayer = state.tableData.active;
 
   const getMaxBet = () => {
     return maxBy(players, (player: any) => player.betSize);
@@ -334,6 +320,17 @@ const PokerGame = () => {
         </Typography>
       )}
       <TableCard ref={tablecard} />
+      <StyledCommunityCard display="flex" position="absolute">
+        {get(state, 'tableData.community', []).map(
+          (card: any, index: number) => {
+            return (
+              <Box key={`card_${index}`} mr={0.5} ml={0.5}>
+                <Card type={card.suit} number={card.rank} />
+              </Box>
+            );
+          }
+        )}
+      </StyledCommunityCard>
       <Table />
       <Links>
         <BlackEllipse left="40px" onClick={() => onReset()}>
@@ -370,33 +367,60 @@ const PokerGame = () => {
       })}
 
       <Box display="flex" justifyContent="center">
-        <Box pt="540px" px="20px" width="374px">
-          <TurnButton>
-            <Box
-              style={{ marginTop: '2px' }}
-              color="white"
-              fontSize="11px"
-              mr="5px"
-            >
-              Your Turn
-            </Box>
-            <Dot />
-          </TurnButton>
+        <Box pt="575px" px="20px" width="374px">
+          {activePlayer === currentPlayer && (
+            <TurnButton>
+              <Box
+                style={{ marginTop: '2px' }}
+                color="white"
+                fontSize="11px"
+                mr="5px"
+              >
+                Your Turn
+              </Box>
+              <Dot />
+            </TurnButton>
+          )}
         </Box>
       </Box>
 
-      <Box display="flex" justifyContent="center">
-        <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
-          <Box onClick={() => turn !== -1 && onFold()}>Fold</Box>
-          <Box />
-          <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
-          <Box />
-          <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
-          <Box />
-          <Box onClick={() => turn !== -1 && onCheck()}>Check</Box>
-          <Box />
-        </ActionButtonGroup>
-      </Box>
+      {activePlayer === currentPlayer && (
+        <Box display="flex" justifyContent="center">
+          <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
+            <Button
+              variant="contained"
+              component="div"
+              onClick={() => turn !== -1 && onFold()}
+            >
+              Fold
+            </Button>
+            <Button
+              variant="contained"
+              component="div"
+              disabled={!canCall()}
+              onClick={() => turn !== -1 && onCall()}
+            >
+              Call 300
+            </Button>
+            <Button
+              variant="contained"
+              component="div"
+              disabled={!canRaise(300)}
+              onClick={() => turn !== -1 && setRaiseShow(true)}
+            >
+              Raise
+            </Button>
+            <Button
+              variant="contained"
+              component="div"
+              disabled={!canCheck()}
+              onClick={() => turn !== -1 && onCheck()}
+            >
+              Check
+            </Button>
+          </ActionButtonGroup>
+        </Box>
+      )}
       <Box
         display="flex"
         justifyContent="center"
