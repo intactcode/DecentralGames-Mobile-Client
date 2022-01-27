@@ -88,6 +88,20 @@ const Socket = () => {
         });
       });
 
+      socket.on('waitTime', (data: any) => {
+        dispatch({
+          type: 'wait_time',
+          data,
+        });
+      });
+
+      socket.on('started', () => {
+        dispatch({
+          type: 'wait_time',
+          data: 0,
+        });
+      });
+
       const tryReconnect = () => {
         setTimeout(() => {
           socket.io.open((err) => {

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Box } from '@mui/material';
+import { maxBy } from 'lodash';
+import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
@@ -197,38 +198,88 @@ const PokerGame = () => {
   const [iceamount, setIceAmount] = useState(22000); // eslint-disable-line
   const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
-  const [roundcount, setRoundCount] = useState(0);
   const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
   const [players, setPlayers] = useState([]);
   const [userPosition, setUserPosition] = useState(0);
-
+  const forcedBets = state.currentSeat.forced;
+  const currentPlayer = state.currentSeat.currentSeat;
   const tablecard: any = useRef(null);
 
-  const setNextTurn = () => {
-    let temp = (turn + 1) % 6;
-    while (active[temp] === false && temp !== turn) temp = (temp + 1) % 6;
-    if (temp === 0) {
-      setRoundCount(roundcount + 1);
-      tablecard.current?.progressDeal();
-      if (roundcount + 1 === 3) {
-        setTurn(-1);
-        let t = [...win];
-        t[temp] = true;
-        setWin(t);
-        return;
-      }
+  const getMaxBet = () => {
+    return maxBy(players, (player: any) => player.betSize);
+  };
+
+  // eslint-disable-next-line
+  const getMinRaise = () => {
+    return getMaxBet() + forcedBets.bigBlind;
+  };
+
+  // eslint-disable-next-line
+  const canCall = () => {
+    if (players[currentPlayer] === undefined) {
+      return false;
     }
-    if (temp === turn) setTurn(-1);
-    else setTurn(temp);
+    const { betSize } = players[currentPlayer];
+    const maxBetSize = getMaxBet();
+    return betSize !== maxBetSize;
+  };
+
+  const canCheck = () => {
+    if (players[currentPlayer] === undefined) {
+      return false;
+    }
+    const { betSize } = players[currentPlayer];
+    const maxBetSize = getMaxBet();
+    return betSize === maxBetSize;
+  };
+
+  // eslint-disable-next-line
+  const canRaise = (amount: number) => {
+    if (amount < 0 || players[currentPlayer] === undefined) {
+      return false;
+    }
+
+    const maxBetSize = getMaxBet();
+    if (maxBetSize === 0) {
+      return false;
+    }
+
+    const { totalChips } = players[currentPlayer];
+    const minBet = maxBetSize + forcedBets.bigBlind;
+    if (amount < minBet || amount > totalChips) {
+      return false;
+    }
+
+    return amount >= minBet;
+  };
+
+  // eslint-disable-next-line
+  const canBet = (amount: number) => {
+    if (amount < 0 || players[currentPlayer] === undefined) {
+      return false;
+    }
+
+    const maxBet = getMaxBet();
+    if (maxBet > 0) {
+      return false;
+    }
+
+    const { totalChips } = players[currentPlayer];
+    const minBet = forcedBets.bigBlind;
+    if (amount < minBet || amount > totalChips) {
+      return false;
+    }
+
+    return totalChips >= minBet;
   };
 
   const onFold = () => {
-    if (turn >= 0) {
-      let tempactive = [...active];
-      tempactive[turn] = false;
-      setActive(tempactive);
-      setNextTurn();
-      state.socket.emit('foldTable');
+    state.socket.emit('foldTable');
+  };
+
+  const onCheck = () => {
+    if (canCheck()) {
+      state.socket.emit('checkTable');
     }
   };
 
@@ -237,19 +288,10 @@ const PokerGame = () => {
       alert('Input correct amount');
       return;
     }
-    let temp = [...raise];
-    temp[turn] = raiseamount;
-    setRaise(temp);
-    setNextTurn();
-    setRaiseShow(false);
-    state.socket.emit('raiseTable', { raise: 300 });
+    state.socket.emit('raiseTable', { raise: raiseamount });
   };
 
   const onCall = () => {
-    let temp = [...raise];
-    temp[turn] = 300;
-    setRaise(temp);
-    setNextTurn();
     state.socket.emit('callTable');
   };
 
@@ -286,6 +328,11 @@ const PokerGame = () => {
 
   return (
     <Body>
+      {!!state.waitTime && (
+        <Typography variant="h1" component="h2" ml={6} position="absolute">
+          {state.waitTime}
+        </Typography>
+      )}
       <TableCard ref={tablecard} />
       <Table />
       <Links>
@@ -345,6 +392,8 @@ const PokerGame = () => {
           <Box onClick={() => turn !== -1 && onCall()}>Call 300</Box>
           <Box />
           <Box onClick={() => turn !== -1 && setRaiseShow(true)}>Raise</Box>
+          <Box />
+          <Box onClick={() => turn !== -1 && onCheck()}>Check</Box>
           <Box />
         </ActionButtonGroup>
       </Box>
