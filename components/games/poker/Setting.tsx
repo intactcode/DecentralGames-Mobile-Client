@@ -4,6 +4,7 @@ import { FaChevronDown } from 'react-icons/fa';
 import Image from 'next/image';
 import ProgressBar from './ProgressBar';
 
+
 interface Props {
   open: boolean;
   setOpen: any;
