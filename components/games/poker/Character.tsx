@@ -112,7 +112,6 @@ const Character: React.FC<Props> = ({
   user,
   raise,
   index,
-  turn,
   items,
   ice,
   xp,
@@ -132,7 +131,7 @@ const Character: React.FC<Props> = ({
 
   return (
     <Box left={left} top={top} position="absolute">
-      {turn && (
+      {active && currentSeat === index && (
         <>
           <Gradient />
           <SpinCircle>
@@ -199,22 +198,24 @@ const Character: React.FC<Props> = ({
               data?.name.substring(state.userAddress.length - 4)
             : 'Guest'}
         </Box>
-        <Box fontSize="14px">
-          <Box
-            style={{ paddingTop: '2px' }}
-            fontWeight="bold"
-            color="white"
-            mb="2px"
-          >
-            4000
+        {data?.name && (
+          <Box fontSize="14px">
+            <Box
+              style={{ paddingTop: '2px' }}
+              fontWeight="bold"
+              color="white"
+              mb="2px"
+            >
+              {data?.betSize}
+            </Box>
+            <ChipImage
+              src="/images/freecoin.svg"
+              width="15px"
+              height="15px"
+              className="chip"
+            />
           </Box>
-          <ChipImage
-            src="/images/freecoin.svg"
-            width="15px"
-            height="15px"
-            className="chip"
-          />
-        </Box>
+        )}
       </PlayerInfo>
       {active && index !== currentSeat && data?.name && !!state.cards.length && (
         <Box display="flex" mt="-135px" ml="5px">
