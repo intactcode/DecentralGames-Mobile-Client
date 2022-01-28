@@ -102,6 +102,11 @@ const Socket = () => {
         });
       });
 
+      socket.on('winners', (data: any) => {
+        console.log('winners: ', data);
+        alert(`Player ${data[0] | 0} won!`);
+      });
+
       const tryReconnect = () => {
         setTimeout(() => {
           socket.io.open((err) => {

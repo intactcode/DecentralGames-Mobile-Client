@@ -323,7 +323,13 @@ const PokerGame = () => {
   return (
     <Body>
       {!!state.waitTime && (
-        <Typography variant="h1" component="h2" ml={6} position="absolute">
+        <Typography
+          variant="h1"
+          component="h2"
+          ml={6}
+          mt={3}
+          position="absolute"
+        >
           {state.waitTime}
         </Typography>
       )}
@@ -341,7 +347,7 @@ const PokerGame = () => {
       </StyledCommunityCard>
       <Table />
       <Typography variant="h4" component="h5" ml={6}>
-        Pot: {state.tableData?.pot}
+        Pot: {state.tableData?.pot || 0}
       </Typography>
       <Links>
         <BlackEllipse left="40px" onClick={() => onReset()}>
@@ -360,8 +366,8 @@ const PokerGame = () => {
           <Character
             key={300 + userId}
             image={image[userId]}
-            left={positionx[i]}
-            top={positiony[i]}
+            left={positionx[(i + 6 - currentPlayer) % 6]}
+            top={positiony[(i + 6 - currentPlayer) % 6]}
             active={active[userId]}
             user={userId === 0}
             turn={turn == userId}
