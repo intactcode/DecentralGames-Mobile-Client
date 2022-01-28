@@ -119,7 +119,8 @@ const Character: React.FC<Props> = ({
   data,
 }) => {
   const state = useStoreState();
-  const currentSeat = state.currentSeat.currentSeat;
+  const currentSeat = state.currentSeat?.currentSeat;
+  const activePlayer = state.tableData?.active;
 
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
@@ -131,7 +132,7 @@ const Character: React.FC<Props> = ({
 
   return (
     <Box left={left} top={top} position="absolute">
-      {active && currentSeat === index && (
+      {index === activePlayer && (
         <>
           <Gradient />
           <SpinCircle>
@@ -167,12 +168,14 @@ const Character: React.FC<Props> = ({
         active={active}
         onClick={() => setInfoModalOpen(!infomodalopen)}
       >
-        <Image
-          src={`/${image}`}
-          width="60px"
-          height="60px"
-          alt="player-circle"
-        />
+        {data?.name && (
+          <Image
+            src={`/${image}`}
+            width="60px"
+            height="60px"
+            alt="player-circle"
+          />
+        )}
       </PlayerCircle>
       {raise && (
         <RaiseMoney left={rpositionx[index]} top={rpositiony[index]}>
@@ -196,7 +199,7 @@ const Character: React.FC<Props> = ({
             ? data?.name.substring(0, 5) +
               '...' +
               data?.name.substring(state.userAddress.length - 4)
-            : 'Guest'}
+            : ''}
         </Box>
         {data?.name && (
           <Box fontSize="14px">
