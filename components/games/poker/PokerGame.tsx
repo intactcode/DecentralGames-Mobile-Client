@@ -36,7 +36,7 @@ const Body = styled(Box)`
 `;
 
 const Table = styled(Box)`
-  background-image: url('images/Table.png');
+  background-image: url('images/Table.svg');
   width: 100%;
   max-width: 374px;
   height: 578px;
@@ -128,7 +128,7 @@ const TurnButton = styled(Box)`
   border-radius: 8px;
   cursor: pointer;
 
-  margin-left: 200px;
+  margin-left: 250px;
   margin-top: -30px;
   zindex: 10;
   position: absolute;
@@ -340,6 +340,9 @@ const PokerGame = () => {
         )}
       </StyledCommunityCard>
       <Table />
+      <Typography variant="h4" component="h5" ml={6}>
+        Pot: {state.tableData?.pot}
+      </Typography>
       <Links>
         <BlackEllipse left="40px" onClick={() => onReset()}>
           <BsBoxArrowLeft />
