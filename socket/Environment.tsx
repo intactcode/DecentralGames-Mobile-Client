@@ -2,12 +2,12 @@ const useLocalhostApis = true;
 
 const environment: any = {
   localhost: useLocalhostApis
-    ? 'http://localhost:5001'
-    : 'https://mobile.socket.decentral.games',
-  testing: 'https://mobile.socket.testing.decentral.games',
-  development: 'https://mobile.socket.dev.decentral.games',
-  staging: 'https://mobile.socket.staging.decentral.games',
-  production: 'https://mobile.socket.decentral.games',
+    ? 'ws://localhost:5001'
+    : 'wss://mobile.socket.decentral.games',
+  testing: 'wss://mobile.socket.testing.decentral.games',
+  development: 'wss://mobile.socket.dev.decentral.games',
+  staging: 'wss://mobile.socket.staging.decentral.games',
+  production: 'wss://mobile.socket.decentral.games',
 };
 
 export default environment;
