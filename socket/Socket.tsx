@@ -1,7 +1,7 @@
-import io from 'socket.io-client'; // using version 4.0.1 as latest version has issues with Next.js
 import mobileServerURL from './MobileServerURL';
 import { useEffect } from 'react';
 import { useStoreState, useStoreDispatch } from '../store/Hooks';
+import * as Colyseus from 'colyseus.js';
 
 const Socket = () => {
   const state = useStoreState(); // returns current state from Context API store
@@ -9,115 +9,80 @@ const Socket = () => {
 
   useEffect(() => {
     if (state.userStatus >= 4) {
-      const autoToken: string = localStorage.getItem('token') || '';
-      const socket = io(mobileServerURL, {
-        transports: ['websocket'],
-        query: {
-          autoToken,
-        },
-      });
+      const authToken: string = localStorage.getItem('token') || '';
+      const client = new Colyseus.Client(mobileServerURL);
 
-      // dispatch socket instance to global state
-      dispatch({
-        type: 'socket_instance',
-        data: socket,
-      });
+      client
+        .joinOrCreate('pokerTable', { authToken, chips: 1000 })
+        .then((room) => {
+          console.log(`Successfuly joined ${room.name} [${room.sessionId}]`);
 
-      socket.on('connection', (socket: typeof Socket) => {
-        console.log('Socket server response:', socket);
-      });
-
-      socket.on('createdTable', (data: any) => {
-        // dispatch active table ID to global state
-        dispatch({
-          type: 'active_table',
-          data: data.tableId,
-        });
-      });
-
-      socket.on('joinedTable', (data: any) => {
-        if (data.tableId) {
-          // dispatch active table ID to global state
+          // dispatch socket instance to global state
           dispatch({
-            type: 'active_table',
-            data: data.tableId,
+            type: 'socket_instance',
+            data: room,
           });
-        }
-      });
 
-      socket.on('tableData', (data: any) => {
-        dispatch({
-          type: 'table_data',
-          data,
-        });
-      });
-
-      socket.on('playerJoinTable', (data: any) => {
-        console.log('new player joined: ', data.playerId);
-      });
-
-      socket.on('status', (data: any) => {
-        console.log('status: ', data);
-      });
-
-      socket.on('chipUpdate', (data: any) => {
-        dispatch({
-          type: 'chip_update',
-          data,
-        });
-      });
-
-      socket.on('currentSeat', (data: any) => {
-        dispatch({
-          type: 'current_seat',
-          data,
-        });
-      });
-
-      socket.on('playerSitDown', (data: any) => {
-        dispatch({
-          type: 'player_sit_down',
-          data,
-        });
-      });
-
-      socket.on('cards', (data: any) => {
-        dispatch({
-          type: 'cards',
-          data,
-        });
-      });
-
-      socket.on('waitTime', (data: any) => {
-        dispatch({
-          type: 'wait_time',
-          data,
-        });
-      });
-
-      socket.on('started', () => {
-        dispatch({
-          type: 'wait_time',
-          data: 0,
-        });
-      });
-
-      socket.on('winners', (data: any) => {
-        console.log('winners: ', data);
-        alert(`Player ${data[0] | 0} won!`);
-      });
-
-      const tryReconnect = () => {
-        setTimeout(() => {
-          socket.io.open((err) => {
-            if (err) {
-              tryReconnect();
-            }
+          room.onMessage('tableData', (data: any) => {
+            dispatch({
+              type: 'table_data',
+              data,
+            });
           });
-        }, 2000);
-      };
 
-      socket.on('close', tryReconnect);
+          room.onMessage('playerJoinTable', (data: any) => {
+            console.log('New player joined:', data.name);
+          });
+
+          room.onMessage('status', (data: any) => {
+            console.log('status: ', data);
+          });
+
+          room.onMessage('chipUpdate', (data: any) => {
+            dispatch({
+              type: 'chip_update',
+              data,
+            });
+          });
+
+          room.onMessage('currentSeat', (data: any) => {
+            dispatch({
+              type: 'current_seat',
+              data,
+            });
+          });
+
+          room.onMessage('playerSitDown', (data: any) => {
+            dispatch({
+              type: 'player_sit_down',
+              data,
+            });
+          });
+
+          room.onMessage('cards', (data: any) => {
+            dispatch({
+              type: 'cards',
+              data,
+            });
+          });
+
+          room.onMessage('waitTime', (data: any) => {
+            dispatch({
+              type: 'wait_time',
+              data,
+            });
+          });
+
+          room.onMessage('started', () => {
+            dispatch({
+              type: 'wait_time',
+              data: 0,
+            });
+          });
+        })
+        .catch((e) => {
+          console.log('JOIN ERROR', e);
+        });
     }
   }, [dispatch, state.userStatus]);
 

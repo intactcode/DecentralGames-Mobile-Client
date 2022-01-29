@@ -153,7 +153,7 @@ const positionx = [
 ];
 const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
 const image = [
-  'images/face.png',
+  'images/character.png',
   'images/character.png',
   'images/character.png',
   'images/character.png',
@@ -264,12 +264,12 @@ const PokerGame = () => {
   };
 
   const onFold = () => {
-    state.socket.emit('foldTable');
+    state.socket.send('foldTable');
   };
 
   const onCheck = () => {
     if (canCheck()) {
-      state.socket.emit('checkTable');
+      state.socket.send('checkTable');
     }
   };
 
@@ -278,11 +278,11 @@ const PokerGame = () => {
       alert('Input correct amount');
       return;
     }
-    state.socket.emit('raiseTable', { raise: raiseamount });
+    state.socket.send('raiseTable', { raise: raiseamount });
   };
 
   const onCall = () => {
-    state.socket.emit('callTable');
+    state.socket.send('callTable');
   };
 
   const onBet = () => {

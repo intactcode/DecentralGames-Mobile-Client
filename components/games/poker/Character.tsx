@@ -168,14 +168,12 @@ const Character: React.FC<Props> = ({
         active={active}
         onClick={() => setInfoModalOpen(!infomodalopen)}
       >
-        {data?.name && (
-          <Image
-            src={`/${image}`}
-            width="60px"
-            height="60px"
-            alt="player-circle"
-          />
-        )}
+        <Image
+          src={data?.image ?? `/${image}`}
+          width="60px"
+          height="60px"
+          alt="player-circle"
+        />
       </PlayerCircle>
       {raise && (
         <RaiseMoney left={rpositionx[index]} top={rpositiony[index]}>
@@ -194,14 +192,8 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
-        <Box>
-          {data?.name
-            ? data?.name.substring(0, 5) +
-              '...' +
-              data?.name.substring(state.userAddress.length - 4)
-            : ''}
-        </Box>
-        {data?.name && (
+        <Box>{data?.name ?? 'Waiting...'}</Box>
+        {data && (
           <Box fontSize="14px">
             <Box
               style={{ paddingTop: '2px' }}

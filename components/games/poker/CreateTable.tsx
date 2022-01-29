@@ -15,18 +15,11 @@ const CreateTable = () => {
   }
 
   useEffect(() => {
-    if (state.activeTable) {
+    if (state.socket) {
       redirect();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.activeTable]);
-
-  useEffect(() => {
-    if (Object.keys(state.socket).length !== 0) {
-      state.socket.emit('joinTable');
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }
-  }, [state.socket]);
 
   return (
     <main className={styles.main}>
