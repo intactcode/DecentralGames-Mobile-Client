@@ -6,8 +6,6 @@ declare const window: any;
 
 const Segment = () => {
   const state = useStoreState(); // returns current state from Context API store
-
-  // define local variables
   const router = useRouter();
 
   /////////////////////////////////////////////////////////////////////////////////////////

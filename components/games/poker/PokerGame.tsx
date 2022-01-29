@@ -4,6 +4,7 @@ import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Character from './Character';
 import Setting from './Setting';
@@ -177,6 +178,8 @@ const items = [
 
 const PokerGame = () => {
   const state = useStoreState(); // returns current state from Context API store
+  const router = useRouter();
+
   const [turn, setTurn] = useState(0);
   const [active, setActive] = useState<boolean[]>(new Array(6).fill(true));
   const [raiseamount, setRaiseAmount] = useState(600);
@@ -299,6 +302,15 @@ const PokerGame = () => {
       tablecard.current?.progressDeal();
     }, 100);
   };
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
+  useEffect(() => {
+    if (Object.keys(state.socket).length === 0) {
+      router.push('/join');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.socket]);
 
   useEffect(() => {
     onReset();
