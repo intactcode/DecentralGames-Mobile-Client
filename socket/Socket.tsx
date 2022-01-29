@@ -7,6 +7,8 @@ const Socket = () => {
   const state = useStoreState(); // returns current state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (state.userStatus >= 4) {
       const authToken: string = localStorage.getItem('token') || '';

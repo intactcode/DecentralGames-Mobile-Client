@@ -20,7 +20,11 @@ const loginUser = async (dispatch: any, userAddress: string) => {
   try {
     const jsonStatus = await Fetch.USER_STATUS();
 
-    if (!jsonStatus || !jsonStatus.status) return false;
+    if (!jsonStatus || !jsonStatus.status) {
+      return false;
+    } else {
+      console.log('Dispatching user data');
+    }
 
     dispatch({
       type: 'update_status',
@@ -78,6 +82,7 @@ const assignToken = async (dispatch: any, web3: any, userAddress: string) => {
 
     if (!token) {
       console.log('Error retrieving token');
+
       dispatch({
         type: 'update_status',
         data: 0,
@@ -120,7 +125,8 @@ const connectMobileWallet = async (dispatch: any) => {
 
   provider.connector.on('display_uri', (err, payload) => {
     const uri = payload.params[0];
-    console.log(uri);
+    console.log('Display URI: ' + uri);
+
     const formattedURI = `https://metamask.app.link/wc?uri=${encodeURIComponent(
       uri
     )}`;
@@ -140,6 +146,7 @@ const connectMobileWallet = async (dispatch: any) => {
 
   provider.connector.on('transport_error', () => {
     console.log('transport_error');
+
     provider.close();
   });
 
@@ -182,6 +189,7 @@ const refreshToken = async (dispatch: any) => {
       });
     } else {
       console.log('Retrieved refreshed token: ' + token);
+
       localStorage.setItem('token', token);
     }
   } catch (error) {
@@ -192,6 +200,8 @@ const refreshToken = async (dispatch: any) => {
 function Wallet() {
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     (async () => {
       // check if user is already logged in on app launch
@@ -208,11 +218,14 @@ function Wallet() {
         });
 
         const userStatus = await loginUser(dispatch, userAddress);
+
         if (userStatus !== false) {
           // get new access token to extend expiration time by 12 hours
           refreshToken(dispatch);
         } else {
           // token expired; user needs to reauthenticate account
+          console.log('Expired token');
+
           dispatch({
             type: 'update_status',
             data: 2,
@@ -224,6 +237,7 @@ function Wallet() {
       if (window.ethereum) {
         window.ethereum.on('accountsChanged', (account: string) => {
           console.log('Account changed to:', account);
+
           if (localStorage.getItem('userAddress')) {
             disconnectWallet(dispatch);
             window.location.reload();
@@ -232,6 +246,7 @@ function Wallet() {
 
         window.ethereum.on('disconnect', () => {
           console.log('Wallet disconnected');
+
           if (localStorage.getItem('userAddress')) {
             disconnectWallet(dispatch);
             window.location.reload();

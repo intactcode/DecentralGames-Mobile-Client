@@ -1,20 +1,20 @@
-import CreateTable from '../components/games/poker/CreateTable';
+import JoinTable from '../components/games/poker/JoinTable';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
 
-const Create = () => {
+const Join = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | ICE Poker'}
+        title={constants.TITLE + ' | Join Table'}
         image={images.SOCIAL_SHARE}
       />
 
-      <CreateTable />
+      <JoinTable />
     </Layout>
   );
 };
 
-export default Create;
+export default Join;

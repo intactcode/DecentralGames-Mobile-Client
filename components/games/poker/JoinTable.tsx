@@ -6,20 +6,18 @@ import ButtonLogin from '../../buttons/ButtonLogin';
 import styles from '../../../styles/Home.module.css';
 import { useStoreState } from '../../../store/Hooks';
 
-const CreateTable = () => {
-  const state = useStoreState();
+const JoinTable = () => {
+  const state = useStoreState(); // returns current state from Context API store
   const router = useRouter();
 
-  function redirect() {
-    router.push('/poker');
-  }
-
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
-    if (state.socket) {
-      redirect();
+    if (Object.keys(state.socket).length !== 0) {
+      router.push('/poker');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.activeTable]);
+  }, [state.socket]);
 
   return (
     <main className={styles.main}>
@@ -27,10 +25,14 @@ const CreateTable = () => {
       <div className={styles.back} />
 
       <Box position="relative" zIndex={30}>
-        <ButtonLogin />
+        {state.userStatus >= 4 ? (
+          <Box className={styles.playtitle}>Joining Table...</Box>
+        ) : (
+          <ButtonLogin />
+        )}
       </Box>
     </main>
   );
 };
 
-export default CreateTable;
+export default JoinTable;

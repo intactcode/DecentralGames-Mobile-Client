@@ -8,8 +8,6 @@ declare const window: any;
 
 const ButtonHome = (props: { page: string }) => {
   const state = useStoreState(); // returns current state from Context API store
-
-  // define local variables
   const router = useRouter();
 
   /////////////////////////////////////////////////////////////////////////////////////////

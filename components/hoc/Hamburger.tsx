@@ -4,6 +4,8 @@ import { useEffect, useRef } from 'react';
 const Hamburger = () => {
   const menuRef = useRef<any>(null);
 
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     document.addEventListener('mouseup', function (event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -38,7 +40,7 @@ const Hamburger = () => {
             <h2>Lobby</h2>
           </Link>
 
-          <Link href="/create" passHref>
+          <Link href="/join" passHref>
             <h2>Play Now</h2>
           </Link>
 
