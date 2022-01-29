@@ -15,6 +15,15 @@ const ButtonLogin = () => {
       state.userAddress.substring(state.userAddress.length - 4)
     : '';
 
+  let buttonText = 'Connect Your Wallet';
+  if (state.userAddress) {
+    buttonText = ellipsis;
+  } else if (state.userStatus === 3) {
+    buttonText = 'Connecting...';
+  } else if (state.userStatus === 2) {
+    buttonText = 'Reauthenticate';
+  }
+
   return (
     <Box
       className={styles.connectWallet}
@@ -32,13 +41,7 @@ const ButtonLogin = () => {
         width={35}
         height={35}
       />
-      <Box>
-        {state.userAddress
-          ? ellipsis
-          : state.userStatus === 3
-          ? 'Connecting...'
-          : 'Connect Your Wallet'}
-      </Box>
+      <Box>{buttonText}</Box>
     </Box>
   );
 };

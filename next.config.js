@@ -15,3 +15,19 @@ module.exports = withPWA({
   reactStrictMode: true,
   swcMinify: false,
 });
+
+module.exports.images = {
+  domains: [
+    'peer.decentraland.org',
+    'peer-ec1.decentraland.org',
+    'peer-wc1.decentraland.org',
+    'peer-eu1.decentraland.org',
+    'peer-ap1.decentraland.org',
+    'interconnected.online',
+    'peer.decentral.io',
+    'peer.melonwave.com',
+    'peer.kyllian.me',
+    'peer.uadevops.com',
+    'peer.dclnodes.io',
+  ],
+};

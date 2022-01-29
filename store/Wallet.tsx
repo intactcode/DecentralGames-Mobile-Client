@@ -183,10 +183,6 @@ const refreshToken = async (dispatch: any) => {
     } else {
       console.log('Retrieved refreshed token: ' + token);
       localStorage.setItem('token', token);
-      dispatch({
-        type: 'update_status',
-        data: 4,
-      });
     }
   } catch (error) {
     console.log(error);
@@ -216,9 +212,10 @@ function Wallet() {
           // get new access token to extend expiration time by 12 hours
           refreshToken(dispatch);
         } else {
+          // token expired; user needs to reauthenticate account
           dispatch({
             type: 'update_status',
-            data: 0,
+            data: 2,
           });
         }
       }

@@ -171,7 +171,7 @@ const Character: React.FC<Props> = ({
         onClick={() => setInfoModalOpen(!infomodalopen)}
       >
         <Image
-          src={`/${image}`}
+          src={data?.image ?? `/${image}`}
           width="60px"
           height="60px"
           alt="player-circle"
@@ -194,29 +194,25 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
       <PlayerInfo active={active}>
-        <Box>
-          {data?.name
-            ? data?.name.substring(0, 5) +
-              '...' +
-              data?.name.substring(state.userAddress.length - 4)
-            : 'Guest'}
-        </Box>
-        <Box fontSize="14px">
-          <Box
-            style={{ paddingTop: '2px' }}
-            fontWeight="bold"
-            color="white"
-            mb="2px"
-          >
-            4000
+        <Box>{data?.name ?? 'Waiting...'}</Box>
+        {data && (
+          <Box fontSize="14px">
+            <Box
+              style={{ paddingTop: '2px' }}
+              fontWeight="bold"
+              color="white"
+              mb="2px"
+            >
+              4000
+            </Box>
+            <ChipImage
+              src="/images/freecoin.svg"
+              width="15px"
+              height="15px"
+              className="chip"
+            />
           </Box>
-          <ChipImage
-            src="/images/freecoin.svg"
-            width="15px"
-            height="15px"
-            className="chip"
-          />
-        </Box>
+        )}
       </PlayerInfo>
       {active && index !== currentSeat && data?.name && (
         <Box display="flex" mt="-135px" ml="5px">
