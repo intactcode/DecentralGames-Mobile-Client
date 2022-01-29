@@ -112,7 +112,6 @@ const Character: React.FC<Props> = ({
   user,
   raise,
   index,
-  turn,
   items,
   ice,
   xp,
@@ -120,7 +119,8 @@ const Character: React.FC<Props> = ({
   data,
 }) => {
   const state = useStoreState();
-  const currentSeat = state.currentSeat.currentSeat;
+  const currentSeat = state.currentSeat?.currentSeat;
+  const activePlayer = state.tableData?.active;
 
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
@@ -132,18 +132,16 @@ const Character: React.FC<Props> = ({
 
   return (
     <Box left={left} top={top} position="absolute">
-      {turn && (
+      {index === activePlayer && (
         <>
           <Gradient />
           <SpinCircle>
             <CountdownCircleTimer
+              duration={30}
               strokeWidth={10}
-              isPlaying
-              duration={10}
               colors={[['#FFFFFF', 1]]}
               size={90}
               trailColor="transparent"
-              onComplete={() => {}}
             />
           </SpinCircle>
         </>
@@ -203,7 +201,7 @@ const Character: React.FC<Props> = ({
               color="white"
               mb="2px"
             >
-              4000
+              {data?.betSize}
             </Box>
             <ChipImage
               src="/images/freecoin.svg"
@@ -214,7 +212,7 @@ const Character: React.FC<Props> = ({
           </Box>
         )}
       </PlayerInfo>
-      {active && index !== currentSeat && data?.name && (
+      {active && index !== currentSeat && data?.name && !!state.cards.length && (
         <Box display="flex" mt="-135px" ml="5px">
           <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
           <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
