@@ -27,6 +27,9 @@ const JoinGame = (props: any) => {
 
   useEffect(() => {
     if (Object.keys(state.socket).length !== 0) {
+      console.log('socket...');
+      console.log(state.socket);
+
       router.push('/' + props.gameType);
     }
   }, [state.socket, router, props.gameType]);
@@ -38,7 +41,9 @@ const JoinGame = (props: any) => {
 
       <Box position="relative" zIndex={30}>
         {state.userStatus >= 4 ? (
-          <Box className={styles.playtitle}>Joining Game...</Box>
+          <Box className={styles.playtitle}>
+            Joining Game [{Object.keys(state.socket).length}]
+          </Box>
         ) : (
           <ButtonLogin />
         )}
