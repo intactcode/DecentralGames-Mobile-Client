@@ -29,5 +29,6 @@ module.exports.images = {
     'peer.kyllian.me',
     'peer.uadevops.com',
     'peer.dclnodes.io',
+    'res.cloudinary.com',
   ],
 };
