@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { Box } from '@mui/material';
 // import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../../store/Hooks';
-import { useStoreDispatch } from '../../../store/Hooks';
-import ButtonLogin from '../../buttons/ButtonLogin';
-import styles from '../../../styles/Home.module.css';
+import { useStoreState } from '../../store/Hooks';
+import { useStoreDispatch } from '../../store/Hooks';
+import ButtonLogin from '../buttons/ButtonLogin';
+import styles from '../../styles/Home.module.css';
 
-const JoinTable = () => {
+const JoinGame = (props: any) => {
   const state = useStoreState(); // returns current state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
   const router = useRouter();
@@ -16,21 +16,20 @@ const JoinTable = () => {
   /////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (state.userStatus >= 4) {
-      console.log('Joining poker');
+      console.log('Joining game: ' + props.gameType);
 
       dispatch({
-        type: 'game',
-        data: 'poker',
+        type: 'game_type',
+        data: props.gameType,
       });
     }
-  }, [state.userStatus, dispatch]);
+  }, [state.userStatus, dispatch, props.gameType]);
 
   useEffect(() => {
     if (Object.keys(state.socket).length !== 0) {
-      router.push('/poker');
+      router.push('/' + props.gameType);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.userStatus, state.socket]);
+  }, [state.socket, router, props.gameType]);
 
   return (
     <main className={styles.main}>
@@ -39,7 +38,7 @@ const JoinTable = () => {
 
       <Box position="relative" zIndex={30}>
         {state.userStatus >= 4 ? (
-          <Box className={styles.playtitle}>Joining Table...</Box>
+          <Box className={styles.playtitle}>Joining Game...</Box>
         ) : (
           <ButtonLogin />
         )}
@@ -48,4 +47,4 @@ const JoinTable = () => {
   );
 };
 
-export default JoinTable;
+export default JoinGame;

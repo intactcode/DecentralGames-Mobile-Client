@@ -5,6 +5,7 @@ import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { BsBoxArrowLeft } from 'react-icons/bs';
 import { useRouter } from 'next/router';
+import { useStoreState } from '../../../store/Hooks';
 import Image from 'next/image';
 import Character from './Character';
 import Setting from './Setting';
@@ -13,7 +14,6 @@ import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
 import Card from './Card';
-import { useStoreState } from '../../../store/Hooks';
 
 const Progress = styled(Box)`
   display: flex;
@@ -198,6 +198,58 @@ const PokerGame = () => {
   const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
 
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
+  const onReset = () => {
+    console.log('Reset game parameters');
+
+    setRaise([]);
+    setTurn(0);
+    setWin(new Array(6).fill(false));
+    setActive(new Array(6).fill(true));
+
+    tablecard.current?.newRound();
+
+    setTimeout(function () {
+      tablecard.current?.progressDeal();
+    }, 100);
+  };
+
+  // if user is logged-in reset game parameters, else send them to the join page
+  useEffect(() => {
+    if (Object.keys(state.socket).length !== 0) {
+      onReset();
+    } else {
+      router.push('/join');
+    }
+  }, [state.socket, router]);
+
+  // useEffect(() => {
+  //   if (Object.keys(state.socket).length === 0) {
+  //     router.push('/join');
+  //   }
+  // }, [state.socket, router]);
+
+  // useEffect(() => {
+  //   onReset();
+  // }, []);
+
+  useEffect(() => {
+    const setSeats = (seats: any) => {
+      for (let i = 0; i < 6; i++) {
+        if (seats[i] && seats[i].name == state.socket.id) {
+          setUserPosition(i);
+        }
+      }
+
+      setPlayers(Object.values(seats));
+    };
+
+    setSeats(state.tableData.seats || {});
+  }, [state.tableData, state.socket.id]);
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
   const getMaxBet = () => {
     return get(maxBy(players, 'betSize'), 'betSize', 0);
   };
@@ -291,46 +343,6 @@ const PokerGame = () => {
   const onBet = () => {
     state.socket.emit('betTable', { bet: forcedBets.bigBlind });
   };
-
-  const onReset = () => {
-    setRaise([]);
-    setTurn(0);
-    setWin(new Array(6).fill(false));
-    setActive(new Array(6).fill(true));
-    tablecard.current?.newRound();
-    setTimeout(function () {
-      tablecard.current?.progressDeal();
-    }, 100);
-  };
-
-  /////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////
-  useEffect(() => {
-    if (Object.keys(state.socket).length === 0) {
-      router.push('/join');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.socket]);
-
-  useEffect(() => {
-    onReset();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    const setSeats = (seats: any) => {
-      for (let i = 0; i < 6; i++) {
-        if (seats[i] && seats[i].name == state.socket.id) {
-          setUserPosition(i);
-        }
-      }
-
-      setPlayers(Object.values(seats));
-    };
-
-    setSeats(state.tableData.seats || {});
-  }, [state.tableData, state.socket.id]);
 
   return (
     <Body>
