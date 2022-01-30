@@ -32,7 +32,7 @@ const reducer = (state: any, action: { type: any; data: any }) => {
         userAddress: action.data,
       };
     }
-    case 'game': {
+    case 'game_type': {
       return {
         ...state,
         game: action.data,

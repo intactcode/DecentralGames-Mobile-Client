@@ -1,4 +1,4 @@
-import JoinTable from '../components/games/poker/JoinTable';
+import JoinGame from '../components/games/JoinGame';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
@@ -8,11 +8,11 @@ const Join = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Join Table'}
+        title={constants.TITLE + ' | Join Game'}
         image={images.SOCIAL_SHARE}
       />
 
-      <JoinTable />
+      <JoinGame gameType={'poker'} />
     </Layout>
   );
 };
