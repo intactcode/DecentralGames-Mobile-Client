@@ -4,13 +4,7 @@ import { GlobalContext } from './Context';
 const initialState = {
   userStatus: 0,
   userAddress: '',
-  userInfo: {
-    name: '',
-    id: 0,
-    balancePLAY: 0,
-    count: '',
-    email: '',
-  },
+  game: '',
   tokenAmounts: {
     ICE_AMOUNT: 0,
     XP_AMOUNT: 0,
@@ -21,7 +15,6 @@ const initialState = {
   currentSeat: {},
   playerSitDown: {},
   cards: [],
-  activeTable: 0,
   waitTime: 0,
 };
 
@@ -39,10 +32,10 @@ const reducer = (state: any, action: { type: any; data: any }) => {
         userAddress: action.data,
       };
     }
-    case 'user_info': {
+    case 'game': {
       return {
         ...state,
-        userInfo: action.data,
+        game: action.data,
       };
     }
     case 'token_amounts': {
@@ -55,12 +48,6 @@ const reducer = (state: any, action: { type: any; data: any }) => {
       return {
         ...state,
         socket: action.data,
-      };
-    }
-    case 'active_table': {
-      return {
-        ...state,
-        activeTable: action.data,
       };
     }
     case 'table_data': {
