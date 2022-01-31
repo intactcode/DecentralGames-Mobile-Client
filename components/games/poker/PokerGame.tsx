@@ -13,7 +13,7 @@ import LeaderBoard from './LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
-import Card from './Card';
+import Card from './Card/Card';
 
 const Progress = styled(Box)`
   display: flex;
