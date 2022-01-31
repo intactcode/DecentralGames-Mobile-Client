@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 import styles from './Card.module.css';
-import CardBack from '../CardBack';
+import CardBack from '../CardBack/CardBack';
 import RealCard from '../Card/Card';
 
 export interface CardProps {
