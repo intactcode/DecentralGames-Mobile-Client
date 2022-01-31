@@ -1,5 +1,5 @@
-import { Box } from '@mui/material';
 import { useState } from 'react';
+import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
@@ -40,6 +40,11 @@ type PlayerInfoProps = {
 const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
   opacity: active ? '1' : '0.6',
   marginTop: '8px',
+  position: 'absolute',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  whiteSpace: 'nowrap',
+
   ['& :nth-of-type(1)']: {
     color: '#FFFFFFBF',
     textAlign: 'center',
@@ -121,6 +126,7 @@ const Character: React.FC<Props> = ({
   const state = useStoreState();
   const currentSeat = state.currentSeat?.currentSeat;
   const activePlayer = state.tableData?.active;
+  const isInHand = state.tableData?.isInHand ?? [];
 
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
@@ -212,26 +218,32 @@ const Character: React.FC<Props> = ({
           </Box>
         )}
       </PlayerInfo>
-      {active && index !== currentSeat && data?.name && !!state.cards.length && (
-        <Box display="flex" mt="-135px" ml="5px">
-          <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
-          <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
-        </Box>
-      )}
-      {active && index === currentSeat && !!state.cards.length && (
-        <Box display="flex" mt="-175px" ml="-10px">
-          <Card
-            type={state.cards[0].suit}
-            number={state.cards[0].rank}
-            transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)"
-          />
-          <Card
-            type={state.cards[1].suit}
-            number={state.cards[1].rank}
-            transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)"
-          />
-        </Box>
-      )}
+      {active &&
+        index !== currentSeat &&
+        isInHand[index] &&
+        !!state.cards.length && (
+          <Box display="flex" mt="-108px" ml="5px">
+            <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
+            <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
+          </Box>
+        )}
+      {active &&
+        index === currentSeat &&
+        isInHand[index] &&
+        !!state.cards.length && (
+          <Box display="flex" mt="-125px" ml="-10px">
+            <Card
+              type={state.cards[0].suit}
+              number={state.cards[0].rank}
+              transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)"
+            />
+            <Card
+              type={state.cards[1].suit}
+              number={state.cards[1].rank}
+              transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)"
+            />
+          </Box>
+        )}
     </Box>
   );
 };

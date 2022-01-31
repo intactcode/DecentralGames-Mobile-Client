@@ -1,5 +1,6 @@
-import mobileServerURL from './MobileServerURL';
 import { useEffect } from 'react';
+import { get } from 'lodash';
+import mobileServerURL from './MobileServerURL';
 import { useStoreState, useStoreDispatch } from '../store/Hooks';
 import * as Colyseus from 'colyseus.js';
 
@@ -82,12 +83,23 @@ const Socket = () => {
                 data: 0,
               });
             });
+
+            room.onMessage('winners', (winners: any) => {
+              const isInHand = state.tableData?.isInHand ?? [];
+              alert(
+                `Player ${
+                  get(winners, '0.0.0', isInHand.indexOf(true)) + 1
+                } won`
+              );
+            });
           })
           .catch((e) => {
             console.log('JOIN ERROR', e);
           });
       }
     }
+
+    //eslint-disable-next-line
   }, [dispatch, state.userStatus, state.game]);
 
   return null;
