@@ -341,7 +341,7 @@ const PokerGame = () => {
   };
 
   const onBet = () => {
-    state.socket.emit('betTable', { bet: forcedBets.bigBlind });
+    state.socket.send('betTable', { bet: forcedBets.bigBlind });
   };
 
   return (

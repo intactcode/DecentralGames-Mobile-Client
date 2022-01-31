@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { FaChevronDown } from 'react-icons/fa';
 import { useState } from 'react';
 
-
 const CloseIcon = styled(Box)<{ open: boolean }>`
   top: 6px;
   left: 15px;
@@ -70,7 +69,7 @@ const RaiseButton = styled(Box)`
 `;
 
 const RaiseButtonBack = styled(Box)`
-  background: #2B8C46;
+  background: #2b8c46;
   color: white;
   border-radius: 12px;
   display: flex;
@@ -122,12 +121,9 @@ const RaiseSetting: React.FC<Props> = ({
   return (
     <div>
       {!keyboardOpen ? (
-        <RaiseField 
-          open={open}
-          style={{ bottom: '0px'}}
-        >
+        <RaiseField open={open} style={{ bottom: '0px' }}>
           <RaisePanel>
-            <CloseIcon 
+            <CloseIcon
               onClick={() => {
                 setOpen(false);
                 setKeyboardOpen(false);
@@ -137,11 +133,17 @@ const RaiseSetting: React.FC<Props> = ({
               <FaChevronDown fontSize="20px" />
             </CloseIcon>
             <RaiseInput>
-              <Box color="#FFFFFF80" width="85px" fontWeight="bold" mr="5px" mt="5px">
+              <Box
+                color="#FFFFFF80"
+                width="85px"
+                fontWeight="bold"
+                mr="5px"
+                mt="5px"
+              >
                 Your Bet:
               </Box>
               <span
-                style={{ 
+                style={{
                   display: 'flex',
                   justifyContent: 'flex-start',
                   marginTop: '6px',
@@ -163,7 +165,9 @@ const RaiseSetting: React.FC<Props> = ({
                   variant="standard"
                   type="number"
                   value={raiseamount}
-                  onChange={(event) => setRaiseAmount(Number(event.target.value))}
+                  onChange={(event) => {
+                    setRaiseAmount(Number(event.target.value));
+                  }}
                   onClick={() => setKeyboardOpen(true)}
                 />
                 <Image
@@ -195,12 +199,9 @@ const RaiseSetting: React.FC<Props> = ({
           </RaisePanel>
         </RaiseField>
       ) : (
-        <RaiseField 
-          open={open}
-          style={{ bottom: '340px'}}
-        >
+        <RaiseField open={open} style={{ bottom: '0px' }}>
           <RaisePanel>
-            <CloseIcon 
+            <CloseIcon
               onClick={() => {
                 setOpen(false);
                 setKeyboardOpen(false);
@@ -210,11 +211,17 @@ const RaiseSetting: React.FC<Props> = ({
               <FaChevronDown fontSize="20px" />
             </CloseIcon>
             <RaiseInput>
-              <Box color="#FFFFFF80" width="85px" fontWeight="bold" mr="5px" mt="5px">
+              <Box
+                color="#FFFFFF80"
+                width="85px"
+                fontWeight="bold"
+                mr="5px"
+                mt="5px"
+              >
                 Your Bet:
               </Box>
               <span
-                style={{ 
+                style={{
                   display: 'flex',
                   justifyContent: 'flex-start',
                   marginTop: '6px',
@@ -236,7 +243,9 @@ const RaiseSetting: React.FC<Props> = ({
                   variant="standard"
                   type="number"
                   value={raiseamount}
-                  onChange={(event) => setRaiseAmount(Number(event.target.value))}
+                  onChange={(event) => {
+                    setRaiseAmount(Number(event.target.value));
+                  }}
                   onClick={() => setKeyboardOpen(true)}
                 />
                 <Image
