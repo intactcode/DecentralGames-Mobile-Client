@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
-import CardBack from './CardBack';
+import CardBack from './CardBack/CardBack';
 import Card from './Card/Card';
 import InfoDialog from './InfoDialog';
 import UserInfoDialog from './UserInfoDialog';
