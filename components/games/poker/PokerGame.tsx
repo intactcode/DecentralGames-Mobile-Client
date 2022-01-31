@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { maxBy, get } from 'lodash';
+import { maxBy, get, isEmpty } from 'lodash';
 import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
@@ -191,12 +191,17 @@ const PokerGame = () => {
   const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
   const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<any[]>([]);
   const [userPosition, setUserPosition] = useState(0);
   const forcedBets = state.currentSeat.forced || {};
   const currentPlayer = state.currentSeat.currentSeat || 0;
   const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
+  const winners = state.winners;
+  const winnerPair = get(winners, 'winners.0.0.1.cards', []);
+  const isInHand = state.tableData?.isInHand ?? [];
+  const winnerIndex = get(winners, '0.0.0', isInHand.indexOf(true));
+  const isWon = !isEmpty(winners);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -362,7 +367,23 @@ const PokerGame = () => {
         {get(state, 'tableData.community', []).map(
           (card: any, index: number) => {
             return (
-              <Box key={`card_${index}`} mr={0.5} ml={0.5} mt={1}>
+              <Box
+                key={`card_${index}`}
+                mr={0.5}
+                ml={0.5}
+                mt={1}
+                style={{
+                  borderColor: winnerPair.find(
+                    (winner: any) =>
+                      winner.suit === card.suit && winner.rank === card.rank
+                  )
+                    ? 'red'
+                    : 'transparent',
+                  borderStyle: 'solid',
+                  borderWidth: '2px',
+                  borderRadius: '7px',
+                }}
+              >
                 <Card type={card.suit} number={card.rank} />
               </Box>
             );
@@ -409,7 +430,33 @@ const PokerGame = () => {
 
       <Box display="flex" justifyContent="center">
         <Box pt="575px" px="20px" width="374px">
-          {activePlayer === currentPlayer && (
+          {!isWon &&
+            players[activePlayer] &&
+            (activePlayer === currentPlayer ? (
+              <TurnButton>
+                <Box
+                  style={{ marginTop: '2px' }}
+                  color="white"
+                  fontSize="11px"
+                  mr="5px"
+                >
+                  Your Turn
+                </Box>
+                <Dot />
+              </TurnButton>
+            ) : (
+              <TurnButton>
+                <Box
+                  style={{ marginTop: '2px' }}
+                  color="white"
+                  fontSize="11px"
+                  mr="5px"
+                >
+                  {`${players[activePlayer]?.name}'s Turn`}
+                </Box>
+              </TurnButton>
+            ))}
+          {isWon && (
             <TurnButton>
               <Box
                 style={{ marginTop: '2px' }}
@@ -417,9 +464,8 @@ const PokerGame = () => {
                 fontSize="11px"
                 mr="5px"
               >
-                Your Turn
+                {`${players[winnerIndex]?.name} wins`}
               </Box>
-              <Dot />
             </TurnButton>
           )}
         </Box>
