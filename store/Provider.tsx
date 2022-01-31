@@ -88,8 +88,6 @@ const reducer = (state: any, action: { type: any; data: any }) => {
       };
     }
     case 'set_winner': {
-      console.log('-------', action.data);
-
       return {
         ...state,
         winners: action.data,
