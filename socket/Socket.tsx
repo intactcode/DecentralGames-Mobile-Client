@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { get } from 'lodash';
 import mobileServerURL from './MobileServerURL';
 import { useStoreState, useStoreDispatch } from '../store/Hooks';
 import * as Colyseus from 'colyseus.js';
@@ -79,18 +78,21 @@ const Socket = () => {
 
             room.onMessage('started', () => {
               dispatch({
+                type: 'set_winner',
+                data: [],
+              });
+
+              dispatch({
                 type: 'wait_time',
                 data: 0,
               });
             });
 
-            room.onMessage('winners', (winners: any) => {
-              const isInHand = state.tableData?.isInHand ?? [];
-              alert(
-                `Player ${
-                  get(winners, '0.0.0', isInHand.indexOf(true)) + 1
-                } won`
-              );
+            room.onMessage('winners', (data: any) => {
+              dispatch({
+                type: 'set_winner',
+                data,
+              });
             });
           })
           .catch((e) => {

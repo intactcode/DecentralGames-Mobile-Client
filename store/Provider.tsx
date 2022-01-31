@@ -16,6 +16,7 @@ const initialState = {
   playerSitDown: {},
   cards: [],
   waitTime: 0,
+  winners: [],
 };
 
 const reducer = (state: any, action: { type: any; data: any }) => {
@@ -84,6 +85,12 @@ const reducer = (state: any, action: { type: any; data: any }) => {
       return {
         ...state,
         waitTime: action.data,
+      };
+    }
+    case 'set_winner': {
+      return {
+        ...state,
+        winners: action.data,
       };
     }
     default: {

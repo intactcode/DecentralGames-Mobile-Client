@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { isEmpty, get } from 'lodash';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
@@ -127,6 +128,11 @@ const Character: React.FC<Props> = ({
   const currentSeat = state.currentSeat?.currentSeat;
   const activePlayer = state.tableData?.active;
   const isInHand = state.tableData?.isInHand ?? [];
+  const winners = state.winners;
+  const winnerIndex = get(winners, '0.0.0', isInHand.indexOf(true));
+  const winnerPair = get(winners, 'winners.0.0.1.cards', []);
+
+  const isWon = !isEmpty(winners);
 
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
@@ -137,7 +143,14 @@ const Character: React.FC<Props> = ({
   const [infomodalopen, setInfoModalOpen] = useState(false);
 
   return (
-    <Box left={left} top={top} position="absolute">
+    <Box
+      left={left}
+      top={top}
+      position="absolute"
+      style={{
+        opacity: !isEmpty(winners) ? (winnerIndex === index ? 1 : 0.7) : 1,
+      }}
+    >
       {index === activePlayer && (
         <>
           <Gradient />
@@ -218,7 +231,8 @@ const Character: React.FC<Props> = ({
           </Box>
         )}
       </PlayerInfo>
-      {active &&
+      {!isWon &&
+        active &&
         index !== currentSeat &&
         isInHand[index] &&
         !!state.cards.length && (
@@ -227,7 +241,8 @@ const Character: React.FC<Props> = ({
             <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
           </Box>
         )}
-      {active &&
+      {!isWon &&
+        active &&
         index === currentSeat &&
         isInHand[index] &&
         !!state.cards.length && (
@@ -244,6 +259,48 @@ const Character: React.FC<Props> = ({
             />
           </Box>
         )}
+      {isWon && winners.cards[index] && (
+        <Box key={`winner_card_${index}`} display="flex" mt="-125px" ml="-10px">
+          <Box
+            style={{
+              borderColor: winnerPair.find(
+                (winner: any) =>
+                  winner.suit === winners.cards[index][0].suit &&
+                  winner.rank === winners.cards[index][0].rank
+              )
+                ? 'red'
+                : 'transparent',
+              borderStyle: 'solid',
+              borderWidth: '2px',
+              borderRadius: '7px',
+            }}
+          >
+            <Card
+              type={winners.cards[index][0].suit}
+              number={winners.cards[index][0].rank}
+            />
+          </Box>
+          <Box
+            style={{
+              borderColor: winnerPair.find(
+                (winner: any) =>
+                  winner.suit === winners.cards[index][1].suit &&
+                  winner.rank === winners.cards[index][1].rank
+              )
+                ? 'red'
+                : 'transparent',
+              borderStyle: 'solid',
+              borderWidth: '2px',
+              borderRadius: '7px',
+            }}
+          >
+            <Card
+              type={winners.cards[index][1].suit}
+              number={winners.cards[index][1].rank}
+            />
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 };
