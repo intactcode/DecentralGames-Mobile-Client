@@ -121,7 +121,7 @@ const TurnButton = styled(Box)`
   align-items: center;
   padding: 8px 11px;
 
-  width: 84px;
+  width: 110px;
   height: 31px;
 
   border: 1px solid #67dd6c;
@@ -129,7 +129,7 @@ const TurnButton = styled(Box)`
   border-radius: 8px;
   cursor: pointer;
 
-  margin-left: 250px;
+  margin-left: 232px;
   margin-top: -30px;
   zindex: 10;
   position: absolute;
@@ -438,7 +438,6 @@ const PokerGame = () => {
                   style={{ marginTop: '2px' }}
                   color="white"
                   fontSize="11px"
-                  mr="5px"
                 >
                   Your Turn
                 </Box>
@@ -450,7 +449,6 @@ const PokerGame = () => {
                   style={{ marginTop: '2px' }}
                   color="white"
                   fontSize="11px"
-                  mr="5px"
                 >
                   {`${players[activePlayer]?.name}'s Turn`}
                 </Box>
@@ -471,7 +469,7 @@ const PokerGame = () => {
         </Box>
       </Box>
 
-      {activePlayer === currentPlayer && (
+      {activePlayer === currentPlayer ? (
         <Box display="flex" justifyContent="center">
           <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
             <Button
@@ -481,7 +479,7 @@ const PokerGame = () => {
             >
               Fold
             </Button>
-            {canCall() && (
+            {canCall() ? (
               <Button
                 variant="contained"
                 component="div"
@@ -490,8 +488,16 @@ const PokerGame = () => {
               >
                 Call
               </Button>
+            ) : (
+              <Button
+                variant="contained"
+                component="div"
+                onClick={() => turn !== -1 && onCheck()}
+              >
+                Check
+              </Button>
             )}
-            {canRaise(getMinRaise()) && (
+            {canRaise(getMinRaise()) ? (
               <Button
                 variant="contained"
                 component="div"
@@ -499,8 +505,15 @@ const PokerGame = () => {
               >
                 Raise
               </Button>
-            )}
-            {canBet(forcedBets.bigBlind) && (
+            ) : canBet(forcedBets.bigBlind) ? (
+              <Button
+                variant="contained"
+                component="div"
+                onClick={() => turn !== -1 && onBet()}
+              >
+                Bet
+              </Button>
+            ) : (
               <Button
                 variant="contained"
                 component="div"
@@ -509,19 +522,39 @@ const PokerGame = () => {
                 Bet
               </Button>
             )}
-            {canCheck() && (
-              <Button
-                variant="contained"
-                component="div"
-                disabled={!canCheck()}
-                onClick={() => turn !== -1 && onCheck()}
-              >
-                Check
-              </Button>
-            )}
+          </ActionButtonGroup>
+        </Box>
+      ) : (
+        <Box display="flex" justifyContent="center">
+          <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
+            <Button
+              disabled
+              variant="contained"
+              component="div"
+              onClick={() => turn !== -1 && onFold()}
+            >
+              Fold
+            </Button>
+            <Button
+              disabled
+              variant="contained"
+              component="div"
+              onClick={() => turn !== -1 && onCheck()}
+            >
+              Check
+            </Button>
+            <Button
+              disabled
+              variant="contained"
+              component="div"
+              onClick={() => turn !== -1 && onBet()}
+            >
+              Bet
+            </Button>
           </ActionButtonGroup>
         </Box>
       )}
+
       <Box
         display="flex"
         justifyContent="center"
