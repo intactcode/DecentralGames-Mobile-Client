@@ -4,35 +4,12 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
-import CardBack from './CardBack/CardBack';
-import Card from './Card/Card';
-import InfoDialog from './InfoDialog';
-import UserInfoDialog from './UserInfoDialog';
-import { useStoreState } from '../../../store/Hooks';
-
-type PlayerCircleProps = {
-  active: boolean;
-};
-
-const PlayerCircle = styled(Box)<PlayerCircleProps>(({ active }) => ({
-  cursor: 'pointer',
-  position: 'relative',
-  zIndex: 1,
-  width: '72px',
-  height: '72px',
-  border: '6px solid #292929',
-  boxSizing: 'border-box',
-  borderRadius: '50%',
-  backgroundColor: '#292929',
-  boxShadow: '0px 12px 12px rgba(0, 0, 0, 0.25)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  overflow: 'hidden',
-  [' > span > img']: {
-    opacity: active ? '1' : '0.2',
-  },
-}));
+import CardBack from '../CardBack/CardBack';
+import Card from '../Card/Card';
+import InfoDialog from '../InfoDialog';
+import UserInfoDialog from '../UserInfoDialog';
+import { useStoreState } from '../../../../store/Hooks';
+import styles from './Character.module.scss';
 
 type PlayerInfoProps = {
   active: boolean;
@@ -58,22 +35,6 @@ const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
     justifyContent: 'center',
   },
 }));
-
-const RaiseMoney = styled(Box)`
-  display: flex;
-  padding: 3px 0px 0px 6px;
-  z-index: 2;
-  position: absolute;
-  width: 53px;
-  height: 24px;
-  background: #ecfc7d;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
-  border-radius: 29px;
-`;
-
-const RaiseAmount = styled(Box)`
-  margin-top: 3px !important;
-`;
 
 const SpinCircle = styled(Box)`
   position: absolute;
@@ -183,29 +144,29 @@ const Character: React.FC<Props> = ({
           dg={dg}
         />
       )}
-      <PlayerCircle
-        active={active}
-        onClick={() => setInfoModalOpen(!infomodalopen)}
-      >
-        <Image
+      <div className={styles.playerCircle} onClick={() => setInfoModalOpen(!infomodalopen)}>
+        <img
+          style={{opacity: active ? 1 : 0.2}}
           src={data?.image ?? `/${image}`}
           width="60px"
           height="60px"
           alt="player-circle"
         />
-      </PlayerCircle>
+      </div>
       {raise && (
-        <RaiseMoney left={rpositionx[index]} top={rpositiony[index]}>
-          <RaiseAmount fontWeight="bold" mt="-3px" color="black">
+        <>
+        <div className={styles.raiseMoney} style={{left: rpositionx[index], top: rpositiony[index]}}>
+          <div className={styles.raiseAmount}>
             {raise}
-          </RaiseAmount>
-          <Image
+          </div>
+          <img
             src="/images/freecoin.svg"
             width="18px"
             height="18px"
             alt="freecoin"
           />
-        </RaiseMoney>
+        </div>
+        </>
       )}
       <Box position="relative" left={dealerx[index]} top={dealery[index]}>
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
