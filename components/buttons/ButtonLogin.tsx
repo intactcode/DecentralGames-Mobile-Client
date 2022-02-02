@@ -5,7 +5,7 @@ import { useStoreState, useStoreDispatch } from '../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../store/Wallet';
 
 const ButtonLogin = () => {
-  const state = useStoreState(); // returns current state from Context API store
+  const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
   // write the user's wallet address with ellipsis added

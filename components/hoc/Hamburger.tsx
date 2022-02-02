@@ -36,28 +36,16 @@ const Hamburger = () => {
     but hey, it's pure CSS magic. */}
 
         <ul id="menu">
-          <Link href="/" passHref>
+          {/* <Link href="/" passHref>
             <h2>Lobby</h2>
-          </Link>
+          </Link> */}
 
-          <Link href="/join" passHref>
+          <Link href="/join-poker" passHref>
             <h2>Play Now</h2>
           </Link>
 
-          <Link href="/stats" passHref>
-            <h2>Player Stats</h2>
-          </Link>
-
-          <Link href="/leaderboard" passHref>
-            <h2>Daily Leaderboard</h2>
-          </Link>
-
-          <Link href="/challenges" passHref>
-            <h2>ICE Challenges</h2>
-          </Link>
-
-          <Link href="/settings" passHref>
-            <h2>Settings</h2>
+          <Link href="/" passHref>
+            <h2>Discord</h2>
           </Link>
         </ul>
       </div>
