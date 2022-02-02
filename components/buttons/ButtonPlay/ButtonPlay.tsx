@@ -1,6 +1,6 @@
 import styles from './ButtonPlay.module.scss';
-import Image from 'next/image';
 import { Button } from 'semantic-ui-react';
+
 
 const ButtonPlay = () => {
   return (

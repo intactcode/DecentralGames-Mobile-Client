@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Button } from 'semantic-ui-react';
 import { useStoreState, useStoreDispatch } from '../../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../../store/Wallet';
