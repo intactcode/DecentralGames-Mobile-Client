@@ -17,5 +17,13 @@
 		color: white;
 		line-height: 40px;
 		bottom: 24px;
+		transition: all 0.25s ease;
+	}
+
+	.button_play:hover {
+		background-color: #006EFF;
+		color: white;
+		filter: brightness(0.8);
+		transition: all 0.25s ease;
 	}
 }
