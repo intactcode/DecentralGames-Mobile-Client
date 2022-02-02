@@ -5,7 +5,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-top: 30vh;
   align-items: center;
 }
 
@@ -34,7 +34,9 @@
 	.play_title {
 	  font-size: 36px;
 	  position: relative;
+	  color: white;
 	  text-align: center;
+	  margin-top: -6px;
 	  z-index: 10;
 	  font-family: Larsseit-Bold;
 	}

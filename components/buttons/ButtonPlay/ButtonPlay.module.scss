@@ -1,14 +1,21 @@
 @import 'styles/base.scss';
 
 .container {
+	display: flex;
+	justify-content: center;
+
 	.button_play {
-		position: relative;
+		position: absolute;
 		z-index: 10;
-		width: 200px;
 		height: 68px;
+		width: calc(100vw - 48px);
+		max-width: 400px;
 		background: #006EFF;
 		border-radius: 12px;
 		font-family: Larsseit-Bold;
 		font-size: 18px;
+		color: white;
+		line-height: 40px;
+		bottom: 24px;
 	}
 }

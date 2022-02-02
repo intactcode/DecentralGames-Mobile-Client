@@ -17,9 +17,9 @@ const HomePage = () => {
         <h1 className={styles.play_title}>
           (ICE) Poker.
         </h1>
-
-        <ButtonPlay />
       </div>
+
+      <ButtonPlay />
     </div>
   );
 };

@@ -1,20 +1,21 @@
 
-.btn-primary:active,
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:disabled,
-.btn-primary.disabled,
-.btn:active,
-.btn:hover,
-.btn:focus,
-.btn:disabled,
-.btn.disabled {
+.ui.button-primary:active,
+.ui.button-primary:hover,
+.ui.button-primary:focus,
+.ui.button-primary:disabled,
+.ui.button-primary.disabled,
+.ui.active.button:active,
+.ui.button:active,
+.ui.button:hover,
+.ui.button:focus,
+.ui.button:disabled,
+.ui.button.disabled {
   color: white !important;
   box-shadow: none !important;
 }
 
-.btn:hover,
-.btn-primary:hover {
+.ui.button:hover,
+.ui.button-primary:hover {
   filter: brightness(0.9) !important;
 }
 
