@@ -7,7 +7,7 @@ import { useStoreState } from '../../store/Hooks';
 declare const window: any;
 
 const ButtonHome = (props: { page: string }) => {
-  const state = useStoreState(); // returns current state from Context API store
+  const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 
   /////////////////////////////////////////////////////////////////////////////////////////
