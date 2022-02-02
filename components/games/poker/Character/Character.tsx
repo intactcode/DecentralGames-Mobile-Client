@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { isEmpty, get } from 'lodash';
-import { Box } from '@mui/material';
-import { styled } from '@mui/system';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
 import CardBack from '../CardBack/CardBack';
@@ -10,14 +8,6 @@ import InfoDialog from '../InfoDialog';
 import UserInfoDialog from '../UserInfoDialog';
 import { useStoreState } from '../../../../store/Hooks';
 import styles from './Character.module.scss';
-
-const Gradient = styled(Box)`
-  position: absolute;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  box-shadow: 0px 0px 36px #ffe976;
-`;
 
 interface Props {
   image: string;
@@ -69,17 +59,10 @@ const Character: React.FC<Props> = ({
   const [infomodalopen, setInfoModalOpen] = useState(false);
 
   return (
-    <Box
-      left={left}
-      top={top}
-      position="absolute"
-      style={{
-        opacity: !isEmpty(winners) ? (winnerIndex === index ? 1 : 0.7) : 1,
-      }}
-    >
+    <section style={{position: 'absolute', left: left, top: top, opacity: !isEmpty(winners) ? (winnerIndex === index ? 1 : 0.7) : 1}}>
       {index === activePlayer && (
         <>
-          <Gradient />
+          <div className={styles.gradient}/>
           <div className={styles.spinCircle}>
             <CountdownCircleTimer
               duration={30}
@@ -133,9 +116,9 @@ const Character: React.FC<Props> = ({
         </div>
         </>
       )}
-      <Box position="relative" left={dealerx[index]} top={dealery[index]}>
+      <div className={styles.dealerChip} style={{left: dealerx[index], top: dealery[index]}}>
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
-      </Box>
+      </div>
       <div className={styles.playerInfo} style={{opacity: active ? '1' : '0.6'}}>
         <div>{data?.name ?? 'Waiting...'}</div>
         {data && (
@@ -156,17 +139,17 @@ const Character: React.FC<Props> = ({
         index !== currentSeat &&
         isInHand[index] &&
         !!state.cards.length && (
-          <Box display="flex" mt="-108px" ml="5px">
+          <div className={styles.cardBackContainer}>
             <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
             <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
-          </Box>
+          </div>
         )}
       {!isWon &&
         active &&
         index === currentSeat &&
         isInHand[index] &&
         !!state.cards.length && (
-          <Box display="flex" mt="-125px" ml="-10px">
+          <div className={styles.cardContainer}>
             <Card
               type={state.cards[0].suit}
               number={state.cards[0].rank}
@@ -177,11 +160,12 @@ const Character: React.FC<Props> = ({
               number={state.cards[1].rank}
               transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)"
             />
-          </Box>
+          </div>
         )}
       {isWon && winners.cards[index] && (
-        <Box key={`winner_card_${index}`} display="flex" mt="-125px" ml="-10px">
-          <Box
+        <div className={styles.winnerCardContainer} key={`winner_card_${index}`}>
+          <div
+            className={styles.winnerCardFrame}
             style={{
               borderColor: winnerPair.find(
                 (winner: any) =>
@@ -190,17 +174,15 @@ const Character: React.FC<Props> = ({
               )
                 ? 'red'
                 : 'transparent',
-              borderStyle: 'solid',
-              borderWidth: '2px',
-              borderRadius: '7px',
             }}
           >
             <Card
               type={winners.cards[index][0].suit}
               number={winners.cards[index][0].rank}
             />
-          </Box>
-          <Box
+          </div>
+          <div
+            className={styles.winnerCardFrame}
             style={{
               borderColor: winnerPair.find(
                 (winner: any) =>
@@ -209,19 +191,16 @@ const Character: React.FC<Props> = ({
               )
                 ? 'red'
                 : 'transparent',
-              borderStyle: 'solid',
-              borderWidth: '2px',
-              borderRadius: '7px',
             }}
           >
             <Card
               type={winners.cards[index][1].suit}
               number={winners.cards[index][1].rank}
             />
-          </Box>
-        </Box>
+          </div>
+        </div>
       )}
-    </Box>
+    </section>
   );
 };
 

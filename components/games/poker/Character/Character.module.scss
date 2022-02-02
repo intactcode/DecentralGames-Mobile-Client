@@ -83,3 +83,38 @@
     margin-top: -1px !important;
 }
 
+.cardBackContainer {
+    display: flex;
+    margin-top: -108px;
+    margin-left: 5px;
+}
+
+.cardContainer {
+    display: flex;
+    margin-top: -125px;
+    margin-left: -10px;
+}
+
+.winnerCardContainer {
+    display: flex;
+    margin-top: -125px;
+    margin-left: -13px;
+
+    .winnerCardFrame {
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 7px;
+    }
+}
+
+.dealerChip {
+    position: relative;
+}
+
+.gradient {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 36px #ffe976;
+}
