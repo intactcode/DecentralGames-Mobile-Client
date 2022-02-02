@@ -26,7 +26,7 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
         className={styles.close}
         style={{
           display: open ? 'flex' : 'none',
-          right: (index === 1 || index === 2) ? '-15px' : index === 3 ? `-${(items.length * 32 + 8 * items.length - 8) / 2}px` : '50px'
+          right: (index === 1 || index === 2) ? '-15px' : index === 3 ? `-${(items.length * 32 + 8 * items.length - 8) / 2}px` : '50px',
         }}
       >
         <AiOutlineClose color="white" />
@@ -37,7 +37,7 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
           right: (index === 1 || index === 2) ? '0px' : index === 3
           ? `-${(items.length * 32 + 8 * items.length - 32) / 2}px`
           : 'unset',
-          maxWidth: open ? '300px' : '0px'
+          maxWidth: open ? '300px' : '0px',
         }}
         ref={dialog}
       >
@@ -51,7 +51,7 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
               <img
                 src={data}
                 key={data}
-                alt='line'
+                alt="line"
               />
               <span>+31%</span>
             </div>
