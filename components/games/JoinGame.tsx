@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Box } from '@mui/material';
-// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useStoreState } from '../../store/Hooks';
 import { useStoreDispatch } from '../../store/Hooks';
@@ -8,7 +7,7 @@ import ButtonLogin from '../buttons/ButtonLogin';
 import styles from '../../styles/Home.module.css';
 
 const JoinGame = (props: any) => {
-  const state = useStoreState(); // returns current state from Context API store
+  const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
   const router = useRouter();
 
@@ -18,6 +17,7 @@ const JoinGame = (props: any) => {
     if (state.userStatus >= 4) {
       console.log('Joining game: ' + props.gameType);
 
+      // dispatch game type to start a new game of that type
       dispatch({
         type: 'game_type',
         data: props.gameType,
@@ -27,9 +27,6 @@ const JoinGame = (props: any) => {
 
   useEffect(() => {
     if (Object.keys(state.socket).length !== 0) {
-      console.log('socket...');
-      console.log(state.socket);
-
       router.push('/' + props.gameType);
     }
   }, [state.socket, router, props.gameType]);

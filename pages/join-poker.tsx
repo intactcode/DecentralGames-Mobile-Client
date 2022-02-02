@@ -8,7 +8,7 @@ const Join = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Join Game'}
+        title={constants.TITLE + ' | Join ICE Poker'}
         image={images.SOCIAL_SHARE}
       />
 

@@ -3,7 +3,7 @@ import { maxBy, get, isEmpty } from 'lodash';
 import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
-import { BsBoxArrowLeft } from 'react-icons/bs';
+// import { BsBoxArrowLeft } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 import { useStoreState } from '../../../store/Hooks';
 import Image from 'next/image';
@@ -177,7 +177,7 @@ const items = [
 ];
 
 const PokerGame = () => {
-  const state = useStoreState(); // returns current state from Context API store
+  const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 
   const [turn, setTurn] = useState(0);
@@ -206,7 +206,7 @@ const PokerGame = () => {
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   const onReset = () => {
-    console.log('Reset game parameters');
+    console.log('Set game parameters');
 
     setRaise([]);
     setTurn(0);
@@ -220,24 +220,14 @@ const PokerGame = () => {
     }, 100);
   };
 
-  // if user is logged-in reset game parameters, else send them to the join page
+  // if user is logged-in set game parameters, else send them to the join page
   useEffect(() => {
     if (Object.keys(state.socket).length !== 0) {
       onReset();
     } else {
-      router.push('/join');
+      router.push('/join-poker');
     }
   }, [state.socket, router]);
-
-  // useEffect(() => {
-  //   if (Object.keys(state.socket).length === 0) {
-  //     router.push('/join');
-  //   }
-  // }, [state.socket, router]);
-
-  // useEffect(() => {
-  //   onReset();
-  // }, []);
 
   useEffect(() => {
     const setSeats = (seats: any) => {
@@ -394,10 +384,13 @@ const PokerGame = () => {
       <Typography variant="h4" component="h5" ml={6}>
         Pot: {state.tableData?.pot || 0}
       </Typography>
+
       <Links>
-        <BlackEllipse left="40px" onClick={() => onReset()}>
-          <BsBoxArrowLeft />
+        <BlackEllipse left="40px">
+          {/* <BlackEllipse left="40px" onClick={() => onReset()}> */}
+          {/* <BsBoxArrowLeft /> */}
         </BlackEllipse>
+
         <BlackEllipse
           right="40px"
           onClick={() => setIsLeaderBoard(!isleaderboard)}
@@ -405,6 +398,7 @@ const PokerGame = () => {
           <MdOutlineLeaderboard />
         </BlackEllipse>
       </Links>
+
       {positionx.map((data, i) => {
         const userId = (i + 6 + userPosition) % 6;
         return (
@@ -434,22 +428,14 @@ const PokerGame = () => {
             players[activePlayer] &&
             (activePlayer === currentPlayer ? (
               <TurnButton>
-                <Box
-                  style={{ marginTop: '2px' }}
-                  color="white"
-                  fontSize="11px"
-                >
+                <Box style={{ marginTop: '2px' }} color="white" fontSize="11px">
                   Your Turn
                 </Box>
                 <Dot />
               </TurnButton>
             ) : (
               <TurnButton>
-                <Box
-                  style={{ marginTop: '2px' }}
-                  color="white"
-                  fontSize="11px"
-                >
+                <Box style={{ marginTop: '2px' }} color="white" fontSize="11px">
                   {`${players[activePlayer]?.name}'s Turn`}
                 </Box>
               </TurnButton>
