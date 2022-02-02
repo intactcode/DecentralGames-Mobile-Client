@@ -5,8 +5,8 @@ import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 // import { BsBoxArrowLeft } from 'react-icons/bs';
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../../store/Hooks';
 import Image from 'next/image';
+import { useStoreState } from '../../../store/Hooks';
 import Character from './Character/Character';
 import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
@@ -146,11 +146,11 @@ const Dot = styled(Box)`
 
 const positionx = [
   'calc(50% - 36px)',
-  'calc(50% + 90px)',
-  'calc(50% + 90px)',
+  'calc(50% - 160px)',
+  'calc(50% - 160px)',
   'calc(50% - 36px)',
-  'calc(50% - 160px)',
-  'calc(50% - 160px)',
+  'calc(50% + 90px)',
+  'calc(50% + 90px)',
 ];
 const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
 const image = [
