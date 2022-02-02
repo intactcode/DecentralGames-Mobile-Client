@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { AiOutlineClose } from 'react-icons/ai';
 import styles from './InfoDialog.module.scss';
 
@@ -26,7 +27,12 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
         className={styles.close}
         style={{
           display: open ? 'flex' : 'none',
-          right: (index === 1 || index === 2) ? '-15px' : index === 3 ? `-${(items.length * 32 + 8 * items.length - 8) / 2}px` : '50px',
+          right:
+            index === 1 || index === 2
+              ? '-15px'
+              : index === 3
+              ? `-${(items.length * 32 + 8 * items.length - 8) / 2}px`
+              : '50px',
         }}
       >
         <AiOutlineClose color="white" />
@@ -34,9 +40,12 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
       <div
         className={styles.dialog}
         style={{
-          right: (index === 1 || index === 2) ? '0px' : index === 3
-          ? `-${(items.length * 32 + 8 * items.length - 32) / 2}px`
-          : 'unset',
+          right:
+            index === 1 || index === 2
+              ? '0px'
+              : index === 3
+              ? `-${(items.length * 32 + 8 * items.length - 32) / 2}px`
+              : 'unset',
           maxWidth: open ? '300px' : '0px',
         }}
         ref={dialog}
@@ -45,17 +54,16 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
           return (
             <div
               className={styles.item}
-              style={{marginLeft: i === 0 ? '16px' : '', marginRight: i === items.length - 1 ? '16px' : ''}}
+              style={{
+                marginLeft: i === 0 ? '16px' : '',
+                marginRight: i === items.length - 1 ? '16px' : '',
+              }}
               key={200 + i}
             >
-              <img
-                src={data}
-                key={data}
-                alt="line"
-              />
+              <Image src={data} key={data} layout="fill" alt="line" />
               <span>+31%</span>
             </div>
-          )
+          );
         })}
       </div>
     </section>

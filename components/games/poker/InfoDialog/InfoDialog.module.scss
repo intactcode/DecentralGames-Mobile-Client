@@ -1,50 +1,50 @@
 .close {
-    cursor: pointer;
-    background: #1F1F1F;
-    position: absolute;
-    border: 1px solid #2A2A2A;
-    box-sizing: border-box;
-    box-shadow: 0px 10.6667px 21.3333px rgba(0, 0, 0, 0.24);
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-    width: 32px;
-    height: 32px;
-    z-index: 15;
-    top: -15px;
-    transition: background 0.3s;
-    &:hover {
-        background: #333333;
-    }
+  cursor: pointer;
+  background: #1f1f1f;
+  position: absolute;
+  border: 1px solid #2a2a2a;
+  box-sizing: border-box;
+  box-shadow: 0px 10.6667px 21.3333px rgba(0, 0, 0, 0.24);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  z-index: 15;
+  top: -15px;
+  transition: background 0.3s;
+  &:hover {
+    background: #333333;
+  }
 }
 
 .dialog {
+  display: flex;
+  position: absolute;
+  background: #1f1f1f;
+  border-radius: 24px;
+  padding: 16px 0px 8px 0px;
+  z-index: 10;
+  overflow: hidden;
+  width: fit-content;
+  transition: max-width 0.3s;
+
+  .item {
+    margin-left: 8px;
     display: flex;
-    position: absolute;
-    background: #1F1F1F;
-    border-radius: 24px;
-    padding: 16px 0px 8px 0px;
-    z-index: 10;
-    overflow: hidden;
-    width: fit-content;
-    transition: max-width 0.3s;
+    align-items: center;
+    flex-direction: column;
 
-    .item {
-        margin-left: 8px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-
-        img {
-            width: 37px;
-            height: 37px;
-        }
-
-        span {
-            font-size: 9px;
-            color: rgb(255,255,255,0.75);
-            font-weight: bold;
-            margin-top: 4px;
-        }
+    img {
+      width: 37px;
+      height: 37px;
     }
+
+    span {
+      font-size: 9px;
+      color: rgb(255, 255, 255, 0.75);
+      font-weight: bold;
+      margin-top: 4px;
+    }
+  }
 }
