@@ -1,120 +1,120 @@
 .playerCircle {
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    width: 72px;
-    height: 72px;
-    border: 6px solid #292929;
-    box-sizing: border-box;
-    border-radius: 50%;
-    background-color: #292929;
-    box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  width: 72px;
+  height: 72px;
+  border: 6px solid #292929;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: #292929;
+  box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .playerInfo {
-    margin-top: 13px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    font-size: 13px;
+  margin-top: 13px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 13px;
 
-    .chipForBet {
-        font-size: 15px;
-        &:nth-of-type(1) {
-            color: #FFFFFFBF;
-            text-align: center;
-            font-weight: bold;
-        }
-    
-        &:nth-of-type(2) {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .betAmount {
-            padding-top: 2px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 2px;
-        }
+  .chipForBet {
+    font-size: 15px;
+    &:nth-of-type(1) {
+      color: #ffffffbf;
+      text-align: center;
+      font-weight: bold;
     }
+
+    &:nth-of-type(2) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .betAmount {
+      padding-top: 2px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 2px;
+    }
+  }
 }
 
 .raiseMoney {
-    display: flex;
-    padding: 3px 0px 0px 3px;
-    z-index: 2;
-    position: absolute;
-    width: 53px;
-    height: 24px;
-    background: #ecfc7d;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
-    border-radius: 29px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  padding: 3px 0px 0px 3px;
+  z-index: 2;
+  position: absolute;
+  width: 53px;
+  height: 24px;
+  background: #ecfc7d;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
+  border-radius: 29px;
+  align-items: center;
+  justify-content: center;
 }
 
 .raiseAmount {
-    font-weight: bold;
-    color: black;
+  font-weight: bold;
+  color: black;
 }
 
 .spinCircle {
-    position: absolute;
-    left: -9px;
-    top: -9px;  
+  position: absolute;
+  left: -9px;
+  top: -9px;
 }
 
 .gradient {
-    position: absolute;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    box-shadow: 0px 0px 36px #ffe976;
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 36px #ffe976;
 }
 
 .chipImage {
-    margin-top: -1px !important;
+  margin-top: -1px !important;
 }
 
 .cardBackContainer {
-    display: flex;
-    margin-top: -108px;
-    margin-left: 5px;
+  display: flex;
+  margin-top: -108px;
+  margin-left: 5px;
 }
 
 .cardContainer {
-    display: flex;
-    margin-top: -125px;
-    margin-left: -10px;
+  display: flex;
+  margin-top: -125px;
+  margin-left: -10px;
 }
 
 .winnerCardContainer {
-    display: flex;
-    margin-top: -125px;
-    margin-left: -13px;
+  display: flex;
+  margin-top: -125px;
+  margin-left: -13px;
 
-    .winnerCardFrame {
-        border-style: solid;
-        border-width: 2px;
-        border-radius: 7px;
-    }
+  .winnerCardFrame {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 7px;
+  }
 }
 
 .dealerChip {
-    position: relative;
+  position: relative;
 }
 
 .gradient {
-    position: absolute;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    box-shadow: 0px 0px 36px #ffe976;
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 36px #ffe976;
 }
