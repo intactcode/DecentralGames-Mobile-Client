@@ -9,7 +9,7 @@ const ButtonLogin = () => {
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
   // write the user's wallet address with ellipsis added
-  const ellipsis = state.userAddress
+  {/*const ellipsis = state.userAddress
     ? state.userAddress.substring(0, 5) +
       '...' +
       state.userAddress.substring(state.userAddress.length - 4)
@@ -22,7 +22,7 @@ const ButtonLogin = () => {
     buttonText = 'Connecting...';
   } else if (state.userStatus === 2) {
     buttonText = 'Reauthenticate';
-  }
+  }*/}
 
   return (
     <div className={styles.container}>

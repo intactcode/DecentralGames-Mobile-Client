@@ -1,13 +1,13 @@
 import ButtonConnect from '../../buttons/ButtonConnect/ButtonConnect';
 import ButtonJoin from '../../buttons/ButtonJoin/ButtonJoin';
 import styles from './ConnectWallet.module.scss';
-import { useStoreState, useStoreDispatch } from '../../../store/Hooks';
+import { useStoreState } from '../../../store/Hooks';
 import { FaChevronLeft } from 'react-icons/fa';
+import Link from 'next/link'
 
 
 const ConnectWallet = () => {
   const state = useStoreState(); // returns global state from Context API store
-  const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
   return (
     <div className={styles.main}>
@@ -18,11 +18,11 @@ const ConnectWallet = () => {
 
       {state.userStatus < 4 ? (
         <div className={styles.button_container}>
-          <a href="/">
+          <Link href="/">
             <div className={styles.close}>
               <FaChevronLeft fontSize="20px" />
             </div>
-          </a>
+          </Link>
           <h2 className={styles.welcome}> 
             Welcome to Free to Play <br /> Play-to-Earn ICE Poker! 
           </h2>
@@ -65,11 +65,11 @@ const ConnectWallet = () => {
         </div>
       ) : (
         <div className={styles.button_container_two}>
-          <a href="/">
+          <Link href="/">
             <div className={styles.close}>
               <FaChevronLeft fontSize="20px" />
             </div>
-          </a>
+          </Link>
           <h2 className={styles.welcome}> 
             Ice Wearable Required! 
           </h2>
