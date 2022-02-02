@@ -6,6 +6,7 @@ import Socket from '../socket/Socket';
 import '../styles/globals.css';
 import '../styles/menu.css';
 
+
 function Application(props: { Component: any; pageProps: any; store: any }) {
   return (
     <Provider store={props.store}>

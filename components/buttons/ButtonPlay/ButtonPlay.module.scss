@@ -1,0 +1,14 @@
+@import 'styles/base.scss';
+
+.container {
+	.button_play {
+		position: relative;
+		z-index: 10;
+		width: 200px;
+		height: 68px;
+		background: #006EFF;
+		border-radius: 12px;
+		font-family: Larsseit-Bold;
+		font-size: 18px;
+	}
+}
