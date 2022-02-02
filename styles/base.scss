@@ -1,25 +1,14 @@
-
-.ui.button-primary:active,
-.ui.button-primary:hover,
-.ui.button-primary:focus,
-.ui.button-primary:disabled,
-.ui.button-primary.disabled,
-.ui.active.button:active,
-.ui.button:active,
-.ui.button:hover,
-.ui.button:focus,
-.ui.button:disabled,
-.ui.button.disabled {
-  color: white !important;
-  box-shadow: none !important;
-}
-
-.ui.button:hover,
-.ui.button-primary:hover {
-  filter: brightness(0.9) !important;
+@font-face {
+  font-family: 'Larsseit-ExtraBold';
+  src: url('/fonts/Larsseit/Larsseit-ExtraBold.otf');
 }
 
 @font-face {
   font-family: 'Larsseit-Bold';
   src: url('/fonts/Larsseit/Larsseit-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Larsseit';
+  src: url('/fonts/Larsseit/Larsseit.otf');
 }

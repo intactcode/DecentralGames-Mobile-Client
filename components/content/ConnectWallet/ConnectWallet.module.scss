@@ -1,0 +1,92 @@
+
+
+.main {
+  max-width: 100vw;
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2a2a2a;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
+}
+
+.gradient {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.back {
+  top: 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://res.cloudinary.com/dnzambf4m/image/upload/v1643833574/Poker_Table_sg4gkg.png');
+  background-size: 100% 100%;
+  color: white;
+}
+
+.button_container {
+  position: absolute;
+  bottom: 0;
+  height: 433px;
+  z-index: 10;
+  width: 100%;
+  background: #1F1F1F;
+  border-radius: 16px 16px 0px 0px;
+
+  .welcome {
+    padding: 24px 24px 16px 24px;
+    margin-bottom: 0px;
+    font-family: Larsseit-ExtraBold;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+    line-height: 32px;
+  }
+
+  .play_text {
+    font-family: Larsseit;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+  }
+
+  .image_span {
+    display: flex;
+    justify-content: center;
+
+    .image_grouping {
+      .lower_text {
+        font-family: Larsseit-Bold;
+        color: white;
+        text-align: center;
+        font-size: 18px;
+        line-height: 24px;
+      }
+    }
+
+    .wearable_image {
+      width: 100px;
+      height: 88px;
+    }
+
+    .card_image {
+      width: 85px;
+      height: 76px;
+      margin: 12px 18px 0px 26px;
+    }
+
+    .diamond_image {
+      width: 100px;
+      height: 88px;
+    }
+  }
+
+}
+
+
+
