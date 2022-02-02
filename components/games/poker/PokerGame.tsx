@@ -7,7 +7,7 @@ import { BsBoxArrowLeft } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 import { useStoreState } from '../../../store/Hooks';
 import Image from 'next/image';
-import Character from './Character';
+import Character from './Character/Character';
 import Setting from './Setting';
 import LeaderBoard from './LeaderBoard';
 import ProgressBar from './ProgressBar';
