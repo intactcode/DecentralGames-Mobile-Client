@@ -4,7 +4,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
 import CardBack from '../CardBack/CardBack';
 import Card from '../Card/Card';
-import InfoDialog from '../InfoDialog';
+import InfoDialog from '../InfoDialog/InfoDialog';
 import UserInfoDialog from '../UserInfoDialog';
 import { useStoreState } from '../../../../store/Hooks';
 import styles from './Character.module.scss';
