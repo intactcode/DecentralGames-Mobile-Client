@@ -11,47 +11,12 @@ import UserInfoDialog from '../UserInfoDialog';
 import { useStoreState } from '../../../../store/Hooks';
 import styles from './Character.module.scss';
 
-type PlayerInfoProps = {
-  active: boolean;
-};
-
-const PlayerInfo = styled(Box)<PlayerInfoProps>(({ active }) => ({
-  opacity: active ? '1' : '0.6',
-  marginTop: '8px',
-  position: 'absolute',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  whiteSpace: 'nowrap',
-
-  ['& :nth-of-type(1)']: {
-    color: '#FFFFFFBF',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-
-  ['& :nth-of-type(2)']: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-}));
-
-const SpinCircle = styled(Box)`
-  position: absolute;
-  left: -9px;
-  top: -9px;
-`;
-
 const Gradient = styled(Box)`
   position: absolute;
   width: 72px;
   height: 72px;
   border-radius: 50%;
   box-shadow: 0px 0px 36px #ffe976;
-`;
-
-const ChipImage = styled(Image)`
-  margin-top: -1px !important;
 `;
 
 interface Props {
@@ -115,7 +80,7 @@ const Character: React.FC<Props> = ({
       {index === activePlayer && (
         <>
           <Gradient />
-          <SpinCircle>
+          <div className={styles.spinCircle}>
             <CountdownCircleTimer
               duration={30}
               strokeWidth={10}
@@ -123,7 +88,7 @@ const Character: React.FC<Props> = ({
               size={90}
               trailColor="transparent"
             />
-          </SpinCircle>
+          </div>
         </>
       )}
       {!user && (
@@ -171,27 +136,21 @@ const Character: React.FC<Props> = ({
       <Box position="relative" left={dealerx[index]} top={dealery[index]}>
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </Box>
-      <PlayerInfo active={active}>
-        <Box>{data?.name ?? 'Waiting...'}</Box>
+      <div className={styles.playerInfo} style={{opacity: active ? '1' : '0.6'}}>
+        <div>{data?.name ?? 'Waiting...'}</div>
         {data && (
-          <Box fontSize="14px">
-            <Box
-              style={{ paddingTop: '2px' }}
-              fontWeight="bold"
-              color="white"
-              mb="2px"
-            >
+          <div className={styles.chipForBet}>
+            <div className={styles.betAmount}>
               {data?.betSize}
-            </Box>
-            <ChipImage
+            </div>
+            <img className={styles.chipImage}
               src="/images/freecoin.svg"
               width="15px"
               height="15px"
-              className="chip"
             />
-          </Box>
+          </div>
         )}
-      </PlayerInfo>
+      </div>
       {!isWon &&
         active &&
         index !== currentSeat &&

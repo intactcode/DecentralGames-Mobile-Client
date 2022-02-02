@@ -15,6 +15,37 @@
     overflow: hidden;
 }
 
+.playerInfo {
+    margin-top: 13px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 13px;
+
+    .chipForBet {
+        font-size: 15px;
+        &:nth-of-type(1) {
+            color: #FFFFFFBF;
+            text-align: center;
+            font-weight: bold;
+        }
+    
+        &:nth-of-type(2) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .betAmount {
+            padding-top: 2px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 2px;
+        }
+    }
+}
+
 .raiseMoney {
     display: flex;
     padding: 3px 0px 0px 3px;
@@ -33,3 +64,22 @@
     font-weight: bold;
     color: black;
 }
+
+.spinCircle {
+    position: absolute;
+    left: -9px;
+    top: -9px;  
+}
+
+.gradient {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 36px #ffe976;
+}
+
+.chipImage {
+    margin-top: -1px !important;
+}
+
