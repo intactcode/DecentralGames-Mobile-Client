@@ -14,11 +14,12 @@ interface ItemFieldProps {
   type?: number;
 }
 
-const ItemFieldNew = (props: { children: any, type: number }) => {
+const ItemField = (props: { children: any, type: number, style?: any }) => {
   return (
     <div
       className={styles.itemField}
       style={{
+        ...props.style,
         width: props.type === 0 ? '40px' : props.type === 1 ? '116px' : '90px',
         height: props.type === 0 ? '40px' : props.type === 1 ? '100px' : '36px',
         flexDirection: props.type === 0 ? 'column' : 'row',
@@ -30,22 +31,6 @@ const ItemFieldNew = (props: { children: any, type: number }) => {
     </div>
   );
 };
-
-const ItemField = styled(Box)<ItemFieldProps>(({ type }) => ({
-  background: 'rgba(0, 0, 0, 0.5)',
-  borderRadius: '8px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontWeight: '800',
-  lineHeight: '15px',
-  color: 'white',
-  width: type === 0 ? '40px' : type === 1 ? '116px' : '90px',
-  height: type === 0 ? '40px' : type === 1 ? '100px' : '36px',
-  flexDirection: type === 0 ? 'column' : 'row',
-  fontSize: type === 0 ? '8px' : '14px',
-  fontStyle: type === 0 ? 'italic' : 'unset',
-}));
 
 const Setting: React.FC<Props> = ({ open, setOpen }) => {
   return (
@@ -86,7 +71,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
                 height={15}
               />
             </ItemField>
-            <ItemField ml="10px" type={0}>
+            <ItemField type={0} style={{marginLeft: '10px'}}>
               <span>1</span>
               <Image src="/images/xp.png" alt="xp" width={17} height={11} />
             </ItemField>
@@ -111,7 +96,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
                 height={15}
               />
             </ItemField>
-            <ItemField ml="10px" type={0}>
+            <ItemField type={0} style={{marginLeft: '10px'}}>
               <span>2</span>
               <Image src="/images/xp.png" alt="xp" width={17} height={11} />
             </ItemField>
@@ -136,7 +121,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
                 height={15}
               />
             </ItemField>
-            <ItemField ml="10px" type={0}>
+            <ItemField type={0} style={{marginLeft: '10px'}}>
               <span>3</span>
               <Image
                 src="/images/xp.png"
@@ -165,7 +150,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
           </div>
           <div className={styles.itemFieldContainer}>
             <div className={styles.upperTitle}>Net Chips</div>
-            <ItemField type={2} position="relative">
+            <ItemField type={2} style={{position: "relative"}}>
               <span className={styles.text}>+0</span>
               <div style={{position: "absolute", right: "8px", top: "8px"}}>
                 <Image
@@ -187,7 +172,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
               <span className={styles.text}>Top 10%</span>
             </ItemField>
             <div className={styles.lowerTitle}>Next Tier</div>
-            <ItemField type={2} position="relative">
+            <ItemField type={2} style={{position: "relative"}}>
               <span className={styles.text}>+4,291</span>
               <div style={{ margin: '6px 0px 0px 2px' }}>
                 <Image
