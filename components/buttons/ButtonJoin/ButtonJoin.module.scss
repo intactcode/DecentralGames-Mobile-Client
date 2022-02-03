@@ -1,0 +1,29 @@
+@import 'styles/base.scss';
+
+.container {
+	display: flex;
+	justify-content: center;
+
+	.button_join {
+		position: absolute;
+		z-index: 10;
+		height: 68px;
+		width: calc(100vw - 48px);
+		max-width: 400px;
+		background: #006EFF;
+		border-radius: 12px;
+		font-family: Larsseit-Bold;
+		font-size: 18px;
+		color: white;
+		line-height: 40px;
+		bottom: 24px;
+		transition: all 0.25s ease;
+	}
+
+	.button_join:hover {
+		background-color: #006EFF;
+		color: white;
+		filter: brightness(0.8);
+		transition: all 0.25s ease;
+	}
+}

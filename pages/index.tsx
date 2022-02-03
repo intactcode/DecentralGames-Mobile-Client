@@ -1,4 +1,4 @@
-import HomePage from '../components/content/HomePage';
+import HomePage from '../components/content/HomePage/HomePage';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
