@@ -11,7 +11,6 @@ const Logo = () => {
     if (Object.keys(state.socket).length !== 0) {
       console.log('Reset game session');
 
-      state.socket.send('playerLeaveTable');
       router.push('/');
     }
   };

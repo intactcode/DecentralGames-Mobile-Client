@@ -15,7 +15,6 @@ import TableCard from './tableCard/TableCard';
 import Card from './Card/Card';
 import ButtonRefresh from '../../buttons/ButtonRefresh/ButtonRefresh';
 
-
 const Progress = styled(Box)`
   display: flex;
   align-items: center;
@@ -220,6 +219,12 @@ const PokerGame = () => {
       tablecard.current?.progressDeal();
     }, 100);
   };
+
+  useEffect(() => {
+    return () => {
+      state.socket.leave();
+    };
+  }, [state.socket]);
 
   // if user is logged-in set game parameters, else send them to the join page
   useEffect(() => {

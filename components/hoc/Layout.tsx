@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
-import styles from '../../styles/Home.module.css';
 import Logo from './Logo';
+import styles from '../../styles/Home.module.css';
 
 const Layout = (props: { children: any }) => {
   return (
