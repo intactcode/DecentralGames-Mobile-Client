@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
+import { get } from 'lodash';
 import mobileServerURL from './MobileServerURL';
 import { useStoreState, useStoreDispatch } from '../store/Hooks';
 import * as Colyseus from 'colyseus.js';
 
 const Socket = () => {
-  const state = useStoreState(); // returns global state from Context API store
+  const state = useStoreState(); // returns current state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -26,11 +27,19 @@ const Socket = () => {
               data: room,
             });
 
+            room.onLeave((code) => {
+              console.log('client left the room', code);
+            });
+
             room.onMessage('tableData', (data: any) => {
               dispatch({
                 type: 'table_data',
                 data,
               });
+            });
+
+            room.onMessage('playerLeaveTable', (data: any) => {
+              console.log('player leave table: ', data);
             });
 
             room.onMessage('playerJoinTable', (data: any) => {
@@ -78,21 +87,18 @@ const Socket = () => {
 
             room.onMessage('started', () => {
               dispatch({
-                type: 'set_winner',
-                data: [],
-              });
-
-              dispatch({
                 type: 'wait_time',
                 data: 0,
               });
             });
 
-            room.onMessage('winners', (data: any) => {
-              dispatch({
-                type: 'set_winner',
-                data,
-              });
+            room.onMessage('winners', (winners: any) => {
+              const isInHand = state.tableData?.isInHand ?? [];
+              alert(
+                `Player ${
+                  get(winners, '0.0.0', isInHand.indexOf(true)) + 1
+                } won`
+              );
             });
           })
           .catch((e) => {

@@ -1,48 +1,48 @@
 @import 'styles/base.scss';
 
 .container {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 
-	.button_connect {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		position: absolute;
-		z-index: 10;
-		height: 68px;
-		width: calc(100vw - 48px);
-		max-width: 400px;
-		background: #006EFF;
-		border-radius: 12px;
-		bottom: 24px;
-		transition: all 0.25s ease;
-	}
+  .button_connect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 10;
+    height: 68px;
+    width: calc(100vw - 48px);
+    max-width: 400px;
+    background: #006eff;
+    border-radius: 12px;
+    bottom: 24px;
+    transition: all 0.25s ease;
+  }
 
-	.button_connect:hover {
-		background-color: #006EFF;
-		color: white;
-		filter: brightness(0.8);
-		transition: all 0.25s ease;
-	}
+  .button_connect:hover {
+    background-color: #006eff;
+    color: white;
+    filter: brightness(0.8);
+    transition: all 0.25s ease;
+  }
 
-	.button_span {
-		display: flex;
-		justify-content: center;
+  .button_span {
+    display: flex;
+    justify-content: center;
 
-		.button_image {
-			display: flex;
-			margin-top: 18px;
-			height: 35px;
-			margin-left: -24px;
-			margin-right: 24px;
-		}
+    .button_image {
+      display: flex;
+      margin-top: 18px;
+      height: 35px;
+      margin-left: -24px;
+      margin-right: 24px;
+    }
 
-		.button_text {
-			font-family: Larsseit-Bold;
-			font-size: 18px;
-			color: white;
-			line-height: 40px;
-		}
-	}
+    .button_text {
+      font-family: Larsseit-Bold;
+      font-size: 18px;
+      color: white;
+      line-height: 40px;
+    }
+  }
 }
