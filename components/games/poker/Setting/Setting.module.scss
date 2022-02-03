@@ -1,0 +1,139 @@
+.closeIcon {
+    top: -55px;
+    left: 15px;
+    position: absolute;
+    background: #1f1f1f;
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
+    border-radius: 24px;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;    
+}
+
+.settingBody {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    z-index: 20;
+    padding-left: 0px;
+    transition: max-height 0.5s;  
+}
+
+.settingField {
+    overflow: hidden;
+    background: #1f1f1f;
+    box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 16px 16px 0px 0px;
+    padding: 0 24px;
+    width: 100%;
+    &:nth-of-type(1) {
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 33px;
+      color: white;
+    }
+}
+
+.bottomSetting {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .itemFieldContainer {
+      font-size: 11px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      color: rgb(255, 255, 255, 0.75);
+      align-items: center;
+
+      .upperTitle {
+        margin-bottom: -6px;
+      }
+
+      .lowerTitle {
+        margin: 6px 0px -6px 0px;
+      }
+    }
+}
+
+.timeCounter {
+    display: flex;
+}
+
+.live {
+    width: 41px;
+    height: 22px;
+    margin: 16px 8px -8px 0px;
+    background: #F25B5B;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 8px;  
+}
+
+.hours {
+    width: 114px;
+    height: 22px;
+    margin: 16px 8px -8px 0px;
+    background: #000000;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 8px;
+}
+
+.title {
+    margin-top: 24px;
+}
+
+.property {
+    display: flex;
+    justify-content: space-between;
+
+    .itemFieldContainer {
+        margin-top: 15px;
+        display: flex;
+
+        .span {
+            margin-top: -5px;
+        }
+    }
+
+    .progress {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+        justify-content: none!important;
+    
+        div {
+          color: #ffffffbf;
+          font-size: 11px;
+          line-height: normal;
+          font-weight: normal;
+        }  
+    }
+}
+
+.itemField {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    line-height: 15px;
+    color: white;
+}
+
+.text {
+    margin-top: 2px;
+}

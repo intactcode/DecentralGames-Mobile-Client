@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useStoreState } from '../../../store/Hooks';
 import Character from './Character/Character';
-import Setting from './Setting';
+import Setting from './Setting/Setting';
 import LeaderBoard from './LeaderBoard/LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
