@@ -3,7 +3,6 @@ import { maxBy, get, isEmpty } from 'lodash';
 import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
-// import { BsBoxArrowLeft } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useStoreState } from '../../../store/Hooks';
@@ -14,6 +13,8 @@ import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
 import Card from './Card/Card';
+import ButtonRefresh from '../../buttons/ButtonRefresh/ButtonRefresh';
+
 
 const Progress = styled(Box)`
   display: flex;
@@ -386,10 +387,7 @@ const PokerGame = () => {
       </Typography>
 
       <Links>
-        <BlackEllipse left="40px">
-          {/* <BlackEllipse left="40px" onClick={() => onReset()}> */}
-          {/* <BsBoxArrowLeft /> */}
-        </BlackEllipse>
+        <ButtonRefresh />
 
         <BlackEllipse
           right="40px"
