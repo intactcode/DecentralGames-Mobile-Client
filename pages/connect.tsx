@@ -1,20 +1,21 @@
-import UserSettings from '../components/content/UserSettings';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
+import ConnectWallet from '../components/content/ConnectWallet/ConnectWallet';
 
-const Settings = () => {
+
+const Connect = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Settings'}
+        title={constants.TITLE + ' | Connect'}
         image={images.SOCIAL_SHARE}
       />
 
-      <UserSettings />
+      <ConnectWallet />
     </Layout>
   );
 };
 
-export default Settings;
+export default Connect;
