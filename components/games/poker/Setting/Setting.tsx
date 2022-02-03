@@ -1,5 +1,3 @@
-import { Box } from '@mui/material';
-import { styled } from '@mui/system';
 import { FaChevronDown } from 'react-icons/fa';
 import Image from 'next/image';
 import ProgressBar from '../ProgressBar';
@@ -8,10 +6,6 @@ import styles from './Setting.module.scss';
 interface Props {
   open: boolean;
   setOpen: any;
-}
-
-interface ItemFieldProps {
-  type?: number;
 }
 
 const ItemField = (props: { children: any, type: number, style?: any }) => {
@@ -138,7 +132,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             <div className={styles.upperTitle}>Expected ICE Earned</div>
             <ItemField type={1}>
               <span>- -&nbsp;&nbsp;</span>
-              <div style={{marginTop: "5px"}}>
+              <div style={{marginTop: '5px'}}>
                 <Image
                   src="/images/diamond.svg"
                   width={18}
@@ -150,9 +144,9 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
           </div>
           <div className={styles.itemFieldContainer}>
             <div className={styles.upperTitle}>Net Chips</div>
-            <ItemField type={2} style={{position: "relative"}}>
+            <ItemField type={2} style={{position: 'relative'}}>
               <span className={styles.text}>+0</span>
-              <div style={{position: "absolute", right: "8px", top: "8px"}}>
+              <div style={{position: 'absolute', right: '8px', top: '8px'}}>
                 <Image
                   src="/images/freecoin.svg"
                   width={22}
@@ -172,7 +166,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
               <span className={styles.text}>Top 10%</span>
             </ItemField>
             <div className={styles.lowerTitle}>Next Tier</div>
-            <ItemField type={2} style={{position: "relative"}}>
+            <ItemField type={2} style={{position: 'relative'}}>
               <span className={styles.text}>+4,291</span>
               <div style={{ margin: '6px 0px 0px 2px' }}>
                 <Image
