@@ -5,6 +5,9 @@
 	justify-content: center;
 
 	.button_join {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		position: absolute;
 		z-index: 10;
 		height: 68px;

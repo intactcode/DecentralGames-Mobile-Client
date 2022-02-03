@@ -2,7 +2,7 @@ import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
-import ConnectWallet from '../components/content/ConnectWallet/ConnectWallet';
+import JoinGameFlow from '../components/content/JoinGameFlow/JoinGameFlow';
 
 
 const Connect = () => {
@@ -13,7 +13,7 @@ const Connect = () => {
         image={images.SOCIAL_SHARE}
       />
 
-      <ConnectWallet />
+      <JoinGameFlow />
     </Layout>
   );
 };

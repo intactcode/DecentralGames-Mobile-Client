@@ -19,6 +19,7 @@
 
 .back {
   max-width: 448px;
+  max-height: 682px;
   top: 0px;
   position: absolute;
   width: 100%;
@@ -65,6 +66,7 @@
   }
 
   .play_text {
+    margin-top: 0px;
     font-family: Larsseit;
     font-size: 18px;
     text-align: center;
@@ -77,6 +79,7 @@
 
     .image_grouping {
       .lower_text {
+        margin-top: 0px;
         font-family: Larsseit-Bold;
         color: white;
         text-align: center;
@@ -92,7 +95,7 @@
     }
 
     .card_image {
-      width: 85px;
+      width: 82px;
       height: 76px;
       margin: 12px 18px 0px 26px;
     }
@@ -109,7 +112,7 @@
   max-width: 448px;
   position: absolute;
   bottom: 0;
-  height: 538px;
+  height: 518px;
   z-index: 10;
   width: 100%;
   background: #1F1F1F;
@@ -150,6 +153,7 @@
   }
 
   .play_text {
+    margin-top: -4px;
     font-family: Larsseit;
     font-size: 18px;
     text-align: center;

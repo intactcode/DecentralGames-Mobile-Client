@@ -1,12 +1,12 @@
 import ButtonConnect from '../../buttons/ButtonConnect/ButtonConnect';
 import ButtonJoin from '../../buttons/ButtonJoin/ButtonJoin';
-import styles from './ConnectWallet.module.scss';
+import styles from './JoinGameFlow.module.scss';
 import { useStoreState } from '../../../store/Hooks';
 import { FaChevronLeft } from 'react-icons/fa';
 import Link from 'next/link'
 
 
-const ConnectWallet = () => {
+const JoinGameFlow = () => {
   const state = useStoreState(); // returns global state from Context API store
 
   return (
@@ -91,4 +91,4 @@ const ConnectWallet = () => {
   );
 };
 
-export default ConnectWallet;
+export default JoinGameFlow;
