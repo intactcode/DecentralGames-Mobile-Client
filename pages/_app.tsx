@@ -3,6 +3,7 @@ import { Provider } from '../store/Store';
 import Segment from '../components/common/Segment';
 import Wallet from '../store/Wallet';
 import Socket from '../socket/Socket';
+import '../styles/base.scss';
 import '../styles/globals.css';
 import '../styles/menu.css';
 import 'semantic-ui-css/semantic.min.css';
