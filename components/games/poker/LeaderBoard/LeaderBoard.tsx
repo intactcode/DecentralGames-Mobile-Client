@@ -24,9 +24,12 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
   }, []);
 
   return (
-    <>
+    <section>
       <div className={styles.leaderBoardBody} style={{maxHeight: open ? '800px' : '0px'}}>
-        <div className={styles.leaderBoardField}>
+        <div
+          className={styles.leaderBoardField}
+          style={{paddingBottom: open ? '30px' : '0px'}}
+        >
           <div
             className={styles.closeIcon}
             style={{display: open ? 'flex' : 'none'}}
@@ -90,7 +93,7 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
           })}
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
