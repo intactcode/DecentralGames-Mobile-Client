@@ -1,20 +1,21 @@
-import UserSettings from '../components/content/UserSettings';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
+import JoinGameFlow from '../components/content/JoinGameFlow/JoinGameFlow';
 
-const Settings = () => {
+
+const Connect = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Settings'}
+        title={constants.TITLE + ' | Connect'}
         image={images.SOCIAL_SHARE}
       />
 
-      <UserSettings />
+      <JoinGameFlow />
     </Layout>
   );
 };
 
-export default Settings;
+export default Connect;

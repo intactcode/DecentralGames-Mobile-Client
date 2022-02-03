@@ -3,17 +3,18 @@ import { maxBy, get, isEmpty } from 'lodash';
 import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
-// import { BsBoxArrowLeft } from 'react-icons/bs';
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../../store/Hooks';
 import Image from 'next/image';
+import { useStoreState } from '../../../store/Hooks';
 import Character from './Character/Character';
 import Setting from './Setting';
-import LeaderBoard from './LeaderBoard';
+import LeaderBoard from './LeaderBoard/LeaderBoard';
 import ProgressBar from './ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
 import Card from './Card/Card';
+import ButtonRefresh from '../../buttons/ButtonRefresh/ButtonRefresh';
+
 
 const Progress = styled(Box)`
   display: flex;
@@ -146,11 +147,11 @@ const Dot = styled(Box)`
 
 const positionx = [
   'calc(50% - 36px)',
-  'calc(50% + 90px)',
-  'calc(50% + 90px)',
+  'calc(50% - 160px)',
+  'calc(50% - 160px)',
   'calc(50% - 36px)',
-  'calc(50% - 160px)',
-  'calc(50% - 160px)',
+  'calc(50% + 90px)',
+  'calc(50% + 90px)',
 ];
 const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
 const image = [
@@ -386,10 +387,7 @@ const PokerGame = () => {
       </Typography>
 
       <Links>
-        <BlackEllipse left="40px">
-          {/* <BlackEllipse left="40px" onClick={() => onReset()}> */}
-          {/* <BsBoxArrowLeft /> */}
-        </BlackEllipse>
+        <ButtonRefresh />
 
         <BlackEllipse
           right="40px"

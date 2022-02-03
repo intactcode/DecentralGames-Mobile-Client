@@ -5,7 +5,7 @@ import Image from 'next/image';
 import CardBack from '../CardBack/CardBack';
 import Card from '../Card/Card';
 import InfoDialog from '../InfoDialog/InfoDialog';
-import UserInfoDialog from '../UserInfoDialog';
+import UserInfoDialog from '../UserInfoDialog/UserInfoDialog';
 import { useStoreState } from '../../../../store/Hooks';
 import styles from './Character.module.scss';
 
@@ -45,7 +45,6 @@ const Character: React.FC<Props> = ({
   const activePlayer = state.tableData?.active;
   const isInHand = state.tableData?.isInHand ?? [];
   const winners = state.winners;
-  const winnerIndex = get(winners, '0.0.0', isInHand.indexOf(true));
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
 
   const isWon = !isEmpty(winners);
@@ -59,10 +58,16 @@ const Character: React.FC<Props> = ({
   const [infomodalopen, setInfoModalOpen] = useState(false);
 
   return (
-    <section style={{position: 'absolute', left: left, top: top, opacity: !isEmpty(winners) ? (winnerIndex === index ? 1 : 0.7) : 1}}>
+    <section
+      style={{
+        position: 'absolute',
+        left: left,
+        top: top,
+      }}
+    >
       {index === activePlayer && (
         <>
-          <div className={styles.gradient}/>
+          <div className={styles.gradient} />
           <div className={styles.spinCircle}>
             <CountdownCircleTimer
               duration={30}
@@ -92,9 +97,11 @@ const Character: React.FC<Props> = ({
           dg={dg}
         />
       )}
-      <div className={styles.playerCircle} onClick={() => setInfoModalOpen(!infomodalopen)}>
-        <img
-          style={{opacity: active ? 1 : 0.2}}
+      <div
+        className={styles.playerCircle}
+        onClick={() => setInfoModalOpen(!infomodalopen)}
+      >
+        <Image
           src={data?.image ?? `/${image}`}
           width="60px"
           height="60px"
@@ -103,33 +110,40 @@ const Character: React.FC<Props> = ({
       </div>
       {raise && (
         <>
-        <div className={styles.raiseMoney} style={{left: rpositionx[index], top: rpositiony[index]}}>
-          <div className={styles.raiseAmount}>
-            {raise}
+          <div
+            className={styles.raiseMoney}
+            style={{ left: rpositionx[index], top: rpositiony[index] }}
+          >
+            <div className={styles.raiseAmount}>{raise}</div>
+            <Image
+              src="/images/freecoin.svg"
+              width="18px"
+              height="18px"
+              alt="freecoin"
+            />
           </div>
-          <img
-            src="/images/freecoin.svg"
-            width="18px"
-            height="18px"
-            alt="freecoin"
-          />
-        </div>
         </>
       )}
-      <div className={styles.dealerChip} style={{left: dealerx[index], top: dealery[index]}}>
+      <div
+        className={styles.dealerChip}
+        style={{ left: dealerx[index], top: dealery[index] }}
+      >
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </div>
-      <div className={styles.playerInfo} style={{opacity: active ? '1' : '0.6'}}>
+      <div
+        className={styles.playerInfo}
+        style={{ opacity: active ? '1' : '0.6' }}
+      >
         <div>{data?.name ?? 'Waiting...'}</div>
         {data && (
           <div className={styles.chipForBet}>
-            <div className={styles.betAmount}>
-              {data?.betSize}
-            </div>
-            <img className={styles.chipImage}
+            <div className={styles.betAmount}>{data?.betSize}</div>
+            <Image
+              className={styles.chipImage}
               src="/images/freecoin.svg"
               width="15px"
               height="15px"
+              alt="chipImage"
             />
           </div>
         )}
@@ -163,7 +177,10 @@ const Character: React.FC<Props> = ({
           </div>
         )}
       {isWon && winners.cards[index] && (
-        <div className={styles.winnerCardContainer} key={`winner_card_${index}`}>
+        <div
+          className={styles.winnerCardContainer}
+          key={`winner_card_${index}`}
+        >
           <div
             className={styles.winnerCardFrame}
             style={{

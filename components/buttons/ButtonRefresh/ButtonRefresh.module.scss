@@ -1,0 +1,13 @@
+.refresh {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: #2a2a2a;
+  border-radius: 50%;
+  color: #616161;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
+}

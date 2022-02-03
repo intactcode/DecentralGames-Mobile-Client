@@ -1,0 +1,163 @@
+.main {
+  max-width: 100vw;
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2a2a2a;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
+}
+
+.gradient {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.back {
+  max-width: 448px;
+  max-height: 682px;
+  top: 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://res.cloudinary.com/dnzambf4m/image/upload/v1643833574/Poker_Table_sg4gkg.png');
+  background-size: 100% 100%;
+  color: white;
+}
+
+.button_container {
+  max-width: 448px;
+  position: absolute;
+  bottom: 0;
+  height: 433px;
+  z-index: 10;
+  width: 100%;
+  background: #1f1f1f;
+  border-radius: 16px 16px 0px 0px;
+
+  .close {
+    top: -55px;
+    left: 15px;
+    position: absolute;
+    background: #1f1f1f;
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
+    border-radius: 24px;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    color: white;
+  }
+
+  .welcome {
+    padding: 0px 24px 16px 24px;
+    margin-bottom: 0px;
+    font-family: Larsseit-ExtraBold;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+    line-height: 32px;
+  }
+
+  .play_text {
+    margin-top: 0px;
+    font-family: Larsseit;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+  }
+
+  .image_span {
+    display: flex;
+    justify-content: center;
+
+    .image_grouping {
+      .lower_text {
+        margin-top: 0px;
+        font-family: Larsseit-Bold;
+        color: white;
+        text-align: center;
+        font-size: 18px;
+        line-height: 24px;
+      }
+    }
+
+    .wearable_image {
+      width: 106px;
+      height: 92px;
+      margin: -4px 0px 0px 0px;
+    }
+
+    .card_image {
+      width: 82px;
+      height: 76px;
+      margin: 12px 18px 0px 26px;
+    }
+
+    .diamond_image {
+      width: 100px;
+      height: 88px;
+      margin: 2px 0px -2px 0px;
+    }
+  }
+}
+
+.button_container_two {
+  max-width: 448px;
+  position: absolute;
+  bottom: 0;
+  height: 518px;
+  z-index: 10;
+  width: 100%;
+  background: #1f1f1f;
+  border-radius: 16px 16px 0px 0px;
+
+  .close {
+    top: -55px;
+    left: 15px;
+    position: absolute;
+    background: #1f1f1f;
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
+    border-radius: 24px;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    color: white;
+  }
+
+  .welcome {
+    padding: 0px 24px 0px 24px;
+    margin-bottom: 0px;
+    font-family: Larsseit-ExtraBold;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+    line-height: 32px;
+  }
+
+  .wearable_image_two {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: flex;
+    margin-left: 20px;
+    width: calc(100% - 40px);
+  }
+
+  .play_text {
+    margin-top: -4px;
+    font-family: Larsseit;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    padding: 0px 24px 24px 24px;
+  }
+}

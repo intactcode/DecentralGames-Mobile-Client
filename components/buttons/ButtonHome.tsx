@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-// import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from '../../styles/Home.module.css';
 import { useStoreState } from '../../store/Hooks';
