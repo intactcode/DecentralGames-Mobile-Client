@@ -16,7 +16,7 @@ const initialState = {
   playerSitDown: {},
   cards: [],
   waitTime: 0,
-  winners: [],
+  winners: {},
 };
 
 const reducer = (state: any, action: { type: any; data: any }) => {

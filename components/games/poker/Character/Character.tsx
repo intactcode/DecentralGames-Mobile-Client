@@ -13,10 +13,8 @@ interface Props {
   image: string;
   left: string;
   top: string;
-  active: boolean;
   user?: any;
   raise?: any;
-  turn: boolean;
   index: number;
   onFold: any;
   items: any;
@@ -30,7 +28,6 @@ const Character: React.FC<Props> = ({
   image,
   left,
   top,
-  active,
   user,
   raise,
   index,
@@ -47,7 +44,7 @@ const Character: React.FC<Props> = ({
   const winners = state.winners;
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
 
-  const isWon = !isEmpty(winners);
+  const isWon = !isEmpty(winners.winners);
 
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
@@ -130,10 +127,7 @@ const Character: React.FC<Props> = ({
       >
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </div>
-      <div
-        className={styles.playerInfo}
-        style={{ opacity: active ? '1' : '0.6' }}
-      >
+      <div className={styles.playerInfo}>
         <div>{data?.name ?? 'Waiting...'}</div>
         {data && (
           <div className={styles.chipForBet}>
@@ -149,7 +143,6 @@ const Character: React.FC<Props> = ({
         )}
       </div>
       {!isWon &&
-        active &&
         index !== currentSeat &&
         isInHand[index] &&
         !!state.cards.length && (
@@ -159,7 +152,6 @@ const Character: React.FC<Props> = ({
           </div>
         )}
       {!isWon &&
-        active &&
         index === currentSeat &&
         isInHand[index] &&
         !!state.cards.length && (
