@@ -196,7 +196,7 @@ const PokerGame = () => {
   const isWon = !isEmpty(winners.winners);
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const isInHand = state.tableData?.isInHand ?? [];
-  const winnerIndex = get(winners, '0.0.0', isInHand.indexOf(true));
+  const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -574,21 +574,6 @@ const PokerGame = () => {
             alt="200ice"
             width={176}
             height={111}
-          />
-        </Box>
-      )}
-      {isWon && (
-        <Box
-          position="absolute"
-          left="calc(50% - 43px)"
-          top="450px"
-          zIndex={19}
-        >
-          <Image
-            src="/images/fullhouse.svg"
-            alt="fullhouse"
-            width={84}
-            height={35}
           />
         </Box>
       )}
