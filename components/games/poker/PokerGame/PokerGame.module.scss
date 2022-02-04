@@ -50,11 +50,16 @@
   }
 
   .links {
-    position: absolute;
-    width: 340px;
     display: flex;
+    position: absolute;
+    width: 70%;
+    left: 15%;
     justify-content: space-between;
-    left: calc(50% - 170px);
+    top: 0;
+    @include media-ltl-xm {
+      width: 340px;
+      left: calc(50% - 170px);
+    }
 
     .blackEllipse {
       cursor: pointer;
@@ -196,7 +201,7 @@
           box-shadow: 8px #92120c;
         }
         &:disabled {
-            background-color: #a82822;
+          background-color: #a82822;
           box-shadow: 8px #92120c;
         }
       }
@@ -211,7 +216,7 @@
           box-shadow: 8px #267ca1;
         }
         &:disabled {
-            background-color: #3d86a6;
+          background-color: #3d86a6;
           box-shadow: 8px #267ca1;
         }
       }
@@ -226,8 +231,8 @@
           box-shadow: 8px #2b8c46;
         }
         &:disabled {
-            background-color: #3da65a;
-            box-shadow: 8px #2b8c46;
+          background-color: #3da65a;
+          box-shadow: 8px #2b8c46;
         }
       }
       &:nth-of-type(4) {
@@ -241,8 +246,8 @@
           box-shadow: 8px #2b8c46;
         }
         &:disabled {
-            background-color: #3da65a;
-            box-shadow: 8px #2b8c46;
+          background-color: #3da65a;
+          box-shadow: 8px #2b8c46;
         }
       }
     }

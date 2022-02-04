@@ -35,7 +35,7 @@ const JoinGame = (props: any) => {
       <div className={styles.gradient} />
       <div className={styles.back} />
 
-      <div position="relative" zIndex={30}>
+      <div style={{ position: 'relative', zIndex: 30 }}>
         {state.userStatus >= 4 ? (
           <div className={styles.playtitle}>
             Joining Game [{Object.keys(state.socket).length}]

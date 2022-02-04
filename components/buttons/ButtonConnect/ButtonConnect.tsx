@@ -2,7 +2,6 @@ import { useStoreState, useStoreDispatch } from '../../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../../store/Wallet';
 import styles from './ButtonConnect.module.scss';
 
-
 const ButtonLogin = () => {
   const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store

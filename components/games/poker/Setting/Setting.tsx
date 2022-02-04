@@ -8,7 +8,7 @@ interface Props {
   setOpen: any;
 }
 
-const ItemField = (props: { children: any, type: number, style?: any }) => {
+const ItemField = (props: { children: any; type: number; style?: any }) => {
   return (
     <div
       className={styles.itemField}
@@ -30,12 +30,12 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
   return (
     <section
       className={styles.settingBody}
-      style={{maxHeight: open ? '600px' : '0px'}}
+      style={{ maxHeight: open ? '600px' : '0px' }}
     >
       <div className={styles.settingField}>
         <div
           className={styles.closeIcon}
-          style={{display: open ? 'flex' : 'none'}}
+          style={{ display: open ? 'flex' : 'none' }}
           onClick={() => setOpen(false)}
         >
           <FaChevronDown fontSize="20px" />
@@ -44,7 +44,9 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
           <div className={styles.live}>LIVE</div>
           <div className={styles.hours}>13 Hours Remaining</div>
         </div>
-        <div className={styles.title}>Daily ICE Challenges & Tournament Info</div>
+        <div className={styles.title}>
+          Daily ICE Challenges & Tournament Info
+        </div>
         <div className={styles.property}>
           <div className={styles.progress}>
             <div>See the flop 15 times</div>
@@ -65,17 +67,14 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
                 height={15}
               />
             </ItemField>
-            <ItemField type={0} style={{marginLeft: '10px'}}>
+            <ItemField type={0} style={{ marginLeft: '10px' }}>
               <span>1</span>
               <Image src="/images/xp.png" alt="xp" width={17} height={11} />
             </ItemField>
           </div>
         </div>
 
-        <div
-          className={styles.property}
-          style={{marginTop: '-8px'}}
-        >
+        <div className={styles.property} style={{ marginTop: '-8px' }}>
           <div className={styles.progress}>
             <div>Win a hand 5 times</div>
             <ProgressBar type={1} percent={0 / 5} text="0 of 5" width="179px" />
@@ -90,7 +89,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
                 height={15}
               />
             </ItemField>
-            <ItemField type={0} style={{marginLeft: '10px'}}>
+            <ItemField type={0} style={{ marginLeft: '10px' }}>
               <span>2</span>
               <Image src="/images/xp.png" alt="xp" width={17} height={11} />
             </ItemField>
@@ -99,7 +98,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
 
         <div
           className={styles.property}
-          style={{marginTop: '-8px', marginBottom: '12px'}}
+          style={{ marginTop: '-8px', marginBottom: '12px' }}
         >
           <div className={styles.progress}>
             <div>Get a 3 of a kind 2 times</div>
@@ -115,14 +114,9 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
                 height={15}
               />
             </ItemField>
-            <ItemField type={0} style={{marginLeft: '10px'}}>
+            <ItemField type={0} style={{ marginLeft: '10px' }}>
               <span>3</span>
-              <Image
-                src="/images/xp.png"
-                alt="xp"
-                width={17}
-                height={11}
-              />
+              <Image src="/images/xp.png" alt="xp" width={17} height={11} />
             </ItemField>
           </div>
         </div>
@@ -132,7 +126,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             <div className={styles.upperTitle}>Expected ICE Earned</div>
             <ItemField type={1}>
               <span>- -&nbsp;&nbsp;</span>
-              <div style={{marginTop: '5px'}}>
+              <div style={{ marginTop: '5px' }}>
                 <Image
                   src="/images/diamond.svg"
                   width={18}
@@ -144,9 +138,9 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
           </div>
           <div className={styles.itemFieldContainer}>
             <div className={styles.upperTitle}>Net Chips</div>
-            <ItemField type={2} style={{position: 'relative'}}>
+            <ItemField type={2} style={{ position: 'relative' }}>
               <span className={styles.text}>+0</span>
-              <div style={{position: 'absolute', right: '8px', top: '8px'}}>
+              <div style={{ position: 'absolute', right: '8px', top: '8px' }}>
                 <Image
                   src="/images/freecoin.svg"
                   width={22}
@@ -166,7 +160,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
               <span className={styles.text}>Top 10%</span>
             </ItemField>
             <div className={styles.lowerTitle}>Next Tier</div>
-            <ItemField type={2} style={{position: 'relative'}}>
+            <ItemField type={2} style={{ position: 'relative' }}>
               <span className={styles.text}>+4,291</span>
               <div style={{ margin: '6px 0px 0px 2px' }}>
                 <Image

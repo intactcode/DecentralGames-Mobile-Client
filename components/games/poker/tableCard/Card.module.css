@@ -3,16 +3,17 @@
   height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 0.20s;
+  transition: transform 0.2s;
   transition-timing-function: ease-in-out;
 }
 
-.back  {
+.back {
   transform: rotateY(180deg);
 }
 
 /* Stack front and back elements over each other */
-.front, .back {
+.front,
+.back {
   position: absolute;
   top: 0;
   left: 0;

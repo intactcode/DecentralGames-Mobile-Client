@@ -5,7 +5,6 @@ import { useStoreState } from '../../../store/Hooks';
 import { FaChevronLeft } from 'react-icons/fa';
 import Link from 'next/link';
 
-
 const JoinGameFlow = () => {
   const state = useStoreState(); // returns global state from Context API store
 

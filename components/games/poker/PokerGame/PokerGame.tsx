@@ -226,9 +226,7 @@ const PokerGame = () => {
   return (
     <section className={styles.body}>
       {!!state.waitTime && (
-        <div className={styles.waitTime}>
-          {state.waitTime}
-        </div>
+        <div className={styles.waitTime}>{state.waitTime}</div>
       )}
       <TableCard ref={tablecard} />
       <div className={styles.styledCommunityCard}>
@@ -253,10 +251,8 @@ const PokerGame = () => {
           }
         )}
       </div>
-      <div className={styles.table}/>
-      <div className={styles.pot}>
-        Pot: {state.tableData?.pot || 0}
-      </div>
+      <div className={styles.table} />
+      <div className={styles.pot}>Pot: {state.tableData?.pot || 0}</div>
 
       <div className={styles.links}>
         <ButtonRefresh />
@@ -275,12 +271,16 @@ const PokerGame = () => {
           <Character
             key={300 + userId}
             image={image[userId]}
-            left={size.width < 768
-              ? positionx[(i + 6 - currentPlayer) % 6]
-              : positionx_desktop[(i + 6 - currentPlayer) % 6]}
-            top={size.width < 768
-              ? positiony[(i + 6 - currentPlayer) % 6]
-              : positiony_desktop[(i + 6 - currentPlayer) % 6]}
+            left={
+              size.width < 768
+                ? positionx[(i + 6 - currentPlayer) % 6]
+                : positionx_desktop[(i + 6 - currentPlayer) % 6]
+            }
+            top={
+              size.width < 768
+                ? positiony[(i + 6 - currentPlayer) % 6]
+                : positiony_desktop[(i + 6 - currentPlayer) % 6]
+            }
             user={userId === 0}
             index={userId}
             raise={raise[userId]}
@@ -300,10 +300,8 @@ const PokerGame = () => {
             players[activePlayer] &&
             (activePlayer === currentPlayer ? (
               <div className={styles.turnButton}>
-                <div className={styles.title}>
-                  Your Turn
-                </div>
-                <div className={styles.dot}/>
+                <div className={styles.title}>Your Turn</div>
+                <div className={styles.dot} />
               </div>
             ) : (
               <div className={styles.turnButton}>
@@ -314,10 +312,7 @@ const PokerGame = () => {
             ))}
           {isWon && (
             <div className={styles.turnButton}>
-              <div
-                className={styles.title}
-                style={{marginRight: '5px'}}
-              >
+              <div className={styles.title} style={{ marginRight: '5px' }}>
                 {`${players[winnerIndex]?.name} wins`}
               </div>
             </div>
@@ -328,46 +323,28 @@ const PokerGame = () => {
       {activePlayer === currentPlayer ? (
         <div className={styles.buttonContainerParent}>
           <div className={styles.actionButtonGroup}>
-            <button
-              disabled={isWon}
-              onClick={() => onFold()}
-            >
+            <button disabled={isWon} onClick={() => onFold()}>
               FOLD
             </button>
             {canCall() ? (
-              <button
-                disabled={!canCall() || isWon}
-                onClick={() => onCall()}
-              >
+              <button disabled={!canCall() || isWon} onClick={() => onCall()}>
                 CALL
               </button>
             ) : (
-              <button
-                disabled={isWon}
-                onClick={() => onCheck()}
-              >
+              <button disabled={isWon} onClick={() => onCheck()}>
                 CHECK
               </button>
             )}
             {canRaise(getMinRaise()) ? (
-              <button
-                disabled={isWon}
-                onClick={() => setRaiseShow(true)}
-              >
+              <button disabled={isWon} onClick={() => setRaiseShow(true)}>
                 RAISE
               </button>
             ) : canBet(forcedBets.bigBlind) ? (
-              <button
-                disabled={isWon}
-                onClick={() => onBet()}
-              >
+              <button disabled={isWon} onClick={() => onBet()}>
                 BET
               </button>
             ) : (
-              <button
-                disabled={isWon}
-                onClick={() => onBet()}
-              >
+              <button disabled={isWon} onClick={() => onBet()}>
                 BET
               </button>
             )}
@@ -376,22 +353,13 @@ const PokerGame = () => {
       ) : (
         <div className={styles.buttonContainerParent}>
           <div className={styles.actionButtonGroup}>
-            <button
-              disabled
-              onClick={() => onFold()}
-            >
+            <button disabled onClick={() => onFold()}>
               FOLD
             </button>
-            <button
-              disabled
-              onClick={() => onCheck()}
-            >
+            <button disabled onClick={() => onCheck()}>
               CHECK
             </button>
-            <button
-              disabled
-              onClick={() => onBet()}
-            >
+            <button disabled onClick={() => onBet()}>
               BET
             </button>
           </div>

@@ -12,7 +12,7 @@ const Offline = () => {
         image={images.SOCIAL_SHARE}
       />
 
-      <div position="relative" zIndex={30}>
+      <div style={{ position: 'relative', zIndex: 30 }}>
         <div className={styles.playtitle}>Please connect to the Internet.</div>
       </div>
     </Layout>

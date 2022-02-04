@@ -43,13 +43,15 @@ const UserInfoDialog: React.FC<Props> = ({
 
   return (
     <section>
-      <div className={styles.close} style={{display: open ? 'flex' : 'none'}}>
+      <div className={styles.close} style={{ display: open ? 'flex' : 'none' }}>
         <AiOutlineClose color="white" />
       </div>
-      <div className={styles.dialog} style={{zIndex: open ? 10 : 0, opacity: open ? 1 : 0}} ref={dialog}>
-        <div className={styles.title}>
-          Your Player Stats
-        </div>
+      <div
+        className={styles.dialog}
+        style={{ zIndex: open ? 10 : 0, opacity: open ? 1 : 0 }}
+        ref={dialog}
+      >
+        <div className={styles.title}>Your Player Stats</div>
         <div className={styles.itemsContainer}>
           <div className={styles.itemContainer}>
             <span>ICE BALANCE</span>
@@ -74,7 +76,12 @@ const UserInfoDialog: React.FC<Props> = ({
             <span>DG BALANCE</span>
             <div className={styles.itemField}>
               <div className={styles.dgLabel}>{dg}</div>
-              <Image src="/images/dg-logo.png" width={25} height={25} alt="dg" />
+              <Image
+                src="/images/dg-logo.png"
+                width={25}
+                height={25}
+                alt="dg"
+              />
             </div>
           </div>
         </div>
@@ -100,7 +107,7 @@ const UserInfoDialog: React.FC<Props> = ({
                   </>
                 ) : (
                   <>
-                    <div className={styles.noneItem}/>
+                    <div className={styles.noneItem} />
                     <span style={{ opacity: 0.25 }}>+0%</span>
                   </>
                 )}
