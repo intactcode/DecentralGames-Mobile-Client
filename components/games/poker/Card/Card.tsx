@@ -15,7 +15,7 @@ const ProgressBar: React.FC<Props> = ({ type, number, transform }) => {
           type === 'hearts' || type === 'diamonds' ? styles.red : styles.black
         }
       >
-        {number}
+        {number === 'T' ? '10' : number}
       </div>
       <Image
         src={`/images/${type}.png`}

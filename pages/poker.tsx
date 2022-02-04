@@ -1,4 +1,4 @@
-import PokerGame from '../components/games/poker/GameBoard/GameBoard';
+import PokerGame from '../components/games/poker/PokerGame/PokerGame';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';

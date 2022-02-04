@@ -118,3 +118,17 @@
   border-radius: 50%;
   box-shadow: 0px 0px 36px #ffe976;
 }
+
+.fullhouse {
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  color: white;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 16px;
+  background: #d96060;
+  left: 50%;
+  transform: translateX(-34px);
+  width: fit-content;
+}
