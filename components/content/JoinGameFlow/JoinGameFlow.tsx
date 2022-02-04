@@ -3,7 +3,6 @@ import ButtonJoin from '../../buttons/ButtonJoin/ButtonJoin';
 import styles from './JoinGameFlow.module.scss';
 import { useStoreState } from '../../../store/Hooks';
 import { FaChevronLeft } from 'react-icons/fa';
-import Image from 'next/image'
 import Link from 'next/link';
 
 
@@ -31,7 +30,7 @@ const JoinGameFlow = () => {
           </p>
           <span className={styles.image_span}>
             <span className={styles.image_grouping}>
-              <Image
+              <img
                 className={styles.wearable_image}
                 src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_190_p0wyd7.png"
                 alt="wearables"
@@ -41,7 +40,7 @@ const JoinGameFlow = () => {
               </p>
             </span>
             <span className={styles.image_grouping}>
-              <Image
+              <img
                 className={styles.card_image}
                 src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_227_l1z7cv.png"
                 alt="cards"
@@ -51,7 +50,7 @@ const JoinGameFlow = () => {
               </p>
             </span>
             <span className={styles.image_grouping}>
-              <Image
+              <img
                 className={styles.diamond_image}
                 src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_248_ztffw6.png"
                 alt="ice logo"
@@ -72,7 +71,7 @@ const JoinGameFlow = () => {
           </Link>
           <h2 className={styles.welcome}>Ice Wearable Required!</h2>
 
-          <Image
+          <img
             className={styles.wearable_image_two}
             src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643841009/Group_805_fh2pph.png"
             alt="wearables"

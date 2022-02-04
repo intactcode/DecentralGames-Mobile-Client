@@ -1,6 +1,5 @@
 import { useStoreState, useStoreDispatch } from '../../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../../store/Wallet';
-import Image from 'next/image'; 
 import styles from './ButtonConnect.module.scss';
 
 
@@ -19,7 +18,7 @@ const ButtonLogin = () => {
         }}
       >
         <span className={styles.button_span}>
-          <Image
+          <img
             className={styles.button_image}
             src="/images/home/metamask.svg"
             alt="metamask"

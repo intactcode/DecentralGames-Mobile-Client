@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styles from '../../styles/Home.module.css';
 import { useStoreState, useStoreDispatch } from '../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../store/Wallet';
@@ -34,7 +33,7 @@ const ButtonLogin = () => {
         // eslint-disable-next-line react/jsx-curly-newline
       }
     >
-      <Image
+      <img
         src="/images/home/metamask.svg"
         alt="metamask"
         width={35}
