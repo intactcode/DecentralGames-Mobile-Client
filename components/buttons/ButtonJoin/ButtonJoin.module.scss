@@ -21,9 +21,13 @@
     line-height: 40px;
     bottom: 24px;
     transition: all 0.25s ease;
+    border: none;
   }
 
-  .button_join:hover {
+  .button_join:hover,
+  .button_join:active,
+  .button_join:focus {
+    cursor: pointer;
     background-color: #006eff;
     color: white;
     filter: brightness(0.8);
