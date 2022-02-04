@@ -1,6 +1,6 @@
 import { FaChevronDown } from 'react-icons/fa';
 import Image from 'next/image';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '../ProgressBar/ProgressBar';
 import styles from './Setting.module.scss';
 
 interface Props {

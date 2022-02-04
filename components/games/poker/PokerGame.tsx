@@ -9,12 +9,11 @@ import { useStoreState } from '../../../store/Hooks';
 import Character from './Character/Character';
 import Setting from './Setting/Setting';
 import LeaderBoard from './LeaderBoard/LeaderBoard';
-import ProgressBar from './ProgressBar';
+import ProgressBar from './ProgressBar/ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
 import Card from './Card/Card';
 import ButtonRefresh from '../../buttons/ButtonRefresh/ButtonRefresh';
-
 
 const Progress = styled(Box)`
   display: flex;
@@ -220,6 +219,12 @@ const PokerGame = () => {
       tablecard.current?.progressDeal();
     }, 100);
   };
+
+  useEffect(() => {
+    return () => {
+      state.socket.leave();
+    };
+  }, [state.socket]);
 
   // if user is logged-in set game parameters, else send them to the join page
   useEffect(() => {
