@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 // import Image from 'next/image';
 import ButtonHome from '../buttons/ButtonHome';
 import styles from '../../styles/Home.module.css';
@@ -9,13 +8,13 @@ const PageNotFound = () => {
       <div className={styles.gradient} />
       <div className={styles.back} />
 
-      <Box position="relative" zIndex={30}>
-        <Box className={styles.playtitle}>
+      <div position="relative" zIndex={30}>
+        <div className={styles.playtitle}>
           The requested page could not be found.
-        </Box>
+        </div>
 
         <ButtonHome page={'404'} />
-      </Box>
+      </div>
     </main>
   );
 };

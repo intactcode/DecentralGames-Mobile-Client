@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useStoreState } from '../../store/Hooks';
 import { useStoreDispatch } from '../../store/Hooks';
@@ -36,15 +35,15 @@ const JoinGame = (props: any) => {
       <div className={styles.gradient} />
       <div className={styles.back} />
 
-      <Box position="relative" zIndex={30}>
+      <div position="relative" zIndex={30}>
         {state.userStatus >= 4 ? (
-          <Box className={styles.playtitle}>
+          <div className={styles.playtitle}>
             Joining Game [{Object.keys(state.socket).length}]
-          </Box>
+          </div>
         ) : (
           <ButtonLogin />
         )}
-      </Box>
+      </div>
     </main>
   );
 };

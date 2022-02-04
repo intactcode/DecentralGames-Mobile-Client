@@ -1,148 +1,67 @@
 import { useEffect, useRef, useState } from 'react';
 import { maxBy, get, isEmpty } from 'lodash';
-import { Box, Typography, Button } from '@mui/material';
-import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useStoreState } from '../../../store/Hooks';
-import Character from './Character/Character';
-import Setting from './Setting/Setting';
-import LeaderBoard from './LeaderBoard/LeaderBoard';
-import ProgressBar from './ProgressBar/ProgressBar';
-import RaiseSetting from './RaiseSetting/RaiseSetting';
-import TableCard from './tableCard/TableCard';
-import Card from './Card/Card';
-import ButtonRefresh from '../../buttons/ButtonRefresh/ButtonRefresh';
+import { useStoreState } from '../../../../store/Hooks';
+import Character from '../Character/Character';
+import Setting from '../Setting/Setting';
+import LeaderBoard from '../LeaderBoard/LeaderBoard';
+import ProgressBar from '../ProgressBar/ProgressBar';
+import RaiseSetting from '../RaiseSetting/RaiseSetting';
+import TableCard from '../tableCard/TableCard';
+import Card from '../Card/Card';
+import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
 
-const Progress = styled(Box)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px;
-  > div {
-    color: #ffffffbf;
-    font-size: 8px;
-    line-height: normal;
-    font-weight: normal;
-  }
-`;
-
-const Body = styled(Box)`
-  width: 100%;
-  position: relative;
-  margin-top: 72px;
-  font-family: 'Larsseit';
-  height: calc(100vh - 72px);
-`;
-
-const Table = styled(Box)`
-  background-image: url('images/Table.svg');
-  width: 100%;
-  max-width: 374px;
-  height: 578px;
-  position: absolute;
-  left: calc(50% - 187px);
-`;
-
-const Links = styled(Box)`
-  position: absolute;
-  width: 340px;
-  display: flex;
-  justify-content: space-between;
-  left: calc(50% - 170px);
-`;
-
-const BlackEllipse = styled(Box)`
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  background: #2a2a2a;
-  border-radius: 50%;
-  color: #616161;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
-`;
+import gameboardstyles from '../../poker/GameBoard/GameBoard.module.scss';
 
 type ActionButtonGroupProps = {
   turn: number;
 };
 
-const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginTop: '10px',
-  opacity: turn === 0 ? 1 : 0.2,
-  ['& > div']: {
-    borderRadius: '8px',
-    width: '110px',
-    height: '69px',
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    margin: '5px',
-    color: 'white',
-  },
-  ['& div:nth-of-type(1)']: {
-    background: '#A82822',
-  },
-  ['& div:nth-of-type(2)']: {
-    background: '#3D86A6',
-  },
-  ['& div:nth-of-type(3)']: {
-    background: '#3DA65A',
-  },
-  ['& div:nth-of-type(4)']: {
-    background: '#3DA65A',
-  },
-}));
+const ActionButtonGroup: React.FC<ActionButtonGroupProps> = ({
+  children,
+  turn,
+}) => {
+  return (
+    <div
+      className={gameboardstyles.actionButtonGroup}
+      style={{ opacity: turn === 0 ? 1 : 0.2 }}
+    >
+      {children}
+    </div>
+  );
+};
 
-const StyledCommunityCard = styled(Box)`
-  left: 50%;
-  z-index: 10000;
-  transform: translateX(-50%);
-  top: 200px;
-  max-width: 180px;
-  justify-content: center;
-  flex-wrap: wrap;
-  display: flex;
-`;
+// Hooks
+function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
 
-const TurnButton = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 11px;
+  useEffect(() => {
+    // only execute all the code below in client side
+    if (typeof window !== 'undefined') {
+      function handleResize(): void {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }
 
-  width: 110px;
-  height: 31px;
+      // Add event listener
+      window.addEventListener('resize', handleResize);
 
-  border: 1px solid #67dd6c;
-  box-sizing: border-box;
-  border-radius: 8px;
-  cursor: pointer;
+      // Call handler right away so state gets updated with initial window size
+      handleResize();
 
-  margin-left: 232px;
-  margin-top: -30px;
-  zindex: 10;
-  position: absolute;
-`;
-
-const Dot = styled(Box)`
-  margin-top: 0px;
-  background: #00ff0a;
-  box-shadow: 0px 0px 4px rgba(4, 235, 68, 0.5);
-  border-radius: 50%;
-  width: 7px;
-  height: 7px;
-`;
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+  return windowSize;
+}
 
 const positionx = [
   'calc(50% - 36px)',
@@ -153,6 +72,17 @@ const positionx = [
   'calc(50% + 90px)',
 ];
 const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
+
+const positionx_desktop = [
+  'calc(50% - 380px)',
+  'calc(50% + 110px)',
+  'calc(50% + 110px)',
+  'calc(50% + 300px)',
+  'calc(50% - 190px)',
+  'calc(50% - 190px)',
+];
+const positiony_desktop = ['200px', '395px', '30px', '200px', '30px', '395px'];
+
 const image = [
   'images/character.png',
   'images/character.png',
@@ -203,6 +133,7 @@ const PokerGame = () => {
   const winnerIndex = get(winners, '0.0.0', isInHand.indexOf(true));
   const isWon = !isEmpty(winners);
 
+  const size = useWindowSize();
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   const onReset = () => {
@@ -222,7 +153,7 @@ const PokerGame = () => {
 
   useEffect(() => {
     return () => {
-      state.socket.leave();
+      // state.socket.leave();
     };
   }, [state.socket]);
 
@@ -346,28 +277,30 @@ const PokerGame = () => {
   };
 
   return (
-    <Body>
+    <div className={gameboardstyles.gameboardBody}>
       {!!state.waitTime && (
-        <Typography
-          variant="h1"
-          component="h2"
-          ml={6}
-          mt={3}
-          position="absolute"
+        <h2
+          style={{
+            marginLeft: 6,
+            marginTop: 3,
+            position: 'absolute',
+            fontSize: '6rem',
+            fontWeight: 300,
+            fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+            lineHeight: 1.167,
+            letterSpacing: '-0.01562em',
+          }}
         >
           {state.waitTime}
-        </Typography>
+        </h2>
       )}
       <TableCard ref={tablecard} />
-      <StyledCommunityCard display="flex" position="absolute">
+      <div className={gameboardstyles.styledCommunityCard}>
         {get(state, 'tableData.community', []).map(
           (card: any, index: number) => {
             return (
-              <Box
+              <div
                 key={`card_${index}`}
-                mr={0.5}
-                ml={0.5}
-                mt={1}
                 style={{
                   borderColor: winnerPair.find(
                     (winner: any) =>
@@ -378,29 +311,40 @@ const PokerGame = () => {
                   borderStyle: 'solid',
                   borderWidth: '2px',
                   borderRadius: '7px',
+                  marginRight: 0.5,
+                  marginLeft: 0.5,
+                  marginTop: 1,
                 }}
               >
                 <Card type={card.suit} number={card.rank} />
-              </Box>
+              </div>
             );
           }
         )}
-      </StyledCommunityCard>
-      <Table />
-      <Typography variant="h4" component="h5" ml={6}>
+      </div>
+      <div className={gameboardstyles.gameboardTable}></div>
+      <h2
+        style={{
+          marginLeft: 10,
+          fontWeight: 400,
+          fontSize: '2.125rem',
+          lineHeight: 1.235,
+          letterSpacing: '0.00735em',
+        }}
+      >
         Pot: {state.tableData?.pot || 0}
-      </Typography>
+      </h2>
 
-      <Links>
+      <div className={gameboardstyles.gameboardLinks}>
         <ButtonRefresh />
-
-        <BlackEllipse
-          right="40px"
+        <div
+          className={gameboardstyles.gameboardBlackEllipse}
+          style={{ right: '40px' }}
           onClick={() => setIsLeaderBoard(!isleaderboard)}
         >
           <MdOutlineLeaderboard />
-        </BlackEllipse>
-      </Links>
+        </div>
+      </div>
 
       {positionx.map((data, i) => {
         const userId = (i + 6 + userPosition) % 6;
@@ -408,8 +352,12 @@ const PokerGame = () => {
           <Character
             key={300 + userId}
             image={image[userId]}
-            left={positionx[(i + 6 - currentPlayer) % 6]}
-            top={positiony[(i + 6 - currentPlayer) % 6]}
+            left={size.width < 768
+              ? positionx[(i + 6 - currentPlayer) % 6]
+              : positionx_desktop[(i + 6 - currentPlayer) % 6]}
+            top={size.width < 768
+              ? positiony[(i + 6 - currentPlayer) % 6]
+              : positiony_desktop[(i + 6 - currentPlayer) % 6]}
             active={active[userId]}
             user={userId === 0}
             turn={turn == userId}
@@ -425,144 +373,146 @@ const PokerGame = () => {
         );
       })}
 
-      <Box display="flex" justifyContent="center">
-        <Box pt="575px" px="20px" width="374px">
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div
+          style={{
+            paddingTop: '575px',
+            paddingLeft: '20px',
+            paddingRight: '20px',
+            width: '374px',
+          }}
+        >
           {!isWon &&
             players[activePlayer] &&
             (activePlayer === currentPlayer ? (
-              <TurnButton>
-                <Box style={{ marginTop: '2px' }} color="white" fontSize="11px">
+              <div className={gameboardstyles.turnButton}>
+                <div
+                  style={{ marginTop: '2px', color: 'white', fontSize: '11px' }}
+                >
                   Your Turn
-                </Box>
-                <Dot />
-              </TurnButton>
+                </div>
+                <div className={gameboardstyles.dot} />
+              </div>
             ) : (
-              <TurnButton>
-                <Box style={{ marginTop: '2px' }} color="white" fontSize="11px">
+              <div className={gameboardstyles.turnButton}>
+                <div
+                  style={{ marginTop: '2px', color: 'white', fontSize: '11px' }}
+                >
                   {`${players[activePlayer]?.name}'s Turn`}
-                </Box>
-              </TurnButton>
+                </div>
+              </div>
             ))}
           {isWon && (
-            <TurnButton>
-              <Box
-                style={{ marginTop: '2px' }}
-                color="white"
-                fontSize="11px"
-                mr="5px"
+            <div className={gameboardstyles.turnButton}>
+              <div
+                style={{
+                  marginTop: '2px',
+                  color: 'white',
+                  fontSize: '11px',
+                  marginRight: '5px',
+                }}
               >
                 {`${players[winnerIndex]?.name} wins`}
-              </Box>
-            </TurnButton>
+              </div>
+            </div>
           )}
-        </Box>
-      </Box>
-
+        </div>
+      </div>
       {activePlayer === currentPlayer ? (
-        <Box display="flex" justifyContent="center">
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
-            <Button
-              variant="contained"
-              component="div"
+            <button
+              className={gameboardstyles.button_fold}
               onClick={() => turn !== -1 && onFold()}
             >
               Fold
-            </Button>
+            </button>
             {canCall() ? (
-              <Button
-                variant="contained"
-                component="div"
-                disabled={!canCall()}
+              <button
+                className={gameboardstyles.button_check}
                 onClick={() => turn !== -1 && onCall()}
               >
                 Call
-              </Button>
+              </button>
             ) : (
-              <Button
-                variant="contained"
-                component="div"
+              <button
+                className={gameboardstyles.button_check}
                 onClick={() => turn !== -1 && onCheck()}
               >
                 Check
-              </Button>
+              </button>
             )}
             {canRaise(getMinRaise()) ? (
-              <Button
-                variant="contained"
-                component="div"
+              <button
+                className={gameboardstyles.button_bet}
                 onClick={() => turn !== -1 && setRaiseShow(true)}
               >
                 Raise
-              </Button>
+              </button>
             ) : canBet(forcedBets.bigBlind) ? (
-              <Button
-                variant="contained"
-                component="div"
+              <button
+                className={gameboardstyles.button_bet}
                 onClick={() => turn !== -1 && onBet()}
               >
                 Bet
-              </Button>
+              </button>
             ) : (
-              <Button
-                variant="contained"
-                component="div"
+              <button
+                className={gameboardstyles.button_bet}
                 onClick={() => turn !== -1 && onBet()}
               >
                 Bet
-              </Button>
+              </button>
             )}
           </ActionButtonGroup>
-        </Box>
+        </div>
       ) : (
-        <Box display="flex" justifyContent="center">
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
-            <Button
+            <button
               disabled
-              variant="contained"
-              component="div"
+              className={gameboardstyles.button_fold}
               onClick={() => turn !== -1 && onFold()}
             >
               Fold
-            </Button>
-            <Button
-              disabled
-              variant="contained"
-              component="div"
+            </button>
+            <button
+              className={gameboardstyles.button_check}
               onClick={() => turn !== -1 && onCheck()}
             >
               Check
-            </Button>
-            <Button
-              disabled
-              variant="contained"
-              component="div"
+            </button>
+            <button
+              className={gameboardstyles.button_bet}
               onClick={() => turn !== -1 && onBet()}
             >
               Bet
-            </Button>
+            </button>
           </ActionButtonGroup>
-        </Box>
+        </div>
       )}
 
-      <Box
-        display="flex"
-        justifyContent="center"
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '15px',
+        }}
         onClick={() => setIsSetting(!issetting)}
-        mb="15px"
       >
-        <Progress>
-          <Box>See the river 15 times</Box>
+        <div className={gameboardstyles.progressbarsContainer}>
+          <div>See the river 15 times</div>
           <ProgressBar type={0} percent={7 / 15} text="7/15" width="74px" />
-        </Progress>
-        <Progress>
-          <Box>Win the hand X times</Box>
+        </div>
+        <div className={gameboardstyles.progressbarsContainer}>
+          <div>Win the hand X times</div>
           <ProgressBar type={1} percent={1 / 8} text="1/8" width="74px" />
-        </Progress>
-        <Progress>
-          <Box>Get a three of a kind X times</Box>
+        </div>
+        <div className={gameboardstyles.progressbarsContainer}>
+          <div>Get a three of a kind X times</div>
           <ProgressBar type={2} percent={3 / 4} text="3/4" width="74px" />
-        </Progress>
-      </Box>
+        </div>
+      </div>
       <RaiseSetting
         open={raiseshow}
         setOpen={setRaiseShow}
@@ -573,21 +523,29 @@ const PokerGame = () => {
       <Setting open={issetting} setOpen={setIsSetting} />
       <LeaderBoard open={isleaderboard} setOpen={setIsLeaderBoard} />
       {win[0] && (
-        <Box position="absolute" left="calc(50% - 90px)" top="570px">
+        <div
+          style={{
+            position: 'absolute',
+            left: 'calc(50% - 90px)',
+            top: '570px',
+          }}
+        >
           <Image
             src="/images/200ice.svg"
             alt="200ice"
             width={176}
             height={111}
           />
-        </Box>
+        </div>
       )}
       {win[0] && (
-        <Box
-          position="absolute"
-          left="calc(50% - 43px)"
-          top="450px"
-          zIndex={19}
+        <div
+          style={{
+            position: 'absolute',
+            left: 'calc(50% - 43px)',
+            top: '450px',
+            zIndex: 19,
+          }}
         >
           <Image
             src="/images/fullhouse.svg"
@@ -595,9 +553,9 @@ const PokerGame = () => {
             width={84}
             height={35}
           />
-        </Box>
+        </div>
       )}
-    </Body>
+    </div>
   );
 };
 

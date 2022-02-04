@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import styles from '../../styles/Home.module.css';
 import { useStoreState } from '../../store/Hooks';
@@ -25,9 +24,9 @@ const ButtonHome = (props: { page: string }) => {
   }
 
   return (
-    <Box className={styles.connectWallet} onClick={() => clickedHome()}>
+    <div className={styles.connectWallet} onClick={() => clickedHome()}>
       Back to Home
-    </Box>
+    </div>
   );
 };
 

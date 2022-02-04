@@ -1,6 +1,6 @@
-import { Button } from 'semantic-ui-react';
 import { useStoreState, useStoreDispatch } from '../../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../../store/Wallet';
+import Image from 'next/image'; 
 import styles from './ButtonConnect.module.scss';
 
 
@@ -10,7 +10,7 @@ const ButtonLogin = () => {
 
   return (
     <div className={styles.container}>
-      <Button
+      <button
         className={styles.button_connect}
         onClick={() => {
           state.userAddress
@@ -19,14 +19,14 @@ const ButtonLogin = () => {
         }}
       >
         <span className={styles.button_span}>
-          <img
+          <Image
             className={styles.button_image}
             src="/images/home/metamask.svg"
             alt="metamask"
           />
           <p className={styles.button_text}>Connect Your Wallet</p>
         </span>
-      </Button>
+      </button>
     </div>
   );
 };
