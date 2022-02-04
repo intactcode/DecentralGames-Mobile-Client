@@ -78,6 +78,16 @@ const Socket = () => {
             });
 
             room.onMessage('waitTime', (data: any) => {
+              if (data === 0) {
+                dispatch({
+                  type: 'set_winner',
+                  data: {
+                    cards: [],
+                    winners: [],
+                  },
+                });
+              }
+
               dispatch({
                 type: 'wait_time',
                 data,
@@ -85,11 +95,6 @@ const Socket = () => {
             });
 
             room.onMessage('started', () => {
-              dispatch({
-                type: 'set_winner',
-                data: [],
-              });
-
               dispatch({
                 type: 'wait_time',
                 data: 0,

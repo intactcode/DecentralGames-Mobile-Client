@@ -67,15 +67,13 @@ const BlackEllipse = styled(Box)`
   filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
 `;
 
-type ActionButtonGroupProps = {
-  turn: number;
-};
+type ActionButtonGroupProps = {};
 
-const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(({ turn }) => ({
+const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   marginTop: '10px',
-  opacity: turn === 0 ? 1 : 0.2,
+  opacity: 1,
   ['& > div']: {
     borderRadius: '8px',
     width: '110px',
@@ -180,8 +178,6 @@ const PokerGame = () => {
   const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 
-  const [turn, setTurn] = useState(0);
-  const [active, setActive] = useState<boolean[]>(new Array(6).fill(true));
   const [raiseamount, setRaiseAmount] = useState(600);
   const [raiseshow, setRaiseShow] = useState(false);
   const [raise, setRaise] = useState<number[]>([]);
@@ -190,7 +186,6 @@ const PokerGame = () => {
   const [iceamount, setIceAmount] = useState(22000); // eslint-disable-line
   const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
-  const [win, setWin] = useState<boolean[]>(new Array(6).fill(false));
   const [players, setPlayers] = useState<any[]>([]);
   const [userPosition, setUserPosition] = useState(0);
   const forcedBets = state.currentSeat.forced || {};
@@ -198,10 +193,10 @@ const PokerGame = () => {
   const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
   const winners = state.winners;
+  const isWon = !isEmpty(winners.winners);
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const isInHand = state.tableData?.isInHand ?? [];
   const winnerIndex = get(winners, '0.0.0', isInHand.indexOf(true));
-  const isWon = !isEmpty(winners);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -209,9 +204,6 @@ const PokerGame = () => {
     console.log('Set game parameters');
 
     setRaise([]);
-    setTurn(0);
-    setWin(new Array(6).fill(false));
-    setActive(new Array(6).fill(true));
 
     tablecard.current?.newRound();
 
@@ -410,9 +402,7 @@ const PokerGame = () => {
             image={image[userId]}
             left={positionx[(i + 6 - currentPlayer) % 6]}
             top={positiony[(i + 6 - currentPlayer) % 6]}
-            active={active[userId]}
             user={userId === 0}
-            turn={turn == userId}
             index={userId}
             raise={raise[userId]}
             onFold={onFold}
@@ -460,11 +450,12 @@ const PokerGame = () => {
 
       {activePlayer === currentPlayer ? (
         <Box display="flex" justifyContent="center">
-          <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
+          <ActionButtonGroup>
             <Button
               variant="contained"
               component="div"
-              onClick={() => turn !== -1 && onFold()}
+              disabled={isWon}
+              onClick={() => onFold()}
             >
               Fold
             </Button>
@@ -472,8 +463,8 @@ const PokerGame = () => {
               <Button
                 variant="contained"
                 component="div"
-                disabled={!canCall()}
-                onClick={() => turn !== -1 && onCall()}
+                disabled={!canCall() || isWon}
+                onClick={() => onCall()}
               >
                 Call
               </Button>
@@ -481,7 +472,8 @@ const PokerGame = () => {
               <Button
                 variant="contained"
                 component="div"
-                onClick={() => turn !== -1 && onCheck()}
+                disabled={isWon}
+                onClick={() => onCheck()}
               >
                 Check
               </Button>
@@ -490,7 +482,8 @@ const PokerGame = () => {
               <Button
                 variant="contained"
                 component="div"
-                onClick={() => turn !== -1 && setRaiseShow(true)}
+                disabled={isWon}
+                onClick={() => setRaiseShow(true)}
               >
                 Raise
               </Button>
@@ -498,7 +491,8 @@ const PokerGame = () => {
               <Button
                 variant="contained"
                 component="div"
-                onClick={() => turn !== -1 && onBet()}
+                disabled={isWon}
+                onClick={() => onBet()}
               >
                 Bet
               </Button>
@@ -506,7 +500,8 @@ const PokerGame = () => {
               <Button
                 variant="contained"
                 component="div"
-                onClick={() => turn !== -1 && onBet()}
+                disabled={isWon}
+                onClick={() => onBet()}
               >
                 Bet
               </Button>
@@ -515,12 +510,12 @@ const PokerGame = () => {
         </Box>
       ) : (
         <Box display="flex" justifyContent="center">
-          <ActionButtonGroup turn={turn === -1 ? 1 : 0}>
+          <ActionButtonGroup>
             <Button
               disabled
               variant="contained"
               component="div"
-              onClick={() => turn !== -1 && onFold()}
+              onClick={() => onFold()}
             >
               Fold
             </Button>
@@ -528,7 +523,7 @@ const PokerGame = () => {
               disabled
               variant="contained"
               component="div"
-              onClick={() => turn !== -1 && onCheck()}
+              onClick={() => onCheck()}
             >
               Check
             </Button>
@@ -536,7 +531,7 @@ const PokerGame = () => {
               disabled
               variant="contained"
               component="div"
-              onClick={() => turn !== -1 && onBet()}
+              onClick={() => onBet()}
             >
               Bet
             </Button>
@@ -572,7 +567,7 @@ const PokerGame = () => {
       />
       <Setting open={issetting} setOpen={setIsSetting} />
       <LeaderBoard open={isleaderboard} setOpen={setIsLeaderBoard} />
-      {win[0] && (
+      {isWon && (
         <Box position="absolute" left="calc(50% - 90px)" top="570px">
           <Image
             src="/images/200ice.svg"
@@ -582,7 +577,7 @@ const PokerGame = () => {
           />
         </Box>
       )}
-      {win[0] && (
+      {isWon && (
         <Box
           position="absolute"
           left="calc(50% - 43px)"
