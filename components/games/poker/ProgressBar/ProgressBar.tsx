@@ -1,6 +1,5 @@
-import { Box } from '@mui/material';
-import { styled } from '@mui/system';
 import { useEffect, useRef, useState } from 'react';
+import styles from './ProgressBar.module.scss';
 
 interface Props {
   type: number;
@@ -9,36 +8,6 @@ interface Props {
   width?: string;
   height?: number;
 }
-
-const ProgressBarBack = styled(Box)`
-  display: flex;
-  margin-top: 5px;
-  border-radius: 24px;
-  background: #000000e5;
-  height: 20px;
-  cursor: pointer;
-`;
-
-const Progress = styled(Box)`
-  height: 20px;
-  box-shadow: inset 0px -4px 8px rgba(255, 255, 255, 0.05);
-  border-radius: 24px;
-  min-width: 20px !important;
-  transition: width 0.1s;
-`;
-
-interface TitleProps {
-  type?: any;
-}
-
-const Title = styled(Box)<TitleProps>(({ type }) => ({
-  minWidth: '30px',
-  position: 'absolute',
-  fontSize: type ? '8px' : '10px',
-  right: type ? '5px' : '-36px',
-  top: '6px',
-  color: type ? 'white' : 'rgb(255,255,255,0.75)',
-}));
 
 const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
   const backgrounds = [
@@ -76,6 +45,13 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
   };
 
   useEffect(() => {
+    if (offset.current) {
+      const { offsetWidth } = offset.current;
+      setCurPercent(percent * offsetWidth);
+    }
+  }, [offset, percent]);
+
+  useEffect(() => {
     document.addEventListener('mouseup', function (event) {
       if (offset.current && !offset.current.contains(event.target)) {
         setIsMove(false);
@@ -93,18 +69,33 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
   };
 
   return (
-    <ProgressBarBack
-      position="relative"
+    <div
+      className={styles.progressBarBack}
+      style={{width: width}}
       onMouseDown={(e) => handleClick(e)}
       onTouchMove={(e) => MoveAction(e)}
       onMouseMove={(e) => MoveAction(e)}
       onMouseUp={() => handleUp()}
       ref={offset}
-      width={width}
     >
-      <Progress width={curpercent} style={{ background: backgrounds[type] }} />
-      <Title type={curtext.includes('/').toString()}>{curtext}</Title>
-    </ProgressBarBack>
+      <div
+        className={styles.progress}
+        style={{
+          width: curpercent,
+          background: backgrounds[type],
+        }}
+      />
+      <div
+        className={styles.title}
+        style={{
+          fontSize: curtext.includes('/') ? '8px' : '10px',
+          right: curtext.includes('/') ? '5px' : '-36px',
+          color: curtext.includes('/') ? 'white' : 'rgb(255,255,255,0.75)',
+        }}
+      >
+        {curtext}
+      </div>
+    </div>
   );
 };
 
