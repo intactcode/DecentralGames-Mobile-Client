@@ -9,7 +9,7 @@ import { useStoreState } from '../../../store/Hooks';
 import Character from './Character/Character';
 import Setting from './Setting/Setting';
 import LeaderBoard from './LeaderBoard/LeaderBoard';
-import ProgressBar from './ProgressBar';
+import ProgressBar from './ProgressBar/ProgressBar';
 import RaiseSetting from './RaiseSetting';
 import TableCard from './tableCard/TableCard';
 import Card from './Card/Card';
