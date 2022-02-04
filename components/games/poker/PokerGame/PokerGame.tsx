@@ -1,146 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { maxBy, get, isEmpty } from 'lodash';
-import { Box, Typography, Button } from '@mui/material';
-import { styled } from '@mui/system';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useStoreState } from '../../../store/Hooks';
-import Character from './Character/Character';
-import Setting from './Setting/Setting';
-import LeaderBoard from './LeaderBoard/LeaderBoard';
-import ProgressBar from './ProgressBar/ProgressBar';
-import RaiseSetting from './RaiseSetting/RaiseSetting';
-import TableCard from './tableCard/TableCard';
-import Card from './Card/Card';
-import ButtonRefresh from '../../buttons/ButtonRefresh/ButtonRefresh';
-
-const Progress = styled(Box)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px;
-  > div {
-    color: #ffffffbf;
-    font-size: 8px;
-    line-height: normal;
-    font-weight: normal;
-  }
-`;
-
-const Body = styled(Box)`
-  width: 100%;
-  position: relative;
-  margin-top: 72px;
-  font-family: 'Larsseit';
-  height: calc(100vh - 72px);
-`;
-
-const Table = styled(Box)`
-  background-image: url('images/Table.svg');
-  width: 100%;
-  max-width: 374px;
-  height: 578px;
-  position: absolute;
-  left: calc(50% - 187px);
-`;
-
-const Links = styled(Box)`
-  position: absolute;
-  width: 340px;
-  display: flex;
-  justify-content: space-between;
-  left: calc(50% - 170px);
-`;
-
-const BlackEllipse = styled(Box)`
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  background: #2a2a2a;
-  border-radius: 50%;
-  color: #616161;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
-`;
-
-type ActionButtonGroupProps = {};
-
-const ActionButtonGroup = styled(Box)<ActionButtonGroupProps>(() => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  marginTop: '10px',
-  opacity: 1,
-  ['& > div']: {
-    borderRadius: '8px',
-    width: '110px',
-    height: '69px',
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    margin: '5px',
-    color: 'white',
-  },
-  ['& div:nth-of-type(1)']: {
-    background: '#A82822',
-  },
-  ['& div:nth-of-type(2)']: {
-    background: '#3D86A6',
-  },
-  ['& div:nth-of-type(3)']: {
-    background: '#3DA65A',
-  },
-  ['& div:nth-of-type(4)']: {
-    background: '#3DA65A',
-  },
-}));
-
-const StyledCommunityCard = styled(Box)`
-  left: 50%;
-  z-index: 10000;
-  transform: translateX(-50%);
-  top: 200px;
-  max-width: 180px;
-  justify-content: center;
-  flex-wrap: wrap;
-  display: flex;
-`;
-
-const TurnButton = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 11px;
-
-  width: 110px;
-  height: 31px;
-
-  border: 1px solid #67dd6c;
-  box-sizing: border-box;
-  border-radius: 8px;
-  cursor: pointer;
-
-  margin-left: 232px;
-  margin-top: -30px;
-  zindex: 10;
-  position: absolute;
-`;
-
-const Dot = styled(Box)`
-  margin-top: 0px;
-  background: #00ff0a;
-  box-shadow: 0px 0px 4px rgba(4, 235, 68, 0.5);
-  border-radius: 50%;
-  width: 7px;
-  height: 7px;
-`;
+import { useStoreState } from '../../../../store/Hooks';
+import Character from '../Character/Character';
+import Setting from '../Setting/Setting';
+import LeaderBoard from '../LeaderBoard/LeaderBoard';
+import ProgressBar from '../ProgressBar/ProgressBar';
+import RaiseSetting from '../RaiseSetting/RaiseSetting';
+import TableCard from '../tableCard/TableCard';
+import Card from '../Card/Card';
+import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
+import styles from './PokerGame.module.scss';
 
 const positionx = [
   'calc(50% - 36px)',
@@ -338,28 +210,20 @@ const PokerGame = () => {
   };
 
   return (
-    <Body>
+    <section className={styles.body}>
       {!!state.waitTime && (
-        <Typography
-          variant="h1"
-          component="h2"
-          ml={6}
-          mt={3}
-          position="absolute"
-        >
+        <div className={styles.waitTime}>
           {state.waitTime}
-        </Typography>
+        </div>
       )}
       <TableCard ref={tablecard} />
-      <StyledCommunityCard display="flex" position="absolute">
+      <div className={styles.styledCommunityCard}>
         {get(state, 'tableData.community', []).map(
           (card: any, index: number) => {
             return (
-              <Box
+              <div
+                className={styles.cardContainer}
                 key={`card_${index}`}
-                mr={0.5}
-                ml={0.5}
-                mt={1}
                 style={{
                   borderColor: winnerPair.find(
                     (winner: any) =>
@@ -367,32 +231,29 @@ const PokerGame = () => {
                   )
                     ? 'red'
                     : 'transparent',
-                  borderStyle: 'solid',
-                  borderWidth: '2px',
-                  borderRadius: '7px',
                 }}
               >
                 <Card type={card.suit} number={card.rank} />
-              </Box>
+              </div>
             );
           }
         )}
-      </StyledCommunityCard>
-      <Table />
-      <Typography variant="h4" component="h5" ml={6}>
+      </div>
+      <div className={styles.table}/>
+      <div className={styles.pot}>
         Pot: {state.tableData?.pot || 0}
-      </Typography>
+      </div>
 
-      <Links>
+      <div className={styles.links}>
         <ButtonRefresh />
 
-        <BlackEllipse
-          right="40px"
+        <div
+          className={styles.blackEllipse}
           onClick={() => setIsLeaderBoard(!isleaderboard)}
         >
           <MdOutlineLeaderboard />
-        </BlackEllipse>
-      </Links>
+        </div>
+      </div>
 
       {positionx.map((data, i) => {
         const userId = (i + 6 + userPosition) % 6;
@@ -415,149 +276,127 @@ const PokerGame = () => {
         );
       })}
 
-      <Box display="flex" justifyContent="center">
-        <Box pt="575px" px="20px" width="374px">
+      <div className={styles.buttonContainerParent}>
+        <div className={styles.turnButtonContainer}>
           {!isWon &&
             players[activePlayer] &&
             (activePlayer === currentPlayer ? (
-              <TurnButton>
-                <Box style={{ marginTop: '2px' }} color="white" fontSize="11px">
+              <div className={styles.turnButton}>
+                <div className={styles.title}>
                   Your Turn
-                </Box>
-                <Dot />
-              </TurnButton>
+                </div>
+                <div className={styles.dot}/>
+              </div>
             ) : (
-              <TurnButton>
-                <Box style={{ marginTop: '2px' }} color="white" fontSize="11px">
+              <div className={styles.turnButton}>
+                <div className={styles.title}>
                   {`${players[activePlayer]?.name}'s Turn`}
-                </Box>
-              </TurnButton>
+                </div>
+              </div>
             ))}
           {isWon && (
-            <TurnButton>
-              <Box
-                style={{ marginTop: '2px' }}
-                color="white"
-                fontSize="11px"
-                mr="5px"
+            <div className={styles.turnButton}>
+              <div
+                className={styles.title}
+                style={{marginRight: '5px'}}
               >
                 {`${players[winnerIndex]?.name} wins`}
-              </Box>
-            </TurnButton>
+              </div>
+            </div>
           )}
-        </Box>
-      </Box>
+        </div>
+      </div>
 
       {activePlayer === currentPlayer ? (
-        <Box display="flex" justifyContent="center">
-          <ActionButtonGroup>
-            <Button
-              variant="contained"
-              component="div"
+        <div className={styles.buttonContainerParent}>
+          <div className={styles.actionButtonGroup}>
+            <button
               disabled={isWon}
               onClick={() => onFold()}
             >
-              Fold
-            </Button>
+              FOLD
+            </button>
             {canCall() ? (
-              <Button
-                variant="contained"
-                component="div"
+              <button
                 disabled={!canCall() || isWon}
                 onClick={() => onCall()}
               >
-                Call
-              </Button>
+                CALL
+              </button>
             ) : (
-              <Button
-                variant="contained"
-                component="div"
+              <button
                 disabled={isWon}
                 onClick={() => onCheck()}
               >
-                Check
-              </Button>
+                CHECK
+              </button>
             )}
             {canRaise(getMinRaise()) ? (
-              <Button
-                variant="contained"
-                component="div"
+              <button
                 disabled={isWon}
                 onClick={() => setRaiseShow(true)}
               >
-                Raise
-              </Button>
+                RAISE
+              </button>
             ) : canBet(forcedBets.bigBlind) ? (
-              <Button
-                variant="contained"
-                component="div"
+              <button
                 disabled={isWon}
                 onClick={() => onBet()}
               >
-                Bet
-              </Button>
+                BET
+              </button>
             ) : (
-              <Button
-                variant="contained"
-                component="div"
+              <button
                 disabled={isWon}
                 onClick={() => onBet()}
               >
-                Bet
-              </Button>
+                BET
+              </button>
             )}
-          </ActionButtonGroup>
-        </Box>
+          </div>
+        </div>
       ) : (
-        <Box display="flex" justifyContent="center">
-          <ActionButtonGroup>
-            <Button
+        <div className={styles.buttonContainerParent}>
+          <div className={styles.actionButtonGroup}>
+            <button
               disabled
-              variant="contained"
-              component="div"
               onClick={() => onFold()}
             >
-              Fold
-            </Button>
-            <Button
+              FOLD
+            </button>
+            <button
               disabled
-              variant="contained"
-              component="div"
               onClick={() => onCheck()}
             >
-              Check
-            </Button>
-            <Button
+              CHECK
+            </button>
+            <button
               disabled
-              variant="contained"
-              component="div"
               onClick={() => onBet()}
             >
-              Bet
-            </Button>
-          </ActionButtonGroup>
-        </Box>
+              BET
+            </button>
+          </div>
+        </div>
       )}
 
-      <Box
-        display="flex"
-        justifyContent="center"
+      <div
+        className={styles.progressContainer}
         onClick={() => setIsSetting(!issetting)}
-        mb="15px"
       >
-        <Progress>
-          <Box>See the river 15 times</Box>
+        <div className={styles.progress}>
+          <span>See the river 15 times</span>
           <ProgressBar type={0} percent={7 / 15} text="7/15" width="74px" />
-        </Progress>
-        <Progress>
-          <Box>Win the hand X times</Box>
+        </div>
+        <div className={styles.progress}>
+          <span>Win the hand X times</span>
           <ProgressBar type={1} percent={1 / 8} text="1/8" width="74px" />
-        </Progress>
-        <Progress>
-          <Box>Get a three of a kind X times</Box>
+        </div>
+        <div className={styles.progress}>
+          <span>Get a three of a kind X times</span>
           <ProgressBar type={2} percent={3 / 4} text="3/4" width="74px" />
-        </Progress>
-      </Box>
+        </div>
+      </div>
       <RaiseSetting
         open={raiseshow}
         setOpen={setRaiseShow}
@@ -568,16 +407,16 @@ const PokerGame = () => {
       <Setting open={issetting} setOpen={setIsSetting} />
       <LeaderBoard open={isleaderboard} setOpen={setIsLeaderBoard} />
       {isWon && (
-        <Box position="absolute" left="calc(50% - 90px)" top="570px">
+        <div className={styles.wonImageContainer}>
           <Image
             src="/images/200ice.svg"
             alt="200ice"
             width={176}
             height={111}
           />
-        </Box>
+        </div>
       )}
-    </Body>
+    </section>
   );
 };
 
