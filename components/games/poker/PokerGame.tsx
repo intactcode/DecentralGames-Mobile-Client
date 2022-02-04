@@ -10,7 +10,7 @@ import Character from './Character/Character';
 import Setting from './Setting/Setting';
 import LeaderBoard from './LeaderBoard/LeaderBoard';
 import ProgressBar from './ProgressBar/ProgressBar';
-import RaiseSetting from './RaiseSetting';
+import RaiseSetting from './RaiseSetting/RaiseSetting';
 import TableCard from './tableCard/TableCard';
 import Card from './Card/Card';
 import ButtonRefresh from '../../buttons/ButtonRefresh/ButtonRefresh';
