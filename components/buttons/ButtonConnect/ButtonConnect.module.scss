@@ -17,9 +17,13 @@
     border-radius: 12px;
     bottom: 24px;
     transition: all 0.25s ease;
+    border: none;
   }
 
-  .button_connect:hover {
+  .button_connect:hover,
+  .button_connect:active,
+  .button_connect:focus {
+    cursor: pointer;
     background-color: #006eff;
     color: white;
     filter: brightness(0.8);

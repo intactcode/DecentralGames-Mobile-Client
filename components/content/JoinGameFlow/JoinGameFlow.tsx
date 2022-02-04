@@ -33,7 +33,6 @@ const JoinGameFlow = () => {
               <img
                 className={styles.wearable_image}
                 src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_190_p0wyd7.png"
-                layout="fill"
                 alt="wearables"
               />
               <p className={styles.lower_text}>
@@ -43,7 +42,6 @@ const JoinGameFlow = () => {
             <span className={styles.image_grouping}>
               <img
                 className={styles.card_image}
-                layout="fill"
                 src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_227_l1z7cv.png"
                 alt="cards"
               />
@@ -54,7 +52,6 @@ const JoinGameFlow = () => {
             <span className={styles.image_grouping}>
               <img
                 className={styles.diamond_image}
-                layout="fill"
                 src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_248_ztffw6.png"
                 alt="ice logo"
               />
@@ -76,7 +73,6 @@ const JoinGameFlow = () => {
 
           <img
             className={styles.wearable_image_two}
-            layout="fill"
             src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643841009/Group_805_fh2pph.png"
             alt="wearables"
           />

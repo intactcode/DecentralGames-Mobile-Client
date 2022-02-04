@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { Button } from 'semantic-ui-react';
 import styles from './ButtonJoin.module.scss';
 
+
 const ButtonJoin = () => {
   const router = useRouter();
   return (
