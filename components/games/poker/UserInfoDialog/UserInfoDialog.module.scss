@@ -1,8 +1,8 @@
 .close {
   cursor: pointer;
-  background: #1F1F1F;
+  background: #1f1f1f;
   position: absolute;
-  border: 1px solid #2A2A2A;
+  border: 1px solid #2a2a2a;
   box-sizing: border-box;
   box-shadow: 0px 10.6667px 21.3333px rgba(0, 0, 0, 0.24);
   border-radius: 50%;
@@ -15,7 +15,7 @@
   left: 135px;
   transition: background 0.3s;
   &:hover {
-      background: #333333;
+    background: #333333;
   }
 }
 
@@ -23,7 +23,7 @@
   top: -180px;
   position: absolute;
   left: -90px;
-  background: #1F1F1F;
+  background: #1f1f1f;
   border-radius: 24px;
   padding: 16px;
   overflow: hidden;
@@ -32,9 +32,9 @@
   transition: opacity 0.3s;
 
   span {
-      font-size: 9px;
-      color: rgb(255, 255, 255, 0.75);
-      margin-top: 4px;
+    font-size: 9px;
+    color: rgb(255, 255, 255, 0.75);
+    margin-top: 4px;
   }
 }
 
@@ -109,5 +109,5 @@
   background: radial-gradient(50% 50% at 50% 50%, #979797 0%, #6f6f6f 100%);
   border-radius: 8px;
   width: 37px;
-  height: 37px;  
+  height: 37px;
 }

@@ -1,5 +1,3 @@
-import { Box } from '@mui/material';
-import Image from 'next/image';
 import styles from '../../styles/Home.module.css';
 import { useStoreState, useStoreDispatch } from '../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../store/Wallet';
@@ -25,7 +23,7 @@ const ButtonLogin = () => {
   }
 
   return (
-    <Box
+    <div
       className={styles.connectWallet}
       onClick={
         () =>
@@ -35,14 +33,14 @@ const ButtonLogin = () => {
         // eslint-disable-next-line react/jsx-curly-newline
       }
     >
-      <Image
+      <img
         src="/images/home/metamask.svg"
         alt="metamask"
         width={35}
         height={35}
       />
-      <Box>{buttonText}</Box>
-    </Box>
+      <div>{buttonText}</div>
+    </div>
   );
 };
 

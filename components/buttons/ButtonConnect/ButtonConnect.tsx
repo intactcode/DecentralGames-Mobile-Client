@@ -1,8 +1,6 @@
-import { Button } from 'semantic-ui-react';
 import { useStoreState, useStoreDispatch } from '../../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../../store/Wallet';
 import styles from './ButtonConnect.module.scss';
-
 
 const ButtonLogin = () => {
   const state = useStoreState(); // returns global state from Context API store
@@ -10,7 +8,7 @@ const ButtonLogin = () => {
 
   return (
     <div className={styles.container}>
-      <Button
+      <button
         className={styles.button_connect}
         onClick={() => {
           state.userAddress
@@ -26,7 +24,7 @@ const ButtonLogin = () => {
           />
           <p className={styles.button_text}>Connect Your Wallet</p>
         </span>
-      </Button>
+      </button>
     </div>
   );
 };

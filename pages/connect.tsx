@@ -4,7 +4,6 @@ import constants from '../components/common/Constants';
 import images from '../components/common/Images';
 import JoinGameFlow from '../components/content/JoinGameFlow/JoinGameFlow';
 
-
 const Connect = () => {
   return (
     <Layout>

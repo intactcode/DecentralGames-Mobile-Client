@@ -1,122 +1,122 @@
 .closeIcon {
-    top: 6px;
-    left: 15px;
-    position: absolute;
-    background: #1f1f1f;
-    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
-    border-radius: 24px;
-    width: 48px;
-    height: 48px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 20;  
+  top: 6px;
+  left: 15px;
+  position: absolute;
+  background: #1f1f1f;
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
+  border-radius: 24px;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 20;
 }
 
 .raiseField {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 0px;
-    margin-top: -72px;
-    transition: max-height 0.5s;
-    overflow: hidden;
-    z-index: 20;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  margin-top: -72px;
+  transition: max-height 0.5s;
+  overflow: hidden;
+  z-index: 20;
 
-    .raisePanel {
-        padding: 0px 16px;
-        margin-top: 60px;
-        background: #1f1f1f;
-        box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
-        border-radius: 16px 16px 0px 0px;
-        width: 100vw;
-        height: 156px;
+  .raisePanel {
+    padding: 0px 16px;
+    margin-top: 60px;
+    background: #1f1f1f;
+    box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 16px 16px 0px 0px;
+    width: 100vw;
+    height: 156px;
 
-        .raiseInput {
-            margin-top: 16px;
-            padding: 6px 6px 6px 18px;
-            justify-content: space-between;
-            display: flex;
-            align-items: center;
-            border: 1px solid #2a2a2a;
-            box-sizing: border-box;
-            border-radius: 16px;
-            height: 58px;
+    .raiseInput {
+      margin-top: 16px;
+      padding: 6px 6px 6px 18px;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+      border: 1px solid #2a2a2a;
+      box-sizing: border-box;
+      border-radius: 16px;
+      height: 58px;
 
-            .title {
-                color: #FFFFFF80;
-                width: 85px;
-                font-weight: bold;
-                margin-right: 5px;
-                margin-top: 5px;
-            }
+      .title {
+        color: #ffffff80;
+        width: 85px;
+        font-weight: bold;
+        margin-right: 5px;
+        margin-top: 5px;
+      }
 
-            .inputContainer {
-                display: flex;
-                justify-content: flex-start;
-                margin-top: 6px;
-                
-                input {
-                    background: transparent;
-                    border-width: 0px;
-                    outline-width: 0px;
-                    text-align: center;
-                    color: white;
-                    font-size: 30px;
-                    width: 90px;
-                    font-weight: bold;
-                    margin-top: -6px;
-                }
-            }
+      .inputContainer {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 6px;
 
-            .raiseButton {
-                background: #3da65a;
-                color: white;
-                border-radius: 12px;
-                display: flex;
-                align-self: flex-end;
-                justify-content: center;
-                align-items: center;
-                width: 90px;
-                height: 46px;
-                cursor: pointer;
-                z-index: 1;
-                margin-bottom: 2px;
-            }
-
-            .raiseButtonBack {
-                background: #2b8c46;
-                color: white;
-                border-radius: 12px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 90px;
-                height: 46px;
-                cursor: pointer;
-                margin-left: -90px;
-                margin-top: 2px;
-                z-index: 0;              
-            }
+        input {
+          background: transparent;
+          border-width: 0px;
+          outline-width: 0px;
+          text-align: center;
+          color: white;
+          font-size: 30px;
+          width: 90px;
+          font-weight: bold;
+          margin-top: -6px;
         }
+      }
 
-        .raiseAction {
-            margin-top: 12px;
-            color: white;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
+      .raiseButton {
+        background: #3da65a;
+        color: white;
+        border-radius: 12px;
+        display: flex;
+        align-self: flex-end;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        height: 46px;
+        cursor: pointer;
+        z-index: 1;
+        margin-bottom: 2px;
+      }
 
-            div {
-                background: #2a2a2a;
-                border-radius: 8px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                width: calc(25% - 4px);
-                height: 48px;
-            }
-        }
+      .raiseButtonBack {
+        background: #2b8c46;
+        color: white;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        height: 46px;
+        cursor: pointer;
+        margin-left: -90px;
+        margin-top: 2px;
+        z-index: 0;
+      }
     }
+
+    .raiseAction {
+      margin-top: 12px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        background: #2a2a2a;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        width: calc(25% - 4px);
+        height: 48px;
+      }
+    }
+  }
 }

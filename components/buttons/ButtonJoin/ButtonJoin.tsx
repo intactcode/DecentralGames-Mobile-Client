@@ -1,20 +1,12 @@
-import { useRouter } from 'next/router';
-import { Button } from 'semantic-ui-react';
+import Link from 'next/link';
 import styles from './ButtonJoin.module.scss';
 
-
 const ButtonJoin = () => {
-  const router = useRouter();
   return (
     <div className={styles.container}>
-      <Button
-        className={styles.button_join}
-        onClick={() => {
-          router.push('/join-poker');
-        }}
-      >
-        Join Game
-      </Button>
+      <Link href="/join-poker">
+        <a className={styles.button_join}>Join Game</a>
+      </Link>
     </div>
   );
 };

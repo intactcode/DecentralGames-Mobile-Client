@@ -25,12 +25,12 @@ const RaiseSetting: React.FC<Props> = ({
       {!keyboardOpen ? (
         <div
           className={styles.raiseField}
-          style={{maxHeight: open ? '400px' : '0px'}}
+          style={{ maxHeight: open ? '400px' : '0px' }}
         >
           <div className={styles.raisePanel}>
             <div
               className={styles.closeIcon}
-              style={{display: open ? 'flex' : 'none'}}
+              style={{ display: open ? 'flex' : 'none' }}
               onClick={() => {
                 setOpen(false);
                 setKeyboardOpen(false);
@@ -39,9 +39,7 @@ const RaiseSetting: React.FC<Props> = ({
               <FaChevronDown fontSize="20px" />
             </div>
             <div className={styles.raiseInput}>
-              <div className={styles.title}>
-                Your Bet:
-              </div>
+              <div className={styles.title}>Your Bet:</div>
               <span className={styles.inputContainer}>
                 <input
                   className="raise"
@@ -70,7 +68,7 @@ const RaiseSetting: React.FC<Props> = ({
                 >
                   Raise
                 </div>
-                <div className={styles.raiseButtonBack}/>
+                <div className={styles.raiseButtonBack} />
               </span>
             </div>
             <div className={styles.raiseAction}>
@@ -84,12 +82,12 @@ const RaiseSetting: React.FC<Props> = ({
       ) : (
         <div
           className={styles.raiseField}
-          style={{maxHeight: open ? '400px' : '0px'}}
+          style={{ maxHeight: open ? '400px' : '0px' }}
         >
           <div className={styles.raisePanel}>
             <div
               className={styles.closeIcon}
-              style={{display: open ? 'flex' : 'none'}}
+              style={{ display: open ? 'flex' : 'none' }}
               onClick={() => {
                 setOpen(false);
                 setKeyboardOpen(false);
@@ -98,9 +96,7 @@ const RaiseSetting: React.FC<Props> = ({
               <FaChevronDown fontSize="20px" />
             </div>
             <div className={styles.raiseInput}>
-              <div className={styles.title}>
-                Your Bet:
-              </div>
+              <div className={styles.title}>Your Bet:</div>
               <span className={styles.inputContainer}>
                 <input
                   className="raise"
@@ -129,7 +125,7 @@ const RaiseSetting: React.FC<Props> = ({
                 >
                   Raise
                 </div>
-                <div className={styles.raiseButtonBack}/>
+                <div className={styles.raiseButtonBack} />
               </span>
             </div>
             <div className={styles.raiseAction}>

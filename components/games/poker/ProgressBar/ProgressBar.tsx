@@ -71,7 +71,7 @@ const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
   return (
     <div
       className={styles.progressBarBack}
-      style={{width: width}}
+      style={{ width: width }}
       onMouseDown={(e) => handleClick(e)}
       onTouchMove={(e) => MoveAction(e)}
       onMouseMove={(e) => MoveAction(e)}
