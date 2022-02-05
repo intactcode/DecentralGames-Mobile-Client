@@ -252,7 +252,7 @@ const PokerGame = () => {
         )}
       </div>
       <div className={styles.table} />
-      <div className={styles.pot}>Pot: {state.tableData?.pot || 0}</div>
+      {/* <div className={styles.pot}>Pot: {state.tableData?.pot || 0}</div> */}
 
       <div className={styles.links}>
         <ButtonRefresh />
