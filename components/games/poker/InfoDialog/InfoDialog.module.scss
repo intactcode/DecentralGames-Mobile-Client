@@ -48,3 +48,16 @@
     }
   }
 }
+.userItemContainer {
+  margin-right: 4px;
+  margin-left: 4px;
+  font-size: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userItemImgContainer {
+  width: 37px;
+  height: 37px;
+}
