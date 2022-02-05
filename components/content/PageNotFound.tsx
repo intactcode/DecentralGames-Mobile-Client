@@ -8,7 +8,7 @@ const PageNotFound = () => {
       <div className={styles.gradient} />
       <div className={styles.back} />
 
-      <div position="relative" zIndex={30}>
+      <div style={{position:'relative', zIndex:30}} >
         <div className={styles.playtitle}>
           The requested page could not be found.
         </div>
