@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { maxBy, get, isEmpty } from 'lodash';
-import { MdOutlineLeaderboard, MdOutlineListAlt } from 'react-icons/md';
-import { BsEmojiSmile } from 'react-icons/bs';
+import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useStoreState } from '../../../../store/Hooks';
@@ -253,13 +252,15 @@ const PokerGame = () => {
         )}
       </div>
       <div className={styles.table} />
-      <div className={styles.pot}>Pot: {state.tableData?.pot || 0}</div>
+      {/* <div className={styles.pot}>Pot: {state.tableData?.pot || 0}</div> */}
 
       <div className={styles.links}>
         <ButtonRefresh />
-
-        <div className={styles.blackEllipse}>
-          <BsEmojiSmile />
+        <div
+          className={styles.blackEllipse}
+          onClick={() => setIsLeaderBoard(!isleaderboard)}
+        >
+          <MdOutlineLeaderboard />
         </div>
       </div>
 
@@ -363,17 +364,6 @@ const PokerGame = () => {
           </div>
         </div>
       )}
-      <div className={styles.links} style={{ top: 'unset' }}>
-        <div className={styles.blackEllipse}>
-          <MdOutlineListAlt />
-        </div>
-        <div
-          className={styles.blackEllipse}
-          onClick={() => setIsLeaderBoard(!isleaderboard)}
-        >
-          <MdOutlineLeaderboard />
-        </div>
-      </div>
       <div
         className={styles.progressContainer}
         onClick={() => setIsSetting(!issetting)}
