@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 
+// eslint-disable-next-line import/prefer-default-export
 export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
+    width: 0,
+    height: 0,
   });
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      function handleResize(): void {
+      
+      const handleResize=()=> {
         setWindowSize({
           width: window.innerWidth,
           height: window.innerHeight,
         });
       }
-
       // Add event listener
       window.addEventListener('resize', handleResize);
 
