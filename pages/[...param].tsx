@@ -1,4 +1,4 @@
-import PageNotFound from '../components/content/PageNotFound';
+import PageNotFound from '../components/content/PageNotFound/PageNotFound';
 import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';

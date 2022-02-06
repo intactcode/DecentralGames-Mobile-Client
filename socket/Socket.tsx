@@ -4,7 +4,7 @@ import { useStoreState, useStoreDispatch } from '../store/Hooks';
 import * as Colyseus from 'colyseus.js';
 
 const Socket = () => {
-  const state = useStoreState(); // returns current state from Context API store
+  const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
   /////////////////////////////////////////////////////////////////////////////////////////

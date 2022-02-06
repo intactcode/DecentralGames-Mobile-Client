@@ -3,16 +3,16 @@ import { maxBy, get, isEmpty } from 'lodash';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useStoreState } from '../../../../store/Hooks';
+import { useStoreState, useWindowSize } from '../../../../store/Hooks';
 import Character from '../Character/Character';
 import Setting from '../Setting/Setting';
 import LeaderBoard from '../LeaderBoard/LeaderBoard';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import RaiseSetting from '../RaiseSetting/RaiseSetting';
-import TableCard from '../tableCard/TableCard';
+import TableCard from '../TableCardRename/TableCard';
 import Card from '../Card/Card';
 import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
-import { useWindowSize } from '../../../../hooks/useWindowSize';
+// import { useWindowSize } from '../../../../hooks/useWindowSize';
 
 import styles from './PokerGame.module.scss';
 
