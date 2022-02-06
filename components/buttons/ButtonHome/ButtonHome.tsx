@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-// import styles from '../../styles/Home.module.css';
 import { useStoreState } from '../../../store/Hooks';
 import styles from './ButtonHome.module.scss';
 
