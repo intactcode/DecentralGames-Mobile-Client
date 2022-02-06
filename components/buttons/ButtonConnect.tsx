@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { useStoreState, useStoreDispatch } from '../../../store/Hooks';
-import { connectWallet, disconnectWallet } from '../../../store/Wallet';
-import styles from './ButtonConnect.module.scss';
+import { useStoreState, useStoreDispatch } from '../../store/Hooks';
+import { connectWallet, disconnectWallet } from '../../store/Wallet';
+import styles from './Button.module.scss';
 
 const ButtonConnect = () => {
   const state = useStoreState(); // returns global state from Context API store

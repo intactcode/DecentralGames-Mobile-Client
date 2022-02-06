@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../../store/Hooks';
-import styles from './ButtonHome.module.scss';
+import { useStoreState } from '../../store/Hooks';
+import styles from './Button.module.scss';
 
 declare const window: any;
 

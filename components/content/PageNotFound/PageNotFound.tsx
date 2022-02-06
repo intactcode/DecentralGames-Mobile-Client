@@ -1,5 +1,5 @@
 // import Image from 'next/image';
-import ButtonHome from '../../buttons/ButtonHome/ButtonHome';
+import ButtonHome from '../../buttons/ButtonHome';
 import styles from './PageNotFound.module.scss';
 
 const PageNotFound = () => {

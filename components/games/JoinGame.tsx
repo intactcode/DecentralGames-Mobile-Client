@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useStoreState } from '../../store/Hooks';
 import { useStoreDispatch } from '../../store/Hooks';
-import ButtonLogin from '../buttons/ButtonLogin/ButtonLogin';
+import ButtonLogin from '../buttons/ButtonLogin';
 import styles from '../../styles/Home.module.css';
 
 const JoinGame = (props: any) => {

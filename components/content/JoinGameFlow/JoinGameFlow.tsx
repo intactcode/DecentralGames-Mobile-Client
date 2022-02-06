@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import ButtonConnect from '../../buttons/ButtonConnect/ButtonConnect';
-import ButtonJoin from '../../buttons/ButtonJoin/ButtonJoin';
+import ButtonConnect from '../../buttons/ButtonConnect';
+import ButtonJoin from '../../buttons/ButtonJoin';
 import styles from './JoinGameFlow.module.scss';
 import { useStoreState } from '../../../store/Hooks';
 import { FaChevronLeft } from 'react-icons/fa';
