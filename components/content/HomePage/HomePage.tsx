@@ -1,4 +1,4 @@
-import ButtonPlay from '../../buttons/ButtonPlay/ButtonPlay';
+import ButtonPlay from '../../buttons/ButtonPlay';
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {
