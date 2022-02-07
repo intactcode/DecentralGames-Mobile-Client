@@ -174,3 +174,13 @@
   font-size: 18px;
   margin-left: 18px;
 }
+
+.layoutPosition {
+  position: relative;
+  overflow-x: hidden;
+  @media all and (display-mode: standalone) {
+    /* only apply if app is running standalone */
+    overflow-x: unset;
+    height: 100vh;
+  }
+}
