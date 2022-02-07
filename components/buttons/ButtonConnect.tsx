@@ -1,8 +1,9 @@
-import { useStoreState, useStoreDispatch } from '../../../store/Hooks';
-import { connectWallet, disconnectWallet } from '../../../store/Wallet';
-import styles from './ButtonConnect.module.scss';
+/* eslint-disable @next/next/no-img-element */
+import { useStoreState, useStoreDispatch } from '../../store/Hooks';
+import { connectWallet, disconnectWallet } from '../../store/Wallet';
+import styles from './Button.module.scss';
 
-const ButtonLogin = () => {
+const ButtonConnect = () => {
   const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
 
@@ -22,6 +23,7 @@ const ButtonLogin = () => {
             src="/images/home/metamask.svg"
             alt="metamask"
           />
+
           <p className={styles.button_text}>Connect Your Wallet</p>
         </span>
       </button>
@@ -29,4 +31,4 @@ const ButtonLogin = () => {
   );
 };
 
-export default ButtonLogin;
+export default ButtonConnect;

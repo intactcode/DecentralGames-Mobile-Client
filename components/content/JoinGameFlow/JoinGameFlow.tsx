@@ -1,8 +1,10 @@
-import ButtonConnect from '../../buttons/ButtonConnect/ButtonConnect';
-import ButtonJoin from '../../buttons/ButtonJoin/ButtonJoin';
+/* eslint-disable @next/next/no-img-element */
+import ButtonConnect from '../../buttons/ButtonConnect';
+import ButtonJoin from '../../buttons/ButtonJoin';
 import styles from './JoinGameFlow.module.scss';
 import { useStoreState } from '../../../store/Hooks';
 import { FaChevronLeft } from 'react-icons/fa';
+import images from '../../../components/common/Images';
 import Link from 'next/link';
 
 const JoinGameFlow = () => {
@@ -21,19 +23,23 @@ const JoinGameFlow = () => {
               <FaChevronLeft fontSize="20px" />
             </div>
           </Link>
+
           <h2 className={styles.welcome}>
             Welcome to Free to Play <br /> Play-to-Earn ICE Poker!
           </h2>
+
           <p className={styles.play_text}>
             Play poker for free. Earn real cash value.
           </p>
+
           <span className={styles.image_span}>
             <span className={styles.image_grouping}>
               <img
                 className={styles.wearable_image}
-                src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_190_p0wyd7.png"
+                src={images.WEARABLES_1}
                 alt="wearables"
               />
+
               <p className={styles.lower_text}>
                 Get a <br /> Wearable
               </p>
@@ -41,9 +47,10 @@ const JoinGameFlow = () => {
             <span className={styles.image_grouping}>
               <img
                 className={styles.card_image}
-                src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_227_l1z7cv.png"
+                src={images.CARDS}
                 alt="cards"
               />
+
               <p className={styles.lower_text}>
                 Play Free <br /> Poker
               </p>
@@ -51,14 +58,16 @@ const JoinGameFlow = () => {
             <span className={styles.image_grouping}>
               <img
                 className={styles.diamond_image}
-                src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643834689/Group_248_ztffw6.png"
+                src={images.DIAMOND}
                 alt="ice logo"
               />
+
               <p className={styles.lower_text}>
                 Earn <br /> Ice
               </p>
             </span>
           </span>
+
           <ButtonConnect />
         </div>
       ) : (
@@ -68,11 +77,12 @@ const JoinGameFlow = () => {
               <FaChevronLeft fontSize="20px" />
             </div>
           </Link>
+
           <h2 className={styles.welcome}>Ice Wearable Required!</h2>
 
           <img
             className={styles.wearable_image_two}
-            src="https://res.cloudinary.com/dnzambf4m/image/upload/v1643841009/Group_805_fh2pph.png"
+            src={images.WEARABLES_2}
             alt="wearables"
           />
 

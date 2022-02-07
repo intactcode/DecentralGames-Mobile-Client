@@ -7,4 +7,5 @@ coverage
 
 #ignore specific files
 Constants.tsx
+Images.tsx
 node_modules/**

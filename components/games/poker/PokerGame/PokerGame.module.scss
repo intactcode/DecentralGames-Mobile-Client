@@ -40,6 +40,7 @@
     max-width: 760px;
     height: 500px;
     position: absolute;
+    top:50px;
     left: calc(50% - 380px);
     @include media-ltl-xm {
       background-image: url('/images/Table.svg');
@@ -55,7 +56,8 @@
     width: 70%;
     left: 15%;
     justify-content: space-between;
-    top: 0;
+    top: 50px;
+    z-index: 10;
     @include media-ltl-xm {
       width: 340px;
       left: calc(50% - 170px);
@@ -168,8 +170,11 @@
   .actionButtonGroup {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: -40px;
     opacity: 1;
+    @include media-ltl-xm {
+      margin-top: 20px;
+    }
 
     button {
       display: inline-block;

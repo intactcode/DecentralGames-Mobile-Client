@@ -1,6 +1,8 @@
-import styles from '../../styles/Home.module.css';
+/* eslint-disable @next/next/no-img-element */
+// import styles from '../../styles/Home.module.css';
 import { useStoreState, useStoreDispatch } from '../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../store/Wallet';
+import styles from './Button.module.scss';
 
 const ButtonLogin = () => {
   const state = useStoreState(); // returns global state from Context API store
@@ -39,6 +41,7 @@ const ButtonLogin = () => {
         width={35}
         height={35}
       />
+
       <div>{buttonText}</div>
     </div>
   );
