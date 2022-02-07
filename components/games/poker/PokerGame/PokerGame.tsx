@@ -12,7 +12,6 @@ import RaiseSetting from '../RaiseSetting/RaiseSetting';
 import TableCard from '../TableCardRename/TableCard';
 import Card from '../Card/Card';
 import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
-// import { useWindowSize } from '../../../../hooks/useWindowSize';
 
 import styles from './PokerGame.module.scss';
 
@@ -24,7 +23,7 @@ const positionx = [
   'calc(50% + 90px)',
   'calc(50% + 90px)',
 ];
-const positiony = ['460px', '330px', '140px', '0px', '140px', '330px'];
+const positiony = ['510px', '380px', '190px', '50px', '190px', '380px'];
 
 const positionx_desktop = [
   'calc(50% - 380px)',
@@ -34,7 +33,7 @@ const positionx_desktop = [
   'calc(50% - 190px)',
   'calc(50% - 190px)',
 ];
-const positiony_desktop = ['200px', '375px', '5px', '200px', '5px', '375px'];
+const positiony_desktop = ['250px', '405px', '55px', '250px', '55px', '405px'];
 
 const image = [
   'images/character.png',
@@ -252,7 +251,7 @@ const PokerGame = () => {
         )}
       </div>
       <div className={styles.table} />
-      {/* <div className={styles.pot}>Pot: {state.tableData?.pot || 0}</div> */}
+      <div className={styles.pot}>Pot: {state.tableData?.pot || 0}</div>
 
       <div className={styles.links}>
         <ButtonRefresh />
