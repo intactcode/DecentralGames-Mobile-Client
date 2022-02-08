@@ -33,7 +33,7 @@ const positionx_desktop = [
   'calc(50% - 190px)',
   'calc(50% - 190px)',
 ];
-const positiony_desktop = ['250px', '405px', '55px', '250px', '55px', '405px'];
+const positiony_desktop = ['250px', '420px', '55px', '250px', '55px', '420px'];
 
 const image = [
   'images/character.png',
@@ -265,10 +265,12 @@ const PokerGame = () => {
 
       {positionx.map((data, i) => {
         const userId = (i + 6 + userPosition) % 6;
+        const classString = 'characterPos' + `${i}`;
         return (
           <Character
             key={300 + userId}
             image={image[userId]}
+            classString = {classString}
             left={
               size.width < 768
                 ? positionx[(i + 6 - currentPlayer) % 6]
@@ -319,7 +321,7 @@ const PokerGame = () => {
       </div>
 
       {activePlayer === currentPlayer ? (
-        <div className={styles.buttonContainerParent}>
+        <div className={styles.buttonContainerParentBottom}>
           <div className={styles.actionButtonGroup}>
             <button disabled={isWon} onClick={() => onFold()}>
               FOLD
@@ -349,7 +351,7 @@ const PokerGame = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.buttonContainerParent}>
+        <div className={styles.buttonContainerParentBottom}>
           <div className={styles.actionButtonGroup}>
             <button disabled onClick={() => onFold()}>
               FOLD
