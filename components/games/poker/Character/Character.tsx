@@ -59,7 +59,7 @@ const Character: React.FC<Props> = ({
   const ranking = get(winners, 'winners.0.0.1.ranking', 0);
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
 
-  const isWon = !isEmpty(winners.winners);
+  const isWon = !isEmpty(winners);
 
   const rpositionx = ['10px', '-40px', '-40px', '10px', '58px', '58px'];
   const rpositiony = ['-80px', '20px', '20px', '120px', '20px', '20px'];
@@ -68,8 +68,6 @@ const Character: React.FC<Props> = ({
   const dealery = ['-5px', '60px', '-20px', '60px', '-20px', '60px'];
 
   const [infomodalopen, setInfoModalOpen] = useState(false);
-
-  console.log('--------winner-index-----', winnerIndex);
 
   return (
     <section

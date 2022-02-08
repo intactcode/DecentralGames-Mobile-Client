@@ -77,7 +77,7 @@ const PokerGame = () => {
   const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
   const winners = state.winners;
-  const isWon = !isEmpty(winners.winners);
+  const isWon = !isEmpty(winners);
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const isInHand = state.tableData?.isInHand ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
