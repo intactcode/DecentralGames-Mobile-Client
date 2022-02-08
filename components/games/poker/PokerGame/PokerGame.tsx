@@ -304,7 +304,10 @@ const PokerGame = () => {
                 <div className={styles.dot} />
               </div>
             ) : (
-              <div className={styles.turnButton}>
+              <div
+                className={styles.turnButton}
+                style={{borderColor: '#2a2a2a'}}
+              >
                 <div className={styles.title}>
                   {`${players[activePlayer]?.name}'s Turn`}
                 </div>
