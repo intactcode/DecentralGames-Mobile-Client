@@ -16,7 +16,11 @@
   margin-top: 72px;
   font-family: 'Larsseit';
   height: calc(100vh - 72px);
-
+  @media all and (display-mode: standalone) { 
+    /* only apply if app is running standalone */
+    margin-top: 50px;
+    height: calc(100vh - 50px);
+  }
   .waitTime {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 300;
@@ -29,7 +33,7 @@
   .pot {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 400;
-    font-size: 2.125rem;
+    font-size: 2rem;
     margin-left: 48px;
   }
 
@@ -40,13 +44,18 @@
     max-width: 760px;
     height: 500px;
     position: absolute;
-    top:50px;
+    top: 50px;
     left: calc(50% - 380px);
     @include media-ltl-xm {
       background-image: url('/images/Table.svg');
       max-width: 374px;
       height: 578px;
       left: calc(50% - 187px);
+    }
+    @media all and (display-mode: standalone) {
+      /* only apply if app is running standalone */
+        height: 55vh;
+        background-size: 100% 100%;
     }
   }
 
@@ -103,6 +112,15 @@
   .buttonContainerParent {
     display: flex;
     justify-content: center;
+    @media all and (display-mode: standalone) {
+      /* only apply if app is running standalone */
+      height: 65vh;
+    }
+  }
+
+  .buttonContainerParentBottom {
+    display: flex;
+    justify-content: center;
   }
 
   .turnButtonContainer {
@@ -152,7 +170,10 @@
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
-
+    @media all and (display-mode: standalone) {
+      /* only apply if app is running standalone */
+      margin-bottom: 0px;
+    }
     .progress {
       display: flex;
       align-items: center;
@@ -175,7 +196,10 @@
     @include media-ltl-xm {
       margin-top: 20px;
     }
-
+    @media all and (display-mode: standalone) {
+      /* only apply if app is running standalone */
+      margin-top: 1vh;
+    }
     button {
       display: inline-block;
       border-radius: 8px;
@@ -345,3 +369,4 @@
   }
   transform: translateY(4px);
 }
+

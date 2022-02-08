@@ -4,13 +4,13 @@ import styles from './Button.module.scss';
 const ButtonJoin = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.button_connect}>
-        <span className={styles.button_span}>
-          <Link href="/join-poker">
+      <Link href="/join-poker">
+        <div className={styles.button_connect}>
+          <span className={styles.button_span}>
             <a className={styles.button_text}>Join Game</a>
-          </Link>
-        </span>
-      </div>
+          </span>
+        </div>
+      </Link>
     </div>
   );
 };

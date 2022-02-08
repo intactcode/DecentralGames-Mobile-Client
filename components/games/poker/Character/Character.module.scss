@@ -132,3 +132,56 @@
   transform: translateX(-34px);
   width: fit-content;
 }
+
+.characterPos1 {
+  @media all and (max-width: 767px)and (display-mode: standalone) {
+    left: calc(50% - 130px) !important;
+    top: 42vh !important;
+  }
+  @media all and (min-width: 768px) and (display-mode: standalone) {
+    top: 55% !important;
+  }
+}
+.characterPos2 {
+  @media all and (max-width: 767px) and (display-mode: standalone) {
+    top: 21vh !important;
+    left: calc(50% - 130px) !important;
+  }
+  @media all and (min-width: 768px) and (display-mode: standalone) {
+    top: 7% !important;
+  }
+}
+.characterPos3 {
+  @media all and (min-width: 768px) and (display-mode: standalone) {
+    // left: calc(50% + 230px) !important;
+    top: 30vh !important;
+  }
+}
+.characterPos4 {
+  @media all and (max-width: 767px) and (display-mode: standalone) {
+    top: 21vh !important;
+    left: calc(50% + 55px) !important;
+  }
+  @media all and (min-width: 768px) and (display-mode: standalone) {
+    top: 7% !important;
+  }
+}
+.characterPos5 {
+  @media all and (max-width: 767px) and (display-mode: standalone) {
+    left: calc(50% + 55px) !important;
+    top: 42vh !important;
+  }
+  @media all and (min-width: 768px) and (display-mode: standalone) {
+    /* only apply if app is running standalone */
+    top: 55% !important;
+  }
+}
+.characterPos0 {
+  @media all and (max-width: 767px) and (display-mode: standalone) {
+    top: 54% !important;
+  }
+  @media all and (min-width: 768px) and (display-mode: standalone) {
+    // left: calc(50% - 315px) !important;
+    top: 30vh !important;
+  }
+}

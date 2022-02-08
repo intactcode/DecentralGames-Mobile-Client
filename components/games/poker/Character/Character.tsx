@@ -35,6 +35,7 @@ interface Props {
   xp?: number;
   dg?: number;
   data?: any;
+  classString: string;
 }
 
 const Character: React.FC<Props> = ({
@@ -49,6 +50,7 @@ const Character: React.FC<Props> = ({
   xp,
   dg,
   data,
+  classString,
 }) => {
   const state = useStoreState();
   const currentSeat = state.currentSeat?.currentSeat;
@@ -75,7 +77,9 @@ const Character: React.FC<Props> = ({
         position: 'absolute',
         left: left,
         top: top,
+        zIndex:20,
       }}
+      className={styles[classString]}
     >
       {index === activePlayer && (
         <>
