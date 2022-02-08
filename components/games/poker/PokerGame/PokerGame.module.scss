@@ -30,11 +30,25 @@
     position: absolute;
   }
 
-  .pot {
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    font-weight: 400;
-    font-size: 2rem;
-    margin-left: 48px;
+  .potContainer {
+    display: flex;
+    position: relative;
+    top: 210px;
+    justify-content: center;
+    z-index: 99;
+
+    .pot {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+      width: auto !important;
+  
+      .amount {
+        color: white;
+        margin-left: 4px;
+      }
+    }
   }
 
   .table {
@@ -121,6 +135,7 @@
   .buttonContainerParentBottom {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
   }
 
   .turnButtonContainer {
