@@ -30,11 +30,25 @@
     position: absolute;
   }
 
-  .pot {
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    font-weight: 400;
-    font-size: 2rem;
-    margin-left: 48px;
+  .potContainer {
+    display: flex;
+    position: relative;
+    top: 210px;
+    justify-content: center;
+    z-index: 99;
+
+    .pot {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+      width: auto !important;
+  
+      .amount {
+        color: white;
+        margin-left: 4px;
+      }
+    }
   }
 
   .table {
@@ -92,7 +106,7 @@
     left: 50%;
     z-index: 10000;
     transform: translateX(-50%);
-    top: 200px;
+    top: 230px;
     max-width: 180px;
     justify-content: center;
     flex-wrap: wrap;
@@ -121,6 +135,7 @@
   .buttonContainerParentBottom {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
   }
 
   .turnButtonContainer {
@@ -151,6 +166,7 @@
 
       .dot {
         margin-top: 0px;
+        margin-left: 4px;
         background: #00ff0a;
         box-shadow: 0px 0px 4px rgba(4, 235, 68, 0.5);
         border-radius: 50%;
@@ -160,6 +176,7 @@
 
       .title {
         margin-top: 2px;
+        text-align: center;
         color: white;
         font-size: 11px;
       }

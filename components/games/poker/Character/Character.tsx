@@ -79,7 +79,7 @@ const Character: React.FC<Props> = ({
         position: 'absolute',
         left: left,
         top: top,
-        zIndex:20,
+        zIndex: infomodalopen ? 21 : 20,
       }}
       className={styles[classString]}
     >
