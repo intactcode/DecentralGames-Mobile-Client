@@ -40,8 +40,6 @@ interface Props {
 
 const Character: React.FC<Props> = ({
   image,
-  left,
-  top,
   user,
   raise,
   index,
@@ -75,12 +73,11 @@ const Character: React.FC<Props> = ({
     <section
       style={{
         position: 'absolute',
-        left: left,
-        top: top,
         zIndex: infomodalopen ? 21 : 20,
       }}
       className={styles[classString]}
     >
+      {console.log(user)}
       {index === activePlayer && (
         <>
           <div className={styles.gradient} />
@@ -147,7 +144,7 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </div>
       <div className={styles.playerInfo}>
-        <div>{data?.name ?? 'Waiting...'}</div>
+        <div>{data?.name ?? `Waiting...${index}`}</div>
         {data && (
           <div className={styles.chipForBet}>
             <div className={styles.betAmount}>{data?.betSize}</div>

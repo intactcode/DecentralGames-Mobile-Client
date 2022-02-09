@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useStoreState } from '../../store/Hooks';
 import { useStoreDispatch } from '../../store/Hooks';
 import ButtonLogin from '../buttons/ButtonLogin';
-import styles from '../../styles/Home.module.css';
+import styles from '../../styles/Home.module.scss';
 
 const JoinGame = (props: any) => {
   const state = useStoreState(); // returns global state from Context API store

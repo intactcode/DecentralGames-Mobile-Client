@@ -25,8 +25,9 @@ const ButtonLogin = () => {
   }
 
   return (
+    <div className={styles.container}>
     <div
-      className={styles.connectWallet}
+      className={styles.button_connect}
       onClick={
         () =>
           state.userAddress
@@ -35,14 +36,24 @@ const ButtonLogin = () => {
         // eslint-disable-next-line react/jsx-curly-newline
       }
     >
-      <img
+      {/* <img
         src="/images/home/metamask.svg"
         alt="metamask"
         width={35}
         height={35}
       />
 
-      <div>{buttonText}</div>
+      <div>{buttonText}</div> */}
+      <span className={styles.button_span}>
+          <img
+            className={styles.button_image}
+            src="/images/home/metamask.svg"
+            alt="metamask"
+          />
+
+          <p className={styles.button_text}>{buttonText}</p>
+        </span>
+    </div>
     </div>
   );
 };
