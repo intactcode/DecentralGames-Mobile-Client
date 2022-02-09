@@ -2,7 +2,7 @@ import Layout from '../components/hoc/Layout';
 import Header from '../components/hoc/Header';
 import constants from '../components/common/Constants';
 import images from '../components/common/Images';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.scss';
 
 const Offline = () => {
   return (

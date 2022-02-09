@@ -1,5 +1,5 @@
 // import { useRouter } from 'next/router';
-import { MdRefresh } from 'react-icons/md';
+import { MdOutlineSubdirectoryArrowLeft } from 'react-icons/md';
 import { useStoreState } from '../../../store/Hooks';
 import styles from './ButtonRefresh.module.scss';
 
@@ -18,7 +18,7 @@ const ButtonRefresh = () => {
 
   return (
     <div className={styles.refresh} onClick={() => onReset()}>
-      <MdRefresh style={{ fontSize: '22px' }} />
+      <MdOutlineSubdirectoryArrowLeft style={{ fontSize: '22px' }} />
     </div>
   );
 };

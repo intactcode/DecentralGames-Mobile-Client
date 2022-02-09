@@ -299,7 +299,7 @@ const PokerGame = () => {
         );
       })}
 
-      <div className={styles.buttonContainerParent}>
+      <div className={styles.buttonContainerParentBottom}>
         <div className={styles.turnButtonContainer}>
           {!isWon &&
             players[activePlayer] &&

@@ -93,6 +93,10 @@
   display: flex;
   margin-top: -125px;
   margin-left: -10px;
+  @media (max-width: 767px) and (display-mode: standalone) {
+    margin-top: -110px;
+    margin-left: 7px;
+  }
 }
 
 .winnerCardContainer {
@@ -133,55 +137,100 @@
   width: fit-content;
 }
 
-.characterPos1 {
-  @media all and (max-width: 767px)and (display-mode: standalone) {
-    left: calc(50% - 130px) !important;
-    top: 42vh !important;
+.characterPos0 {
+  left:calc(50% + 110px);
+  top: 420px;
+  @media (max-width: 767px) {
+    left: calc(50% - 36px);
+    top: 510px;
   }
-  @media all and (min-width: 768px) and (display-mode: standalone) {
+
+  @media (max-width: 767px) and (display-mode: standalone) {
+    top: 59vh !important;
+    left: calc(50% - 35px) !important;
+  }
+  @media (min-width: 768px) and (display-mode: standalone) {
+    left: calc(50% + 110px) !important;
+    top: 52vh !important;
+  }
+}
+
+.characterPos1 {
+  left:calc(50% - 190px);
+  top: 420px;
+  @media (max-width: 767px) {
+    left: calc(50% - 160px);
+    top: 380px;
+  }
+  @media (max-width: 767px) and (display-mode: standalone) {
+    left: calc(50% - 130px) !important;
+    top: 45vh !important;
+  }
+  @media (min-width: 768px) and (display-mode: standalone) {
     top: 55% !important;
   }
 }
 .characterPos2 {
-  @media all and (max-width: 767px) and (display-mode: standalone) {
-    top: 21vh !important;
+  left:calc(50% - 380px);
+  top: 250px;
+  @media (max-width: 767px) {
+    left: calc(50% - 160px);
+    top: 190px;
+  }
+  @media (max-width: 767px) and (display-mode: standalone) {
+    top: 24vh !important;
     left: calc(50% - 130px) !important;
   }
-  @media all and (min-width: 768px) and (display-mode: standalone) {
-    top: 7% !important;
+  @media (min-width: 768px) and (display-mode: standalone) {
+    top: 30vh !important;
+    left: calc(50% - 325px);
   }
 }
 .characterPos3 {
-  @media all and (min-width: 768px) and (display-mode: standalone) {
-    // left: calc(50% + 230px) !important;
-    top: 30vh !important;
+  left:calc(50% - 190px);
+  top: 55px;
+  @media (max-width: 767px) {
+    left: calc(50% - 36px);
+    top: 50px;
+  }
+  @media (max-width: 767px) and (display-mode: standalone) {
+    top: 8vh !important;
+    left: calc(50% - 35px) !important;
+  }
+  @media (min-width: 768px) and (display-mode: standalone) {
+    top: 7vh !important;
+    left: calc(50% + -190px);
   }
 }
 .characterPos4 {
-  @media all and (max-width: 767px) and (display-mode: standalone) {
-    top: 21vh !important;
+  left:calc(50% + 110px);
+  top: 55px;
+  @media (max-width: 767px) {
+    left: calc(50% + 90px);
+    top: 190px;
+  }
+  @media (max-width: 767px) and (display-mode: standalone) {
+    top: 24vh !important;
     left: calc(50% + 55px) !important;
   }
-  @media all and (min-width: 768px) and (display-mode: standalone) {
-    top: 7% !important;
+  @media (min-width: 768px) and (display-mode: standalone) {
+    top: 7vh !important;
   }
 }
 .characterPos5 {
-  @media all and (max-width: 767px) and (display-mode: standalone) {
+  left:calc(50% + 300px);
+  top: 250px;
+  @media (max-width: 767px) {
+    left: calc(50% + 90px);
+    top: 380px;
+  }
+  @media (max-width: 767px) and (display-mode: standalone) {
     left: calc(50% + 55px) !important;
-    top: 42vh !important;
+    top: 45vh !important;
   }
-  @media all and (min-width: 768px) and (display-mode: standalone) {
+  @media (min-width: 768px) and (display-mode: standalone) {
     /* only apply if app is running standalone */
-    top: 55% !important;
-  }
-}
-.characterPos0 {
-  @media all and (max-width: 767px) and (display-mode: standalone) {
-    top: 54% !important;
-  }
-  @media all and (min-width: 768px) and (display-mode: standalone) {
-    // left: calc(50% - 315px) !important;
+    left: calc(50% + 250px) !important;
     top: 30vh !important;
   }
 }
