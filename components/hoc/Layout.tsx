@@ -1,11 +1,9 @@
-import Logo from './Logo';
-import styles from '../../styles/Home.module.css';
+import styles from '../../styles/Home.module.scss';
 
 const Layout = (props: { children: any }) => {
   return (
     <div className={styles.layoutPosition}>
-      <Logo />
-
+      {/* <Logo /> */}
       <div className={styles.container}>{props.children}</div>
     </div>
   );

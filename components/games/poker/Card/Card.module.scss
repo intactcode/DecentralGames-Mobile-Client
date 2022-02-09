@@ -10,10 +10,17 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 767px) and (display-mode: standalone) {
+    width: 32px;
+    height: 45px;
+  }
 
   div {
     font-size: 28px;
     font-weight: bold;
+    @media (max-width: 767px) and (display-mode: standalone) {
+      font-size: 16px;
+    }
   }
 
   .red {
