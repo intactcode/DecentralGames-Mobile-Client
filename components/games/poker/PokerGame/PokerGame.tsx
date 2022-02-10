@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { maxBy, get, isEmpty } from 'lodash';
+import { maxBy, get } from 'lodash';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -77,7 +77,7 @@ const PokerGame = () => {
   const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
   const winners = state.winners;
-  const isWon = !isEmpty(winners);
+  const isWon = state.isWon;
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const isInHand = state.tableData?.isInHand ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
@@ -275,7 +275,7 @@ const PokerGame = () => {
           <Character
             key={300 + userId}
             image={image[userId]}
-            classString = {classString}
+            classString={classString}
             left={
               size.width < 768
                 ? positionx[(i + 6 - currentPlayer) % 6]
@@ -311,7 +311,7 @@ const PokerGame = () => {
             ) : (
               <div
                 className={styles.turnButton}
-                style={{borderColor: '#2a2a2a'}}
+                style={{ borderColor: '#2a2a2a' }}
               >
                 <div className={styles.title}>
                   {`${players[activePlayer]?.name}'s Turn`}

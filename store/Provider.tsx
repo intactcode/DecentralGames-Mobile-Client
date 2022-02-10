@@ -17,6 +17,7 @@ const initialState = {
   cards: [],
   waitTime: 0,
   winners: {},
+  isWon: false,
 };
 
 const reducer = (state: any, action: { type: any; data: any }) => {
@@ -85,12 +86,14 @@ const reducer = (state: any, action: { type: any; data: any }) => {
       return {
         ...state,
         waitTime: action.data,
+        isWon: action.data === 0 ? false : state.isWon,
       };
     }
     case 'set_winner': {
       return {
         ...state,
         winners: action.data,
+        isWon: true,
       };
     }
     default: {
