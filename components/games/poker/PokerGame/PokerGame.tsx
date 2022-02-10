@@ -52,6 +52,7 @@ const PokerGame = () => {
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
   const [players, setPlayers] = useState<any[]>([]);
   const [userPosition, setUserPosition] = useState(0);
+  const [overlayTimeout, setOverlayTimeout] = useState(false);
   const forcedBets = state.currentSeat.forced || {};
   const currentPlayer = state.currentSeat.currentSeat || 0;
   const tablecard: any = useRef(null);
@@ -104,6 +105,15 @@ const PokerGame = () => {
 
     setSeats(state.tableData.seats || {});
   }, [state.tableData, state.socket.id]);
+
+  useEffect(() => {
+    if (state.tableData.round) {
+      setOverlayTimeout(true);
+      setTimeout(() => {
+        setOverlayTimeout(false);
+      }, 5000);
+    }
+  }, [state.tableData.round]);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -206,6 +216,9 @@ const PokerGame = () => {
       {!!state.waitTime && (
         <div className={styles.waitTime}>{state.waitTime}</div>
       )}
+      {overlayTimeout && (
+        <div className={styles.roundOverlay}>{state.tableData.round}</div>
+      )}
       <TableCard ref={tablecard} />
       <div className={styles.styledCommunityCard}>
         {get(state, 'tableData.community', []).map(
@@ -255,16 +268,6 @@ const PokerGame = () => {
             key={300 + userId}
             image={image[userId]}
             classString={classString}
-            left={
-              size.width < 768
-                ? positionx[(i + 6 - currentPlayer) % 6]
-                : positionx_desktop[(i + 6 - currentPlayer) % 6]
-            }
-            top={
-              size.width < 768
-                ? positiony[(i + 6 - currentPlayer) % 6]
-                : positiony_desktop[(i + 6 - currentPlayer) % 6]
-            }
             user={userId === 0}
             index={userId}
             raise={raise[userId]}
