@@ -314,28 +314,28 @@ const PokerGame = () => {
         <div className={styles.buttonContainerParentBottom}>
           <div className={styles.actionButtonGroup}>
             <button disabled={isWon} onClick={() => onFold()}>
-              FOLD
+              Fold
             </button>
             {canCall() ? (
               <button disabled={!canCall() || isWon} onClick={() => onCall()}>
-                CALL
+                Call
               </button>
             ) : (
               <button disabled={isWon} onClick={() => onCheck()}>
-                CHECK
+                Check
               </button>
             )}
             {canRaise(getMinRaise()) ? (
               <button disabled={isWon} onClick={() => setRaiseShow(true)}>
-                RAISE
+                Raise
               </button>
             ) : canBet(forcedBets.bigBlind) ? (
               <button disabled={isWon} onClick={() => onBet()}>
-                BET
+                Bet
               </button>
             ) : (
               <button disabled={isWon} onClick={() => onBet()}>
-                BET
+                Bet
               </button>
             )}
           </div>
@@ -344,13 +344,13 @@ const PokerGame = () => {
         <div className={styles.buttonContainerParentBottom}>
           <div className={styles.actionButtonGroup}>
             <button disabled onClick={() => onFold()}>
-              FOLD
+              Fold
             </button>
             <button disabled onClick={() => onCheck()}>
-              CHECK
+              Check
             </button>
             <button disabled onClick={() => onBet()}>
-              BET
+              Bet
             </button>
           </div>
         </div>
