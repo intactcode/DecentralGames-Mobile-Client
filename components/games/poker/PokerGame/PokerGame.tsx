@@ -255,7 +255,7 @@ const PokerGame = () => {
             key={300 + userId}
             image={image[userId]}
             classString = {classString}
-            user={userId === 0}
+            user={((i + 6 - currentPlayer) % 6) === 0}
             index={userId}
             raise={raise[userId]}
             onFold={onFold}
