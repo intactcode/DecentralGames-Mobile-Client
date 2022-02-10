@@ -270,7 +270,7 @@ const PokerGame = () => {
 
       {positionx.map((data, i) => {
         const userId = (i + 6 + userPosition) % 6;
-        const classString = 'characterPos' + `${i}`;
+        const classString = 'characterPos' + `${(i + 6 - currentPlayer) % 6}`;
         return (
           <Character
             key={300 + userId}
