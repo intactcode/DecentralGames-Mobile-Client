@@ -30,5 +30,6 @@ module.exports.images = {
     'peer.uadevops.com',
     'peer.dclnodes.io',
     'res.cloudinary.com',
+    'peer-ec2.decentraland.org',
   ],
 };
