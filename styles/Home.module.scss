@@ -45,6 +45,9 @@
   top: 10px;
   z-index: 20;
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+    top: 50px;
+  }
 }
 
 .footer {
