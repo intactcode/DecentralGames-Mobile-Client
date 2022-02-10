@@ -24,8 +24,6 @@ const results = [
 
 interface Props {
   image: string;
-  left: string;
-  top: string;
   user?: any;
   raise?: any;
   index: number;
@@ -77,7 +75,6 @@ const Character: React.FC<Props> = ({
       }}
       className={styles[classString]}
     >
-      {console.log(user)}
       {index === activePlayer && (
         <>
           <div className={styles.gradient} />
