@@ -24,8 +24,6 @@ const results = [
 
 interface Props {
   image: string;
-  left: string;
-  top: string;
   user?: any;
   raise?: any;
   index: number;

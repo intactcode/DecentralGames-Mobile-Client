@@ -3,7 +3,7 @@ import { maxBy, get, isEmpty } from 'lodash';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useStoreState, useWindowSize } from '../../../../store/Hooks';
+import { useStoreState } from '../../../../store/Hooks';
 import Character from '../Character/Character';
 import Setting from '../Setting/Setting';
 import LeaderBoard from '../LeaderBoard/LeaderBoard';
@@ -14,26 +14,6 @@ import Card from '../Card/Card';
 import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
 
 import styles from './PokerGame.module.scss';
-
-const positionx = [
-  'calc(50% - 36px)',
-  'calc(50% - 160px)',
-  'calc(50% - 160px)',
-  'calc(50% - 36px)',
-  'calc(50% + 90px)',
-  'calc(50% + 90px)',
-];
-const positiony = ['510px', '380px', '190px', '50px', '190px', '380px'];
-
-const positionx_desktop = [
-  'calc(50% - 380px)',
-  'calc(50% + 110px)',
-  'calc(50% + 110px)',
-  'calc(50% + 300px)',
-  'calc(50% - 190px)',
-  'calc(50% - 190px)',
-];
-const positiony_desktop = ['250px', '420px', '55px', '250px', '55px', '420px'];
 
 const image = [
   'images/character.png',
@@ -82,7 +62,6 @@ const PokerGame = () => {
   const isInHand = state.tableData?.isInHand ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
 
-  const size = useWindowSize();
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   const onReset = () => {
@@ -268,7 +247,7 @@ const PokerGame = () => {
         </div>
       </div>
 
-      {positionx.map((data, i) => {
+      {image.map((data, i) => {
         const userId = (i + 6 + userPosition) % 6;
         const classString = 'characterPos' + `${(i + 6 - currentPlayer) % 6}`;
         return (
@@ -276,16 +255,6 @@ const PokerGame = () => {
             key={300 + userId}
             image={image[userId]}
             classString = {classString}
-            left={
-              size.width < 768
-                ? positionx[(i + 6 - currentPlayer) % 6]
-                : positionx_desktop[(i + 6 - currentPlayer) % 6]
-            }
-            top={
-              size.width < 768
-                ? positiony[(i + 6 - currentPlayer) % 6]
-                : positiony_desktop[(i + 6 - currentPlayer) % 6]
-            }
             user={userId === 0}
             index={userId}
             raise={raise[userId]}
