@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { maxBy, get, isEmpty } from 'lodash';
+import { maxBy, get } from 'lodash';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -52,12 +52,13 @@ const PokerGame = () => {
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
   const [players, setPlayers] = useState<any[]>([]);
   const [userPosition, setUserPosition] = useState(0);
+  const [overlayTimeout, setOverlayTimeout] = useState(false);
   const forcedBets = state.currentSeat.forced || {};
   const currentPlayer = state.currentSeat.currentSeat || 0;
   const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
   const winners = state.winners;
-  const isWon = !isEmpty(winners.winners);
+  const isWon = state.isWon;
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const isInHand = state.tableData?.isInHand ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
@@ -104,6 +105,15 @@ const PokerGame = () => {
 
     setSeats(state.tableData.seats || {});
   }, [state.tableData, state.socket.id]);
+
+  useEffect(() => {
+    if (state.tableData.round) {
+      setOverlayTimeout(true);
+      setTimeout(() => {
+        setOverlayTimeout(false);
+      }, 5000);
+    }
+  }, [state.tableData.round]);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -206,6 +216,9 @@ const PokerGame = () => {
       {!!state.waitTime && (
         <div className={styles.waitTime}>{state.waitTime}</div>
       )}
+      {overlayTimeout && (
+        <div className={styles.roundOverlay}>{state.tableData.round}</div>
+      )}
       <TableCard ref={tablecard} />
       <div className={styles.styledCommunityCard}>
         {get(state, 'tableData.community', []).map(
@@ -254,7 +267,7 @@ const PokerGame = () => {
           <Character
             key={300 + userId}
             image={image[userId]}
-            classString = {classString}
+            classString={classString}
             user={userId === 0}
             index={userId}
             raise={raise[userId]}
@@ -280,7 +293,7 @@ const PokerGame = () => {
             ) : (
               <div
                 className={styles.turnButton}
-                style={{borderColor: '#2a2a2a'}}
+                style={{ borderColor: '#2a2a2a' }}
               >
                 <div className={styles.title}>
                   {`${players[activePlayer]?.name}'s Turn`}

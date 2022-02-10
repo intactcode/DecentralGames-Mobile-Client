@@ -24,6 +24,18 @@
   @media screen and (max-width: 767px) and (display-mode: standalone) {
     margin-top: 0px;
   }
+
+  .roundOverlay {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0px;
+    position: absolute;
+    z-index: 100;
+  }
+
   .waitTime {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 300;
