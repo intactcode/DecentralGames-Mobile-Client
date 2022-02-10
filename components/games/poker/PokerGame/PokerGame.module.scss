@@ -184,7 +184,9 @@
         margin-left: 70px;
         margin-top: 20px;
       }
-
+      @media (min-width: 768px) and (display-mode: standalone) {
+        margin-top: 20px;
+      }
       .dot {
         margin-top: 0px;
         margin-left: 4px;
