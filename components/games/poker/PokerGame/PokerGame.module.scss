@@ -24,6 +24,18 @@
   @media screen and (max-width: 767px) and (display-mode: standalone) {
     margin-top: 0px;
   }
+
+  .roundOverlay {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0px;
+    position: absolute;
+    z-index: 100;
+  }
+
   .waitTime {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 300;
@@ -248,7 +260,7 @@
       border-radius: 8px;
       border-width: 0px;
       width: 110px;
-      height: 45px;
+      height: 70px;
       cursor: pointer;
       display: flex;
       justify-content: center;
@@ -258,68 +270,68 @@
       margin: 5px;
       color: white;
 
-      &:disabled {
-        color: rgba(0, 0, 0, 0.3);
-      }
-
       &:nth-of-type(1) {
         background: #a82822;
-        box-shadow: 0 8px #92120c;
+        box-shadow: 0 4px #92120c;
         &:hover {
           background-color: #6a1a16;
         }
         &:active {
           background-color: #a82822;
-          box-shadow: 8px #92120c;
+          box-shadow: 4px #92120c;
         }
         &:disabled {
           background-color: #a82822;
-          box-shadow: 8px #92120c;
+          box-shadow: 4px #92120c;
+          opacity: 0.4;
         }
       }
       &:nth-of-type(2) {
         background: #3d86a6;
-        box-shadow: 0 8px #267ca1;
+        box-shadow: 0 4px #267ca1;
         &:hover {
           background-color: #306a82;
         }
         &:active {
           background-color: #3d86a6;
-          box-shadow: 8px #267ca1;
+          box-shadow: 4px #267ca1;
         }
         &:disabled {
           background-color: #3d86a6;
-          box-shadow: 8px #267ca1;
+          box-shadow: 4px #267ca1;
+          opacity: 0.4;
         }
       }
       &:nth-of-type(3) {
         background: #3da65a;
-        box-shadow: 0 8px #2b8c46;
+        box-shadow: 0 4px #2b8c46;
         &:hover {
           background-color: #308247;
         }
         &:active {
           background-color: #3da65a;
-          box-shadow: 8px #2b8c46;
+          box-shadow: 4px #2b8c46;
         }
         &:disabled {
           background-color: #3da65a;
-          box-shadow: 8px #2b8c46;
+          box-shadow: 4px #2b8c46;
+          opacity: 0.4;
         }
       }
       &:nth-of-type(4) {
         background: #3da65a;
-        box-shadow: 0 8px #2b8c46;
+        box-shadow: 0 4px #2b8c46;
         &:hover {
           background-color: #308247;
         }
         &:active {
           background-color: #3da65a;
-          box-shadow: 8px #2b8c46;
+          box-shadow: 4px #2b8c46;
         }
         &:disabled {
           background-color: #3da65a;
-          box-shadow: 8px #2b8c46;
+          box-shadow: 4px #2b8c46;
+          opacity: 0.4;
         }
       }
     }
