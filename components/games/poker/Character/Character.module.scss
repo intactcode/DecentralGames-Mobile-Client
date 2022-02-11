@@ -101,13 +101,15 @@
 
 .winnerCardContainer {
   display: flex;
-  margin-top: -125px;
+  margin-top: -135px;
   margin-left: -13px;
+  @media (max-width: 767px) and (display-mode: standalone)  {
+    margin-top: -118px;
+    margin-left: 0px;
+  }
 
   .winnerCardFrame {
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 7px;
+    padding:1px;
   }
 }
 
@@ -135,6 +137,9 @@
   left: 50%;
   transform: translateX(-34px);
   width: fit-content;
+  @media (max-width: 767px) and (display-mode: standalone)  {
+   left:75%;
+  }
 }
 
 .characterPos0 {
