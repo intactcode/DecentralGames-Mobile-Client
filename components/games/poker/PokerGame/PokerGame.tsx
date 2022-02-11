@@ -333,7 +333,7 @@ const PokerGame = () => {
             </button>
             {canCall() ? (
               <button disabled={!canCall() || isWon} onClick={() => onCall()}>
-                Call
+                Call {players[currentPlayer].betSize}
               </button>
             ) : (
               <button disabled={isWon} onClick={() => onCheck()}>
