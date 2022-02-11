@@ -101,13 +101,15 @@
 
 .winnerCardContainer {
   display: flex;
-  margin-top: -125px;
+  margin-top: -135px;
   margin-left: -13px;
+  @media (max-width: 767px) and (display-mode: standalone)  {
+    margin-top: -118px;
+    margin-left: 0px;
+  }
 
   .winnerCardFrame {
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 7px;
+    padding:1px;
   }
 }
 
@@ -132,9 +134,15 @@
   padding: 2px 8px;
   border-radius: 16px;
   background: #d96060;
-  left: 50%;
-  transform: translateX(-34px);
+  left:50%;
+   white-space: nowrap;
+   transform: translateX(-50%);
   width: fit-content;
+  // @media (max-width: 767px) and (display-mode: standalone)  {
+  //  left:50%;
+  //  white-space: nowrap;
+  //  transform: translateX(-50%);
+  // }
 }
 
 .characterPos0 {

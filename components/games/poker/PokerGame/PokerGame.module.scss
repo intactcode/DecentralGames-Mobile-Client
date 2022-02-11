@@ -131,12 +131,14 @@
     flex-wrap: wrap;
     display: flex;
     position: absolute;
-
+    @include media-ltl-xm {
+      max-width: 120px;
+    }
     .cardContainer {
       margin-right: 0.5;
-      margin-left: 0.5;
-      margin-top: 1;
-      border-style: solid;
+      border-style: unset;
+      margin-left: 8px;
+      margin-top: 8px;
       border-width: 2px;
       border-radius: 7px;
     }
@@ -340,7 +342,16 @@
   .wonImageContainer {
     position: absolute;
     left: calc(50% - 90px);
-    top: 570px;
+    top: 700px;
+    .potValueText {
+      position: absolute;
+      top: 56px;
+      left: 46%;
+      font-weight: 800;
+      font-size: 11px;
+      line-height: 13.13px;
+      color: #fff;
+    }
   }
 }
 
@@ -423,4 +434,25 @@
     box-shadow: 8px #2b8c46;
   }
   transform: translateY(4px);
+}
+.playerInfo {
+  margin-top: 13px;
+  position: absolute;
+  left: 15%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 13px;
+
+  .chipForBet {
+    font-size: 15px;
+    .betAmount {
+      padding-top: 2px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 2px;
+    }
+  }
+  @media (max-width: 767px) {
+    left: calc(50% - 150px);
+  }
 }

@@ -189,13 +189,13 @@ const Character: React.FC<Props> = ({
           <div
             className={styles.winnerCardFrame}
             style={{
-              borderColor: winnerPair.find(
+              opacity: winnerPair.find(
                 (winner: any) =>
                   winner.suit === winners.cards[index][0].suit &&
                   winner.rank === winners.cards[index][0].rank
               )
-                ? 'red'
-                : 'transparent',
+                ? '0.7'
+                : '1',
             }}
           >
             <Card
@@ -206,13 +206,13 @@ const Character: React.FC<Props> = ({
           <div
             className={styles.winnerCardFrame}
             style={{
-              borderColor: winnerPair.find(
+              opacity: winnerPair.find(
                 (winner: any) =>
                   winner.suit === winners.cards[index][1].suit &&
                   winner.rank === winners.cards[index][1].rank
               )
-                ? 'red'
-                : 'transparent',
+                ? '0.7'
+                : '1',
             }}
           >
             <Card

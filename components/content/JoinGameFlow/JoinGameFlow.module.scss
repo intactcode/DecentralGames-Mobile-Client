@@ -38,7 +38,9 @@
   width: 100%;
   background: #1f1f1f;
   border-radius: 16px 16px 0px 0px;
-
+  @media (max-width: 390px) {
+    bottom: 50px;
+  }
   .close {
     top: -55px;
     left: 15px;

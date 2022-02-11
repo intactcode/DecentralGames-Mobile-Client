@@ -17,59 +17,62 @@ const JoinGameFlow = () => {
       <div className={styles.text_container}></div>
 
       {state.userStatus < 4 ? (
-        <div className={styles.button_container}>
-          <Link href="/" passHref={true}>
-            <div className={styles.close}>
-              <FaChevronLeft fontSize="20px" />
-            </div>
-          </Link>
+        <>
+          <div className={styles.button_container}>
+            <Link href="/" passHref={true}>
+              <div className={styles.close}>
+                <FaChevronLeft fontSize="20px" />
+              </div>
+            </Link>
 
-          <h2 className={styles.welcome}>
-            Welcome to Free to Play <br /> Play-to-Earn ICE Poker!
-          </h2>
+            <h2 className={styles.welcome}>
+              Welcome to Free to Play <br /> Play-to-Earn ICE Poker!
+            </h2>
 
-          <p className={styles.play_text}>
-            Play poker for free. Earn real cash value.
-          </p>
+            <p className={styles.play_text}>
+              Play poker for free. Earn real cash value.
+            </p>
 
-          <span className={styles.image_span}>
-            <span className={styles.image_grouping}>
-              <img
-                className={styles.wearable_image}
-                src={images.WEARABLES_1}
-                alt="wearables"
-              />
+            <span className={styles.image_span}>
+              <span className={styles.image_grouping}>
+                <img
+                  className={styles.wearable_image}
+                  src={images.WEARABLES_1}
+                  alt="wearables"
+                />
 
-              <p className={styles.lower_text}>
-                Get a <br /> Wearable
-              </p>
+                <p className={styles.lower_text}>
+                  Get a <br /> Wearable
+                </p>
+              </span>
+              <span className={styles.image_grouping}>
+                <img
+                  className={styles.card_image}
+                  src={images.CARDS}
+                  alt="cards"
+                />
+
+                <p className={styles.lower_text}>
+                  Play Free <br /> Poker
+                </p>
+              </span>
+              <span className={styles.image_grouping}>
+                <img
+                  className={styles.diamond_image}
+                  src={images.DIAMOND}
+                  alt="ice logo"
+                />
+
+                <p className={styles.lower_text}>
+                  Earn <br /> Ice
+                </p>
+              </span>
             </span>
-            <span className={styles.image_grouping}>
-              <img
-                className={styles.card_image}
-                src={images.CARDS}
-                alt="cards"
-              />
 
-              <p className={styles.lower_text}>
-                Play Free <br /> Poker
-              </p>
-            </span>
-            <span className={styles.image_grouping}>
-              <img
-                className={styles.diamond_image}
-                src={images.DIAMOND}
-                alt="ice logo"
-              />
 
-              <p className={styles.lower_text}>
-                Earn <br /> Ice
-              </p>
-            </span>
-          </span>
-
+          </div>
           <ButtonConnect />
-        </div>
+        </>
       ) : (
         <div className={styles.button_container_two}>
           <Link href="/" passHref={true}>

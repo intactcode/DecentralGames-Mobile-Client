@@ -229,12 +229,12 @@ const PokerGame = () => {
                 className={styles.cardContainer}
                 key={`card_${index}`}
                 style={{
-                  borderColor: winnerPair.find(
+                  opacity: winnerPair.find(
                     (winner: any) =>
                       winner.suit === card.suit && winner.rank === card.rank
                   )
-                    ? 'red'
-                    : 'transparent',
+                    ? '0.7'
+                    : '1',
                 }}
               >
                 <Card type={card.suit} number={card.rank} />
@@ -269,7 +269,7 @@ const PokerGame = () => {
             key={300 + userId}
             image={image[userId]}
             classString={classString}
-            user={userId === 0}
+            user={(i + 6 - currentPlayer) % 6 === 0}
             index={userId}
             raise={raise[userId]}
             onFold={onFold}
@@ -310,7 +310,22 @@ const PokerGame = () => {
           )}
         </div>
       </div>
-
+      <div className={styles.playerInfo}>
+        <div>Your Total</div>
+        <div className={styles.chipForBet}>
+          {iceamount && (
+            <div className={styles.betAmount}>{iceamount}
+              <Image
+                className={styles.chipImage}
+                src="/images/freecoin.svg"
+                width="15px"
+                height="15px"
+                alt="chipImage"
+              />
+            </div>
+          )}
+        </div>
+      </div>
       {activePlayer === currentPlayer ? (
         <div className={styles.buttonContainerParentBottom}>
           <div className={styles.actionButtonGroup}>
@@ -319,7 +334,7 @@ const PokerGame = () => {
             </button>
             {canCall() && (
               <button disabled={!canCall() || isWon} onClick={() => onCall()}>
-                Call
+                Call {players[currentPlayer].betSize}
               </button>
             )}
             {canCheck() && (
@@ -388,6 +403,7 @@ const PokerGame = () => {
             width={176}
             height={111}
           />
+          <span className={styles.potValueText}>{state.tableData?.pot || 0}</span>
         </div>
       )}
     </section>
