@@ -62,6 +62,7 @@ const PokerGame = () => {
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const isInHand = state.tableData?.isInHand ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
+  const legalActions = get(state, 'tableData.legalActions.actions', []);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +134,7 @@ const PokerGame = () => {
     }
     const { betSize } = players[currentPlayer];
     const maxBetSize = getMaxBet();
-    return betSize !== maxBetSize;
+    return betSize !== maxBetSize && legalActions.includes('call');
   };
 
   const canCheck = () => {
@@ -142,7 +143,7 @@ const PokerGame = () => {
     }
     const { betSize } = players[currentPlayer];
     const maxBetSize = getMaxBet();
-    return betSize === maxBetSize;
+    return betSize === maxBetSize && legalActions.includes('check');
   };
 
   // eslint-disable-next-line
@@ -162,7 +163,7 @@ const PokerGame = () => {
       return false;
     }
 
-    return amount >= minBet;
+    return amount >= minBet && legalActions.includes('raise');
   };
 
   // eslint-disable-next-line
@@ -331,24 +332,22 @@ const PokerGame = () => {
             <button disabled={isWon} onClick={() => onFold()}>
               Fold
             </button>
-            {canCall() ? (
+            {canCall() && (
               <button disabled={!canCall() || isWon} onClick={() => onCall()}>
                 Call {players[currentPlayer].betSize}
               </button>
-            ) : (
+            )}
+            {canCheck() && (
               <button disabled={isWon} onClick={() => onCheck()}>
                 Check
               </button>
             )}
-            {canRaise(getMinRaise()) ? (
+            {canRaise(getMinRaise()) && (
               <button disabled={isWon} onClick={() => setRaiseShow(true)}>
                 Raise
               </button>
-            ) : canBet(forcedBets.bigBlind) ? (
-              <button disabled={isWon} onClick={() => onBet()}>
-                Bet
-              </button>
-            ) : (
+            )}
+            {canBet(forcedBets.bigBlind) && (
               <button disabled={isWon} onClick={() => onBet()}>
                 Bet
               </button>
