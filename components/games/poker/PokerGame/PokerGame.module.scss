@@ -343,6 +343,15 @@
     position: absolute;
     left: calc(50% - 90px);
     top: 570px;
+    .potValueText {
+      position: absolute;
+      top: 56px;
+      left: 47%;
+      font-weight: 800;
+      font-size: 11px;
+      line-height: 13.13px;
+      color: #fff;
+    }
   }
 }
 
@@ -425,4 +434,25 @@
     box-shadow: 8px #2b8c46;
   }
   transform: translateY(4px);
+}
+.playerInfo {
+  margin-top: 13px;
+  position: absolute;
+  left: 15%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 13px;
+
+  .chipForBet {
+    font-size: 15px;
+    .betAmount {
+      padding-top: 2px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 2px;
+    }
+  }
+  @media (max-width: 767px) {
+    left: calc(50% - 150px);
+  }
 }

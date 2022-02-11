@@ -309,7 +309,22 @@ const PokerGame = () => {
           )}
         </div>
       </div>
-
+      <div className={styles.playerInfo}>
+        <div>Your Total</div>
+        <div className={styles.chipForBet}>
+          {iceamount && (
+            <div className={styles.betAmount}>{iceamount}
+              <Image
+                className={styles.chipImage}
+                src="/images/freecoin.svg"
+                width="15px"
+                height="15px"
+                alt="chipImage"
+              />
+            </div>
+          )}
+        </div>
+      </div>
       {activePlayer === currentPlayer ? (
         <div className={styles.buttonContainerParentBottom}>
           <div className={styles.actionButtonGroup}>
@@ -389,6 +404,7 @@ const PokerGame = () => {
             width={176}
             height={111}
           />
+          <span className={styles.potValueText}>{state.tableData?.pot || 0}</span>
         </div>
       )}
     </section>
