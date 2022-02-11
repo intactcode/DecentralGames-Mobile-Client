@@ -18,9 +18,7 @@
     bottom: 24px;
     transition: all 0.25s ease;
     border: none;
-    @media (max-width: 767px) {
-      bottom: 120px;
-    }
+  
   }
 
   .button_connect:hover,
