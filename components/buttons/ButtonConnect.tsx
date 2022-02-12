@@ -1,7 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
 import { useStoreState, useStoreDispatch } from '../../hooks/Hooks';
-import { connectWallet, disconnectWallet } from '../../store/Wallet';
+import {
+  connectWallet,
+  disconnectWallet,
+  assignToken,
+} from '../../store/Wallet';
 import styles from './Button.module.scss';
 
 declare const window: any;
@@ -15,14 +19,24 @@ const ButtonConnect = () => {
     setEthereum(window.ethereum);
   }, []);
 
+  let buttonText = 'Connect Your Wallet';
+  if (state.userStatus === 2) {
+    buttonText = 'Sign Login Message';
+  }
+
   return (
     <div className={styles.container}>
       <button
         className={styles.button_connect}
         onClick={() => {
-          state.userAddress
-            ? disconnectWallet(dispatch)
-            : connectWallet(dispatch);
+          if (state.userStatus === 2 && state.web3Provider) {
+            // user is in between connecting and signing message on mobile
+            assignToken(dispatch, state.web3Provider);
+          } else if (state.userAddress) {
+            disconnectWallet(dispatch);
+          } else {
+            connectWallet(dispatch);
+          }
         }}
       >
         <span className={styles.button_span}>
@@ -36,7 +50,7 @@ const ButtonConnect = () => {
             alt="wallet-image"
           />
 
-          <p className={styles.button_text}>Connect Your Wallet</p>
+          <p className={styles.button_text}>{buttonText}</p>
         </span>
       </button>
     </div>
