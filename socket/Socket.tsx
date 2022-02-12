@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import socketServerURL from './SocketServerURL';
 import { useStoreState, useStoreDispatch } from '../hooks/Hooks';
+import getCachedSession from '../api/GetCachedSession';
 import * as Colyseus from 'colyseus.js';
 
 const Socket = () => {
@@ -12,7 +13,8 @@ const Socket = () => {
   useEffect(() => {
     if (state.userStatus >= 4) {
       if (state.game === 'poker') {
-        const authToken: string = localStorage.getItem('token') || '';
+        const authToken: string =
+          getCachedSession(state.userAddress).token || '';
         const client = new Colyseus.Client(socketServerURL);
 
         client

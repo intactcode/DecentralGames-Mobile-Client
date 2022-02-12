@@ -53,7 +53,7 @@ const loginUser = async (dispatch: any, userAddress: string) => {
   }
 };
 
-export const disconnectWallet = (dispatch: any) => {
+export const disconnectWallet = (dispatch: any, clearAllSessions: boolean) => {
   dispatch({
     type: 'update_status',
     data: 0,
@@ -64,8 +64,13 @@ export const disconnectWallet = (dispatch: any) => {
     data: '',
   });
 
-  localStorage.removeItem('userAddress');
-  localStorage.removeItem('token');
+  if (clearAllSessions) {
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith('session-0x')) {
+        localStorage.removeItem(key);
+      }
+    });
+  }
 };
 
 export const assignToken = async (dispatch: any, web3: Web3) => {
@@ -181,7 +186,7 @@ export const connectWallet = async (dispatch: any) => {
 
 const refreshToken = async (dispatch: any, userAddress: string) => {
   try {
-    const token = await Fetch.REFRESH_TOKEN();
+    const token = await Fetch.REFRESH_TOKEN(userAddress);
 
     if (!token) {
       console.log('Error refreshing token');
@@ -246,22 +251,18 @@ function Wallet() {
 
       // add event listeners for desktop wallet
       if (window.ethereum) {
-        window.ethereum.on('accountsChanged', (account: string) => {
-          console.log('Account changed to:', account);
+        window.ethereum.on('accountsChanged', (accounts: string[]) => {
+          console.log('Account changed to:', accounts[0]);
 
-          if (getCachedSession(window.ethereum.selectedAddress)) {
-            disconnectWallet(dispatch);
-            window.location.reload();
-          }
+          disconnectWallet(dispatch, accounts.length === 0);
+          window.location.reload();
         });
 
         window.ethereum.on('disconnect', () => {
           console.log('Wallet disconnected');
 
-          if (getCachedSession(window.ethereum.selectedAddress)) {
-            disconnectWallet(dispatch);
-            window.location.reload();
-          }
+          disconnectWallet(dispatch, true);
+          window.location.reload();
         });
       }
     })();
