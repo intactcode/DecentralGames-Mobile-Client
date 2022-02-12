@@ -112,45 +112,29 @@ const getWalletConnectProvider = () => {
   return new WalletConnectProvider({
     rpc: constants.MATIC_RPC,
     chainId: constants.MATIC_CHAIN_ID,
-    qrcode: false,
+    qrcodeModalOptions: {
+      mobileLinks: ['rainbow', 'metamask', 'ledger', 'argent', 'trust'],
+    },
   });
 };
 
 const connectMobileWallet = async (dispatch: any) => {
-  const provider: WalletConnectProvider = getWalletConnectProvider();
-  if (provider.connector.connected) {
-    provider.close(); // close any existing connection
-  }
+  window.localStorage.removeItem('walletconnect');
+  let provider: WalletConnectProvider = getWalletConnectProvider();
   const web3 = new Web3(provider as any);
 
-  provider.connector.on('display_uri', (err, payload) => {
-    const uri = payload.params[0];
-    console.log('Display URI: ' + uri);
-
-    const formattedURI = `https://metamask.app.link/wc?uri=${encodeURIComponent(
-      uri
-    )}`;
-    window.location.replace(formattedURI);
-  });
-
-  provider.connector.on('connect', async (err, payload) => {
-    console.log('Wallet connected:', payload);
-
-    const { accounts } = payload.params[0];
+  provider.on('accountsChanged', async (accounts: string[]) => {
     const address = accounts[0];
+    console.log('Wallet connected:', address);
 
     await assignToken(dispatch, web3, address);
-
-    provider.close();
   });
 
-  provider.connector.on('transport_error', () => {
-    console.log('transport_error');
-
-    provider.close();
-  });
-
-  await provider.enable();
+  try {
+    await provider.enable();
+  } catch {
+    console.log('Error connecting to wallet');
+  }
   provider.updateRpcUrl(constants.MATIC_CHAIN_ID);
 };
 
