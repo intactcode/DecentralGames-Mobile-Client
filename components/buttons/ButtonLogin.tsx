@@ -1,12 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 // import styles from '../../styles/Home.module.css';
+import { useState, useEffect } from 'react';
 import { useStoreState, useStoreDispatch } from '../../store/Hooks';
 import { connectWallet, disconnectWallet } from '../../store/Wallet';
 import styles from './Button.module.scss';
 
+declare const window: any;
+
 const ButtonLogin = () => {
   const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
+  const [ethereum, setEthereum] = useState(undefined);
+
+  useEffect(() => {
+    setEthereum(window.ethereum);
+  }, []);
 
   // write the user's wallet address with ellipsis added
   const ellipsis = state.userAddress
@@ -26,34 +34,30 @@ const ButtonLogin = () => {
 
   return (
     <div className={styles.container}>
-    <div
-      className={styles.button_connect}
-      onClick={
-        () =>
-          state.userAddress
-            ? disconnectWallet(dispatch)
-            : connectWallet(dispatch)
-        // eslint-disable-next-line react/jsx-curly-newline
-      }
-    >
-      {/* <img
-        src="/images/home/metamask.svg"
-        alt="metamask"
-        width={35}
-        height={35}
-      />
-
-      <div>{buttonText}</div> */}
-      <span className={styles.button_span}>
+      <div
+        className={styles.button_connect}
+        onClick={
+          () =>
+            state.userAddress
+              ? disconnectWallet(dispatch)
+              : connectWallet(dispatch)
+          // eslint-disable-next-line react/jsx-curly-newline
+        }
+      >
+        <span className={styles.button_span}>
           <img
             className={styles.button_image}
-            src="/images/home/metamask.svg"
-            alt="metamask"
+            src={
+              ethereum
+                ? '/images/home/metamask.svg'
+                : '/images/home/walletconnect-circle-white.svg'
+            }
+            alt="wallet-image"
           />
 
           <p className={styles.button_text}>{buttonText}</p>
         </span>
-    </div>
+      </div>
     </div>
   );
 };
