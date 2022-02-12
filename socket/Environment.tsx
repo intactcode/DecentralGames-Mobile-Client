@@ -6,7 +6,7 @@ const environment: any = {
     : 'wss://mobile.socket.decentral.games',
   testing: 'wss://mobile.socket.testing.decentral.games',
   // development: 'wss://mobile.socket.dev.decentral.games',
-  development: 'ws://localhost:5001',
+  development: 'wss://kx--1q.colyseus.dev',
   staging: 'wss://mobile.socket.staging.decentral.games',
   production: 'wss://mobile.socket.decentral.games',
 };
