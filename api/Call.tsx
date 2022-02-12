@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getCachedSession from './GetCachedSession';
 
 const call = (
   url: string,
@@ -6,9 +7,9 @@ const call = (
   withToken = true,
   data = {}
 ): any => {
-  const accessToken = localStorage.getItem('token');
+  const cachedSession = getCachedSession();
 
-  if (withToken && !accessToken) {
+  if (withToken && !cachedSession.token) {
     return new Promise((resolve, reject) => {
       reject("Couldn't get an access token");
     });
@@ -20,7 +21,7 @@ const call = (
   };
 
   if (withToken) {
-    header['Authorization'] = `Bearer ${accessToken}`;
+    header['Authorization'] = `Bearer ${cachedSession.token}`;
   }
 
   const options: any = {

@@ -11,6 +11,7 @@
     "pre-commit": "next lint --fix && git add -A ."
   },
   "dependencies": {
+    "@walletconnect/utils": "^1.7.1",
     "@walletconnect/web3-provider": "^1.7.1",
     "axios": "0.21.4",
     "bootstrap": "^5.1.3",

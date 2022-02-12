@@ -4,6 +4,7 @@ import { GlobalContext } from './Context';
 const initialState = {
   userStatus: 0,
   userAddress: '',
+  web3Provider: null,
   game: '',
   tokenAmounts: {
     ICE_AMOUNT: 0,
@@ -32,6 +33,12 @@ const reducer = (state: any, action: { type: any; data: any }) => {
       return {
         ...state,
         userAddress: action.data,
+      };
+    }
+    case 'web3_provider': {
+      return {
+        ...state,
+        web3Provider: action.data,
       };
     }
     case 'game_type': {
