@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useStoreState, useStoreDispatch } from '../../hooks/Hooks';
 import {
   connectWallet,
-  disconnectWallet,
   assignToken,
 } from '../../store/Wallet';
 import styles from './Button.module.scss';
@@ -32,8 +31,6 @@ const ButtonConnect = () => {
           if (state.userStatus === 2 && state.web3Provider) {
             // user is in between connecting and signing message on mobile
             assignToken(dispatch, state.web3Provider);
-          } else if (state.userAddress) {
-            disconnectWallet(dispatch);
           } else {
             connectWallet(dispatch);
           }
