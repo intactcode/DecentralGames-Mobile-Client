@@ -19,8 +19,10 @@ const Fetch = {
     );
   },
 
-  REFRESH_TOKEN: () => {
-    return call(`${API_BASE_URL}/authentication/extendToken`, 'POST', true);
+  REFRESH_TOKEN: (userAddress: string) => {
+    return call(`${API_BASE_URL}/authentication/extendToken`, 'POST', true, {
+      userAddress,
+    });
   },
 
   USER_STATUS: () => {

@@ -5,9 +5,9 @@ const call = (
   url: string,
   method: string,
   withToken = true,
-  data = {}
+  data: any = {}
 ): any => {
-  const cachedSession = getCachedSession();
+  const cachedSession = getCachedSession(data.userAddress);
 
   if (withToken && !cachedSession.token) {
     return new Promise((resolve, reject) => {
