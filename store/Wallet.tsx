@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Fetch from '../api/Fetch';
-import { useStoreDispatch } from './Hooks';
+import { useStoreDispatch } from '../hooks/Hooks';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { convertUtf8ToHex } from '@walletconnect/utils';
 import Web3 from 'web3';

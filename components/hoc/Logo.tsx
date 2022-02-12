@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../store/Hooks';
+import { useStoreState } from '../../hooks/Hooks';
 import styles from '../../styles/Home.module.scss';
 
 declare const window: any;
@@ -10,9 +10,9 @@ const Logo = () => {
   const router = useRouter();
 
   const clickedLogo = () => {
-    console.log('Clicked the logo');
+    console.log('Clicked logo');
 
-    // Segment: track MetaMask home button event
+    // Segment: track logo button event
     window.analytics.track('Clicked logo', {
       userAddress: state.userAddress,
     });
