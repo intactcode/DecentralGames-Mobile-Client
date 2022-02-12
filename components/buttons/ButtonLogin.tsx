@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 // import styles from '../../styles/Home.module.css';
 import { useState, useEffect } from 'react';
-import { useStoreState, useStoreDispatch } from '../../store/Hooks';
-import { connectWallet, disconnectWallet } from '../../store/Wallet';
+import { useStoreState, useStoreDispatch } from '../../hooks/Hooks';
+import { connectWallet } from '../../store/Wallet';
 import styles from './Button.module.scss';
 
 declare const window: any;
@@ -37,10 +37,7 @@ const ButtonLogin = () => {
       <div
         className={styles.button_connect}
         onClick={
-          () =>
-            state.userAddress
-              ? disconnectWallet(dispatch)
-              : connectWallet(dispatch)
+          () => connectWallet(dispatch)
           // eslint-disable-next-line react/jsx-curly-newline
         }
       >

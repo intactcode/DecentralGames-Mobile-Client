@@ -2,7 +2,7 @@
 import ButtonConnect from '../../buttons/ButtonConnect';
 import ButtonJoin from '../../buttons/ButtonJoin';
 import styles from './JoinGameFlow.module.scss';
-import { useStoreState } from '../../../store/Hooks';
+import { useStoreState } from '../../../hooks/Hooks';
 import { FaChevronLeft } from 'react-icons/fa';
 import images from '../../../components/common/Images';
 import Link from 'next/link';
@@ -68,8 +68,6 @@ const JoinGameFlow = () => {
                 </p>
               </span>
             </span>
-
-
           </div>
           <ButtonConnect />
         </>
