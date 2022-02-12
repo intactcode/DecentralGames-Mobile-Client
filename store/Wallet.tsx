@@ -2,10 +2,19 @@ import { useEffect } from 'react';
 import Fetch from '../api/Fetch';
 import { useStoreDispatch } from './Hooks';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { convertUtf8ToHex } from '@walletconnect/utils';
 import Web3 from 'web3';
 import constants from '../components/common/Constants';
+import getCachedSession from '../api/GetCachedSession';
 
 declare const window: any;
+
+/* userStatus Reference:
+ * 0: Wallet is neither connected nor authenticated
+ * 2: Wallet is connected, but auth token is needed
+ * 3: Wallet is in the process of verifying token; waiting on API response
+ * 4+: Wallet is connected and authenticated
+ */
 
 const registerUser = async (dispatch: any) => {
   await Fetch.REGISTER('');
@@ -59,7 +68,11 @@ export const disconnectWallet = (dispatch: any) => {
   localStorage.removeItem('token');
 };
 
-const assignToken = async (dispatch: any, web3: any, userAddress: string) => {
+export const assignToken = async (dispatch: any, web3: Web3) => {
+  const userAddress =
+    window.ethereum?.selectedAddress ||
+    (await web3.eth.getAccounts())[0]?.toLowerCase();
+
   // Segment: track wallet connect event
   window.analytics.track('Connected Wallet', {
     userAddress: userAddress,
@@ -68,14 +81,11 @@ const assignToken = async (dispatch: any, web3: any, userAddress: string) => {
   console.log('Connected wallet with address:', userAddress);
   console.log('Waiting for signature...');
 
-  const timestamp = Date.now();
-
-  const msg = web3.utils.utf8ToHex(
-    `Decentral Games Login\nTimestamp: ${timestamp}`
-  );
-
   try {
-    const signature = await web3.eth.personal.sign(msg, userAddress, '');
+    const timestamp = Date.now();
+    const message = `Decentral Games Login\nTimestamp: ${timestamp}`;
+    const hexMsg = convertUtf8ToHex(message);
+    const signature = await web3.eth.personal.sign(hexMsg, userAddress, '');
 
     // get JWT token
     const token = await Fetch.GET_TOKEN(userAddress, signature, timestamp);
@@ -92,15 +102,21 @@ const assignToken = async (dispatch: any, web3: any, userAddress: string) => {
 
     console.log('Assigned token:', token);
 
-    localStorage.setItem('userAddress', userAddress);
-    localStorage.setItem('token', token);
+    localStorage.setItem(
+      `session-${userAddress}`,
+      JSON.stringify({
+        userAddress: userAddress,
+        token: token,
+        expiration: new Date(new Date().getTime() + 60 * 60 * 12 * 1000),
+      })
+    );
 
     const userStatus = await loginUser(dispatch, userAddress);
     if (userStatus === false) {
       await registerUser(dispatch);
     }
-  } catch {
-    // user cancelled signature
+  } catch (e) {
+    // User cancelled signature
     dispatch({
       type: 'update_status',
       data: 0,
@@ -120,14 +136,22 @@ const getWalletConnectProvider = () => {
 
 const connectMobileWallet = async (dispatch: any) => {
   window.localStorage.removeItem('walletconnect');
-  let provider: WalletConnectProvider = getWalletConnectProvider();
+  const provider: WalletConnectProvider = getWalletConnectProvider();
+  provider.updateRpcUrl(constants.MATIC_CHAIN_ID);
   const web3 = new Web3(provider as any);
+  dispatch({
+    type: 'web3_provider',
+    data: web3,
+  });
 
   provider.on('accountsChanged', async (accounts: string[]) => {
     const address = accounts[0];
     console.log('Wallet connected:', address);
 
-    await assignToken(dispatch, web3, address);
+    dispatch({
+      type: 'update_status',
+      data: 2,
+    });
   });
 
   try {
@@ -135,16 +159,11 @@ const connectMobileWallet = async (dispatch: any) => {
   } catch {
     console.log('Error connecting to wallet');
   }
-  provider.updateRpcUrl(constants.MATIC_CHAIN_ID);
 };
 
 const connectDesktopWallet = async (dispatch: any) => {
   await window.ethereum.request({ method: 'eth_requestAccounts' }); // open MetaMask for login
-  await assignToken(
-    dispatch,
-    new Web3(window.ethereum),
-    window.ethereum.selectedAddress
-  );
+  await assignToken(dispatch, new Web3(window.ethereum));
 };
 
 export const connectWallet = async (dispatch: any) => {
@@ -160,7 +179,7 @@ export const connectWallet = async (dispatch: any) => {
   }
 };
 
-const refreshToken = async (dispatch: any) => {
+const refreshToken = async (dispatch: any, userAddress: string) => {
   try {
     const token = await Fetch.REFRESH_TOKEN();
 
@@ -174,7 +193,14 @@ const refreshToken = async (dispatch: any) => {
     } else {
       console.log('Retrieved refreshed token: ' + token);
 
-      localStorage.setItem('token', token);
+      localStorage.setItem(
+        `session-${userAddress}`,
+        JSON.stringify({
+          userAddress: userAddress,
+          token: token,
+          expiration: new Date(new Date().getTime() + 60 * 60 * 12 * 1000),
+        })
+      );
     }
   } catch (error) {
     console.log(error);
@@ -189,23 +215,24 @@ function Wallet() {
   useEffect(() => {
     (async () => {
       // check if user is already logged in on app launch
-      const cachedUserAddress = localStorage.getItem('userAddress');
-      const userAddress = window.ethereum
+      let userAddress = window.ethereum
         ? window.ethereum.selectedAddress
-        : cachedUserAddress;
-      const token = localStorage.getItem('token');
+        : undefined;
+      const cachedSession = getCachedSession(userAddress);
 
-      if (userAddress && token && userAddress === cachedUserAddress) {
+      if (cachedSession.userAddress) {
         dispatch({
           type: 'update_status',
           data: 3,
         });
 
+        userAddress = cachedSession.userAddress;
         const userStatus = await loginUser(dispatch, userAddress);
 
         if (userStatus !== false) {
           // get new access token to extend expiration time by 12 hours
-          refreshToken(dispatch);
+          console.log(`Refreshing token for ${userAddress}`);
+          refreshToken(dispatch, userAddress);
         } else {
           // token expired; user needs to reauthenticate account
           console.log('Expired token');
@@ -222,7 +249,7 @@ function Wallet() {
         window.ethereum.on('accountsChanged', (account: string) => {
           console.log('Account changed to:', account);
 
-          if (localStorage.getItem('userAddress')) {
+          if (getCachedSession(window.ethereum.selectedAddress)) {
             disconnectWallet(dispatch);
             window.location.reload();
           }
@@ -231,7 +258,7 @@ function Wallet() {
         window.ethereum.on('disconnect', () => {
           console.log('Wallet disconnected');
 
-          if (localStorage.getItem('userAddress')) {
+          if (getCachedSession(window.ethereum.selectedAddress)) {
             disconnectWallet(dispatch);
             window.location.reload();
           }
