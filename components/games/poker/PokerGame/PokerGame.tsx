@@ -3,7 +3,7 @@ import { maxBy, get } from 'lodash';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useStoreState } from '../../../../store/Hooks';
+import { useStoreState, useWindowSize } from '../../../../store/Hooks';
 import Character from '../Character/Character';
 import Setting from '../Setting/Setting';
 import LeaderBoard from '../LeaderBoard/LeaderBoard';
@@ -12,7 +12,6 @@ import RaiseSetting from '../RaiseSetting/RaiseSetting';
 import TableCard from '../TableCardRename/TableCard';
 import Card from '../Card/Card';
 import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
-
 import styles from './PokerGame.module.scss';
 
 const image = [
@@ -64,6 +63,7 @@ const PokerGame = () => {
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
   const legalActions = get(state, 'tableData.legalActions.actions', []);
 
+  const size = useWindowSize();
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   const onReset = () => {
@@ -214,6 +214,7 @@ const PokerGame = () => {
 
   return (
     <section className={styles.body}>
+      {console.log('height', size.height)}
       {!!state.waitTime && (
         <div className={styles.waitTime}>{state.waitTime}</div>
       )}
