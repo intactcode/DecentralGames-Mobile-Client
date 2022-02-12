@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Fetch from '../api/Fetch';
-import { useStoreDispatch } from './Hooks';
+import { useStoreDispatch } from '../hooks/Hooks';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import Web3 from 'web3';
 import constants from '../components/common/Constants';

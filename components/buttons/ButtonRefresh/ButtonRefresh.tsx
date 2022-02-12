@@ -1,19 +1,29 @@
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { MdOutlineSubdirectoryArrowLeft } from 'react-icons/md';
-import { useStoreState } from '../../../store/Hooks';
+import { useStoreState } from '../../../hooks/Hooks';
 import styles from './ButtonRefresh.module.scss';
+
+declare const window: any;
 
 const ButtonRefresh = () => {
   const state = useStoreState(); // returns global state from Context API store
-  // const router = useRouter();
+  const router = useRouter();
 
   const onReset = () => {
-    if (Object.keys(state.socket).length !== 0) {
-      console.log('Reset game session');
+    // if (Object.keys(state.socket).length !== 0) {
+    console.log('Clicked back/reset');
 
-      state.socket.leave(false);
-      // router.push('/');
-    }
+    // Segment: track back/reset button event
+    window.analytics.track('Clicked back/reset', {
+      userAddress: state.userAddress,
+    });
+
+    // location.href = '/';
+    router.push('/');
+
+    // state.socket.leave(false);
+
+    // }
   };
 
   return (

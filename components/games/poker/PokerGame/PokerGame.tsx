@@ -3,13 +3,13 @@ import { maxBy, get } from 'lodash';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useStoreState } from '../../../../store/Hooks';
+import { useStoreState } from '../../../../hooks/Hooks';
 import Character from '../Character/Character';
 import Setting from '../Setting/Setting';
 import LeaderBoard from '../LeaderBoard/LeaderBoard';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import RaiseSetting from '../RaiseSetting/RaiseSetting';
-import TableCard from '../TableCardRename/TableCard';
+import TableCard from '../TableCard/TableCard';
 import Card from '../Card/Card';
 import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
 
@@ -78,11 +78,11 @@ const PokerGame = () => {
     }, 100);
   };
 
-  useEffect(() => {
-    return () => {
-      // state.socket.leave();
-    };
-  }, [state.socket]);
+  // useEffect(() => {
+  //   return () => {
+  //     // state.socket.leave();
+  //   };
+  // }, [state.socket]);
 
   // if user is logged-in set game parameters, else send them to the join page
   useEffect(() => {
@@ -314,7 +314,8 @@ const PokerGame = () => {
         <div>Your Total</div>
         <div className={styles.chipForBet}>
           {iceamount && (
-            <div className={styles.betAmount}>{iceamount}
+            <div className={styles.betAmount}>
+              {iceamount}
               <Image
                 className={styles.chipImage}
                 src="/images/freecoin.svg"
@@ -403,7 +404,9 @@ const PokerGame = () => {
             width={176}
             height={111}
           />
-          <span className={styles.potValueText}>{state.tableData?.pot || 0}</span>
+          <span className={styles.potValueText}>
+            {state.tableData?.pot || 0}
+          </span>
         </div>
       )}
     </section>
