@@ -10,6 +10,12 @@
   }
 }
 
+@mixin media-xltl-xm {
+  @media screen and (max-width: 390px) {
+    @content;
+  }
+}
+
 .body {
   width: 100%;
   position: relative;
@@ -24,7 +30,10 @@
   @media screen and (max-width: 767px) and (display-mode: standalone) {
     margin-top: 0px;
   }
-
+  @include media-xltl-xm {
+    margin-top: 0px;
+    height: 100vh;
+  }
   .roundOverlay {
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 300;
@@ -43,6 +52,15 @@
     margin-left: 48px;
     margin-top: 24px;
     position: absolute;
+    @include media-ltl-xm {
+      font-size: 4rem;
+      margin-left: 30px;
+    }
+    @include media-xltl-xm {
+      font-size: 3rem;
+      margin-left: 95px;
+      margin-top: 18px;
+    }
   }
 
   .potContainer {
@@ -51,7 +69,9 @@
     top: 210px;
     justify-content: center;
     z-index: 99;
-
+    @include media-xltl-xm {
+      top: 180px;
+    }
     .pot {
       position: relative;
       display: flex;
@@ -76,10 +96,9 @@
     top: 50px;
     left: calc(50% - 380px);
     @include media-ltl-xm {
-      background-image: url('/images/Table.svg');
-      max-width: 374px;
-      height: 578px;
-      left: calc(50% - 187px);
+      background-image: url('/images/Table-phone.svg');
+      max-width: 280px;
+      left: calc(50% - 140px);
     }
     @media all and (display-mode: standalone) {
       /* only apply if app is running standalone */
@@ -87,6 +106,10 @@
       background-size: 100% 100%;
     }
     @media screen and (max-width: 767px) and (display-mode: standalone) {
+      height: 70vh;
+      top: 40px;
+    }
+    @include media-xltl-xm {
       height: 70vh;
       top: 40px;
     }
@@ -103,6 +126,9 @@
     @include media-ltl-xm {
       width: 340px;
       left: calc(50% - 170px);
+    }
+    @include media-xltl-xm {
+      top: 25px;
     }
 
     .blackEllipse {
@@ -134,6 +160,10 @@
     @include media-ltl-xm {
       max-width: 120px;
     }
+    @include media-xltl-xm {
+      max-width: 160px;
+      top: 200px;
+    }
     .cardContainer {
       margin-right: 0.5;
       border-style: unset;
@@ -157,6 +187,12 @@
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    @include media-ltl-xm {
+      margin-top: 57px;
+    }
+    @include media-xltl-xm {
+      margin-top: 0px;
+    }
   }
 
   .turnButtonContainer {
@@ -171,6 +207,13 @@
       padding-right: 0px;
       width: auto;
       margin-top: 60vh;
+    }
+    @include media-xltl-xm {
+      padding-top: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      width: auto;
+      margin-top: 80vh;
     }
     @media screen and (min-width: 768px) and (display-mode: standalone) {
       padding-top: 410px;
@@ -199,7 +242,7 @@
       }
       @media (max-width: 767px) and (display-mode: standalone) {
         margin-left: 70px;
-        margin-top: 20px;
+        margin-top: 40px;
       }
       @media (min-width: 768px) and (display-mode: standalone) {
         margin-top: 20px;
@@ -271,6 +314,10 @@
       font-weight: bold;
       margin: 5px;
       color: white;
+      @include media-xltl-xm {
+        width: 100px;
+        height: 48px;
+      }
 
       &:nth-of-type(1) {
         background: #a82822;
@@ -454,5 +501,10 @@
   }
   @media (max-width: 767px) {
     left: calc(50% - 150px);
+    margin-top: 35px;
+  }
+  @include media-xltl-xm {
+    margin-top: -38px;
+    transform: translateX(-15%);
   }
 }
