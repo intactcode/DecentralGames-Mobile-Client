@@ -191,7 +191,7 @@
       margin-top: 57px;
     }
     @include media-xltl-xm {
-      margin-top: 0px;
+      margin-top: -50px;
     }
   }
 
@@ -399,6 +399,9 @@
       line-height: 13.13px;
       color: #fff;
     }
+    @include media-xltl-xm {
+      top:570px;
+    }
   }
 }
 
@@ -504,7 +507,7 @@
     margin-top: 35px;
   }
   @include media-xltl-xm {
-    margin-top: -38px;
+    margin-top: -85px;
     transform: translateX(-15%);
   }
 }
