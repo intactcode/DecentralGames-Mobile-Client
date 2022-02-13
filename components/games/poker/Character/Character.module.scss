@@ -152,9 +152,12 @@
     left: calc(50% - 36px);
     top: 510px;
   }
+  @media (max-width: 390px) {
+    top: 430px;
+  }
 
   @media (max-width: 767px) and (display-mode: standalone) {
-    top: 59vh !important;
+    top: 64vh !important;
     left: calc(50% - 35px) !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
@@ -167,11 +170,14 @@
   left:calc(50% - 190px);
   top: 420px;
   @media (max-width: 767px) {
-    left: calc(50% - 160px);
+    left: calc(50% - 155px);
     top: 380px;
   }
+  @media (max-width: 390px) {
+    top: 340px;
+  }
   @media (max-width: 767px) and (display-mode: standalone) {
-    left: calc(50% - 130px) !important;
+    left: calc(50% - 155px) !important;
     top: 45vh !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
@@ -185,9 +191,12 @@
     left: calc(50% - 160px);
     top: 190px;
   }
+  @media (max-width: 390px) {
+    top: 150px;
+  }
   @media (max-width: 767px) and (display-mode: standalone) {
     top: 24vh !important;
-    left: calc(50% - 130px) !important;
+    left: calc(50% - 160px) !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     top: 30vh !important;
@@ -202,7 +211,7 @@
     top: 50px;
   }
   @media (max-width: 767px) and (display-mode: standalone) {
-    top: 8vh !important;
+    top: 6vh !important;
     left: calc(50% - 35px) !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
@@ -217,9 +226,12 @@
     left: calc(50% + 90px);
     top: 190px;
   }
+  @media (max-width: 390px) {
+    top: 150px;
+  }
   @media (max-width: 767px) and (display-mode: standalone) {
     top: 24vh !important;
-    left: calc(50% + 55px) !important;
+    left: calc(50% + 80px) !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     top: 7vh !important;
@@ -232,8 +244,11 @@
     left: calc(50% + 90px);
     top: 380px;
   }
+  @media (max-width: 390px) {
+    top: 340px;
+  }
   @media (max-width: 767px) and (display-mode: standalone) {
-    left: calc(50% + 55px) !important;
+    left: calc(50% + 80px) !important;
     top: 45vh !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {

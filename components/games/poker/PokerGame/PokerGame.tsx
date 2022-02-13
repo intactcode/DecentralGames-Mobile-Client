@@ -12,7 +12,6 @@ import RaiseSetting from '../RaiseSetting/RaiseSetting';
 import TableCard from '../TableCard/TableCard';
 import Card from '../Card/Card';
 import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
-
 import styles from './PokerGame.module.scss';
 
 const image = [

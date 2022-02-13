@@ -48,7 +48,7 @@ const UserInfoDialog: React.FC<Props> = ({
       </div>
       <div
         className={styles.dialog}
-        style={{ zIndex: open ? 10 : 0, opacity: open ? 1 : 0 }}
+        style={{ zIndex: open ? 10 : 0, display: open ? 'block' : 'none' }}
         ref={dialog}
       >
         <div className={styles.title}>Your Player Stats</div>
