@@ -185,4 +185,7 @@
     overflow-x: unset;
     height: 100%;
   }
+  @media (max-width: 390px) {
+    position: unset;
+  }
 }
