@@ -10,20 +10,18 @@ const ButtonRefresh = () => {
   const router = useRouter();
 
   const onReset = () => {
-    // if (Object.keys(state.socket).length !== 0) {
     console.log('Clicked back/reset');
+
+    if (Object.keys(state.socket).length !== 0) {
+      state.socket.leave();
+    }
 
     // Segment: track back/reset button event
     window.analytics.track('Clicked back/reset', {
       userAddress: state.userAddress,
     });
 
-    // location.href = '/';
     router.push('/');
-
-    // state.socket.leave(false);
-
-    // }
   };
 
   return (
