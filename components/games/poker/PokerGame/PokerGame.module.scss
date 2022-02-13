@@ -17,11 +17,11 @@
 }
 
 .body {
+  transform: scale(0.95);
   width: 100%;
   position: relative;
-  margin-top: 72px;
+  margin-top: 0px;
   font-family: 'Larsseit';
-  height: calc(100vh - 72px);
   @media all and (display-mode: standalone) {
     /* only apply if app is running standalone */
     margin-top: 50px;
@@ -186,13 +186,6 @@
   .buttonContainerParentBottom {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
-    @include media-ltl-xm {
-      margin-top: 57px;
-    }
-    @include media-xltl-xm {
-      margin-top: -50px;
-    }
   }
 
   .turnButtonContainer {
