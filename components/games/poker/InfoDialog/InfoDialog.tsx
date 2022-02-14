@@ -52,7 +52,14 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
       >
         {items.map((data: string, i: number) => {
           return (
-            <div className={styles.userItemContainer} key={200 + i}>
+            <div
+              className={styles.userItemContainer}
+              style={{
+                marginLeft: i === 0 ? '16px' : '4px',
+                marginRight: i === items.length - 1 ? '16px' : '4px',
+              }}
+              key={200 + i}
+            >
               <div className={styles.userItemImgContainer}>
                 <Image
                   src={`${data}`}
