@@ -36,78 +36,78 @@
     color: rgb(255, 255, 255, 0.75);
     margin-top: 4px;
   }
-}
 
-.title {
-  font-size: 20px;
-  font-weight: 800;
-  color: white;
-}
+  .title {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+  }
+  
+  .itemsContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    margin-bottom: 8px;
 
-.itemsContainer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
+    .itemContainer {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
 
-.itemContainer {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
+      .itemField {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 800;
+        flex-direction: column;
+        font-size: 11px;
+        font-style: italic;
+        line-height: 15px;
+        color: white;
+        width: 62px;
+        height: 55px;
+        margin-top: 8px;
 
-.iceLabel {
-  margin-bottom: 4px;
-}
+        .iceLabel {
+          margin-bottom: 4px;
+        }
 
-.xpLabel {
-  margin-bottom: 4px;
-  margin-top: -4px;
-}
+        .xpLabel {
+          margin-bottom: 4px;
+          margin-top: -4px;
+        }
 
-.dgLabel {
-  margin-bottom: 2px;
-}
+        .dgLabel {
+          margin-bottom: 2px;
+        }
+      }
+    }
+  }
 
-.userItemsContainer {
-  display: flex;
-  margin-top: 8px;
-}
+  .userItemsContainer {
+    display: flex;
+    margin-top: 8px;
 
-.userItemContainer {
-  margin-right: 8px;
-  font-size: 9px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+    .userItemContainer {
+      margin-right: 8px;
+      font-size: 9px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-.userItemImgContainer {
-  width: 37px;
-  height: 37px;
-}
-
-.itemField {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 800;
-  flex-direction: column;
-  font-size: 11px;
-  font-style: italic;
-  line-height: 15px;
-  color: white;
-  width: 62px;
-  height: 55px;
-  margin-top: 8px;
-}
-
-.noneItem {
-  background: radial-gradient(50% 50% at 50% 50%, #979797 0%, #6f6f6f 100%);
-  border-radius: 8px;
-  width: 37px;
-  height: 37px;
+      .noneItem {
+        background: radial-gradient(50% 50% at 50% 50%, #979797 0%, #6f6f6f 100%);
+        border-radius: 8px;
+        width: 37px;
+        height: 37px;
+      }
+    
+      .userItemImgContainer {
+        width: 37px;
+        height: 37px;
+      }
+    }
+  }
 }
