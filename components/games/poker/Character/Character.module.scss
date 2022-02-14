@@ -181,7 +181,8 @@
     top: 45vh !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
-    top: 55% !important;
+    top: 56% !important;
+    left: calc(50% - 145px) !important;
   }
 }
 .characterPos2 {
@@ -216,7 +217,8 @@
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     top: 7vh !important;
-    left: calc(50% + -190px);
+    left: calc(50% - 145px) !important;
+
   }
 }
 .characterPos4 {
@@ -253,7 +255,7 @@
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     /* only apply if app is running standalone */
-    left: calc(50% + 250px) !important;
+    left: calc(50% + 300px) !important;
     top: 30vh !important;
   }
 }
