@@ -332,22 +332,24 @@ const PokerGame = () => {
             <button disabled={isWon} onClick={() => onFold()}>
               Fold
             </button>
-            {canCall() && (
+            {canCall() ? (
               <button disabled={!canCall() || isWon} onClick={() => onCall()}>
-                Call {players[currentPlayer].betSize}
+                Call
               </button>
-            )}
-            {canCheck() && (
+            ) : (
               <button disabled={isWon} onClick={() => onCheck()}>
                 Check
               </button>
             )}
-            {canRaise(getMinRaise()) && (
+            {canRaise(getMinRaise()) ? (
               <button disabled={isWon} onClick={() => setRaiseShow(true)}>
                 Raise
               </button>
-            )}
-            {canBet(forcedBets.bigBlind) && (
+            ) : canBet(forcedBets.bigBlind) ? (
+              <button disabled={isWon} onClick={() => onBet()}>
+                Bet
+              </button>
+            ) : (
               <button disabled={isWon} onClick={() => onBet()}>
                 Bet
               </button>
