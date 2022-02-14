@@ -254,7 +254,8 @@
         margin-top: 20px;
       }
       @include media-gte-sm {
-        margin-top: -105px;
+        margin-top: -100px;
+        margin-left: 350px;
       }
       .dot {
         margin-top: 0px;
@@ -283,6 +284,12 @@
       /* only apply if app is running standalone */
       margin-bottom: 0px;
     }
+    
+    @include media-gte-sm {
+      margin-bottom: 0px;
+      margin-top: -25px;
+    }
+
     .progress {
       display: flex;
       align-items: center;
@@ -300,7 +307,7 @@
   .actionButtonGroup {
     display: flex;
     justify-content: space-between;
-    margin-top: -75px;
+    margin-top: -100px;
     opacity: 1;
     @include media-ltl-xm {
       margin-top: 0px;
@@ -398,10 +405,10 @@
   .wonImageContainer {
     position: absolute;
     left: calc(50% - 90px);
-    top: 580px;
+    top: 520px;
     .potValueText {
       position: absolute;
-      top: 56px;
+      top: 85px;
       left: 46%;
       font-weight: 800;
       font-size: 11px;
@@ -495,7 +502,7 @@
   transform: translateY(4px);
 }
 .playerInfo {
-  margin-top: -65px;
+  margin-top: -90px;
   position: absolute;
   left: 18%;
   transform: translateX(-50%);
