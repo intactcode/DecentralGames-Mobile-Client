@@ -254,7 +254,7 @@
         margin-top: 20px;
       }
       @include media-gte-sm {
-        margin-top: -70px;
+        margin-top: -105px;
       }
       .dot {
         margin-top: 0px;
@@ -300,7 +300,7 @@
   .actionButtonGroup {
     display: flex;
     justify-content: space-between;
-    margin-top: -40px;
+    margin-top: -75px;
     opacity: 1;
     @include media-ltl-xm {
       margin-top: 0px;
@@ -398,7 +398,7 @@
   .wonImageContainer {
     position: absolute;
     left: calc(50% - 90px);
-    top: 700px;
+    top: 580px;
     .potValueText {
       position: absolute;
       top: 56px;
@@ -495,9 +495,9 @@
   transform: translateY(4px);
 }
 .playerInfo {
-  margin-top: -25px;
+  margin-top: -65px;
   position: absolute;
-  left: 15%;
+  left: 18%;
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: 13px;
