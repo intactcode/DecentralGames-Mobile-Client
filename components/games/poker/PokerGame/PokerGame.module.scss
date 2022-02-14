@@ -73,7 +73,7 @@
       top: 180px;
     }
     @media (min-width: 767px) and (display-mode: standalone) {
-      top:160px;
+      top: 160px;
     }
 
     .pot {
@@ -204,7 +204,7 @@
     @include media-gte-sm {
       margin-top: 0px;
     }
-    @media (min-width:768px) and (display-mode: standalone) {
+    @media (min-width: 768px) and (display-mode: standalone) {
       margin-top: 40px;
     }
     @media (max-width: 390) and (display-mode: standalone) {
@@ -225,7 +225,7 @@
       width: auto;
       margin-top: 60vh;
     }
-    
+
     @include media-xltl-xm {
       padding-top: 0px;
       padding-left: 0px;
@@ -262,14 +262,16 @@
         margin-left: 70px;
         margin-top: 40px;
       }
-           @include media-gte-sm {
+      @include media-gte-sm {
         margin-top: -100px;
         margin-left: 350px;
       }
       @media (min-width: 767px) and (display-mode: standalone) {
         margin-top: 60px;
       }
-
+      @media (max-width: 390px) and (display-mode: standalone) {
+        margin-top: -7px;
+      }
       .dot {
         margin-top: 0px;
         margin-left: 4px;
@@ -297,13 +299,13 @@
       /* only apply if app is running standalone */
       margin-bottom: 0px;
     }
-    
+
     @include media-gte-sm {
       margin-bottom: 0px;
       margin-top: -25px;
     }
-    @media (min-width:768px) and (display-mode: standalone) {
-     margin-top: 5px; 
+    @media (min-width: 768px) and (display-mode: standalone) {
+      margin-top: 5px;
     }
 
     .progress {
@@ -331,6 +333,9 @@
     @media all and (display-mode: standalone) {
       /* only apply if app is running standalone */
       margin-top: 2vh;
+    }
+    @media (max-width: 390px) and (display-mode: standalone) {
+      margin-top: 9vh;
     }
     button {
       display: inline-block;
@@ -430,15 +435,21 @@
       font-size: 11px;
       line-height: 13.13px;
       color: #fff;
-      @media (min-width:768px) and (display-mode: standalone){
-        top:70px;
+      @media (min-width: 768px) and (display-mode: standalone) {
+        top: 70px;
+      }
+      @media (max-width: 390px) and (display-mode: standalone) {
+        top: 72px;
       }
     }
     @include media-xltl-xm {
-      top:570px;
+      top: 570px;
     }
-    @media (min-width:768px) and (display-mode: standalone) {
-      top:570px;
+    @media (min-width: 768px) and (display-mode: standalone) {
+      top: 570px;
+    }
+    @media (max-width: 390px) and (display-mode: standalone) {
+      top: 660px;
     }
   }
 }
@@ -548,11 +559,10 @@
     margin-top: -85px;
     transform: translateX(-15%);
   }
-  @media (max-width:390px) and (display-mode: standalone) {
-    margin-top: -70px;
+  @media (max-width: 390px) and (display-mode: standalone) {
+    margin-top: -10px;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     margin-top: 60px;
   }
-
 }
