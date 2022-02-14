@@ -103,13 +103,13 @@
   display: flex;
   margin-top: -135px;
   margin-left: -13px;
-  @media (max-width: 767px) and (display-mode: standalone)  {
+  @media (max-width: 767px) and (display-mode: standalone) {
     margin-top: -118px;
     margin-left: 0px;
   }
 
   .winnerCardFrame {
-    padding:1px;
+    padding: 1px;
   }
 }
 
@@ -134,9 +134,9 @@
   padding: 2px 8px;
   border-radius: 16px;
   background: #d96060;
-  left:50%;
-   white-space: nowrap;
-   transform: translateX(-50%);
+  left: 50%;
+  white-space: nowrap;
+  transform: translateX(-50%);
   width: fit-content;
   // @media (max-width: 767px) and (display-mode: standalone)  {
   //  left:50%;
@@ -146,7 +146,7 @@
 }
 
 .characterPos0 {
-  left:calc(50% + 110px);
+  left: calc(50% + 110px);
   top: 360px;
   @media (max-width: 767px) {
     left: calc(50% - 36px);
@@ -160,6 +160,10 @@
     top: 64vh !important;
     left: calc(50% - 35px) !important;
   }
+  @media (max-width: 390px) and (display-mode: standalone) {
+    top: 60vh !important;
+  }
+
   @media (min-width: 768px) and (display-mode: standalone) {
     left: calc(50% + 110px) !important;
     top: 52vh !important;
@@ -167,7 +171,7 @@
 }
 
 .characterPos1 {
-  left:calc(50% - 190px);
+  left: calc(50% - 190px);
   top: 360px;
   @media (max-width: 767px) {
     left: calc(50% - 155px);
@@ -181,11 +185,12 @@
     top: 45vh !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
-    top: 55% !important;
+    top: 56% !important;
+    left: calc(50% - 145px) !important;
   }
 }
 .characterPos2 {
-  left:calc(50% - 340px);
+  left: calc(50% - 340px);
   top: 200px;
   @media (max-width: 767px) {
     left: calc(50% - 160px);
@@ -200,11 +205,11 @@
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     top: 30vh !important;
-    left: calc(50% - 325px);
+    left: calc(50% - 310px);
   }
 }
 .characterPos3 {
-  left:calc(50% - 190px);
+  left: calc(50% - 190px);
   top: 55px;
   @media (max-width: 767px) {
     left: calc(50% - 36px);
@@ -214,13 +219,16 @@
     top: 6vh !important;
     left: calc(50% - 35px) !important;
   }
+  @media (max-width: 390px) and (display-mode: standalone) {
+    top: 11vh !important;
+  }
   @media (min-width: 768px) and (display-mode: standalone) {
     top: 7vh !important;
-    left: calc(50% + -190px);
+    left: calc(50% - 145px) !important;
   }
 }
 .characterPos4 {
-  left:calc(50% + 110px);
+  left: calc(50% + 110px);
   top: 55px;
   @media (max-width: 767px) {
     left: calc(50% + 90px);
@@ -238,7 +246,7 @@
   }
 }
 .characterPos5 {
-  left:calc(50% + 260px);
+  left: calc(50% + 260px);
   top: 200px;
   @media (max-width: 767px) {
     left: calc(50% + 90px);
@@ -253,7 +261,7 @@
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     /* only apply if app is running standalone */
-    left: calc(50% + 250px) !important;
+    left: calc(50% + 300px) !important;
     top: 30vh !important;
   }
 }

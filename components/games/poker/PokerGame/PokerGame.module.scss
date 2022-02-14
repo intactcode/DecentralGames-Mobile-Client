@@ -72,6 +72,10 @@
     @include media-xltl-xm {
       top: 180px;
     }
+    @media (min-width: 767px) and (display-mode: standalone) {
+      top: 160px;
+    }
+
     .pot {
       position: relative;
       display: flex;
@@ -164,6 +168,11 @@
       max-width: 160px;
       top: 200px;
     }
+    @media (min-width: 767px) and (display-mode: standalone) {
+      max-width: 280px;
+      top: 180px;
+    }
+
     .cardContainer {
       margin-right: 0.5;
       border-style: unset;
@@ -195,6 +204,9 @@
     @include media-gte-sm {
       margin-top: 0px;
     }
+    @media (min-width: 768px) and (display-mode: standalone) {
+      margin-top: 40px;
+    }
     @media (max-width: 390) and (display-mode: standalone) {
       margin-top: -40px;
     }
@@ -213,7 +225,7 @@
       width: auto;
       margin-top: 60vh;
     }
-    
+
     @include media-xltl-xm {
       padding-top: 0px;
       padding-left: 0px;
@@ -250,11 +262,15 @@
         margin-left: 70px;
         margin-top: 40px;
       }
-      @media (min-width: 768px) and (display-mode: standalone) {
-        margin-top: 20px;
-      }
       @include media-gte-sm {
-        margin-top: -105px;
+        margin-top: -100px;
+        margin-left: 350px;
+      }
+      @media (min-width: 767px) and (display-mode: standalone) {
+        margin-top: 60px;
+      }
+      @media (max-width: 390px) and (display-mode: standalone) {
+        margin-top: 18px;
       }
       .dot {
         margin-top: 0px;
@@ -283,6 +299,15 @@
       /* only apply if app is running standalone */
       margin-bottom: 0px;
     }
+
+    @include media-gte-sm {
+      margin-bottom: 0px;
+      margin-top: -25px;
+    }
+    @media (min-width: 768px) and (display-mode: standalone) {
+      margin-top: 5px;
+    }
+
     .progress {
       display: flex;
       align-items: center;
@@ -300,7 +325,7 @@
   .actionButtonGroup {
     display: flex;
     justify-content: space-between;
-    margin-top: -75px;
+    margin-top: -100px;
     opacity: 1;
     @include media-ltl-xm {
       margin-top: 0px;
@@ -308,6 +333,9 @@
     @media all and (display-mode: standalone) {
       /* only apply if app is running standalone */
       margin-top: 2vh;
+    }
+    @media (max-width: 390px) and (display-mode: standalone) {
+      margin-top: 12vh;
     }
     button {
       display: inline-block;
@@ -398,18 +426,30 @@
   .wonImageContainer {
     position: absolute;
     left: calc(50% - 90px);
-    top: 580px;
+    top: 520px;
     .potValueText {
       position: absolute;
-      top: 56px;
+      top: 85px;
       left: 46%;
       font-weight: 800;
       font-size: 11px;
       line-height: 13.13px;
       color: #fff;
+      @media (min-width: 768px) and (display-mode: standalone) {
+        top: 70px;
+      }
+      @media (max-width: 390px) and (display-mode: standalone) {
+        top: 72px;
+      }
     }
     @include media-xltl-xm {
-      top:570px;
+      top: 570px;
+    }
+    @media (min-width: 768px) and (display-mode: standalone) {
+      top: 570px;
+    }
+    @media (max-width: 390px) and (display-mode: standalone) {
+      top: 715px;
     }
   }
 }
@@ -495,7 +535,7 @@
   transform: translateY(4px);
 }
 .playerInfo {
-  margin-top: -65px;
+  margin-top: -90px;
   position: absolute;
   left: 18%;
   transform: translateX(-50%);
@@ -519,7 +559,10 @@
     margin-top: -85px;
     transform: translateX(-15%);
   }
-  @media (max-width:390px) and (display-mode: standalone) {
-    margin-top: -70px;
+  @media (max-width: 390px) and (display-mode: standalone) {
+    margin-top: 15px;
+  }
+  @media (min-width: 768px) and (display-mode: standalone) {
+    margin-top: 60px;
   }
 }

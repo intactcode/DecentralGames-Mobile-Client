@@ -31,7 +31,10 @@
     border-radius: 16px 16px 0px 0px;
     width: 100vw;
     height: 156px;
-
+    @media (min-width: 768px) {
+      width: 400px;
+      left: calc(50% - 200px);
+    }
     .raiseInput {
       margin-top: 16px;
       padding: 6px 6px 6px 18px;
