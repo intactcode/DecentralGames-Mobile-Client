@@ -179,10 +179,15 @@
 }
 
 .layoutPosition {
-  position: relative;
+  height: 100vh;
+
   overflow-x: hidden; 
   @media all and (display-mode: standalone) {
     overflow-x: unset;
     height: 100%;
+  }
+  @media (max-width: 390px) {
+    position: unset;
+    height: 100vh;
   }
 }
