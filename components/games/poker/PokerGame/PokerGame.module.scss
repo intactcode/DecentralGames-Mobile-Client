@@ -195,6 +195,9 @@
     @include media-gte-sm {
       margin-top: 0px;
     }
+    @media (min-width:768px) and (display-mode: standalone) {
+      margin-top: 40px;
+    }
     @media (max-width: 390) and (display-mode: standalone) {
       margin-top: -40px;
     }
@@ -250,13 +253,14 @@
         margin-left: 70px;
         margin-top: 40px;
       }
-      @media (min-width: 768px) and (display-mode: standalone) {
-        margin-top: 20px;
-      }
-      @include media-gte-sm {
+           @include media-gte-sm {
         margin-top: -100px;
         margin-left: 350px;
       }
+      @media (min-width: 767px) and (display-mode: standalone) {
+        margin-top: 60px;
+      }
+
       .dot {
         margin-top: 0px;
         margin-left: 4px;
@@ -288,6 +292,9 @@
     @include media-gte-sm {
       margin-bottom: 0px;
       margin-top: -25px;
+    }
+    @media (min-width:768px) and (display-mode: standalone) {
+     margin-top: 5px; 
     }
 
     .progress {
@@ -414,8 +421,14 @@
       font-size: 11px;
       line-height: 13.13px;
       color: #fff;
+      @media (min-width:768px) and (display-mode: standalone){
+        top:70px;
+      }
     }
     @include media-xltl-xm {
+      top:570px;
+    }
+    @media (min-width:768px) and (display-mode: standalone) {
       top:570px;
     }
   }
@@ -529,4 +542,8 @@
   @media (max-width:390px) and (display-mode: standalone) {
     margin-top: -70px;
   }
+  @media (min-width: 768px) and (display-mode: standalone) {
+    margin-top: 60px;
+  }
+
 }
