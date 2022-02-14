@@ -94,7 +94,7 @@
     height: 500px;
     position: absolute;
     top: 50px;
-    left: calc(50% - 380px);
+    left: calc(50% - 340px);
     @include media-ltl-xm {
       background-image: url('/images/Table-phone.svg');
       max-width: 280px;
@@ -186,12 +186,14 @@
   .buttonContainerParentBottom {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
     @include media-ltl-xm {
       margin-top: 57px;
     }
     @include media-xltl-xm {
       margin-top: -50px;
+    }
+    @include media-gte-sm {
+      margin-top: 0px;
     }
     @media (max-width: 390) and (display-mode: standalone) {
       margin-top: -40px;
@@ -251,6 +253,9 @@
       @media (min-width: 768px) and (display-mode: standalone) {
         margin-top: 20px;
       }
+      @include media-gte-sm {
+        margin-top: -105px;
+      }
       .dot {
         margin-top: 0px;
         margin-left: 4px;
@@ -295,7 +300,7 @@
   .actionButtonGroup {
     display: flex;
     justify-content: space-between;
-    margin-top: -40px;
+    margin-top: -75px;
     opacity: 1;
     @include media-ltl-xm {
       margin-top: 0px;
@@ -309,7 +314,7 @@
       border-radius: 8px;
       border-width: 0px;
       width: 110px;
-      height: 70px;
+      height: 60px;
       cursor: pointer;
       display: flex;
       justify-content: center;
@@ -393,7 +398,7 @@
   .wonImageContainer {
     position: absolute;
     left: calc(50% - 90px);
-    top: 700px;
+    top: 580px;
     .potValueText {
       position: absolute;
       top: 56px;
@@ -490,9 +495,9 @@
   transform: translateY(4px);
 }
 .playerInfo {
-  margin-top: 5px;
+  margin-top: -65px;
   position: absolute;
-  left: 15%;
+  left: 18%;
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: 13px;

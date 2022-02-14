@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 760 450" height="450" width="760" xmlns="http://www.w3.org/2000/svg">
-  <g filter="url(#filter0_d_846_8855)" transform="matrix(0, 1.506169, -1.536795, 0, 789.622253, -58.406696)" style="">
+<svg viewBox="0 0 680 380" height="380" width="680" xmlns="http://www.w3.org/2000/svg">
+  <g filter="url(#filter0_d_846_8855)" transform="matrix(0, -1.305659, 1.351111, 0, -23.86425, 435.882111)" style="">
     <rect x="82" y="63" width="211" height="408" rx="105.5" fill="#06941D"/>
     <g filter="url(#filter1_ii_846_8855)">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M310 363.5V170.5C310 102.845 255.155 48 187.5 48C119.845 48 65 102.845 65 170.5V363.5C65 431.155 119.845 486 187.5 486C255.155 486 310 431.155 310 363.5ZM187.5 31C110.456 31 48 93.4563 48 170.5V363.5C48 440.544 110.456 503 187.5 503C264.544 503 327 440.544 327 363.5V170.5C327 93.4563 264.544 31 187.5 31Z" fill="black"/>
