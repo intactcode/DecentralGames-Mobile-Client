@@ -71,7 +71,7 @@ const Character: React.FC<Props> = ({
     <section
       style={{
         position: 'absolute',
-        zIndex: infomodalopen ? 21 : 20,
+        zIndex: infomodalopen ? 10010 : 20,
       }}
       className={styles[classString]}
     >
