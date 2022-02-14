@@ -193,6 +193,9 @@
     @include media-xltl-xm {
       margin-top: -50px;
     }
+    @media (max-width: 390) and (display-mode: standalone) {
+      margin-top: -40px;
+    }
   }
 
   .turnButtonContainer {
@@ -510,5 +513,8 @@
   @include media-xltl-xm {
     margin-top: -85px;
     transform: translateX(-15%);
+  }
+  @media (max-width:390px) and (display-mode: standalone) {
+    margin-top: -70px;
   }
 }
