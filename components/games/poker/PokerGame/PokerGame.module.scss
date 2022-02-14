@@ -186,6 +186,16 @@
   .buttonContainerParentBottom {
     display: flex;
     justify-content: center;
+    margin-top: 40px;
+    @include media-ltl-xm {
+      margin-top: 57px;
+    }
+    @include media-xltl-xm {
+      margin-top: -50px;
+    }
+    @media (max-width: 390) and (display-mode: standalone) {
+      margin-top: -40px;
+    }
   }
 
   .turnButtonContainer {
@@ -193,7 +203,7 @@
     padding-left: 20px;
     padding-right: 20px;
     width: 374px;
-    @media screen and (max-width: 767px) and (display-mode: standalone) {
+    @media (max-width: 767px) and (display-mode: standalone) {
       /* only apply if app is running standalone */
       padding-top: 0px;
       padding-left: 0px;
@@ -201,6 +211,7 @@
       width: auto;
       margin-top: 60vh;
     }
+    
     @include media-xltl-xm {
       padding-top: 0px;
       padding-left: 0px;
@@ -502,5 +513,8 @@
   @include media-xltl-xm {
     margin-top: -85px;
     transform: translateX(-15%);
+  }
+  @media (max-width:390px) and (display-mode: standalone) {
+    margin-top: -70px;
   }
 }
