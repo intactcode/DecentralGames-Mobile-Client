@@ -94,7 +94,7 @@
     height: 500px;
     position: absolute;
     top: 50px;
-    left: calc(50% - 380px);
+    left: calc(50% - 340px);
     @include media-ltl-xm {
       background-image: url('/images/Table-phone.svg');
       max-width: 280px;
@@ -186,12 +186,14 @@
   .buttonContainerParentBottom {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
     @include media-ltl-xm {
       margin-top: 57px;
     }
     @include media-xltl-xm {
       margin-top: -50px;
+    }
+    @include media-gte-sm {
+      margin-top: 0px;
     }
     @media (max-width: 390) and (display-mode: standalone) {
       margin-top: -40px;
@@ -251,6 +253,9 @@
       @media (min-width: 768px) and (display-mode: standalone) {
         margin-top: 20px;
       }
+      @include media-gte-sm {
+        margin-top: -60px;
+      }
       .dot {
         margin-top: 0px;
         margin-left: 4px;
@@ -309,7 +314,7 @@
       border-radius: 8px;
       border-width: 0px;
       width: 110px;
-      height: 70px;
+      height: 60px;
       cursor: pointer;
       display: flex;
       justify-content: center;
@@ -490,7 +495,7 @@
   transform: translateY(4px);
 }
 .playerInfo {
-  margin-top: 5px;
+  margin-top: -25px;
   position: absolute;
   left: 15%;
   transform: translateX(-50%);

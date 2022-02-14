@@ -147,7 +147,7 @@
 
 .characterPos0 {
   left:calc(50% + 110px);
-  top: 420px;
+  top: 360px;
   @media (max-width: 767px) {
     left: calc(50% - 36px);
     top: 510px;
@@ -168,7 +168,7 @@
 
 .characterPos1 {
   left:calc(50% - 190px);
-  top: 420px;
+  top: 360px;
   @media (max-width: 767px) {
     left: calc(50% - 155px);
     top: 380px;
@@ -185,8 +185,8 @@
   }
 }
 .characterPos2 {
-  left:calc(50% - 380px);
-  top: 250px;
+  left:calc(50% - 340px);
+  top: 200px;
   @media (max-width: 767px) {
     left: calc(50% - 160px);
     top: 190px;
@@ -238,8 +238,8 @@
   }
 }
 .characterPos5 {
-  left:calc(50% + 300px);
-  top: 250px;
+  left:calc(50% + 260px);
+  top: 200px;
   @media (max-width: 767px) {
     left: calc(50% + 90px);
     top: 380px;
