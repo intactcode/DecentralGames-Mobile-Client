@@ -62,6 +62,7 @@ const PokerGame = () => {
   const isInHand = state.tableData?.isInHand ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
   const legalActions = get(state, 'tableData.legalActions.actions', []);
+  const chipRange = get(state, 'tableData.legalActions.chipRange', {});
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -128,61 +129,19 @@ const PokerGame = () => {
 
   // eslint-disable-next-line
   const canCall = () => {
-    if (players[currentPlayer] === undefined) {
-      return false;
-    }
-    const { betSize } = players[currentPlayer];
-    const maxBetSize = getMaxBet();
-    return betSize !== maxBetSize && legalActions.includes('call');
+    return legalActions.includes('call');
   };
 
   const canCheck = () => {
-    if (players[currentPlayer] === undefined) {
-      return false;
-    }
-    const { betSize } = players[currentPlayer];
-    const maxBetSize = getMaxBet();
-    return betSize === maxBetSize && legalActions.includes('check');
+    return legalActions.includes('check');
   };
 
-  // eslint-disable-next-line
   const canRaise = (amount: number) => {
-    if (amount < 0 || players[currentPlayer] === undefined) {
-      return false;
-    }
-
-    const maxBetSize = getMaxBet();
-    if (maxBetSize === 0) {
-      return false;
-    }
-
-    const { totalChips } = players[currentPlayer];
-    const minBet = maxBetSize + forcedBets.bigBlind;
-    if (amount < minBet || amount > totalChips) {
-      return false;
-    }
-
-    return amount >= minBet && legalActions.includes('raise');
+    return amount >= chipRange.min && amount <= chipRange.max;
   };
 
-  // eslint-disable-next-line
   const canBet = (amount: number) => {
-    if (amount < 0 || players[currentPlayer] === undefined) {
-      return false;
-    }
-
-    const maxBet = getMaxBet();
-    if (maxBet > 0) {
-      return false;
-    }
-
-    const { totalChips } = players[currentPlayer];
-    const minBet = forcedBets.bigBlind;
-    if (amount < minBet || amount > totalChips) {
-      return false;
-    }
-
-    return totalChips >= minBet;
+    return amount >= chipRange.min && amount <= chipRange.max;
   };
 
   const onFold = () => {
@@ -208,6 +167,10 @@ const PokerGame = () => {
   };
 
   const onBet = () => {
+    if (!canBet(forcedBets.bigBlind)) {
+      alert('Input correct amount');
+      return;
+    }
     state.socket.send('betTable', { bet: forcedBets.bigBlind });
   };
 
@@ -333,8 +296,8 @@ const PokerGame = () => {
               Fold
             </button>
             {canCall() && (
-              <button disabled={!canCall() || isWon} onClick={() => onCall()}>
-                Call {players[currentPlayer].betSize}
+              <button disabled={isWon} onClick={() => onCall()}>
+                Call
               </button>
             )}
             {canCheck() && (
@@ -342,12 +305,12 @@ const PokerGame = () => {
                 Check
               </button>
             )}
-            {canRaise(getMinRaise()) && (
+            {legalActions.includes('raise') && (
               <button disabled={isWon} onClick={() => setRaiseShow(true)}>
                 Raise
               </button>
             )}
-            {canBet(forcedBets.bigBlind) && (
+            {legalActions.includes('bet') && (
               <button disabled={isWon} onClick={() => onBet()}>
                 Bet
               </button>
