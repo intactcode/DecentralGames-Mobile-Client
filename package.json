@@ -2,10 +2,15 @@
   "name": "decentral-games-mobile-client",
   "private": true,
   "scripts": {
+    "start": "next start",
     "dev": "next dev",
+    "start:production": "next start -p 3000",
     "tunnel": "local-ssl-proxy --source 3001 --target 3000",
     "build": "next build",
-    "start": "next start",
+    "build:testing": "cross-env APP_ENV=testing next build",
+    "build:development": "cross-env APP_ENV=development next build",
+    "build:staging": "cross-env APP_ENV=staging next build",
+    "build:production": "cross-env APP_ENV=production next build",
     "lint": "next lint",
     "prepare": "husky install",
     "pre-commit": "next lint --fix && git add -A ."
@@ -37,12 +42,14 @@
     "@types/react-motion": "^0.0.32",
     "@typescript-eslint/eslint-plugin": "4.13.0",
     "@typescript-eslint/parser": "4.13.0",
+    "cross-env": "7.0.3",
+    "env-cmd": "10.1.0",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.4",
-    "eslint-config-prettier": "^8.3.0",
-    "husky": "^7.0.4",
+    "eslint-config-prettier": "8.3.0",
+    "husky": "7.0.4",
     "prettier": "2.5.1",
-    "typescript": "^4.5.2"
+    "typescript": "4.5.5"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
