@@ -123,8 +123,8 @@ const Character: React.FC<Props> = ({
             <Image
               className={styles.chipImage}
               src="/images/freecoin.svg"
-              width="15px"
-              height="15px"
+              width="16px"
+              height="16px"
               alt="chipImage"
             />
           </div>
