@@ -26,6 +26,9 @@
     margin-top: -223px;
     bottom: unset;
   }
+  @media (min-width: 768px) and (display-mode: standalone) {
+    left: calc(50% - 180px);
+  }
   .raisePanel {
     padding: 0px 16px;
     margin-top: 60px;
@@ -38,6 +41,7 @@
       width: 400px;
       left: calc(50% - 200px);
     }
+   
     .raiseInput {
       margin-top: 16px;
       padding: 6px 6px 6px 18px;

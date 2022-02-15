@@ -207,7 +207,7 @@
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     top: 30vh !important;
-    left: calc(50% - 310px);
+    left: calc(50% - 345px);
   }
 }
 .characterPos3 {
@@ -263,7 +263,7 @@
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     /* only apply if app is running standalone */
-    left: calc(50% + 300px) !important;
+    left: calc(50% + 350px) !important;
     top: 30vh !important;
   }
 }
