@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
 import { useStoreState, useStoreDispatch } from '../../hooks/Hooks';
-import {
-  connectWallet,
-  assignToken,
-} from '../../store/Wallet';
+import { connectWallet, assignToken } from '../../store/Wallet';
 import styles from './Button.module.scss';
 
 declare const window: any;
@@ -21,6 +18,8 @@ const ButtonConnect = () => {
   let buttonText = 'Connect Your Wallet';
   if (state.userStatus === 2) {
     buttonText = 'Sign Login Message';
+  } else if (state.userStatus === 3) {
+    buttonText = 'Connecting...';
   }
 
   return (

@@ -18,12 +18,20 @@
     bottom: 24px;
     transition: all 0.25s ease;
     border: none;
-  
   }
 
-  .button_connect:hover,
-  .button_connect:active,
-  .button_connect:focus {
+  /* fix sticky hover on mobile */
+  @media (hover: hover) {
+    .button_connect:hover {
+      cursor: pointer;
+      background-color: #006eff;
+      color: white;
+      filter: brightness(0.8);
+      transition: all 0.25s ease;
+    }
+  }
+
+  .button_connect:active {
     cursor: pointer;
     background-color: #006eff;
     color: white;
