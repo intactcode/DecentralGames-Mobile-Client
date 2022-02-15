@@ -73,6 +73,19 @@ export const disconnectWallet = (dispatch: any, clearAllSessions: boolean) => {
   }
 };
 
+const storeSession = (userAddress: string, token: string) => {
+  localStorage.setItem(
+    `session-${userAddress}`,
+    JSON.stringify({
+      userAddress: userAddress,
+      token: token,
+      expiration: new Date(
+        new Date().getTime() + 60 * 60 * constants.AUTH_TOKEN_TTL * 1000
+      ),
+    })
+  );
+};
+
 export const assignToken = async (dispatch: any, web3: Web3) => {
   const userAddress =
     window.ethereum?.selectedAddress ||
@@ -105,16 +118,13 @@ export const assignToken = async (dispatch: any, web3: Web3) => {
       return;
     }
 
-    console.log('Assigned token:', token);
+    dispatch({
+      type: 'update_status',
+      data: 3,
+    });
 
-    localStorage.setItem(
-      `session-${userAddress}`,
-      JSON.stringify({
-        userAddress: userAddress,
-        token: token,
-        expiration: new Date(new Date().getTime() + 60 * 60 * 12 * 1000),
-      })
-    );
+    console.log('Assigned token:', token);
+    storeSession(userAddress, token);
 
     const userStatus = await loginUser(dispatch, userAddress);
     if (userStatus === false) {
@@ -197,15 +207,7 @@ const refreshToken = async (dispatch: any, userAddress: string) => {
       });
     } else {
       console.log('Retrieved refreshed token: ' + token);
-
-      localStorage.setItem(
-        `session-${userAddress}`,
-        JSON.stringify({
-          userAddress: userAddress,
-          token: token,
-          expiration: new Date(new Date().getTime() + 60 * 60 * 12 * 1000),
-        })
-      );
+      storeSession(userAddress, token);
     }
   } catch (error) {
     console.log(error);
