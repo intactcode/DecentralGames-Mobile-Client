@@ -30,6 +30,7 @@ const ButtonRefresh = () => {
         src="/images/exit.svg"
         width={20}
         height={20}
+        alt={'exit'}
       />
     </div>
   );

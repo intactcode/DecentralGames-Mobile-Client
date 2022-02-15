@@ -191,6 +191,7 @@ const PokerGame = () => {
             src="/images/leaderboard.svg"
             width={20}
             height={20}
+            alt={'leaderboard'}
           />
         </div>
       </div>
