@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { MdOutlineSubdirectoryArrowLeft } from 'react-icons/md';
+import Image from 'next/image';
 import { useStoreState } from '../../../hooks/Hooks';
 import styles from './ButtonRefresh.module.scss';
 
@@ -26,7 +26,12 @@ const ButtonRefresh = () => {
 
   return (
     <div className={styles.refresh} onClick={() => onReset()}>
-      <MdOutlineSubdirectoryArrowLeft style={{ fontSize: '22px' }} />
+      <Image
+        src="/images/exit.svg"
+        width={20}
+        height={20}
+        alt={'exit'}
+      />
     </div>
   );
 };

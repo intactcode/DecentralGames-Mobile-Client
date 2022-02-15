@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { maxBy, get } from 'lodash';
-import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useStoreState } from '../../../../hooks/Hooks';
@@ -188,7 +187,12 @@ const PokerGame = () => {
           className={styles.blackEllipse}
           onClick={() => setIsLeaderBoard(!isleaderboard)}
         >
-          <MdOutlineLeaderboard />
+          <Image
+            src="/images/leaderboard.svg"
+            width={20}
+            height={20}
+            alt={'leaderboard'}
+          />
         </div>
       </div>
     );
@@ -307,8 +311,8 @@ const PokerGame = () => {
               <Image
                 className={styles.chipImage}
                 src="/images/freecoin.svg"
-                width="15px"
-                height="15px"
+                width="16px"
+                height="16px"
                 alt="chipImage"
               />
             </div>

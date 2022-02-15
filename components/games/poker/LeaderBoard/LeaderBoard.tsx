@@ -59,12 +59,14 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
           return (
             <div className={styles.leaderBoardContent} key={400 + i}>
               <div className={styles.starImgContainer}>
-                <Image
-                  src="/images/star.svg"
-                  width="12px"
-                  height="13px"
-                  alt="star"
-                />
+                {i === 5 && (
+                  <Image
+                    src="/images/star.svg"
+                    width="12px"
+                    height="13px"
+                    alt="star"
+                  />
+                )}
               </div>
               <div className={styles.scoreField}>
                 <div className={styles.percentile}>{data.percentile}</div>
