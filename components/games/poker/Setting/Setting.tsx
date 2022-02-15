@@ -140,7 +140,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             <div className={styles.upperTitle}>Net Chips</div>
             <ItemField type={2} style={{ position: 'relative' }}>
               <span className={styles.text}>+0</span>
-              <div style={{ position: 'absolute', right: '8px', top: '8px' }}>
+              <div style={{ position: 'absolute', right: '6px', top: '9px' }}>
                 <Image
                   src="/images/freecoin.svg"
                   width={22}
@@ -161,8 +161,13 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             </ItemField>
             <div className={styles.lowerTitle}>Next Tier</div>
             <ItemField type={2} style={{ position: 'relative' }}>
-              <span className={styles.text}>+4,291</span>
-              <div style={{ margin: '6px 0px 0px 2px' }}>
+              <span
+                className={styles.text}
+                style={{marginLeft: '4px'}}
+              >
+                +4,291
+              </span>
+              <div style={{ marginLeft: '2px', marginTop: '8px' }}>
                 <Image
                   src="/images/freecoin.svg"
                   width={22}
