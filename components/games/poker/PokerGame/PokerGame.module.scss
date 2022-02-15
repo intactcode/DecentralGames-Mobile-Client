@@ -573,13 +573,18 @@
     .betAmount {
       padding-top: 2px;
       font-weight: bold;
-      color: white;
+      color: rgba(255, 255, 255, 0.8);
       margin-bottom: 2px;
+
+      .chipImage {
+        margin-left: 1px !important;
+        margin-top: 4px !important;
+      }
     }
   }
   @include media-tablet768 {
     left: calc(50% - 150px);
-    margin-top: 35px;
+    margin-top: 0px;
   }
   @include media-phone390 {
     margin-top: -85px;
