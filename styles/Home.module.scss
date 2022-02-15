@@ -1,3 +1,5 @@
+@import "/styles/mixins";
+
 .container {
   display: flex;
   justify-content: center;
@@ -45,7 +47,7 @@
   top: 10px;
   z-index: 20;
   cursor: pointer;
-  @media screen and (max-width: 767px) {
+  @include media-tablet768 {
     top: 50px;
   }
 }
@@ -148,7 +150,7 @@
   margin-left: 0.5rem;
 }
 
-@media (max-width: 600px) {
+@include media-tablet768 {
   .grid {
     width: 100%;
     flex-direction: column;
@@ -182,11 +184,11 @@
   height: 100vh;
 
   overflow-x: hidden; 
-  @media all and (display-mode: standalone) {
+  @include media-all-pwa {
     overflow-x: unset;
     height: 100%;
   }
-  @media (max-width: 390px) {
+  @include media-phone390 {
     position: unset;
     height: 100vh;
   }

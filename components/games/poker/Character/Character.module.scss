@@ -1,3 +1,5 @@
+@import '/styles/mixins';
+
 .playerCircle {
   cursor: pointer;
   position: relative;
@@ -93,7 +95,7 @@
   display: flex;
   margin-top: -125px;
   margin-left: -10px;
-  @media (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     margin-top: -115px;
     margin-left: -6px;
   }
@@ -103,7 +105,7 @@
   display: flex;
   margin-top: -135px;
   margin-left: -13px;
-  @media (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     margin-top: -118px;
     margin-left: 0px;
   }
@@ -140,7 +142,7 @@
   white-space: nowrap;
   transform: translateX(-50%);
   width: fit-content;
-  // @media (max-width: 767px) and (display-mode: standalone)  {
+  // @include media-tablet768-pwa  {
   //  left:50%;
   //  white-space: nowrap;
   //  transform: translateX(-50%);
@@ -150,23 +152,23 @@
 .characterPos0 {
   left: calc(50% + 110px);
   top: 360px;
-  @media (max-width: 767px) {
+  @include media-tablet768 {
     left: calc(50% - 36px);
     top: 510px;
   }
-  @media (max-width: 390px) {
+  @include media-phone390 {
     top: 430px;
   }
 
-  @media (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     top: 64vh !important;
     left: calc(50% - 35px) !important;
   }
-  @media (max-width: 390px) and (display-mode: standalone) {
+  @include media-phone390-pwa {
     top: 60vh !important;
   }
 
-  @media (min-width: 768px) and (display-mode: standalone) {
+  @include media-desktop768-pwa {
     left: calc(50% + 110px) !important;
     top: 52vh !important;
   }
@@ -175,18 +177,18 @@
 .characterPos5 {
   left: calc(50% - 190px);
   top: 360px;
-  @media (max-width: 767px) {
+  @include media-tablet768 {
     left: calc(50% - 155px);
     top: 380px;
   }
-  @media (max-width: 390px) {
+  @include media-phone390 {
     top: 340px;
   }
-  @media (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     left: calc(50% - 155px) !important;
     top: 50vh !important;
   }
-  @media (min-width: 768px) and (display-mode: standalone) {
+  @include media-desktop768-pwa {
     top: 56% !important;
     left: calc(50% - 145px) !important;
   }
@@ -194,18 +196,18 @@
 .characterPos4 {
   left: calc(50% - 340px);
   top: 200px;
-  @media (max-width: 767px) {
+  @include media-tablet768 {
     left: calc(50% - 160px);
     top: 190px;
   }
-  @media (max-width: 390px) {
+  @include media-phone390 {
     top: 150px;
   }
-  @media (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     top: 24vh !important;
     left: calc(50% - 160px) !important;
   }
-  @media (min-width: 768px) and (display-mode: standalone) {
+  @include media-desktop768-pwa {
     top: 30vh !important;
     left: calc(50% - 345px);
   }
@@ -213,18 +215,18 @@
 .characterPos3 {
   left: calc(50% - 190px);
   top: 55px;
-  @media (max-width: 767px) {
+  @include media-tablet768 {
     left: calc(50% - 36px);
     top: 50px;
   }
-  @media (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     top: 6vh !important;
     left: calc(50% - 35px) !important;
   }
-  @media (max-width: 390px) and (display-mode: standalone) {
+  @include media-phone390-pwa {
     top: 11vh !important;
   }
-  @media (min-width: 768px) and (display-mode: standalone) {
+  @include media-desktop768-pwa {
     top: 7vh !important;
     left: calc(50% - 145px) !important;
   }
@@ -232,36 +234,36 @@
 .characterPos2 {
   left: calc(50% + 110px);
   top: 55px;
-  @media (max-width: 767px) {
+  @include media-tablet768 {
     left: calc(50% + 90px);
     top: 190px;
   }
-  @media (max-width: 390px) {
+  @include media-phone390 {
     top: 150px;
   }
-  @media (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     top: 24vh !important;
     left: calc(50% + 80px) !important;
   }
-  @media (min-width: 768px) and (display-mode: standalone) {
+  @include media-desktop768-pwa {
     top: 7vh !important;
   }
 }
 .characterPos1 {
   left: calc(50% + 260px);
   top: 200px;
-  @media (max-width: 767px) {
+  @include media-tablet768 {
     left: calc(50% + 90px);
     top: 380px;
   }
-  @media (max-width: 390px) {
+  @include media-phone390 {
     top: 340px;
   }
-  @media (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     left: calc(50% + 80px) !important;
     top: 50vh !important;
   }
-  @media (min-width: 768px) and (display-mode: standalone) {
+  @include media-desktop768-pwa {
     /* only apply if app is running standalone */
     left: calc(50% + 350px) !important;
     top: 30vh !important;

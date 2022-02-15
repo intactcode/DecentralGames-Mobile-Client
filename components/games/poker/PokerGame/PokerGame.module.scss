@@ -1,20 +1,4 @@
-@mixin media-gte-sm {
-  @media screen and (min-width: 768px) {
-    @content;
-  }
-}
-
-@mixin media-ltl-xm {
-  @media screen and (max-width: 767px) {
-    @content;
-  }
-}
-
-@mixin media-xltl-xm {
-  @media screen and (max-width: 390px) {
-    @content;
-  }
-}
+@import '/styles/mixins';
 
 .body {
   transform: scale(0.95);
@@ -22,15 +6,14 @@
   position: relative;
   margin-top: 0px;
   font-family: 'Larsseit';
-  @media all and (display-mode: standalone) {
-    /* only apply if app is running standalone */
+  @include media-all-pwa {
     margin-top: 50px;
     height: calc(100vh - 50px);
   }
-  @media screen and (max-width: 767px) and (display-mode: standalone) {
+  @include media-tablet768-pwa {
     margin-top: 0px;
   }
-  @include media-xltl-xm {
+  @include media-phone390 {
     margin-top: 0px;
     height: 100vh;
   }
@@ -52,11 +35,11 @@
     margin-left: 48px;
     margin-top: 24px;
     position: absolute;
-    @include media-ltl-xm {
+    @include media-tablet768 {
       font-size: 4rem;
       margin-left: 30px;
     }
-    @include media-xltl-xm {
+    @include media-phone390 {
       font-size: 3rem;
       margin-left: 95px;
       margin-top: 18px;
@@ -69,16 +52,16 @@
     top: 210px;
     justify-content: center;
     z-index: 20;
-    @include media-xltl-xm {
+    @include media-phone390 {
       top: 250px;
     }
-    @media (max-width: 768px) and (display-mode: standalone) {
+    @include media-tablet768-pwa {
       top: 190px;
     }
-    @media (max-width: 390px) and (display-mode: standalone) {
+    @include media-phone390-pwa {
       top: 220px;
     }
-    @media (min-width: 767px) and (display-mode: standalone) {
+    @include media-desktop768-pwa {
       top: 160px;
       left: 50%;
       justify-content: flex-start;
@@ -107,26 +90,26 @@
     position: absolute;
     top: 50px;
     left: calc(50% - 340px);
-    @include media-ltl-xm {
+    @include media-tablet768 {
       background-image: url('/images/Table-phone.png');
       max-width: 280px;
       left: calc(50% - 140px);
     }
-    @media all and (display-mode: standalone) {
+    @include media-all-pwa {
       /* only apply if app is running standalone */
       height: 55vh;
       background-size: 100% 100%;
     }
-    @media screen and (max-width: 767px) and (display-mode: standalone) {
+    @include media-tablet768-pwa {
       height: 60vh;
       top: 75px;
     }
 
-    @include media-xltl-xm {
+    @include media-phone390 {
       height: 70vh;
       top: 40px;
     }
-    @media screen and (max-width: 390px) and (display-mode: standalone) {
+    @include media-phone390-pwa {
       top: 107px;
       max-height: 460px;
     }
@@ -140,11 +123,11 @@
     justify-content: space-between;
     top: 50px;
     z-index: 10;
-    @include media-ltl-xm {
+    @include media-tablet768 {
       width: 340px;
       left: calc(50% - 170px);
     }
-    @include media-xltl-xm {
+    @include media-phone390 {
       top: 25px;
     }
 
@@ -174,25 +157,25 @@
     flex-wrap: wrap;
     display: flex;
     position: absolute;
-    @include media-ltl-xm {
+    @include media-tablet768 {
       max-width: 150px;
     }
-    @include media-xltl-xm {
+    @include media-phone390 {
       max-width: 160px;
       top: 200px;
     }
 
-    @media (max-width: 767px) and (display-mode: standalone) {
-      max-width: 160px;
+    @include media-tablet768-pwa {
+      max-width: 165px;
       top: 215px;
     }
 
-    @media (max-width: 390px) and (display-mode: standalone) {
+    @include media-phone390-pwa {
       max-width: 170px;
       top: 265px;
     }
 
-    @media (min-width: 767px) and (display-mode: standalone) {
+    @include media-desktop768-pwa {
       max-width: 400px;
       top: 190px;
       left: 53%;
@@ -205,7 +188,7 @@
       border-style: solid;
       border-width: 2px;
       border-radius: 7px;
-      @media (min-width: 767px) and (display-mode: standalone) {
+      @include media-desktop768-pwa {
         margin-left: 15px;
       }
     }
@@ -214,7 +197,7 @@
   .buttonContainerParent {
     display: flex;
     justify-content: center;
-    @media all and (display-mode: standalone) {
+    @include media-all-pwa {
       /* only apply if app is running standalone */
       height: 65vh;
     }
@@ -223,19 +206,19 @@
   .buttonContainerParentBottom {
     display: flex;
     justify-content: center;
-    @include media-ltl-xm {
+    @include media-tablet768 {
       margin-top: 57px;
     }
-    @include media-xltl-xm {
+    @include media-phone390 {
       margin-top: -50px;
     }
-    @include media-gte-sm {
+    @include media-desktop768 {
       margin-top: 0px;
     }
-    @media (min-width: 768px) and (display-mode: standalone) {
+    @include media-desktop768-pwa {
       margin-top: 40px;
     }
-    @media (max-width: 390) and (display-mode: standalone) {
+    @include media-phone390-pwa {
       margin-top: -40px;
     }
   }
@@ -245,7 +228,7 @@
     padding-left: 20px;
     padding-right: 20px;
     width: 374px;
-    @media (max-width: 767px) and (display-mode: standalone) {
+    @include media-tablet768-pwa {
       /* only apply if app is running standalone */
       padding-top: 0px;
       padding-left: 0px;
@@ -254,14 +237,14 @@
       margin-top: 60vh;
     }
 
-    @include media-xltl-xm {
+    @include media-phone390 {
       padding-top: 0px;
       padding-left: 0px;
       padding-right: 0px;
       width: auto;
       margin-top: 80vh;
     }
-    @media screen and (min-width: 768px) and (display-mode: standalone) {
+    @include media-desktop768-pwa {
       padding-top: 410px;
     }
     .turnButton {
@@ -283,21 +266,21 @@
       margin-top: -30px;
       z-index: 10;
       position: absolute;
-      @media (max-width: 767px) {
+      @include media-tablet768 {
         margin-top: 0px;
       }
-      @media (max-width: 767px) and (display-mode: standalone) {
+      @include media-tablet768-pwa {
         margin-left: 70px;
         margin-top: 40px;
       }
-      @include media-gte-sm {
+      @include media-desktop768 {
         margin-top: -100px;
         margin-left: 350px;
       }
-      @media (min-width: 767px) and (display-mode: standalone) {
+      @include media-desktop768-pwa {
         margin-top: 60px;
       }
-      @media (max-width: 390px) and (display-mode: standalone) {
+      @include media-phone390-pwa {
         margin-top: 18px;
       }
       .dot {
@@ -323,16 +306,16 @@
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
-    @media all and (display-mode: standalone) {
+    @include media-all-pwa {
       /* only apply if app is running standalone */
       margin-bottom: 0px;
     }
 
-    @include media-gte-sm {
+    @include media-desktop768 {
       margin-bottom: 0px;
       margin-top: -25px;
     }
-    @media (min-width: 768px) and (display-mode: standalone) {
+    @include media-desktop768-pwa {
       margin-top: 5px;
     }
 
@@ -355,14 +338,14 @@
     justify-content: space-between;
     margin-top: -100px;
     opacity: 1;
-    @include media-ltl-xm {
+    @include media-tablet768 {
       margin-top: 0px;
     }
-    @media all and (display-mode: standalone) {
+    @include media-all-pwa {
       /* only apply if app is running standalone */
       margin-top: 2vh;
     }
-    @media (max-width: 390px) and (display-mode: standalone) {
+    @include media-phone390-pwa {
       margin-top: 12vh;
     }
     button {
@@ -379,7 +362,7 @@
       font-weight: bold;
       margin: 5px;
       color: white;
-      @include media-xltl-xm {
+      @include media-phone390 {
         width: 110px;
         height: 65px;
       }
@@ -463,28 +446,28 @@
       font-size: 11px;
       line-height: 13.13px;
       color: #fff;
-      @media (min-width: 768px) and (display-mode: standalone) {
+      @include media-desktop768-pwa {
         top: 70px;
       }
 
-      @media (max-width: 768px) and (display-mode: standalone) {
+      @include media-tablet768-pwa {
         top: 71px;
       }
 
-      @media (max-width: 390px) and (display-mode: standalone) {
+      @include media-phone390-pwa {
         top: 72px;
       }
     }
-    @include media-xltl-xm {
+    @include media-phone390 {
       top: 570px;
     }
-    @media (min-width: 768px) and (display-mode: standalone) {
+    @include media-desktop768-pwa {
       top: 570px;
     }
-    @media (max-width: 768px) and (display-mode: standalone) {
+    @include media-tablet768-pwa {
       top: 595px;
     }
-    @media (max-width: 390px) and (display-mode: standalone) {
+    @include media-phone390-pwa {
       top: 715px;
     }
   }
@@ -587,18 +570,18 @@
       margin-bottom: 2px;
     }
   }
-  @media (max-width: 767px) {
+  @include media-tablet768 {
     left: calc(50% - 150px);
     margin-top: 35px;
   }
-  @include media-xltl-xm {
+  @include media-phone390 {
     margin-top: -85px;
     transform: translateX(-15%);
   }
-  @media (max-width: 390px) and (display-mode: standalone) {
+  @include media-phone390-pwa {
     margin-top: 15px;
   }
-  @media (min-width: 768px) and (display-mode: standalone) {
+  @include media-desktop768-pwa {
     margin-top: 60px;
   }
 }
