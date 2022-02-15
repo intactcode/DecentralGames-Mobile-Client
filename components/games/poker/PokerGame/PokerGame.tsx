@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { maxBy, get } from 'lodash';
 import { MdOutlineLeaderboard } from 'react-icons/md';
 import { useRouter } from 'next/router';
@@ -9,19 +9,10 @@ import Setting from '../Setting/Setting';
 import LeaderBoard from '../LeaderBoard/LeaderBoard';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import RaiseSetting from '../RaiseSetting/RaiseSetting';
-import TableCard from '../TableCard/TableCard';
 import Card from '../Card/Card';
 import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
 import styles from './PokerGame.module.scss';
 
-const image = [
-  'images/character.png',
-  'images/character.png',
-  'images/character.png',
-  'images/character.png',
-  'images/character.png',
-  'images/character.png',
-];
 const items = [
   ['/images/item1.svg'],
   ['/images/item1.svg'],
@@ -43,18 +34,15 @@ const PokerGame = () => {
 
   const [raiseamount, setRaiseAmount] = useState(600);
   const [raiseshow, setRaiseShow] = useState(false);
-  const [raise, setRaise] = useState<number[]>([]);
   const [issetting, setIsSetting] = useState(false);
   const [isleaderboard, setIsLeaderBoard] = useState(false);
   const [iceamount, setIceAmount] = useState(22000); // eslint-disable-line
   const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
   const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
   const [players, setPlayers] = useState<any[]>([]);
-  const [userPosition, setUserPosition] = useState(0);
   const [overlayTimeout, setOverlayTimeout] = useState(false);
   const forcedBets = state.currentSeat.forced || {};
   const currentPlayer = state.currentSeat.currentSeat || 0;
-  const tablecard: any = useRef(null);
   const activePlayer = state.tableData.active;
   const winners = state.winners;
   const isWon = state.isWon;
@@ -68,14 +56,6 @@ const PokerGame = () => {
   /////////////////////////////////////////////////////////////////////////////////////////
   const onReset = () => {
     console.log('Set game parameters');
-
-    setRaise([]);
-
-    tablecard.current?.newRound();
-
-    setTimeout(function () {
-      tablecard.current?.progressDeal();
-    }, 100);
   };
 
   // useEffect(() => {
@@ -95,12 +75,6 @@ const PokerGame = () => {
 
   useEffect(() => {
     const setSeats = (seats: any) => {
-      for (let i = 0; i < 6; i++) {
-        if (seats[i] && seats[i].name == state.socket.id) {
-          setUserPosition(i);
-        }
-      }
-
       setPlayers(Object.values(seats));
     };
 
@@ -182,7 +156,6 @@ const PokerGame = () => {
       {overlayTimeout && (
         <div className={styles.roundOverlay}>{state.tableData.round}</div>
       )}
-      <TableCard ref={tablecard} />
       <div className={styles.styledCommunityCard}>
         {get(state, 'tableData.community', []).map(
           (card: any, index: number) => {
@@ -223,23 +196,19 @@ const PokerGame = () => {
         </div>
       </div>
 
-      {image.map((data, i) => {
-        const userId = (i + 6 + userPosition) % 6;
+      {new Array(6).fill(0).map((data, i) => {
         const classString = 'characterPos' + `${(i + 6 - currentPlayer) % 6}`;
         return (
           <Character
-            key={300 + userId}
-            image={image[userId]}
+            key={`character_${i}`}
             classString={classString}
-            user={(i + 6 - currentPlayer) % 6 === 0}
-            index={userId}
-            raise={raise[userId]}
-            onFold={onFold}
-            items={items[userId]}
+            user={i === currentPlayer}
+            index={i}
+            items={items[i]}
             ice={iceamount}
             xp={xpamount}
             dg={dgamount}
-            data={players[userId]}
+            data={players[i]}
           />
         );
       })}
