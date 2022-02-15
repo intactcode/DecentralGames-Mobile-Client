@@ -432,9 +432,11 @@ const PokerGame = () => {
       {topButtons()}
       {avatars()}
       {yourTurn()}
-      {yourTotal()}
-      {activePlayer === currentPlayer ? activeButtons() : inactiveButtons()}
-      {challenges()}
+      <div className={styles.lowerContainer}>
+        {yourTotal()}
+        {activePlayer === currentPlayer ? activeButtons() : inactiveButtons()}
+        {challenges()}
+      </div>
       {isWinner()}
     </section>
   );

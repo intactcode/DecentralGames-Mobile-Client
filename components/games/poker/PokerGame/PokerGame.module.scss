@@ -1,14 +1,21 @@
 @import '/styles/mixins';
 
 .body {
-  transform: scale(0.95);
   width: 100%;
   position: relative;
   margin-top: 0px;
   font-family: 'Larsseit';
+  height: 100vh;
+
+  .lowerContainer {
+    position: absolute;
+    bottom: 24px;
+    left: calc(50vw - 180px);
+  }
+
   @include media-all-pwa {
     margin-top: 50px;
-    height: calc(100vh - 50px);
+    height: 100vh;
   }
   @include media-tablet768-pwa {
     margin-top: 0px;
@@ -206,6 +213,7 @@
   .buttonContainerParentBottom {
     display: flex;
     justify-content: center;
+
     @include media-tablet768 {
       margin-top: 57px;
     }
