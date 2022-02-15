@@ -191,12 +191,12 @@ const PokerGame = () => {
                 className={styles.cardContainer}
                 key={`card_${index}`}
                 style={{
-                  opacity: winnerPair.find(
+                  borderColor: winnerPair.find(
                     (winner: any) =>
                       winner.suit === card.suit && winner.rank === card.rank
                   )
-                    ? '0.7'
-                    : '1',
+                    ? 'red'
+                    : 'transparent',
                 }}
               >
                 <Card type={card.suit} number={card.rank} />

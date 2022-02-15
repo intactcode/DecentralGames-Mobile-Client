@@ -94,8 +94,8 @@
   margin-top: -125px;
   margin-left: -10px;
   @media (max-width: 767px) and (display-mode: standalone) {
-    margin-top: -110px;
-    margin-left: 7px;
+    margin-top: -115px;
+    margin-left: -6px;
   }
 }
 
@@ -109,7 +109,9 @@
   }
 
   .winnerCardFrame {
-    padding: 1px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 7px;
   }
 }
 
@@ -170,7 +172,7 @@
   }
 }
 
-.characterPos1 {
+.characterPos5 {
   left: calc(50% - 190px);
   top: 360px;
   @media (max-width: 767px) {
@@ -182,14 +184,14 @@
   }
   @media (max-width: 767px) and (display-mode: standalone) {
     left: calc(50% - 155px) !important;
-    top: 45vh !important;
+    top: 50vh !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     top: 56% !important;
     left: calc(50% - 145px) !important;
   }
 }
-.characterPos2 {
+.characterPos4 {
   left: calc(50% - 340px);
   top: 200px;
   @media (max-width: 767px) {
@@ -227,7 +229,7 @@
     left: calc(50% - 145px) !important;
   }
 }
-.characterPos4 {
+.characterPos2 {
   left: calc(50% + 110px);
   top: 55px;
   @media (max-width: 767px) {
@@ -245,7 +247,7 @@
     top: 7vh !important;
   }
 }
-.characterPos5 {
+.characterPos1 {
   left: calc(50% + 260px);
   top: 200px;
   @media (max-width: 767px) {
@@ -257,7 +259,7 @@
   }
   @media (max-width: 767px) and (display-mode: standalone) {
     left: calc(50% + 80px) !important;
-    top: 45vh !important;
+    top: 50vh !important;
   }
   @media (min-width: 768px) and (display-mode: standalone) {
     /* only apply if app is running standalone */
