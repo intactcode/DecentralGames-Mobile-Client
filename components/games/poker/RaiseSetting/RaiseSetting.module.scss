@@ -22,7 +22,10 @@
   transition: max-height 0.5s;
   overflow: hidden;
   z-index: 20;
-
+  @media (max-width: 390px) {
+    margin-top: -223px;
+    bottom: unset;
+  }
   .raisePanel {
     padding: 0px 16px;
     margin-top: 60px;

@@ -72,6 +72,9 @@
     @include media-xltl-xm {
       top: 180px;
     }
+    @media (max-width: 390px) and (display-mode: standalone) {
+      top: 210px;
+    }
     @media (min-width: 767px) and (display-mode: standalone) {
       top: 160px;
     }
