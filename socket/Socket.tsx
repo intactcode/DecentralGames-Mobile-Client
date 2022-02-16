@@ -20,7 +20,7 @@ const Socket = () => {
         client
           .joinOrCreate('pokerTable', { authToken, chips: 1000 })
           .then((room) => {
-            console.log(`Successfuly joined ${room.name} [${room.sessionId}]`);
+            console.log(`Successfully joined ${room.name} [${room.sessionId}]`);
 
             // dispatch socket instance to global state
             dispatch({
@@ -29,10 +29,11 @@ const Socket = () => {
             });
 
             room.onLeave((code) => {
-              console.log('client left the room', code);
+              console.log('Client left the room', code);
             });
 
             room.onMessage('tableData', (data: any) => {
+              console.log('Received tableData: ', data);
               dispatch({
                 type: 'table_data',
                 data,
@@ -40,7 +41,7 @@ const Socket = () => {
             });
 
             room.onMessage('playerLeaveTable', (data: any) => {
-              console.log('player leave table: ', data);
+              console.log('A player left table slot: ', data);
             });
 
             room.onMessage('playerJoinTable', (data: any) => {
@@ -65,6 +66,13 @@ const Socket = () => {
               });
             });
 
+            room.onMessage('startTimerCancelled', () => {
+              dispatch({
+                type: 'wait_time',
+                data: 0,
+              });
+            });
+
             room.onMessage('playerSitDown', (data: any) => {
               dispatch({
                 type: 'player_sit_down',
@@ -73,6 +81,7 @@ const Socket = () => {
             });
 
             room.onMessage('cards', (data: any) => {
+              console.log('Received cards: ', data);
               dispatch({
                 type: 'cards',
                 data,
@@ -96,14 +105,8 @@ const Socket = () => {
               });
             });
 
-            room.onMessage('started', () => {
-              dispatch({
-                type: 'wait_time',
-                data: 0,
-              });
-            });
-
             room.onMessage('winners', (winners: any) => {
+              console.log('Received winners:', winners);
               dispatch({
                 type: 'set_winner',
                 data: winners,

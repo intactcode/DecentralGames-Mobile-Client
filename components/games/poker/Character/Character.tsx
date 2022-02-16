@@ -44,8 +44,8 @@ const Character: React.FC<Props> = ({
   classString,
 }) => {
   const state = useStoreState();
-  const activePlayer = state.tableData?.active;
-  const isInHand = state.tableData?.isInHand ?? [];
+  const activePlayer = state.tableData?.activePlayer;
+  const isInHand = state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winners = state.winners;
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const ranking = get(winners, 'winners.0.0.1.ranking', 0);
@@ -102,12 +102,14 @@ const Character: React.FC<Props> = ({
         className={styles.playerCircle}
         onClick={() => setInfoModalOpen(!infomodalopen)}
       >
-        <Image
-          src={data?.image ?? '/images/character.png'}
-          width="60px"
-          height="60px"
-          alt="player-circle"
-        />
+        <div className={isInHand[index] ? '' : styles.inactivePlayer}>
+          <Image
+            src={data?.image ?? '/images/character.png'}
+            width="60px"
+            height="60px"
+            alt="player-circle"
+          />
+        </div>
       </div>
       <div
         className={styles.dealerChip}
