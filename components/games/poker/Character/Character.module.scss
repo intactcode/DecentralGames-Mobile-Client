@@ -27,7 +27,13 @@
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
+  font-weight: bold;
   font-size: 13px;
+
+  .inactiveColor {
+    color: #9A9A9A;
+    opacity: 0.75;
+  }
 
   .chipForBet {
     font-size: 15px;
