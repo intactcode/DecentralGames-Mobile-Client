@@ -1,3 +1,5 @@
+@import "/styles/mixins";
+
 .settingBody {
   display: flex;
   width: 100%;
@@ -7,6 +9,9 @@
   z-index: 11000;
   padding-left: 0px;
   transition: max-height 0.5s;
+  @include media-desktop768-pwa {
+    bottom: 55px;
+  }
 
   .settingField {
     overflow: hidden;

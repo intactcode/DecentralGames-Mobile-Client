@@ -185,7 +185,7 @@
   }
 }
 
-.characterPos5 {
+.characterPos1 {
   left: calc(50% - 190px);
   top: 360px;
   @include media-tablet768 {
@@ -200,11 +200,11 @@
     top: 50vh !important;
   }
   @include media-desktop768-pwa {
-    top: 56% !important;
+    top: 52vh !important;
     left: calc(50% - 145px) !important;
   }
 }
-.characterPos4 {
+.characterPos2 {
   left: calc(50% - 310px);
   top: 200px;
   @include media-tablet768 {
@@ -220,7 +220,7 @@
   }
   @include media-desktop768-pwa {
     top: 30vh !important;
-    left: calc(50% - 345px);
+    left: calc(50% - 305px);
   }
 }
 .characterPos3 {
@@ -238,11 +238,11 @@
     top: 11vh !important;
   }
   @include media-desktop768-pwa {
-    top: 7vh !important;
+    top: 8vh !important;
     left: calc(50% - 145px) !important;
   }
 }
-.characterPos2 {
+.characterPos4 {
   left: calc(50% + 110px);
   top: 55px;
   @include media-tablet768 {
@@ -257,10 +257,10 @@
     left: calc(50% + 80px) !important;
   }
   @include media-desktop768-pwa {
-    top: 7vh !important;
+    top: 8vh !important;
   }
 }
-.characterPos1 {
+.characterPos5 {
   left: calc(50% + 230px);
   top: 200px;
   @include media-tablet768 {
@@ -276,7 +276,7 @@
   }
   @include media-desktop768-pwa {
     /* only apply if app is running standalone */
-    left: calc(50% + 350px) !important;
+    left: calc(50% + 275px) !important;
     top: 30vh !important;
   }
 }
