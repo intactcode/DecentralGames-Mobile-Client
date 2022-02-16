@@ -44,7 +44,7 @@ const PokerGame = () => {
   const [overlayTimeout, setOverlayTimeout] = useState(false);
   const forcedBets = state.currentSeat.forced || {};
   const currentPlayer = state.currentSeat.currentSeat || 0;
-  const activePlayer = state.tableData.active;
+  const activePlayer = state.tableData.activePlayer;
   const winners = state.winners;
 
   const isWon = state.isWon;
@@ -244,7 +244,8 @@ const PokerGame = () => {
     return (
       <>
         {new Array(6).fill(0).map((data, i) => {
-          const classString = 'characterPos' + `${(i + 6 - currentPlayer) % 6}`;
+          const classString =
+            'characterPos' + `${Math.abs(6 - i + currentPlayer) % 6}`;
 
           return (
             <Character

@@ -20,7 +20,7 @@ const Socket = () => {
         client
           .joinOrCreate('pokerTable', { authToken, chips: 1000 })
           .then((room) => {
-            console.log(`Successfuly joined ${room.name} [${room.sessionId}]`);
+            console.log(`Successfully joined ${room.name} [${room.sessionId}]`);
 
             // dispatch socket instance to global state
             dispatch({
@@ -33,6 +33,7 @@ const Socket = () => {
             });
 
             room.onMessage('tableData', (data: any) => {
+              console.log('Incoming tableData: ', data);
               dispatch({
                 type: 'table_data',
                 data,
@@ -40,7 +41,7 @@ const Socket = () => {
             });
 
             room.onMessage('playerLeaveTable', (data: any) => {
-              console.log('player leave table: ', data);
+              console.log('A player left table slot: ', data);
             });
 
             room.onMessage('playerJoinTable', (data: any) => {
