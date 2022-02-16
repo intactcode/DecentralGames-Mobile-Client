@@ -118,12 +118,17 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </div>
       <div className={styles.playerInfo}>
-        <div>{data?.name ?? `Waiting...${index}`}</div>
+        <div className={isInHand[index] ? '' : styles.inactiveColor}>{data?.name ?? `Waiting...${index}`}</div>
         {data && (
           <div className={styles.chipForBet}>
-            <div className={styles.betAmount}>{data?.betSize}</div>
+            <div
+              className={styles.betAmount}
+              style={{color: isInHand[index] ? 'white' : '#9A9A9A'}}
+            >
+              {data?.betSize}
+            </div>
             <Image
-              className={styles.chipImage}
+              className={`${styles.chipImage} ${isInHand[index] ? '' : styles.inactivePlayer}`}
               src="/images/freecoin.svg"
               width="16px"
               height="16px"
