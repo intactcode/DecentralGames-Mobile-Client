@@ -36,21 +36,25 @@ const PokerGame = () => {
   const [issetting, setIsSetting] = useState(false);
   const [isleaderboard, setIsLeaderBoard] = useState(false);
 
-  const [iceamount, setIceAmount] = useState(22000); // eslint-disable-line
-  const [xpamount, setXPAmount] = useState(22); // eslint-disable-line
-  const [dgamount, setDGAmount] = useState(0.01); // eslint-disable-line
-
   const [players, setPlayers] = useState<any[]>([]);
   const [overlayTimeout, setOverlayTimeout] = useState(false);
   const forcedBets = state.currentSeat.forced || {};
-  const currentPlayer = state.currentSeat.currentSeat || 0;
+  const currentSeat = state.currentSeat.currentSeat || 0;
   const activePlayer = state.tableData.activePlayer;
   const winners = state.winners;
+
+  const chipsAmount =
+    state.tableData.seats && state.tableData.seats[currentSeat]
+      ? state.tableData.seats[currentSeat].stack
+      : 0; // eslint-disable-line
+  const [xpAmount, setXPAmount] = useState(22); // eslint-disable-line
+  const [dgAmount, setDGAmount] = useState(0.01); // eslint-disable-line
 
   const isWon = state.isWon;
 
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
-  const isInHand = state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
+  const isInHand =
+    state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
 
   const legalActions = get(state, 'tableData.legalActions.actions', []);
@@ -245,18 +249,18 @@ const PokerGame = () => {
       <>
         {new Array(6).fill(0).map((data, i) => {
           const classString =
-            'characterPos' + `${Math.abs(6 - i + currentPlayer) % 6}`;
+            'characterPos' + `${Math.abs(6 - i + currentSeat) % 6}`;
 
           return (
             <Character
               key={`character_${i}`}
               classString={classString}
-              user={i === currentPlayer}
+              user={i === currentSeat}
               index={i}
               items={items[i]}
-              ice={iceamount}
-              xp={xpamount}
-              dg={dgamount}
+              ice={chipsAmount}
+              xp={xpAmount}
+              dg={dgAmount}
               data={players[i]}
             />
           );
@@ -271,7 +275,7 @@ const PokerGame = () => {
         <div className={styles.turnButtonContainer}>
           {!isWon &&
             players[activePlayer] &&
-            (activePlayer === currentPlayer ? (
+            (activePlayer === currentSeat ? (
               <div className={styles.turnButton}>
                 <div className={styles.title}>Your Turn</div>
                 <div className={styles.dot} />
@@ -302,12 +306,12 @@ const PokerGame = () => {
   function yourTotal() {
     return (
       <div className={styles.playerInfo}>
-        <div>Your Total</div>
+        <div>Chips Balance</div>
 
         <div className={styles.chipForBet}>
-          {iceamount && (
+          {chipsAmount && (
             <div className={styles.betAmount}>
-              {iceamount}
+              {chipsAmount}
 
               <Image
                 className={styles.chipImage}
@@ -414,25 +418,25 @@ const PokerGame = () => {
     );
   }
 
-  function isWinner() {
-    return (
-      <>
-        {isWon && (
-          <div className={styles.wonImageContainer}>
-            <Image
-              src="/images/200ice.svg"
-              alt="200ice"
-              width={176}
-              height={111}
-            />
-            <span className={styles.potValueText}>
-              {state.tableData?.pot || 0}
-            </span>
-          </div>
-        )}
-      </>
-    );
-  }
+  // function isWinner() {
+  //   return (
+  //     <>
+  //       {isWon && (
+  //         <div className={styles.wonImageContainer}>
+  //           <Image
+  //             src="/images/200ice.svg"
+  //             alt="200ice"
+  //             width={176}
+  //             height={111}
+  //           />
+  //           <span className={styles.potValueText}>
+  //             {state.tableData?.pot || 0}
+  //           </span>
+  //         </div>
+  //       )}
+  //     </>
+  //   );
+  // }
 
   return (
     <section className={styles.body}>
@@ -445,11 +449,11 @@ const PokerGame = () => {
       {yourTurn()}
       <div className={styles.lowerContainer}>
         {yourTotal()}
-        {activePlayer === currentPlayer ? activeButtons() : inactiveButtons()}
+        {activePlayer === currentSeat ? activeButtons() : inactiveButtons()}
         {challenges()}
       </div>
       {settings()}
-      {isWinner()}
+      {/* {isWinner()} */}
     </section>
   );
 };
