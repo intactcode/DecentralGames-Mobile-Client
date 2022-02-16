@@ -127,13 +127,15 @@ const Character: React.FC<Props> = ({
             >
               {data?.betSize}
             </div>
-            <Image
-              className={`${styles.chipImage} ${isInHand[index] ? '' : styles.inactivePlayer}`}
-              src="/images/freecoin.svg"
-              width="16px"
-              height="16px"
-              alt="chipImage"
-            />
+            <div className={styles.chipImage}>
+              <Image
+                className={`${isInHand[index] ? '' : styles.inactivePlayer}`}
+                src="/images/freecoin_new.svg"
+                width="12px"
+                height="12px"
+                alt="chipImage"
+              />
+            </div>
           </div>
         )}
       </div>
