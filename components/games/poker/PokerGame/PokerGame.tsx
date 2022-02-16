@@ -394,7 +394,13 @@ const PokerGame = () => {
             <ProgressBar type={2} percent={3 / 4} text="3/4" width="74px" />
           </div>
         </div>
+      </>
+    );
+  }
 
+  function settings() {
+    return (
+      <>
         <RaiseSetting
           open={raiseshow}
           setOpen={setRaiseShow}
@@ -442,6 +448,7 @@ const PokerGame = () => {
         {activePlayer === currentPlayer ? activeButtons() : inactiveButtons()}
         {challenges()}
       </div>
+      {settings()}
       {isWinner()}
     </section>
   );
