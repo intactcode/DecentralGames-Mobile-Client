@@ -29,11 +29,11 @@ const Socket = () => {
             });
 
             room.onLeave((code) => {
-              console.log('client left the room', code);
+              console.log('Client left the room', code);
             });
 
             room.onMessage('tableData', (data: any) => {
-              console.log('Incoming tableData: ', data);
+              console.log('Received tableData: ', data);
               dispatch({
                 type: 'table_data',
                 data,
@@ -66,6 +66,13 @@ const Socket = () => {
               });
             });
 
+            room.onMessage('startTimerCancelled', () => {
+              dispatch({
+                type: 'wait_time',
+                data: 0,
+              });
+            });
+
             room.onMessage('playerSitDown', (data: any) => {
               dispatch({
                 type: 'player_sit_down',
@@ -74,6 +81,7 @@ const Socket = () => {
             });
 
             room.onMessage('cards', (data: any) => {
+              console.log('Received cards: ', data);
               dispatch({
                 type: 'cards',
                 data,
@@ -97,14 +105,8 @@ const Socket = () => {
               });
             });
 
-            room.onMessage('started', () => {
-              dispatch({
-                type: 'wait_time',
-                data: 0,
-              });
-            });
-
             room.onMessage('winners', (winners: any) => {
+              console.log('Received winners:', winners);
               dispatch({
                 type: 'set_winner',
                 data: winners,

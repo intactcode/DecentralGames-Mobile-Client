@@ -45,7 +45,7 @@ const Character: React.FC<Props> = ({
 }) => {
   const state = useStoreState();
   const activePlayer = state.tableData?.activePlayer;
-  const isInHand = state.tableData?.isInHand ?? [];
+  const isInHand = state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winners = state.winners;
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const ranking = get(winners, 'winners.0.0.1.ranking', 0);

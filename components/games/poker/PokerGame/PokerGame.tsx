@@ -50,7 +50,7 @@ const PokerGame = () => {
   const isWon = state.isWon;
 
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
-  const isInHand = state.tableData?.isInHand ?? [];
+  const isInHand = state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
 
   const legalActions = get(state, 'tableData.legalActions.actions', []);
