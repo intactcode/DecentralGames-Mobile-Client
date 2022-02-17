@@ -11,6 +11,9 @@
     position: absolute;
     bottom: 24px;
     left: calc(50vw - 180px);
+    @include media-phone428 {
+      bottom: -20px;
+    }
     @include media-phone390 {
       position: initial;
     }
@@ -125,6 +128,11 @@
       max-height: 450px;
       top: 40px;
       background-size: contain;
+    }
+    @include media-phone375 {
+      max-height: 390px;
+      top: 65px;
+      left: calc(50% - 120px);
     }
     @include media-phone390-pwa {
       top: 107px;
@@ -254,13 +262,17 @@
       width: auto;
       margin-top: 60vh;
     }
-
+    @include media-phone428 {
+      padding-top: 510px;
+    }
     @include media-phone390 {
       padding-top: 0px;
       padding-left: 0px;
       padding-right: 0px;
       width: auto;
       margin-top: 80vh;
+    }
+    @include media-phone375 {
     }
     @include media-desktop768-pwa {
       padding-top: 410px;
@@ -287,6 +299,11 @@
       @include media-tablet768 {
         margin-top: 0px;
       }
+      @include media-phone390 {
+        margin-top: -35px;
+        margin-left: 65px;
+      }
+
       @include media-tablet768-pwa {
         margin-left: 70px;
         margin-top: 40px;
@@ -464,6 +481,9 @@
       font-size: 11px;
       line-height: 13.13px;
       color: #fff;
+      @include media-phone428 {
+        top: 70px;
+      }
       @include media-desktop768-pwa {
         top: 70px;
       }
@@ -476,8 +496,14 @@
         top: 72px;
       }
     }
+    @include media-phone428 {
+      top: 640px;
+    }
     @include media-phone390 {
       top: 570px;
+    }
+    @include media-phone375 {
+      top: 555px;
     }
     @include media-desktop768-pwa {
       top: 550px;
@@ -597,9 +623,12 @@
     left: calc(50% - 150px);
     margin-top: 0px;
   }
+  @include media-phone428 {
+    margin-top: 10px;
+    transform: translateX(-15%);
+  }
   @include media-phone390 {
     margin-top: -40px;
-    transform: translateX(-15%);
   }
   @include media-phone390-pwa {
     margin-top: 15px;
