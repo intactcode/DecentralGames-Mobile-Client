@@ -6,11 +6,26 @@
   margin-top: 0px;
   font-family: 'Larsseit';
   height: 100vh;
-
+  width: 100vw;
   .lowerContainer {
     position: absolute;
     bottom: 24px;
     left: calc(50vw - 180px);
+    @include media-phone428 {
+      bottom: -20px;
+      @include media-iPhoneOnly {
+        bottom: 65px;
+      }
+    }
+    @include media-phone390 {
+      position: initial;
+    }
+    @include media-desktop768-pwa {
+      bottom: 60px;
+    }
+    @include media-tablet428-pwa {
+      bottom: 24px;
+    }
   }
 
   @include media-all-pwa {
@@ -56,11 +71,11 @@
   .potContainer {
     display: flex;
     position: relative;
-    top: 210px;
+    top: 165px;
     justify-content: center;
     z-index: 20;
     @include media-phone390 {
-      top: 250px;
+      top: 170px;
     }
     @include media-tablet768-pwa {
       top: 190px;
@@ -91,12 +106,15 @@
   .table {
     background-image: url('/images/Table-desktop.png');
     background-repeat: no-repeat;
-    width: 100%;
-    max-width: 760px;
+    width: 620px;
     height: 500px;
+    background-size: contain;
     position: absolute;
-    top: 50px;
-    left: calc(50% - 340px);
+    top: 75px;
+    left: calc(50% - 290px);
+    @include media-desktop768 {
+      height: 340px;
+    }
     @include media-tablet768 {
       background-image: url('/images/Table-phone.png');
       max-width: 280px;
@@ -104,7 +122,7 @@
     }
     @include media-all-pwa {
       /* only apply if app is running standalone */
-      height: 55vh;
+      height: 50vh;
       background-size: 100% 100%;
     }
     @include media-tablet768-pwa {
@@ -113,8 +131,14 @@
     }
 
     @include media-phone390 {
-      height: 70vh;
+      max-height: 450px;
       top: 40px;
+      background-size: contain;
+    }
+    @include media-phone375 {
+      max-height: 390px;
+      top: 65px;
+      left: calc(50% - 120px);
     }
     @include media-phone390-pwa {
       top: 107px;
@@ -157,8 +181,8 @@
     left: 50%;
     z-index: 10000;
     transform: translateX(-50%);
-    top: 230px;
-    max-width: 180px;
+    top: 195px;
+    max-width: 300px;
     justify-content: center;
     flex-wrap: wrap;
     display: flex;
@@ -167,8 +191,9 @@
       max-width: 150px;
     }
     @include media-phone390 {
-      max-width: 160px;
+      max-width: 180px;
       top: 200px;
+      left: 48%;
     }
 
     @include media-tablet768-pwa {
@@ -217,7 +242,7 @@
       margin-top: 57px;
     }
     @include media-phone390 {
-      margin-top: -50px;
+      margin-top: -3px;
     }
     @include media-desktop768 {
       margin-top: 0px;
@@ -243,13 +268,18 @@
       width: auto;
       margin-top: 60vh;
     }
-
+    @include media-phone428 {
+      padding-top: 510px;
+    }
     @include media-phone390 {
       padding-top: 0px;
       padding-left: 0px;
       padding-right: 0px;
       width: auto;
-      margin-top: 80vh;
+      margin-top: 530px;
+    }
+    @include media-phone375 {
+      margin-top: 496px;
     }
     @include media-desktop768-pwa {
       padding-top: 410px;
@@ -276,6 +306,11 @@
       @include media-tablet768 {
         margin-top: 0px;
       }
+      @include media-phone390 {
+        margin-top: -35px;
+        margin-left: 65px;
+      }
+
       @include media-tablet768-pwa {
         margin-left: 70px;
         margin-top: 40px;
@@ -285,7 +320,7 @@
         margin-left: 350px;
       }
       @include media-desktop768-pwa {
-        margin-top: 60px;
+        margin-top: 50px;
       }
       @include media-phone390-pwa {
         margin-top: 18px;
@@ -371,7 +406,7 @@
       color: white;
       @include media-phone390 {
         width: 110px;
-        height: 65px;
+        height: 58px;
       }
 
       &:nth-of-type(1) {
@@ -453,6 +488,9 @@
       font-size: 11px;
       line-height: 13.13px;
       color: #fff;
+      @include media-phone428 {
+        top: 70px;
+      }
       @include media-desktop768-pwa {
         top: 70px;
       }
@@ -465,11 +503,17 @@
         top: 72px;
       }
     }
+    @include media-phone428 {
+      top: 640px;
+    }
     @include media-phone390 {
       top: 570px;
     }
+    @include media-phone375 {
+      top: 555px;
+    }
     @include media-desktop768-pwa {
-      top: 570px;
+      top: 550px;
     }
     @include media-tablet768-pwa {
       top: 595px;
@@ -563,7 +607,7 @@
 .playerInfo {
   margin-top: -90px;
   position: absolute;
-  left: 18%;
+  left: -100px;
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: 13px;
@@ -586,9 +630,12 @@
     left: calc(50% - 150px);
     margin-top: 0px;
   }
-  @include media-phone390 {
-    margin-top: -85px;
+  @include media-phone428 {
+    margin-top: 10px;
     transform: translateX(-15%);
+  }
+  @include media-phone390 {
+    margin-top: -40px;
   }
   @include media-phone390-pwa {
     margin-top: 15px;
