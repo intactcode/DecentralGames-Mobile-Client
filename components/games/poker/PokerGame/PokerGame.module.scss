@@ -17,6 +17,10 @@
         bottom: 65px;
       }
     }
+    @include media-phone412 {
+      top: 570px;
+
+    }
     @include media-phone390 {
       position: initial;
     }
@@ -633,6 +637,9 @@
   @include media-phone428 {
     margin-top: 10px;
     transform: translateX(-15%);
+  }
+  @include media-phone412 {
+    margin-top: 25px;
   }
   @include media-phone390 {
     margin-top: -40px;

@@ -15,6 +15,14 @@
     @content;
   }
 }
+
+// Samsung Galaxy A51 v10.0
+@mixin media-phone412 {
+  @media (max-width: 413px) {
+    @content;
+  }
+}
+
 // iPhone13, iPhone13 Pro, iPhone 12
 @mixin media-phone390 {
   @media screen and (max-width: 390px) {
