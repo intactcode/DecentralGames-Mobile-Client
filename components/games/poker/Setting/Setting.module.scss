@@ -1,4 +1,4 @@
-@import "/styles/mixins";
+@import '/styles/mixins';
 
 .settingBody {
   display: flex;
@@ -11,6 +11,16 @@
   transition: max-height 0.5s;
   @include media-desktop768-pwa {
     bottom: 55px;
+  }
+  @include media-phone428 {
+    @include media-iPhoneOnly {
+      bottom: 80px;
+    }
+  }
+  @include media-phone390 {
+    @include media-iPhoneOnly {
+      bottom: 80px;
+    }
   }
 
   .settingField {
@@ -57,7 +67,7 @@
         line-height: 25px;
         border-radius: 8px;
       }
-      
+
       .hours {
         width: 114px;
         height: 22px;
@@ -75,7 +85,7 @@
     .title {
       margin-top: 24px;
     }
-    
+
     .property {
       display: flex;
       justify-content: space-between;
@@ -85,7 +95,7 @@
         flex-direction: column;
         margin-top: 16px;
         justify-content: none !important;
-    
+
         div {
           color: #ffffffbf;
           font-size: 11px;
@@ -93,11 +103,11 @@
           font-weight: normal;
         }
       }
-    
+
       .itemFieldContainer {
         margin-top: 15px;
         display: flex;
-    
+
         span {
           margin-top: -5px;
         }
@@ -108,7 +118,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 24px;
-    
+
       .itemFieldContainer {
         font-size: 11px;
         font-weight: bold;
@@ -117,11 +127,11 @@
         flex-direction: column;
         color: rgb(255, 255, 255, 0.75);
         align-items: center;
-    
+
         .upperTitle {
           margin-bottom: -6px;
         }
-    
+
         .lowerTitle {
           margin: 6px 0px -6px 0px;
         }
