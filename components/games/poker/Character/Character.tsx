@@ -6,7 +6,7 @@ import CardBack from '../CardBack/CardBack';
 import Card from '../Card/Card';
 import InfoDialog from '../InfoDialog/InfoDialog';
 import UserInfoDialog from '../UserInfoDialog/UserInfoDialog';
-import { useStoreState } from '../../../../hooks/Hooks';
+import { useStoreDispatch, useStoreState } from '../../../../hooks/Hooks';
 import styles from './Character.module.scss';
 
 const results = [
@@ -44,8 +44,10 @@ const Character: React.FC<Props> = ({
   classString,
 }) => {
   const state = useStoreState();
+  const dispatch = useStoreDispatch();
   const activePlayer = state.tableData?.activePlayer;
-  const isInHand = state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
+  const isInHand =
+    state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winners = state.winners;
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const ranking = get(winners, 'winners.0.0.1.ranking', 0);
@@ -66,15 +68,31 @@ const Character: React.FC<Props> = ({
       }}
       className={styles[classString]}
     >
-      {index === activePlayer && (
+      {index === activePlayer && !isWon && (
         <>
           <div className={styles.gradient} />
           <div className={styles.spinCircle}>
             <CountdownCircleTimer
-              duration={30}
+              isPlaying
+              duration={15}
               strokeWidth={10}
               colors={[['#FFFFFF', 1]]}
               size={90}
+              onComplete={() => {
+                if (state.foldedUser === index) {
+                  state.socket.leave();
+
+                  dispatch({
+                    type: 'set_folded_user',
+                    data: null,
+                  });
+                } else {
+                  dispatch({
+                    type: 'set_folded_user',
+                    data: index,
+                  });
+                }
+              }}
               trailColor="transparent"
             />
           </div>
@@ -118,12 +136,14 @@ const Character: React.FC<Props> = ({
         <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
       </div>
       <div className={styles.playerInfo}>
-        <div className={isInHand[index] ? '' : styles.inactiveColor}>{data?.name ?? `Waiting...${index}`}</div>
+        <div className={isInHand[index] ? '' : styles.inactiveColor}>
+          {data?.name ?? `Waiting...${index}`}
+        </div>
         {data && (
           <div className={styles.chipForBet}>
             <div
               className={styles.betAmount}
-              style={{color: isInHand[index] ? 'white' : '#9A9A9A'}}
+              style={{ color: isInHand[index] ? 'white' : '#9A9A9A' }}
             >
               {data?.betSize}
             </div>
