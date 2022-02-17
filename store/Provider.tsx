@@ -9,6 +9,7 @@ const initialState = {
   tokenAmounts: {
     ICE_AMOUNT: 0,
     XP_AMOUNT: 0,
+    DG_AMOUNT: 0,
   },
   socket: {},
   tableData: {},
