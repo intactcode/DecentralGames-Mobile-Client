@@ -37,6 +37,7 @@
 
   .chipForBet {
     font-size: 15px;
+
     &:nth-of-type(1) {
       color: #ffffffbf;
       text-align: center;
@@ -50,7 +51,6 @@
     }
 
     .betAmount {
-      padding-top: 2px;
       font-weight: bold;
       color: white;
       margin-bottom: 2px;
@@ -92,8 +92,8 @@
 }
 
 .chipImage {
-  margin-left: 1px !important;
-  margin-top: -1px !important;
+  margin-left: 2px !important;
+  margin-top: 0px !important;
 }
 
 .cardBackContainer {
