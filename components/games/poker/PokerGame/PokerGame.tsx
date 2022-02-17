@@ -31,7 +31,7 @@ const PokerGame = () => {
   const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 
-  const [raiseamount, setRaiseAmount] = useState(600);
+  const [raiseamount, setRaiseAmount] = useState(50);
   const [raiseshow, setRaiseShow] = useState(false);
   const [issetting, setIsSetting] = useState(false);
   const [isleaderboard, setIsLeaderBoard] = useState(false);

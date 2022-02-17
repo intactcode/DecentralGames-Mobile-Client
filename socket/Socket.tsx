@@ -18,7 +18,7 @@ const Socket = () => {
         const client = new Colyseus.Client(socketServerURL);
 
         client
-          .joinOrCreate('pokerTable', { authToken, chips: 1000 })
+          .joinOrCreate('pokerTable', { authToken, chips: 400 })
           .then((room) => {
             console.log(`Successfully joined ${room.name} [${room.sessionId}]`);
 
