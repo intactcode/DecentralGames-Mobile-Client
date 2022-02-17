@@ -35,9 +35,13 @@ const PokerGame = () => {
   const [raiseshow, setRaiseShow] = useState(false);
   const [issetting, setIsSetting] = useState(false);
   const [isleaderboard, setIsLeaderBoard] = useState(false);
-
   const [players, setPlayers] = useState<any[]>([]);
   const [overlayTimeout, setOverlayTimeout] = useState(false);
+
+  const [iceAmount, setICEAmount] = useState(0);
+  const [xpAmount, setXPAmount] = useState(0);
+  const [dgAmount, setDGAmount] = useState(0);
+
   const forcedBets = state.currentSeat.forced || {};
   const currentSeat = state.currentSeat.currentSeat || 0;
   const activePlayer = state.tableData.activePlayer;
@@ -47,18 +51,13 @@ const PokerGame = () => {
     state.tableData.seats && state.tableData.seats[currentSeat]
       ? state.tableData.seats[currentSeat].stack
       : 0; // eslint-disable-line
-  const [xpAmount, setXPAmount] = useState(22); // eslint-disable-line
-  const [dgAmount, setDGAmount] = useState(0.01); // eslint-disable-line
 
   const isWon = state.isWon;
-
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const isInHand =
     state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
-
   const legalActions = get(state, 'tableData.legalActions.actions', []);
-
   const chipRange = get(state, 'tableData.legalActions.chipRange', {});
 
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -87,6 +86,21 @@ const PokerGame = () => {
       }, 5000);
     }
   }, [state.tableData.round]);
+
+  // ********** later we will fetch the ICE/DG amounts from the smart contract and the XP amount from the server **********
+  useEffect(() => {
+    const iceAmount = 1000;
+    const xpAmount = 22;
+    const dgAmount = 0.01;
+
+    setICEAmount(iceAmount);
+    setXPAmount(xpAmount);
+    setDGAmount(dgAmount);
+
+    console.log('ICE amount: ' + iceAmount);
+    console.log('XP amount: ' + xpAmount);
+    console.log('DG amount: ' + dgAmount);
+  }, []);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -258,7 +272,7 @@ const PokerGame = () => {
               user={i === currentSeat}
               index={i}
               items={items[i]}
-              ice={chipsAmount}
+              ice={iceAmount}
               xp={xpAmount}
               dg={dgAmount}
               data={players[i]}
