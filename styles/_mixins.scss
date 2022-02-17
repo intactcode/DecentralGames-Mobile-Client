@@ -5,25 +5,25 @@
 }
 
 @mixin media-tablet768 {
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     @content;
   }
 }
 // iPhone13 Pro Max
 @mixin media-phone428 {
-  @media screen and (max-width: 427px) {
+  @media (max-width: 428px) {
     @content;
   }
 }
 // iPhone13, iPhone13 Pro, iPhone 12
 @mixin media-phone390 {
-  @media screen and (max-width: 389px) {
+  @media screen and (max-width: 390px) {
     @content;
   }
 }
 // iPhone13 Mini
 @mixin media-phone375 {
-  @media screen and (max-width: 374px) {
+  @media screen and (max-width: 375px) {
     @content;
   }
 }
@@ -41,17 +41,17 @@
 }
 
 @mixin media-tablet768-pwa {
-  @media screen and (max-width: 767px) and (display-mode: standalone) {
+  @media screen and (max-width: 768px) and (display-mode: standalone) {
     @content;
   }
 }
 @mixin media-tablet428-pwa {
-  @media screen and (max-width: 427px) and (display-mode: standalone) {
+  @media screen and (max-width: 428px) and (display-mode: standalone) {
     @content;
   }
 }
 @mixin media-phone390-pwa {
-  @media screen and (max-width: 389px) and (display-mode: standalone) {
+  @media screen and (max-width: 390px) and (display-mode: standalone) {
     @content;
   }
 }
