@@ -9,6 +9,7 @@ import LeaderBoard from '../LeaderBoard/LeaderBoard';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import RaiseSetting from '../RaiseSetting/RaiseSetting';
 import Card from '../Card/Card';
+import CardSpot from '../CardSpot/CardSpot';
 import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
 import styles from './PokerGame.module.scss';
 
@@ -232,9 +233,15 @@ const PokerGame = () => {
   }
 
   function communityCards() {
+    const cards = get(state, 'tableData.community', [])
+    let spots: number[] = []
+    for (let i = 0; i < 5 - cards.length; i++) {
+      spots.push(i)
+    }
+
     return (
       <div className={styles.styledCommunityCard}>
-        {get(state, 'tableData.community', []).map(
+        {cards.map(
           (card: any, index: number) => {
             return (
               <div
@@ -250,6 +257,20 @@ const PokerGame = () => {
                 }}
               >
                 <Card type={card.suit} number={card.rank} />
+              </div>
+            );
+          }
+        )}
+
+        {spots.length > 0 && spots.map(
+          (n: number, index: number) => {
+            return (
+              <div
+                className={styles.cardContainer}
+                style={{borderColor: 'transparent'}}
+                key={`cardspot_${index}`}
+              >
+                <CardSpot/>
               </div>
             );
           }
