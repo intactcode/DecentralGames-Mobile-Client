@@ -65,10 +65,10 @@ const PokerGame = () => {
 
   // if user is not logged-in send them to the join page
   useEffect(() => {
-    if (Object.keys(state.socket).length === 0) {
+    if (Object.keys(state.socket).length === 0 && state.game === 'poker') {
       router.push('/join-poker');
     }
-  }, [state.socket, router]);
+  }, [state.socket, router, state.game]);
 
   useEffect(() => {
     const setSeats = (seats: any) => {
