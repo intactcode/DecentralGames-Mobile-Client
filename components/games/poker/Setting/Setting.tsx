@@ -140,11 +140,11 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             <div className={styles.upperTitle}>Net Chips</div>
             <ItemField type={2} style={{ position: 'relative' }}>
               <span className={styles.text}>+0</span>
-              <div style={{ position: 'absolute', right: '6px', top: '9px' }}>
+              <div style={{ position: 'absolute', right: '8px', top: '11px' }}>
                 <Image
                   src="/images/freecoin.svg"
-                  width={22}
-                  height={22}
+                  width={15}
+                  height={15}
                   alt="freecoin"
                 />
               </div>
@@ -163,15 +163,15 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             <ItemField type={2} style={{ position: 'relative' }}>
               <span
                 className={styles.text}
-                style={{marginLeft: '4px'}}
+                style={{marginLeft: '2px'}}
               >
                 +4,291
               </span>
-              <div style={{ marginLeft: '2px', marginTop: '8px' }}>
+              <div style={{ marginLeft: '4px', marginTop: '4px' }}>
                 <Image
                   src="/images/freecoin.svg"
-                  width={22}
-                  height={22}
+                  width={15}
+                  height={15}
                   alt="freecoin"
                 />
               </div>
