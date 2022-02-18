@@ -28,7 +28,7 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
     
     <section
       className={styles.leaderBoardBody}
-      style={{ maxHeight: open ? size.width > 412 ? '300px' : '570px' : '0px'}}
+      style={{ maxHeight: open ? size.width > 412 ? '500px' : '570px' : '0px'}}
     >
       <div
         className={styles.leaderBoardField}
