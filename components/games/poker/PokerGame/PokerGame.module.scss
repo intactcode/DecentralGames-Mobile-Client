@@ -14,14 +14,17 @@
     @include media-phone428 {
       bottom: -20px;
       @include media-iPhoneOnly {
-        bottom: 65px;
+        top: 570px;
       }
     }
     @include media-phone412 {
       top: 570px;
     }
     @include media-phone390 {
-      position: initial;
+      top: 550px;
+    }
+    @include media-phone375 {
+      top:515px;
     }
     @include media-desktop768-pwa {
       bottom: 60px;
