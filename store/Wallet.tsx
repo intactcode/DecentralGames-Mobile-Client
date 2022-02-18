@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import Fetch from '../api/Fetch';
-import { useStoreDispatch } from '../hooks/Hooks';
+import { useStoreDispatch, useWindowSize } from '../hooks/Hooks';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { convertUtf8ToHex } from '@walletconnect/utils';
 import Web3 from 'web3';
 import constants from '../components/common/Constants';
 import getCachedSession from '../api/GetCachedSession';
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig();
 
 declare const window: any;
 
@@ -216,13 +218,66 @@ const refreshToken = async (dispatch: any, userAddress: string) => {
 
 function Wallet() {
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
+  const size = useWindowSize();
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     (async () => {
+      if (size.width === 0) {
+        return;
+      }
+      let userAddress;
+
+      const {
+        USE_STATIC_MOBILE_ACCOUNTS,
+        ACCOUNT_1_ADDRESS,
+        ACCOUNT_1_TOKEN,
+        ACCOUNT_2_ADDRESS,
+        ACCOUNT_2_TOKEN,
+        ACCOUNT_3_ADDRESS,
+        ACCOUNT_3_TOKEN,
+      } = publicRuntimeConfig;
+      if (USE_STATIC_MOBILE_ACCOUNTS === 'true') {
+        /* Set this environment variable to "true" if you'd like to test on simulated mobile devices
+           that don't support crypto wallets (Blisk, BrowserStack, etc.)
+
+           For this to work, each account needs its Ethereum address and authentication token
+           defined in the .env file.
+        */
+        const widths: any = {
+          390: {
+            address: ACCOUNT_1_ADDRESS,
+            token: ACCOUNT_1_TOKEN,
+            deviceName: 'iPhone 13 Pro',
+          },
+          428: {
+            address: ACCOUNT_2_ADDRESS,
+            token: ACCOUNT_2_TOKEN,
+            deviceName: 'iPhone 13 Pro Max',
+          },
+          375: {
+            address: ACCOUNT_3_ADDRESS,
+            token: ACCOUNT_3_TOKEN,
+            deviceName: 'iPhone 13 Mini',
+          },
+        };
+        const credentials = widths[size.width];
+        if (credentials) {
+          console.log(
+            `Detected device: ${credentials.deviceName}; Using account: ${credentials.address}`
+          );
+          userAddress = credentials.address;
+          storeSession(credentials.address, credentials.token);
+        } else {
+          console.log(
+            'No supported device detected for using static mobile accounts'
+          );
+        }
+      }
+
       // check if user is already logged in on app launch
-      let userAddress = window.ethereum
+      userAddress = window.ethereum
         ? window.ethereum.selectedAddress
         : undefined;
       const cachedSession = getCachedSession(userAddress);
@@ -269,7 +324,7 @@ function Wallet() {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [size]);
 
   return null;
 }
