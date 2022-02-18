@@ -53,8 +53,8 @@ const RaiseSetting: React.FC<Props> = ({
                 <Image
                   src="/images/freecoin.svg"
                   alt="freecoin"
-                  width={44}
-                  height={44}
+                  width={26}
+                  height={26}
                 />
               </span>
               <span style={{ display: 'flex' }}>
@@ -110,8 +110,8 @@ const RaiseSetting: React.FC<Props> = ({
                 <Image
                   src="/images/freecoin.svg"
                   alt="freecoin"
-                  width={44}
-                  height={44}
+                  width={26}
+                  height={26}
                 />
               </span>
               <span style={{ display: 'flex' }}>

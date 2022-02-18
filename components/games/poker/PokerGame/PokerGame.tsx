@@ -326,15 +326,15 @@ const PokerGame = () => {
           {chipsAmount && (
             <div className={styles.betAmount}>
               {chipsAmount}
-
-              <Image
-                className={styles.chipImage}
-                src="/images/freecoin.svg"
-                width="16px"
-                height="16px"
-                alt="chipImage"
-              />
             </div>
+          )}
+          {chipsAmount && (
+            <Image
+              src="/images/freecoin.svg"
+              width="12px"
+              height="12px"
+              alt="chipImage"
+            />
           )}
         </div>
       </div>

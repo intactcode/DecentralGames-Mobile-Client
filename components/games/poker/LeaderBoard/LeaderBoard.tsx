@@ -86,8 +86,8 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
                   <div className={styles.chipAmount}>{data.chips}</div>
                   <Image
                     src="/images/freecoin.svg"
-                    width="14px"
-                    height="14px"
+                    width="12px"
+                    height="12px"
                     alt="freecoin"
                   />
                 </div>

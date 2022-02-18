@@ -150,7 +150,7 @@ const Character: React.FC<Props> = ({
             <div className={styles.chipImage}>
               <Image
                 className={`${isInHand[index] ? '' : styles.inactivePlayer}`}
-                src="/images/freecoin_new.svg"
+                src="/images/freecoin.svg"
                 width="12px"
                 height="12px"
                 alt="chipImage"
