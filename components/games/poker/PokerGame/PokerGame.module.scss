@@ -19,7 +19,6 @@
     }
     @include media-phone412 {
       top: 570px;
-
     }
     @include media-phone390 {
       position: initial;
@@ -27,8 +26,9 @@
     @include media-desktop768-pwa {
       bottom: 60px;
     }
-    @include media-tablet428-pwa {
-      bottom: 24px;
+    @include media-phone428-pwa {
+      position: absolute;
+      top: 580px;
     }
   }
 
@@ -275,6 +275,10 @@
     @include media-phone428 {
       padding-top: 510px;
     }
+    @include media-phone428-pwa {
+      margin-top: 600px;
+    }
+    
     @include media-phone390 {
       padding-top: 0px;
       padding-left: 0px;
@@ -282,8 +286,16 @@
       width: auto;
       margin-top: 530px;
     }
+    @include media-phone390 {
+      margin-top: 600px;
+
+    }
     @include media-phone375 {
       margin-top: 496px;
+    }
+    @include media-phone375-pwa {
+      margin-top: 600px;
+
     }
     @include media-desktop768-pwa {
       padding-top: 410px;
