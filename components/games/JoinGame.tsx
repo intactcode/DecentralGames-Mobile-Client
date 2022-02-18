@@ -38,7 +38,7 @@ const JoinGame = (props: any) => {
       <div style={{ position: 'relative', zIndex: 30 }}>
         {state.userStatus >= 4 ? (
           <div className={styles.playtitle}>
-            Joining Game [{Object.keys(state.socket).length}]
+            Joining Game...
           </div>
         ) : (
           <ButtonLogin />
