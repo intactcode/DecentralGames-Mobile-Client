@@ -29,10 +29,10 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
           display: open ? 'flex' : 'none',
           right:
             index === 1 || index === 2
-              ? '-15px'
+              ? '50px'
               : index === 3
               ? `-${(items.length * 32 + 8 * items.length - 8) / 2}px`
-              : '50px',
+              : '-15px',
         }}
       >
         <AiOutlineClose color="white" />
@@ -42,10 +42,10 @@ const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
         style={{
           right:
             index === 1 || index === 2
-              ? '0px'
+              ? 'unset'
               : index === 3
               ? `-${(items.length * 32 + 8 * items.length - 32) / 2}px`
-              : 'unset',
+              : '0px',
           maxWidth: open ? '300px' : '0px',
         }}
         ref={dialog}
