@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import Image from 'next/image';
+import {useWindowSize} from '../../../../hooks/Hooks'
 import styles from './LeaderBoard.module.scss';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 
 const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
   const [scoredata, setScoreData] = useState<any[]>([]);
-
+  const size = useWindowSize();
   useEffect(() => {
     let temp = [];
     for (let i = 0; i < 20; i++) {
@@ -24,9 +25,10 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
   }, []);
 
   return (
+    
     <section
       className={styles.leaderBoardBody}
-      style={{ maxHeight: open ? '800px' : '0px' }}
+      style={{ maxHeight: open ? size.width > 412 ? '300px' : '570px' : '0px'}}
     >
       <div
         className={styles.leaderBoardField}
@@ -47,6 +49,7 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
           <span>ICE Multiplier</span>
           <span>Net Chips</span>
         </div>
+        <section className={styles.leaderBoardContentContainer}>
         {scoredata.map((data: any, i: any) => {
           let radius: any, color: any;
           if (i < 10) {
@@ -95,6 +98,7 @@ const LeaderBoard: React.FC<Props> = ({ open, setOpen }) => {
             </div>
           );
         })}
+        </section>
       </div>
     </section>
   );
