@@ -2,7 +2,7 @@
 
 .settingBody {
   display: flex;
-  width: 100%;
+  width: 350px;
   justify-content: center;
   position: absolute;
   bottom: 0;
@@ -11,6 +11,9 @@
   transition: max-height 0.5s;
   @include media-desktop768-pwa {
     bottom: 55px;
+  }
+  @include media-tablet768 {
+    width: 100%;
   }
   @include media-phone428 {
     @include media-iPhoneOnly {
@@ -117,7 +120,7 @@
     .bottomSetting {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 10px;
 
       .itemFieldContainer {
         font-size: 11px;
