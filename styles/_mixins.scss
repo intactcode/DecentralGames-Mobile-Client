@@ -53,13 +53,18 @@
     @content;
   }
 }
-@mixin media-tablet428-pwa {
+@mixin media-phone428-pwa {
   @media screen and (max-width: 428px) and (display-mode: standalone) {
     @content;
   }
 }
 @mixin media-phone390-pwa {
   @media screen and (max-width: 390px) and (display-mode: standalone) {
+    @content;
+  }
+}
+@mixin media-phone375-pwa {
+  @media screen and (max-width: 375px) and (display-mode: standalone) {
     @content;
   }
 }
