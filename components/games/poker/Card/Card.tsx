@@ -18,7 +18,7 @@ const ProgressBar: React.FC<Props> = ({ type, number, transform }) => {
         {number === 'T' ? '10' : number}
       </div>
       <Image
-        src={`/images/${type}.png`}
+        src={`/images/${type}.svg`}
         width="19px"
         height="19px"
         alt="card"
