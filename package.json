@@ -13,7 +13,7 @@
     "build:production": "cross-env APP_ENV=production next build",
     "lint": "next lint",
     "prepare": "husky install",
-    "pre-commit": "next lint --fix && git add -A ."
+    "pre-commit": "next lint --fix"
   },
   "dependencies": {
     "@walletconnect/utils": "^1.7.1",
