@@ -151,6 +151,9 @@
       top: 107px;
       max-height: 460px;
     }
+    @include media-phone375-pwa {
+      left: calc(50% - 135px);
+    }
   }
 
   .links {
