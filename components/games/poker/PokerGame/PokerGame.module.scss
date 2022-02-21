@@ -312,6 +312,52 @@
     @include media-desktop768-pwa {
       padding-top: 410px;
     }
+
+    .yourTotal {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      margin-left: 0px;
+      margin-top: -30px;
+      z-index: 10;
+      position: absolute;
+      font-size: 13px;
+
+      .chipForBet {
+        font-size: 15px;
+        display: flex;
+        .betAmount {
+          margin-top: 3px;
+          margin-right: 3px;
+          font-weight: bold;
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+    
+      @include media-tablet768 {
+        margin-top: 0px;
+      }
+      @include media-phone390 {
+        margin-top: -35px;
+        margin-left: -170px;
+      }
+      @include media-tablet768-pwa {
+        margin-left: -70px;
+        margin-top: 40px;
+      }
+      @include media-desktop768 {
+        margin-top: -100px;
+        margin-left: -120px;
+      }
+      @include media-desktop768-pwa {
+        margin-top: 50px;
+      }
+      @include media-phone390-pwa {
+        margin-top: 18px;
+      }
+    }
+
     .turnButton {
       display: flex;
       flex-direction: row;
@@ -635,43 +681,4 @@
     box-shadow: 8px #2b8c46;
   }
   transform: translateY(4px);
-}
-.playerInfo {
-  margin-top: -90px;
-  position: absolute;
-  left: -100px;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: 13px;
-
-  .chipForBet {
-    font-size: 15px;
-    display: flex;
-    .betAmount {
-      margin-top: 3px;
-      margin-right: 3px;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 0.8);
-    }
-  }
-  @include media-tablet768 {
-    left: calc(50% - 150px);
-    margin-top: 0px;
-  }
-  @include media-phone428 {
-    margin-top: 10px;
-    transform: translateX(-15%);
-  }
-  @include media-phone412 {
-    margin-top: 25px;
-  }
-  @include media-phone390 {
-    margin-top: -40px;
-  }
-  @include media-phone390-pwa {
-    margin-top: 15px;
-  }
-  @include media-desktop768-pwa {
-    margin-top: 60px;
-  }
 }

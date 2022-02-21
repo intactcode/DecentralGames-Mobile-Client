@@ -294,10 +294,25 @@ const PokerGame = () => {
     );
   }
 
-  function yourTurn() {
+  function yourTotalAndTurn() {
     return (
       <div className={styles.buttonContainerParentBottom}>
         <div className={styles.turnButtonContainer}>
+          <div className={styles.yourTotal}>
+            <div>Chips Balance</div>
+            <div className={styles.chipForBet}>
+              {chipsAmount && <div className={styles.betAmount}>{chipsAmount}</div>}
+              {chipsAmount && (
+                <Image
+                  src="/images/freecoin.svg"
+                  width="12px"
+                  height="12px"
+                  alt="chipImage"
+                />
+              )}
+            </div>
+          </div>
+
           {!isWon &&
             players[activePlayer] &&
             (activePlayer === currentSeat ? (
@@ -319,26 +334,6 @@ const PokerGame = () => {
                 {`${players[winnerIndex]?.name} wins`}
               </div>
             </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  function yourTotal() {
-    return (
-      <div className={styles.playerInfo}>
-        <div>Chips Balance</div>
-
-        <div className={styles.chipForBet}>
-          {chipsAmount && <div className={styles.betAmount}>{chipsAmount}</div>}
-          {chipsAmount && (
-            <Image
-              src="/images/freecoin.svg"
-              width="12px"
-              height="12px"
-              alt="chipImage"
-            />
           )}
         </div>
       </div>
@@ -464,9 +459,8 @@ const PokerGame = () => {
       {tableAndPot()}
       {topButtons()}
       {avatars()}
-      {yourTurn()}
+      {yourTotalAndTurn()}
       <div className={styles.lowerContainer}>
-        {yourTotal()}
         {activePlayer === currentSeat && !isEmpty(legalActions)
           ? activeButtons()
           : inactiveButtons()}
