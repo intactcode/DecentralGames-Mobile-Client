@@ -467,7 +467,9 @@ const PokerGame = () => {
       {yourTurn()}
       <div className={styles.lowerContainer}>
         {yourTotal()}
-        {activePlayer === currentSeat ? activeButtons() : inactiveButtons()}
+        {activePlayer === currentSeat && !isEmpty(legalActions)
+          ? activeButtons()
+          : inactiveButtons()}
         {challenges()}
       </div>
       {settings()}
