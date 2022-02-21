@@ -120,6 +120,25 @@ const Character: React.FC<Props> = ({
           dg={dg}
         />
       )}
+      {data && data?.betSize > 0 && (
+        <div className={styles.chipForBetContainer}>
+          <div className={styles.chipForBet}>
+            <div
+              className={styles.betAmount}
+            >
+              {data?.betSize}
+            </div>
+            <div className={styles.chipImage}>
+              <Image
+                src="/images/freecoin.svg"
+                width="12px"
+                height="12px"
+                alt="chipImage"
+              />
+            </div>
+          </div>
+        </div>
+      )}
       <div
         className={styles.playerCircle}
         onClick={() => setInfoModalOpen(!infomodalopen)}
@@ -144,12 +163,12 @@ const Character: React.FC<Props> = ({
           {data?.name ?? `Waiting...${index}`}
         </div>
         {data && (
-          <div className={styles.chipForBet}>
+          <div className={styles.chipForStack}>
             <div
               className={styles.betAmount}
               style={{ color: isInHand[index] ? 'white' : '#9A9A9A' }}
             >
-              {data?.betSize}
+              {data?.stack}
             </div>
             <div className={styles.chipImage}>
               <Image
