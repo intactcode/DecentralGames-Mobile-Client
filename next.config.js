@@ -8,12 +8,23 @@ module.exports = withPWA({
     API_URL: process.env.API_URL,
     SOCKET_SERVER_URL: process.env.SOCKET_SERVER_URL,
     USE_STATIC_MOBILE_ACCOUNTS: process.env.USE_STATIC_MOBILE_ACCOUNTS,
-    ACCOUNT_1_ADDRESS: process.env.ACCOUNT_1_ADDRESS,
-    ACCOUNT_1_TOKEN: process.env.ACCOUNT_1_TOKEN,
-    ACCOUNT_2_ADDRESS: process.env.ACCOUNT_2_ADDRESS,
-    ACCOUNT_2_TOKEN: process.env.ACCOUNT_2_TOKEN,
-    ACCOUNT_3_ADDRESS: process.env.ACCOUNT_3_ADDRESS,
-    ACCOUNT_3_TOKEN: process.env.ACCOUNT_3_TOKEN,
+    MOBILE_WIDTHS: {
+      390: {
+        address: process.env.ACCOUNT_1_ADDRESS,
+        token: process.env.ACCOUNT_1_TOKEN,
+        deviceName: 'iPhone 13 Pro',
+      },
+      428: {
+        address: process.env.ACCOUNT_2_ADDRESS,
+        token: process.env.ACCOUNT_2_TOKEN,
+        deviceName: 'iPhone 13 Pro Max',
+      },
+      375: {
+        address: process.env.ACCOUNT_3_ADDRESS,
+        token: process.env.ACCOUNT_3_TOKEN,
+        deviceName: 'iPhone 13 Mini',
+      },
+    },
   },
   pwa: {
     dest: 'public',
@@ -49,4 +60,13 @@ module.exports.redirects = async () => {
       permanent: true,
     },
   ];
+};
+
+module.exports.blisk = async () => {
+  /* Set this environment variable to "true" if you'd like to test on simulated mobile devices
+           that don't support crypto wallets (Blisk, BrowserStack, etc.)
+
+           For this to work, each account needs its Ethereum address and authentication token
+           defined in the .env file.
+        */
 };

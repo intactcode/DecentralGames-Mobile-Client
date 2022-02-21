@@ -229,40 +229,17 @@ function Wallet() {
       }
       let userAddress;
 
-      const {
-        USE_STATIC_MOBILE_ACCOUNTS,
-        ACCOUNT_1_ADDRESS,
-        ACCOUNT_1_TOKEN,
-        ACCOUNT_2_ADDRESS,
-        ACCOUNT_2_TOKEN,
-        ACCOUNT_3_ADDRESS,
-        ACCOUNT_3_TOKEN,
-      } = publicRuntimeConfig;
+      const { USE_STATIC_MOBILE_ACCOUNTS, MOBILE_WIDTHS } = publicRuntimeConfig;
+
       if (USE_STATIC_MOBILE_ACCOUNTS === 'true') {
         /* Set this environment variable to "true" if you'd like to test on simulated mobile devices
            that don't support crypto wallets (Blisk, BrowserStack, etc.)
 
            For this to work, each account needs its Ethereum address and authentication token
-           defined in the .env file.
+           defined in the .env.local file.
         */
-        const widths: any = {
-          390: {
-            address: ACCOUNT_1_ADDRESS,
-            token: ACCOUNT_1_TOKEN,
-            deviceName: 'iPhone 13 Pro',
-          },
-          428: {
-            address: ACCOUNT_2_ADDRESS,
-            token: ACCOUNT_2_TOKEN,
-            deviceName: 'iPhone 13 Pro Max',
-          },
-          375: {
-            address: ACCOUNT_3_ADDRESS,
-            token: ACCOUNT_3_TOKEN,
-            deviceName: 'iPhone 13 Mini',
-          },
-        };
-        const credentials = widths[size.width];
+        const credentials = MOBILE_WIDTHS[size.width];
+
         if (credentials) {
           console.log(
             `Detected device: ${credentials.deviceName}; Using account: ${credentials.address}`
