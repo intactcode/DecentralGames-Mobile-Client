@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
+import * as Colyseus from 'colyseus.js';
 import socketServerURL from './SocketServerURL';
 import { useStoreState, useStoreDispatch } from '../hooks/Hooks';
 import getCachedSession from '../api/GetCachedSession';
-import * as Colyseus from 'colyseus.js';
 
 const Socket = () => {
   const state = useStoreState(); // returns global state from Context API store
