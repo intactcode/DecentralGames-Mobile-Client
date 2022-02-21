@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { isEmpty } from 'lodash';
 import { useStoreState } from '../../hooks/Hooks';
 import { useStoreDispatch } from '../../hooks/Hooks';
 import ButtonLogin from '../buttons/ButtonLogin';
@@ -25,7 +26,7 @@ const JoinGame = (props: any) => {
   }, [state.userStatus, dispatch, props.gameType]);
 
   useEffect(() => {
-    if (Object.keys(state.socket).length !== 0) {
+    if (!isEmpty(state.socket)) {
       router.push('/' + props.gameType);
     }
   }, [state.socket, router, props.gameType]);
@@ -35,11 +36,9 @@ const JoinGame = (props: any) => {
       <div className={styles.gradient} />
       <div className={styles.back} />
 
-      <div style={{ position: 'relative', zIndex: 30 }}>
+      <div className={styles.joining}>
         {state.userStatus >= 4 ? (
-          <div className={styles.playtitle}>
-            Joining Game...
-          </div>
+          <div className={styles.playtitle}>Joining Game...</div>
         ) : (
           <ButtonLogin />
         )}

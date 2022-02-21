@@ -46,6 +46,7 @@ const Character: React.FC<Props> = ({
   const state = useStoreState();
   const dispatch = useStoreDispatch();
   const activePlayer = state.tableData?.activePlayer;
+  const currentPlayer = get(state, 'currentSeat.currentSeat', 0);
   const isInHand =
     state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winners = state.winners;
@@ -79,18 +80,21 @@ const Character: React.FC<Props> = ({
               colors={[['#FFFFFF', 1]]}
               size={90}
               onComplete={() => {
-                if (state.foldedUser === index) {
-                  state.socket.leave();
+                if (currentPlayer === index) {
+                  // already folded once
+                  if (!!state.foldedUser && !state.foldedUser.includes(index)) {
+                    dispatch({
+                      type: 'set_folded_user',
+                      data: [...state.foldedUser, index],
+                    });
+                  } else {
+                    state.socket.leave();
 
-                  dispatch({
-                    type: 'set_folded_user',
-                    data: null,
-                  });
-                } else {
-                  dispatch({
-                    type: 'set_folded_user',
-                    data: index,
-                  });
+                    dispatch({
+                      type: 'set_folded_user',
+                      data: [],
+                    });
+                  }
                 }
               }}
               trailColor="transparent"

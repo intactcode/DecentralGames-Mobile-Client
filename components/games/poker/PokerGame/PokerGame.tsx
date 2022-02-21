@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { maxBy, get } from 'lodash';
+import { maxBy, get, isEmpty } from 'lodash';
+import cn from 'classnames';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useStoreState } from '../../../../hooks/Hooks';
@@ -43,15 +44,12 @@ const PokerGame = () => {
   const [xpAmount, setXPAmount] = useState(0);
   const [dgAmount, setDGAmount] = useState(0);
 
-  const forcedBets = state.currentSeat.forced || {};
-  const currentSeat = state.currentSeat.currentSeat || 0;
-  const activePlayer = state.tableData.activePlayer;
+  const forcedBets = get(state, 'currentSeat.forced', {});
+  const currentSeat = get(state, 'currentSeat.currentSeat', 0);
+  const activePlayer = get(state, 'tableData.activePlayer', 0);
   const winners = state.winners;
 
-  const chipsAmount =
-    state.tableData.seats && state.tableData.seats[currentSeat]
-      ? state.tableData.seats[currentSeat].stack
-      : 0; // eslint-disable-line
+  const chipsAmount = get(state, `tableData.seats.${currentSeat}.stack`, 0);
 
   const isWon = state.isWon;
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
@@ -66,17 +64,13 @@ const PokerGame = () => {
 
   // if user is not logged-in send them to the join page
   useEffect(() => {
-    if (Object.keys(state.socket).length === 0 && state.game === 'poker') {
+    if (isEmpty(state.socket)) {
       router.push('/join-poker');
     }
   }, [state.socket, router, state.game]);
 
   useEffect(() => {
-    const setSeats = (seats: any) => {
-      setPlayers(Object.values(seats));
-    };
-
-    setSeats(state.tableData.seats || {});
+    setPlayers(Object.values(state.tableData.seats || {}));
   }, [state.tableData, state.socket.id]);
 
   useEffect(() => {
@@ -233,48 +227,44 @@ const PokerGame = () => {
   }
 
   function communityCards() {
-    const cards = get(state, 'tableData.community', [])
-    let spots: number[] = []
+    const cards = get(state, 'tableData.community', []);
+    let spots: number[] = [];
     for (let i = 0; i < 5 - cards.length; i++) {
-      spots.push(i)
+      spots.push(i);
     }
 
     return (
       <div className={styles.styledCommunityCard}>
-        {cards.map(
-          (card: any, index: number) => {
-            return (
-              <div
-                className={styles.cardContainer}
-                key={`card_${index}`}
-                style={{
-                  borderColor: winnerPair.find(
-                    (winner: any) =>
-                      winner.suit === card.suit && winner.rank === card.rank
-                  )
-                    ? 'red'
-                    : 'transparent',
-                }}
-              >
-                <Card type={card.suit} number={card.rank} />
-              </div>
-            );
-          }
-        )}
+        {cards.map((card: any, index: number) => {
+          return (
+            <div
+              className={cn(
+                styles.cardContainer,
+                winnerPair.find(
+                  (winner: any) =>
+                    winner.suit === card.suit && winner.rank === card.rank
+                )
+                  ? styles.borderRed
+                  : styles.borderTransparent
+              )}
+              key={`card_${index}`}
+            >
+              <Card type={card.suit} number={card.rank} />
+            </div>
+          );
+        })}
 
-        {spots.length > 0 && spots.map(
-          (n: number, index: number) => {
+        {spots.length > 0 &&
+          spots.map((n: number, index: number) => {
             return (
               <div
-                className={styles.cardContainer}
-                style={{borderColor: 'transparent'}}
+                className={cn(styles.cardContainer, styles.borderTransparent)}
                 key={`cardspot_${index}`}
               >
-                <CardSpot/>
+                <CardSpot />
               </div>
             );
-          }
-        )}
+          })}
       </div>
     );
   }
@@ -316,10 +306,7 @@ const PokerGame = () => {
                 <div className={styles.dot} />
               </div>
             ) : (
-              <div
-                className={styles.turnButton}
-                style={{ borderColor: '#2a2a2a' }}
-              >
+              <div className={cn(styles.turnButton, styles.redBorder)}>
                 <div className={styles.title}>
                   {`${players[activePlayer]?.name}'s Turn`}
                 </div>
@@ -344,11 +331,7 @@ const PokerGame = () => {
         <div>Chips Balance</div>
 
         <div className={styles.chipForBet}>
-          {chipsAmount && (
-            <div className={styles.betAmount}>
-              {chipsAmount}
-            </div>
-          )}
+          {chipsAmount && <div className={styles.betAmount}>{chipsAmount}</div>}
           {chipsAmount && (
             <Image
               src="/images/freecoin.svg"
@@ -484,7 +467,9 @@ const PokerGame = () => {
       {yourTurn()}
       <div className={styles.lowerContainer}>
         {yourTotal()}
-        {activePlayer === currentSeat ? activeButtons() : inactiveButtons()}
+        {activePlayer === currentSeat && !isEmpty(legalActions)
+          ? activeButtons()
+          : inactiveButtons()}
         {challenges()}
       </div>
       {settings()}

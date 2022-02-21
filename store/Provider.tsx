@@ -19,7 +19,7 @@ const initialState = {
   cards: [],
   waitTime: 0,
   winners: {},
-  foldedUser: null,
+  foldedUser: [],
   isWon: false,
 };
 
