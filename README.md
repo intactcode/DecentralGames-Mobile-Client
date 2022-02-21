@@ -28,7 +28,7 @@ Second, add three wallet addresses and their respective tokens to the fields abo
 
 ![This is an image](https://res.cloudinary.com/dnzambf4m/image/upload/v1645451978/address_token_hy5vir.png)
 
-Third, open Blisk and load **_http://localhost:3000_**, and add the devices defined in **_next.config.js_**:
+Third, open Blisk and click **_New devices set..._**, and add the devices defined in **_next.config.js_**. Then load _*http://localhost:3000*_:
 
 (You may ammend this list with your own additional devices)
 
