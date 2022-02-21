@@ -21,13 +21,13 @@ export function useStoreState(): any {
   return store[0];
 }
 
-export function usePrevious<T>(value: T): T {
-  const ref: any = useRef<T>();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-  return ref.current;
-}
+// export function usePrevious<T>(value: T): T {
+//   const ref: any = useRef<T>();
+//   useEffect(() => {
+//     ref.current = value;
+//   }, [value]);
+//   return ref.current;
+// }
 
 export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
