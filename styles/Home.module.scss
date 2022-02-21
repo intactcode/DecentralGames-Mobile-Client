@@ -1,4 +1,4 @@
-@import "/styles/mixins";
+@import '/styles/mixins';
 
 .container {
   display: flex;
@@ -39,6 +39,11 @@
   justify-content: center;
   align-items: center;
   font-family: 'Larsseit';
+
+  .joining {
+    position: relative;
+    z-index: 30;
+  }
 }
 
 .logo {
@@ -183,7 +188,7 @@
 .layoutPosition {
   height: 100vh;
 
-  overflow-x: hidden; 
+  overflow-x: hidden;
   @include media-all-pwa {
     overflow-x: unset;
     height: 100%;

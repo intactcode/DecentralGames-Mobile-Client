@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState, useRef } from 'react';
+import { debounce } from 'lodash';
 import { GlobalContext } from '../store/Store';
 
 export function useStoreDispatch(): any {
@@ -45,11 +46,12 @@ export const useWindowSize = () => {
       };
 
       // Add event listener
-      window.addEventListener('resize', handleResize);
+      window.addEventListener('resize', debounce(handleResize, 750));
 
       handleResize();
 
-      return () => window.removeEventListener('resize', handleResize);
+      return () =>
+        window.removeEventListener('resize', debounce(handleResize, 750));
     }
   }, []);
 

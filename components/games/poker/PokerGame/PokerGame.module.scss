@@ -24,7 +24,7 @@
       top: 550px;
     }
     @include media-phone375 {
-      top:515px;
+      top: 515px;
     }
     @include media-desktop768-pwa {
       bottom: 60px;
@@ -232,6 +232,14 @@
       @include media-desktop768-pwa {
         margin-left: 15px;
       }
+
+      &.borderTransparent {
+        border-color: transparent;
+      }
+
+      &.borderRed {
+        border-color: red;
+      }
     }
   }
 
@@ -284,7 +292,7 @@
     @include media-phone428-pwa {
       margin-top: 600px;
     }
-    
+
     @include media-phone390 {
       padding-top: 0px;
       padding-left: 0px;
@@ -294,14 +302,12 @@
     }
     @include media-phone390 {
       margin-top: 600px;
-
     }
     @include media-phone375 {
       margin-top: 496px;
     }
     @include media-phone375-pwa {
       margin-top: 600px;
-
     }
     @include media-desktop768-pwa {
       padding-top: 410px;
@@ -362,6 +368,10 @@
         text-align: center;
         color: white;
         font-size: 11px;
+      }
+
+      &.redBorder {
+        border-color: #2a2a2a;
       }
     }
   }

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { isEmpty } from 'lodash';
 import { useStoreState, useStoreDispatch } from '../../../hooks/Hooks';
 import styles from './ButtonRefresh.module.scss';
 
@@ -13,7 +14,7 @@ const ButtonRefresh = () => {
   const onReset = () => {
     console.log('Clicked back/reset');
 
-    if (Object.keys(state.socket).length !== 0) {
+    if (!isEmpty(state.socket)) {
       state.socket.leave();
     }
 

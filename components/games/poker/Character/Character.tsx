@@ -8,6 +8,7 @@ import InfoDialog from '../InfoDialog/InfoDialog';
 import UserInfoDialog from '../UserInfoDialog/UserInfoDialog';
 import { useStoreDispatch, useStoreState } from '../../../../hooks/Hooks';
 import styles from './Character.module.scss';
+import { useRouter } from 'next/router';
 
 const results = [
   'High card',
@@ -45,7 +46,9 @@ const Character: React.FC<Props> = ({
 }) => {
   const state = useStoreState();
   const dispatch = useStoreDispatch();
+  const router = useRouter();
   const activePlayer = state.tableData?.activePlayer;
+  const currentPlayer = get(state, 'currentSeat.currentSeat', 0);
   const isInHand =
     state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winners = state.winners;
@@ -79,18 +82,21 @@ const Character: React.FC<Props> = ({
               colors={[['#FFFFFF', 1]]}
               size={90}
               onComplete={() => {
-                if (state.foldedUser === index) {
-                  state.socket.leave();
+                if (currentPlayer === state.foldedUser) {
+                  if (state.foldedUser === index) {
+                    state.socket.leave();
+                    router.push('/');
 
-                  dispatch({
-                    type: 'set_folded_user',
-                    data: null,
-                  });
-                } else {
-                  dispatch({
-                    type: 'set_folded_user',
-                    data: index,
-                  });
+                    dispatch({
+                      type: 'set_folded_user',
+                      data: null,
+                    });
+                  } else {
+                    dispatch({
+                      type: 'set_folded_user',
+                      data: index,
+                    });
+                  }
                 }
               }}
               trailColor="transparent"
