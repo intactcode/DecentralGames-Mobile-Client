@@ -120,7 +120,7 @@ const Socket = () => {
     }
 
     //eslint-disable-next-line
-  }, [dispatch, state.userStatus, state.game]);
+  }, [state.userStatus, state.game]);
 
   return null;
 };
