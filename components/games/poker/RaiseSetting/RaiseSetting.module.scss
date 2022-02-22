@@ -1,4 +1,4 @@
-@import "/styles/mixins";
+@import '/styles/mixins';
 
 .closeIcon {
   top: 6px;
@@ -24,11 +24,38 @@
   transition: max-height 0.5s;
   overflow: hidden;
   z-index: 20;
-  @include media-phone390 {
-    margin-top: -223px;
+  &:focus-within {
+    @include media-phone428 {
+      top: 340px;
+    }
+    @include media-phone412 {
+      top: 280px;
+    }
+    @include media-phone390 {
+      top: 270px;
+    }
+    @include media-phone375 {
+      top: 230px;
+    }
+  }
+  @include media-phone428 {
+    top: 600px;
     bottom: unset;
   }
+  @include media-phone412 {
+    bottom: unset;
+  }
+  @include media-phone390 {
+    top: 530px;
+    bottom: unset;
+  }
+  @include media-phone375 {
+    top: 490px;
+    bottom: unset;
+  }
+ 
   @include media-desktop768-pwa {
+    bottom: 60px;
     left: calc(50% - 180px);
   }
   .raisePanel {
@@ -43,7 +70,7 @@
       width: 400px;
       left: calc(50% - 200px);
     }
-   
+
     .raiseInput {
       margin-top: 16px;
       padding: 6px 6px 6px 18px;
