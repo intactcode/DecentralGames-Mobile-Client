@@ -89,11 +89,6 @@ const Character: React.FC<Props> = ({
                     });
                   } else {
                     state.socket.leave();
-
-                    dispatch({
-                      type: 'set_folded_user',
-                      data: [],
-                    });
                   }
                 }
               }}
@@ -123,11 +118,7 @@ const Character: React.FC<Props> = ({
       {data && data?.betSize > 0 && (
         <div className={styles.chipForBetContainer}>
           <div className={styles.chipForBet}>
-            <div
-              className={styles.betAmount}
-            >
-              {data?.betSize}
-            </div>
+            <div className={styles.betAmount}>{data?.betSize}</div>
             <div className={styles.chipImage}>
               <Image
                 src="/images/freecoin.svg"

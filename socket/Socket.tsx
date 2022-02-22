@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import * as Colyseus from 'colyseus.js';
 import socketServerURL from './SocketServerURL';
 import { useStoreState, useStoreDispatch } from '../hooks/Hooks';
@@ -7,6 +8,7 @@ import getCachedSession from '../api/GetCachedSession';
 const Socket = () => {
   const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
+  const router = useRouter();
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +32,23 @@ const Socket = () => {
 
             room.onLeave((code) => {
               console.log('Client left the room', code);
+
+              dispatch({
+                type: 'game_type',
+                data: '',
+              });
+
+              dispatch({
+                type: 'socket_instance',
+                data: {},
+              });
+
+              dispatch({
+                type: 'set_folded_user',
+                data: [],
+              });
+
+              router.push('/');
             });
 
             room.onMessage('tableData', (data: any) => {
