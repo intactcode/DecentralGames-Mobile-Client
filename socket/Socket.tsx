@@ -32,6 +32,22 @@ const Socket = () => {
 
             room.onLeave((code) => {
               console.log('Client left the room', code);
+
+              dispatch({
+                type: 'game_type',
+                data: '',
+              });
+
+              dispatch({
+                type: 'socket_instance',
+                data: {},
+              });
+
+              dispatch({
+                type: 'set_folded_user',
+                data: [],
+              });
+
               router.push('/');
             });
 

@@ -89,21 +89,6 @@ const Character: React.FC<Props> = ({
                     });
                   } else {
                     state.socket.leave();
-
-                    dispatch({
-                      type: 'game_type',
-                      data: '',
-                    });
-
-                    dispatch({
-                      type: 'socket_instance',
-                      data: {},
-                    });
-
-                    dispatch({
-                      type: 'set_folded_user',
-                      data: [],
-                    });
                   }
                 }
               }}
