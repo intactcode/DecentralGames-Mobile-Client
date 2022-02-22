@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Fetch from '../api/Fetch';
 import { useStoreDispatch, useWindowSize } from '../hooks/Hooks';
 import WalletConnectProvider from '@walletconnect/web3-provider';
@@ -219,12 +219,17 @@ const refreshToken = async (dispatch: any, userAddress: string) => {
 function Wallet() {
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
   const size = useWindowSize();
+  const [isWidthZero, setIsWidthZero] = useState(true);
+
+  useEffect(() => {
+    setIsWidthZero(size.width === 0);
+  }, [size]);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     (async () => {
-      if (size.width === 0) {
+      if (isWidthZero) {
         return;
       }
       let userAddress;
@@ -301,7 +306,7 @@ function Wallet() {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isWidthZero]);
 
   return null;
 }
