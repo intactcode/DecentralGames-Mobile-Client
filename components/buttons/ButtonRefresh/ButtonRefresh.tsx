@@ -33,6 +33,11 @@ const ButtonRefresh = () => {
       data: {},
     });
 
+    dispatch({
+      type: 'set_folded_user',
+      data: [],
+    });
+
     router.push('/');
   };
 
