@@ -1,4 +1,6 @@
 import ButtonPlay from '../../buttons/ButtonPlay';
+import PWAPrompt from '../PWAPrompt/PWAPrompt';
+
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {
@@ -13,6 +15,8 @@ const HomePage = () => {
       </div>
 
       <ButtonPlay />
+
+      <PWAPrompt />
     </div>
   );
 };

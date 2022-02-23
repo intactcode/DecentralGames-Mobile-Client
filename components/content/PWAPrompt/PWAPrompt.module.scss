@@ -1,0 +1,59 @@
+.main {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 999;
+  background: rgba(204, 204, 204, 0.2);
+  backdrop-filter: blur(2px);
+  padding: 16px;
+  transform: translateY(-100%);
+  transition: all .5s;
+
+  &[class~=show] {
+    transform: translateY(0);
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    .title {
+      display: flex;
+      align-items: center;
+      img {
+        border-radius: 8px;
+      }
+      h4 {
+        margin: 0 0 0 8px;
+        color: #fff;
+      }
+    }
+  }
+  
+  .bottom {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+
+    button {
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+      
+      &.add {
+        margin-left: 8px;
+        background-color: #006eff;
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+
+      &.cancel {
+        background: transparent;
+        color: #006eff;
+      }
+    }
+    
+  }
+}
