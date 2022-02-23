@@ -27,8 +27,7 @@ module.exports = withPWA({
     },
   },
   pwa: {
-    dest: 'public',
-    disable: process.env.APP_ENV !== 'production',
+    dest: 'public'
   },
   reactStrictMode: true,
   swcMinify: false,
