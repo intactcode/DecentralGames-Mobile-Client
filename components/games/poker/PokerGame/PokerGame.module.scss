@@ -191,18 +191,20 @@
     left: 50%;
     z-index: 10000;
     transform: translateX(-50%);
-    top: 195px;
+    top: 210px;
     max-width: 300px;
     justify-content: center;
     flex-wrap: wrap;
     display: flex;
     position: absolute;
+
     @include media-tablet768 {
+      top: 230px;
       max-width: 180px;
     }
     @include media-phone390 {
       max-width: 180px;
-      top: 200px;
+      top: 190px;
       left: 48%;
     }
 
