@@ -8,6 +8,8 @@ interface Props {
   setRaiseAmount: any;
   raiseamount: number;
   onRaise: any;
+  pot: number;
+  maxBalance: number;
 }
 
 const RaiseSetting: React.FC<Props> = ({
@@ -16,8 +18,9 @@ const RaiseSetting: React.FC<Props> = ({
   raiseamount,
   setRaiseAmount,
   onRaise,
+  pot,
+  maxBalance,
 }) => {
-
   return (
     <div>
       <div
@@ -66,10 +69,34 @@ const RaiseSetting: React.FC<Props> = ({
             </span>
           </div>
           <div className={styles.raiseAction}>
-            <div>1/2</div>
-            <div>3/4</div>
-            <div>Pot</div>
-            <div>Max</div>
+            <div
+              onClick={() => {
+                setRaiseAmount(Math.round(pot / 2));
+              }}
+            >
+              1/2
+            </div>
+            <div
+              onClick={() => {
+                setRaiseAmount(Math.round(pot * (3 / 4)));
+              }}
+            >
+              3/4
+            </div>
+            <div
+              onClick={() => {
+                setRaiseAmount(pot);
+              }}
+            >
+              Pot
+            </div>
+            <div
+              onClick={() => {
+                setRaiseAmount(maxBalance);
+              }}
+            >
+              Max
+            </div>
           </div>
         </div>
       </div>

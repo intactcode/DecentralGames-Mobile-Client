@@ -33,7 +33,7 @@ const PokerGame = () => {
   const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 
-  const [raiseamount, setRaiseAmount] = useState(50);
+  const [raiseamount, setRaiseAmount] = useState(0);
   const [raiseshow, setRaiseShow] = useState(false);
   const [issetting, setIsSetting] = useState(false);
   const [isleaderboard, setIsLeaderBoard] = useState(false);
@@ -49,7 +49,7 @@ const PokerGame = () => {
   const activePlayer = get(state, 'tableData.activePlayer', 0);
   const winners = state.winners;
 
-  const chipsAmount = get(state, `tableData.seats.${currentSeat}.stack`, 0);
+  const chipsAmount = state.chipUpdate.accountBalance;
 
   const isWon = state.isWon;
   const winnerPair = get(winners, 'winners.0.0.1.cards', []);
@@ -68,6 +68,12 @@ const PokerGame = () => {
       router.push('/join-poker');
     }
   }, [state.socket, router, state.game]);
+
+  useEffect(() => {
+    if (!isNaN(state.tableData.callAmount)) {
+      setRaiseAmount(state.tableData.callAmount * 2);
+    }
+  }, [state.tableData]);
 
   useEffect(() => {
     setPlayers(Object.values(state.tableData.seats || {}));
@@ -301,7 +307,9 @@ const PokerGame = () => {
           <div className={styles.yourTotal}>
             <div>Chips Balance</div>
             <div className={styles.chipForBet}>
-              {chipsAmount && <div className={styles.betAmount}>{chipsAmount}</div>}
+              {chipsAmount && (
+                <div className={styles.betAmount}>{chipsAmount}</div>
+              )}
               {chipsAmount && (
                 <Image
                   src="/images/freecoin.svg"
@@ -424,6 +432,8 @@ const PokerGame = () => {
           raiseamount={raiseamount}
           setRaiseAmount={setRaiseAmount}
           onRaise={onRaise}
+          pot={state.tableData?.pot || 0}
+          maxBalance={players[currentSeat]?.stack}
         />
         <Setting open={issetting} setOpen={setIsSetting} />
         <LeaderBoard open={isleaderboard} setOpen={setIsLeaderBoard} />
