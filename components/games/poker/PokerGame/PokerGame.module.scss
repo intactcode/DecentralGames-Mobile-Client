@@ -100,7 +100,7 @@
       position: relative;
       display: flex;
       justify-content: center;
-      font-weight: bold;
+      font-family: Larsseit-Bold;
       width: auto !important;
 
       .amount {
@@ -326,13 +326,18 @@
       position: absolute;
       font-size: 13px;
 
+      .total {
+        color: rgba(255, 255, 255, 0.75);
+        font-family: Larsseit-Bold;
+      }
+
       .chipForBet {
         font-size: 15px;
         display: flex;
         .betAmount {
           margin-top: 3px;
           margin-right: 3px;
-          font-weight: bold;
+          font-family: Larsseit-Bold;
           color: rgba(255, 255, 255, 0.8);
         }
       }
@@ -450,7 +455,7 @@
         color: #ffffffbf;
         font-size: 8px;
         line-height: normal;
-        font-weight: normal;
+        font-family: Larsseit;
       }
     }
   }
@@ -481,7 +486,7 @@
       justify-content: center;
       align-items: center;
       font-size: 16px;
-      font-weight: bold;
+      font-family: Larsseit-Bold;
       margin: 5px;
       color: white;
       @include media-phone390 {
@@ -564,7 +569,7 @@
       position: absolute;
       top: 85px;
       left: 46%;
-      font-weight: 800;
+      font-family: Larsseit-Bold;
       font-size: 11px;
       line-height: 13.13px;
       color: #fff;
