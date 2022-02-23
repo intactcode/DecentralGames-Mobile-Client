@@ -305,7 +305,7 @@ const PokerGame = () => {
       <div className={styles.buttonContainerParentBottom}>
         <div className={styles.turnButtonContainer}>
           <div className={styles.yourTotal}>
-            <div>Chips Balance</div>
+            <div className={styles.total}>Your Total</div>
             <div className={styles.chipForBet}>
               {chipsAmount && (
                 <div className={styles.betAmount}>{chipsAmount}</div>
