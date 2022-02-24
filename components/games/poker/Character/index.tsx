@@ -175,16 +175,13 @@ const Character: React.FC<CharacterProps> = ({
   };
 
   const CardBackIndicator = () => {
-    return (
-      !isWon &&
-      !user &&
-      isInHand[index] &&
-      !!state.cards.length && (
-        <div className={styles.cardBackContainer}>
-          <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
-          <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
-        </div>
-      )
+    return !isWon && !user && isInHand[index] && !!state.cards.length ? (
+      <div className={styles.cardBackContainer}>
+        <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
+        <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
+      </div>
+    ) : (
+      <></>
     );
   };
 
@@ -251,11 +248,10 @@ const Character: React.FC<CharacterProps> = ({
   };
 
   const WinnerShow: React.FC = () => {
-    return (
-      isWon &&
-      index === winnerIndex && (
-        <div className={styles.fullhouse}>{Constants.RESULTS[ranking]}</div>
-      )
+    return isWon && index === winnerIndex ? (
+      <div className={styles.fullhouse}>{Constants.RESULTS[ranking]}</div>
+    ) : (
+      <></>
     );
   };
 
