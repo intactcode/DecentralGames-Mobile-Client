@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import styles from './CardBack.module.scss';
 
-interface Props {
+interface CardBackProps {
   transform: string;
   width?: number;
   height?: number;
 }
 
-const CardBack: React.FC<Props> = ({ transform, width = 32, height = 47 }) => {
+const CardBack: React.FC<CardBackProps> = (props) => {
+  const { transform, width = 32, height = 47 } = props;
   return (
     <section
       className={styles.cardBody}

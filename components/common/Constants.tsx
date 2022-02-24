@@ -6,6 +6,18 @@ const constants = {
   MATIC_RPC: {137: 'https://polygon-rpc.com'},
   MATIC_CHAIN_ID: 137,
   AUTH_TOKEN_TTL: 24 * 7,
+  RESULTS: [
+    'High card',
+    'Pair',
+    'Two pair',
+    'Three of a kind',
+    'Straight',
+    'Flush',
+    'Full house',
+    'Four of a kind',
+    'Straight flush',
+    'Royal flush',
+  ],
 };
 
 export default constants;

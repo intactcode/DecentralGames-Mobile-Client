@@ -1,32 +1,40 @@
 import { FaChevronDown } from 'react-icons/fa';
 import Image from 'next/image';
-import ProgressBar from '../ProgressBar/ProgressBar';
+import { ProgressBar } from '@/components/games/poker';
 import styles from './Setting.module.scss';
 
-interface Props {
+interface SettingProps {
   open: boolean;
   setOpen: any;
 }
 
-const ItemField = (props: { children: any; type: number; style?: any }) => {
+interface ItemFieldProps {
+  children: any;
+  type: number;
+  style?: any;
+}
+
+const ItemField: React.FC<ItemFieldProps> = (props) => {
+  const { children, type, style } = props;
   return (
     <div
       className={styles.itemField}
       style={{
-        ...props.style,
-        width: props.type === 0 ? '40px' : props.type === 1 ? '116px' : '90px',
-        height: props.type === 0 ? '40px' : props.type === 1 ? '100px' : '36px',
-        flexDirection: props.type === 0 ? 'column' : 'row',
-        fontSize: props.type === 0 ? '8px' : '14px',
-        fontStyle: props.type === 0 ? 'italic' : 'unset',
+        ...style,
+        width: type === 0 ? '40px' : type === 1 ? '116px' : '90px',
+        height: type === 0 ? '40px' : type === 1 ? '100px' : '36px',
+        flexDirection: type === 0 ? 'column' : 'row',
+        fontSize: type === 0 ? '8px' : '14px',
+        fontStyle: type === 0 ? 'italic' : 'unset',
       }}
     >
-      {props.children}
+      {children}
     </div>
   );
 };
 
-const Setting: React.FC<Props> = ({ open, setOpen }) => {
+const Setting: React.FC<SettingProps> = (props) => {
+  const { open, setOpen } = props;
   return (
     <section
       className={styles.settingBody}
@@ -161,10 +169,7 @@ const Setting: React.FC<Props> = ({ open, setOpen }) => {
             </ItemField>
             <div className={styles.lowerTitle}>Next Tier</div>
             <ItemField type={2} style={{ position: 'relative' }}>
-              <span
-                className={styles.text}
-                style={{marginLeft: '2px'}}
-              >
+              <span className={styles.text} style={{ marginLeft: '2px' }}>
                 +4,291
               </span>
               <div style={{ marginLeft: '4px', marginTop: '4px' }}>

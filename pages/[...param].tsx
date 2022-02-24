@@ -1,15 +1,12 @@
-import PageNotFound from '../components/content/PageNotFound/PageNotFound';
-import Layout from '../components/hoc/Layout';
-import Header from '../components/hoc/Header';
-import constants from '../components/common/Constants';
-import images from '../components/common/Images';
+import { PageNotFound } from '@/components/content';
+import { Layout, Header, Constants, Images } from '../components/common';
 
 const Wildcard = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Page Not Found'}
-        image={images.SOCIAL_SHARE}
+        title={Constants.TITLE + ' | Page Not Found'}
+        image={Images.SOCIAL_SHARE}
       />
 
       <PageNotFound />

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { debounce } from 'lodash';
 import { GlobalContext } from '../store/Store';
 

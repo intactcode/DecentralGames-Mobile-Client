@@ -7,7 +7,8 @@ interface Props {
   transform?: string;
 }
 
-const ProgressBar: React.FC<Props> = ({ type, number, transform }) => {
+const Card: React.FC<Props> = (props) => {
+  const { transform, type, number } = props;
   return (
     <section className={styles.cardBody} style={{ transform: transform }}>
       <div
@@ -27,4 +28,4 @@ const ProgressBar: React.FC<Props> = ({ type, number, transform }) => {
   );
 };
 
-export default ProgressBar;
+export default Card;

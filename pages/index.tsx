@@ -1,15 +1,12 @@
-import HomePage from '../components/content/HomePage/HomePage';
-import Layout from '../components/hoc/Layout';
-import Header from '../components/hoc/Header';
-import constants from '../components/common/Constants';
-import images from '../components/common/Images';
+import { HomePage } from '@/components/content';
+import { Layout, Header, Constants, Images } from '@/components/common';
 
 const Home = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | Decentral Games'}
-        image={images.SOCIAL_SHARE}
+        title={Constants.TITLE + ' | Decentral Games'}
+        image={Images.SOCIAL_SHARE}
       />
 
       <HomePage />
