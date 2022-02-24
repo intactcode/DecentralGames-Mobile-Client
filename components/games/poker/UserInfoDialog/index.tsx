@@ -3,7 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import Image from 'next/image';
 import styles from './UserInfoDialog.module.scss';
 
-interface Props {
+interface UserInfoDialogProps {
   index?: number;
   open: boolean;
   setOpen?: any;
@@ -13,14 +13,8 @@ interface Props {
   dg?: number;
 }
 
-const UserInfoDialog: React.FC<Props> = ({
-  open,
-  setOpen,
-  items,
-  ice,
-  xp,
-  dg,
-}) => {
+const UserInfoDialog: React.FC<UserInfoDialogProps> = (props) => {
+  const { open, setOpen, items, ice, xp, dg } = props;
   const dialog = useRef<any>();
   const [useritems, setUserItems] = useState<string[]>([]);
 

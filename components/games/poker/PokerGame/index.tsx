@@ -3,15 +3,17 @@ import { maxBy, get, isEmpty } from 'lodash';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useStoreState } from '../../../../hooks/Hooks';
-import Character from '../Character/Character';
-import Setting from '../Setting/Setting';
-import LeaderBoard from '../LeaderBoard/LeaderBoard';
-import ProgressBar from '../ProgressBar/ProgressBar';
-import RaiseSetting from '../RaiseSetting/RaiseSetting';
-import Card from '../Card/Card';
-import CardSpot from '../CardSpot/CardSpot';
-import ButtonRefresh from '../../../buttons/ButtonRefresh/ButtonRefresh';
+import { useStoreState } from '@/hooks/Hooks';
+import {
+  Character,
+  Setting,
+  LeaderBoard,
+  ProgressBar,
+  RaiseSetting,
+  Card,
+  CardSpot,
+} from '@/components/games/poker';
+import { ButtonRefresh } from '@/components/buttons';
 import styles from './PokerGame.module.scss';
 
 const items = [
@@ -29,7 +31,7 @@ const items = [
   ],
 ];
 
-const PokerGame = () => {
+const PokerGame: React.FC = () => {
   const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 

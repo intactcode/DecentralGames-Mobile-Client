@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { FaChevronDown } from 'react-icons/fa';
 import styles from './RaiseSetting.module.scss';
 
-interface Props {
+interface RaiseSettingProps {
   open: boolean;
   setOpen: any;
   setRaiseAmount: any;
@@ -12,15 +12,16 @@ interface Props {
   maxBalance: number;
 }
 
-const RaiseSetting: React.FC<Props> = ({
-  open,
-  setOpen,
-  raiseamount,
-  setRaiseAmount,
-  onRaise,
-  pot,
-  maxBalance,
-}) => {
+const RaiseSetting: React.FC<RaiseSettingProps> = (props) => {
+  const {
+    open,
+    setOpen,
+    raiseamount,
+    setRaiseAmount,
+    onRaise,
+    pot,
+    maxBalance,
+  } = props;
   return (
     <div>
       <div

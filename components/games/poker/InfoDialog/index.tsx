@@ -3,14 +3,15 @@ import Image from 'next/image';
 import { AiOutlineClose } from 'react-icons/ai';
 import styles from './InfoDialog.module.scss';
 
-interface Props {
+interface InfoDialogProps {
   index?: number;
   open: boolean;
   setOpen?: any;
   items?: any;
 }
 
-const InfoDialog: React.FC<Props> = ({ index, open, setOpen, items }) => {
+const InfoDialog: React.FC<InfoDialogProps> = (props) => {
+  const { index, open, setOpen, items } = props;
   const dialog = useRef<any>();
 
   useEffect(() => {

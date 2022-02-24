@@ -130,5 +130,4 @@ const Provider = (props: {
   );
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { Provider };
+export default Provider;

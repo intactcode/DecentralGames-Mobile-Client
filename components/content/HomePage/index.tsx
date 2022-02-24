@@ -1,5 +1,5 @@
-import ButtonPlay from '../../buttons/ButtonPlay';
-import PWAPrompt from '../PWAPrompt/PWAPrompt';
+import { ButtonPlay } from '@/components/buttons';
+import { PWAPrompt } from '@/components/content';
 
 import styles from './HomePage.module.scss';
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './ProgressBar.module.scss';
 
-interface Props {
+interface ProgressBarProps {
   type: number;
   percent: number;
   text: string;
@@ -9,7 +9,8 @@ interface Props {
   height?: number;
 }
 
-const ProgressBar: React.FC<Props> = ({ type, percent, text, width }) => {
+const ProgressBar: React.FC<ProgressBarProps> = (props) => {
+  const { type, percent, text, width } = props;
   const backgrounds = [
     'radial-gradient(227.45% 196.14% at 21.78% -82.5%, #FF8FD9 0%, #865DFF 56.25%, #4021FF 94.65%)',
     'radial-gradient(195.01% 168.18% at 22.02% -54.55%, #93F8FF 0%, #5882FF 62.16%, #2144FF 94.65%)',

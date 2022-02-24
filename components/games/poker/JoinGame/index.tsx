@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { isEmpty } from 'lodash';
-import { useStoreState } from '../../hooks/Hooks';
-import { useStoreDispatch } from '../../hooks/Hooks';
-import ButtonLogin from '../buttons/ButtonLogin';
-import styles from '../../styles/Home.module.scss';
+import { useStoreDispatch, useStoreState } from '@/hooks/Hooks';
+import { ButtonLogin } from '@/components/buttons';
+import styles from '@/styles/Home.module.scss';
 
 const JoinGame = (props: any) => {
   const state = useStoreState(); // returns global state from Context API store

@@ -2,27 +2,17 @@ import { useState } from 'react';
 import { get } from 'lodash';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
-import CardBack from '../CardBack/CardBack';
-import Card from '../Card/Card';
-import InfoDialog from '../InfoDialog/InfoDialog';
-import UserInfoDialog from '../UserInfoDialog/UserInfoDialog';
-import { useStoreDispatch, useStoreState } from '../../../../hooks/Hooks';
+import { Constants } from '@/components/common';
+import {
+  CardBack,
+  Card,
+  InfoDialog,
+  UserInfoDialog,
+} from '@/components/games/poker';
+import { useStoreDispatch, useStoreState } from '@/hooks/Hooks';
 import styles from './Character.module.scss';
 
-const results = [
-  'High card',
-  'Pair',
-  'Two pair',
-  'Three of a kind',
-  'Straight',
-  'Flush',
-  'Full house',
-  'Four of a kind',
-  'Straight flush',
-  'Royal flush',
-];
-
-interface Props {
+interface CharacterProps {
   user?: any;
   index: number;
   items: any;
@@ -33,7 +23,7 @@ interface Props {
   classString: string;
 }
 
-const Character: React.FC<Props> = ({
+const Character: React.FC<CharacterProps> = ({
   user,
   index,
   items,
@@ -235,7 +225,7 @@ const Character: React.FC<Props> = ({
         </div>
       )}
       {isWon && index === winnerIndex && (
-        <div className={styles.fullhouse}>{results[ranking]}</div>
+        <div className={styles.fullhouse}>{Constants.RESULTS[ranking]}</div>
       )}
     </section>
   );
