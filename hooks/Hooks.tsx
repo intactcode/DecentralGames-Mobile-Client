@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { debounce } from 'lodash';
-import { GlobalContext } from '../store/Store';
+import { GlobalContext } from '@/store/Store';
 
 export function useStoreDispatch(): any {
   const store = useContext(GlobalContext);

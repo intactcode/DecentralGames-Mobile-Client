@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import ButtonConnect from '../../buttons/ButtonConnect';
-import ButtonJoin from '../../buttons/ButtonJoin';
-import styles from './JoinGameFlow.module.scss';
-import { useStoreState } from '../../../hooks/Hooks';
-import { FaChevronLeft } from 'react-icons/fa';
-import images from '../../../components/common/Images';
 import Link from 'next/link';
+import { FaChevronLeft } from 'react-icons/fa';
+import { ButtonConnect, ButtonJoin } from '@/components/buttons';
+import { useStoreState } from '@/hooks/Hooks';
+import { Images } from '@/components/common';
+import styles from './JoinGameFlow.module.scss';
 
 const JoinGameFlow = () => {
   const state = useStoreState(); // returns global state from Context API store
@@ -37,7 +36,7 @@ const JoinGameFlow = () => {
               <span className={styles.image_grouping}>
                 <img
                   className={styles.wearable_image}
-                  src={images.WEARABLES_1}
+                  src={Images.WEARABLES_1}
                   alt="wearables"
                 />
 
@@ -48,7 +47,7 @@ const JoinGameFlow = () => {
               <span className={styles.image_grouping}>
                 <img
                   className={styles.card_image}
-                  src={images.CARDS}
+                  src={Images.CARDS}
                   alt="cards"
                 />
 
@@ -59,7 +58,7 @@ const JoinGameFlow = () => {
               <span className={styles.image_grouping}>
                 <img
                   className={styles.diamond_image}
-                  src={images.DIAMOND}
+                  src={Images.DIAMOND}
                   alt="ice logo"
                 />
 
@@ -83,7 +82,7 @@ const JoinGameFlow = () => {
 
           <img
             className={styles.wearable_image_two}
-            src={images.WEARABLES_2}
+            src={Images.WEARABLES_2}
             alt="wearables"
           />
 

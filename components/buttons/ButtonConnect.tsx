@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react';
-import { useStoreState, useStoreDispatch } from '../../hooks/Hooks';
-import { connectWallet, assignToken } from '../../store/Wallet';
+import { useStoreState, useStoreDispatch } from '@/hooks/Hooks';
+import { connectWallet, assignToken } from '@/store/Wallet';
 import styles from './Button.module.scss';
 
 declare const window: any;

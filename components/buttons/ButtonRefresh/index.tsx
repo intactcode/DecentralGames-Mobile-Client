@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { isEmpty } from 'lodash';
-import { useStoreState } from '../../../hooks/Hooks';
+import { useStoreState } from '@/hooks/Hooks';
 import styles from './ButtonRefresh.module.scss';
 
 declare const window: any;
