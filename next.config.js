@@ -52,13 +52,12 @@ module.exports.images = {
 };
 
 module.exports.redirects = async () => {
-  return [
-    {
-      source: '/:path',
-      destination: '/',
-      permanent: true,
-    },
-  ];
+  const routes = ['connect', 'join-poker', 'poker'];
+  return routes.map(route => ({
+    source: `/${route}`,
+    permanent: true,
+    destination: '/',
+  }))
 };
 
 module.exports.blisk = async () => {
