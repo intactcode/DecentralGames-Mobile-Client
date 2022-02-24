@@ -5,7 +5,7 @@ import styles from './ButtonRefresh.module.scss';
 
 declare const window: any;
 
-const ButtonRefresh = () => {
+const ButtonRefresh: React.FC = () => {
   const state = useStoreState(); // returns global state from Context API store
 
   const onReset = () => {

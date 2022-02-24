@@ -3,10 +3,9 @@ import Image from 'next/image';
 
 import styles from './PWAPrompt.module.scss';
 
-let deferredPrompt: any;  
+let deferredPrompt: any;
 
-const PWAPrompt = () => {
-
+const PWAPrompt: React.FC = () => {
   const [installable, setInstallable] = useState(false);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ const PWAPrompt = () => {
       deferredPrompt = e;
       setInstallable(true);
     });
-  }, [])
+  }, []);
 
   const handleInstallClick = () => {
     setInstallable(false);
@@ -24,7 +23,7 @@ const PWAPrompt = () => {
 
   const handleCancelClick = () => {
     setInstallable(false);
-  }
+  };
 
   return (
     <div className={`${styles.main} ${installable ? 'show' : ''}`}>
@@ -40,8 +39,12 @@ const PWAPrompt = () => {
         </div>
       </div>
       <div className={styles.bottom}>
-        <button className={styles.cancel} onClick={handleCancelClick}>Not Now</button>
-        <button className={styles.add} onClick={handleInstallClick}>Add to Home Screen</button>
+        <button className={styles.cancel} onClick={handleCancelClick}>
+          Not Now
+        </button>
+        <button className={styles.add} onClick={handleInstallClick}>
+          Add to Home Screen
+        </button>
       </div>
     </div>
   );

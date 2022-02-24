@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import styles from './Card.module.scss';
 
-interface Props {
+interface CardProps {
   type: string;
   number: string;
   transform?: string;
 }
 
-const Card: React.FC<Props> = (props) => {
+const Card: React.FC<CardProps> = (props) => {
   const { transform, type, number } = props;
   return (
     <section className={styles.cardBody} style={{ transform: transform }}>

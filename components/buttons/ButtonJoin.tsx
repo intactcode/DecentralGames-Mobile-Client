@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from './Button.module.scss';
 
-const ButtonJoin = () => {
+const ButtonJoin: React.FC = () => {
   return (
     <div className={styles.container}>
       <Link href="/join-poker" passHref>

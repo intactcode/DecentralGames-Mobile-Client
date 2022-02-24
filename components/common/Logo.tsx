@@ -5,7 +5,7 @@ import styles from '@/styles/Home.module.scss';
 
 declare const window: any;
 
-const Logo = () => {
+const Logo: React.FC = () => {
   const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 

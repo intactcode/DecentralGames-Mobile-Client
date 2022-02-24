@@ -5,20 +5,26 @@ import Wallet from '@/store/Wallet';
 import Socket from '@/socket/Socket';
 import '../styles/base.scss';
 import '../styles/globals.css';
-import '../styles/menu.css';
 
-function Application(props: { Component: any; pageProps: any; store: any }) {
+interface ApplicationProps {
+  Component: any;
+  pageProps: any;
+  store: any;
+}
+
+const Application: React.FC<ApplicationProps> = (props) => {
+  const { store, pageProps, Component } = props;
   return (
-    <Provider store={props.store}>
+    <Provider store={store}>
       <Segment />
       <NextNProgress />
 
-      <props.Component {...props.pageProps} />
+      <Component {...pageProps} />
 
       <Wallet />
       <Socket />
     </Provider>
   );
-}
+};
 
 export default Application;
