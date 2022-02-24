@@ -1,7 +1,7 @@
 import call from './Call';
 import getConfig from 'next/config';
+import { Constants } from '@/components/common';
 import environment from './Environment';
-import constants from '../components/common/Constants';
 
 // This imports APP_ENV from next.config.js. APP_ENV must be set in the .env file
 const { publicRuntimeConfig } = getConfig();
@@ -15,7 +15,7 @@ const Fetch = {
   GET_TOKEN: (address: string, signature: string, timestamp: number) => {
     return call(
       // eslint-disable-next-line max-len
-      `${API_BASE_URL}/authentication/getWebAuthToken?address=${address}&signature=${signature}&timestamp=${timestamp}&ttl=${constants.AUTH_TOKEN_TTL}`,
+      `${API_BASE_URL}/authentication/getWebAuthToken?address=${address}&signature=${signature}&timestamp=${timestamp}&ttl=${Constants.AUTH_TOKEN_TTL}`,
       'GET',
       false
     );
@@ -24,7 +24,7 @@ const Fetch = {
   REFRESH_TOKEN: (userAddress: string) => {
     return call(`${API_BASE_URL}/authentication/extendToken`, 'POST', true, {
       userAddress,
-      ttl: constants.AUTH_TOKEN_TTL,
+      ttl: Constants.AUTH_TOKEN_TTL,
     });
   },
 

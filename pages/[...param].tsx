@@ -1,5 +1,5 @@
 import { PageNotFound } from '@/components/content';
-import { Layout, Header, Constants, Images } from '../components/common';
+import { Layout, Header, Constants, Images } from '@/components/common';
 
 const Wildcard = () => {
   return (

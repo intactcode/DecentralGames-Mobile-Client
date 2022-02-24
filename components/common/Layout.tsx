@@ -1,4 +1,4 @@
-import styles from '../../styles/Home.module.scss';
+import styles from '@/styles/Home.module.scss';
 
 const Layout = (props: { children: any }) => {
   return (

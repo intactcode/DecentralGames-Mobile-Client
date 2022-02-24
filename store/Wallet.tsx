@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import Fetch from '../api/Fetch';
-import { useStoreDispatch, useWindowSize } from '../hooks/Hooks';
+import getConfig from 'next/config';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { convertUtf8ToHex } from '@walletconnect/utils';
 import Web3 from 'web3';
-import constants from '../components/common/Constants';
-import getCachedSession from '../api/GetCachedSession';
-import getConfig from 'next/config';
+import { useStoreDispatch, useWindowSize } from '@/hooks/Hooks';
+import { Constants } from '@/components/common';
+import { Fetch, getCachedSession } from '@/api';
+
 const { publicRuntimeConfig } = getConfig();
 
 declare const window: any;
@@ -82,7 +82,7 @@ const storeSession = (userAddress: string, token: string) => {
       userAddress: userAddress,
       token: token,
       expiration: new Date(
-        new Date().getTime() + 60 * 60 * constants.AUTH_TOKEN_TTL * 1000
+        new Date().getTime() + 60 * 60 * Constants.AUTH_TOKEN_TTL * 1000
       ),
     })
   );
@@ -143,8 +143,8 @@ export const assignToken = async (dispatch: any, web3: Web3) => {
 
 const getWalletConnectProvider = () => {
   return new WalletConnectProvider({
-    rpc: constants.MATIC_RPC,
-    chainId: constants.MATIC_CHAIN_ID,
+    rpc: Constants.MATIC_RPC,
+    chainId: Constants.MATIC_CHAIN_ID,
     qrcodeModalOptions: {
       mobileLinks: ['rainbow', 'metamask', 'ledger', 'argent', 'trust'],
     },
@@ -154,7 +154,7 @@ const getWalletConnectProvider = () => {
 const connectMobileWallet = async (dispatch: any) => {
   window.localStorage.removeItem('walletconnect');
   const provider: WalletConnectProvider = getWalletConnectProvider();
-  provider.updateRpcUrl(constants.MATIC_CHAIN_ID);
+  provider.updateRpcUrl(Constants.MATIC_CHAIN_ID);
   const web3 = new Web3(provider as any);
   dispatch({
     type: 'web3_provider',

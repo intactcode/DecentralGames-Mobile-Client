@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import constants from '../common/Constants';
+import { Constants } from '@/components/common';
 
 declare const window: any;
 
@@ -85,7 +85,7 @@ const Header = (props: { title: string; image: string }) => {
     analytics.SNIPPET_VERSION = '4.1.0';
 
     // load Analytics.js with your key, which will automatically load the tools you've enabled for your account
-    analytics.load(constants.SEGMENT_WRITE_KEY);
+    analytics.load(Constants.SEGMENT_WRITE_KEY);
 
     window.addEventListener('scroll', (e: React.UIEvent<HTMLDivElement>) => {
       e.preventDefault();
@@ -98,9 +98,9 @@ const Header = (props: { title: string; image: string }) => {
       <title>{props.title}</title>
 
       <meta property="og:title" content={props.title} />
-      <meta property="og:description" content={constants.DESCRIPTION} />
+      <meta property="og:description" content={Constants.DESCRIPTION} />
       <meta property="og:image" content={props.image} />
-      <meta property="og:url" content={constants.BASE_URL} />
+      <meta property="og:url" content={Constants.BASE_URL} />
       <meta
         name="viewport"
         content="width=device-width, user-scalable=no"

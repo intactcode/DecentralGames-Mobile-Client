@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../hooks/Hooks';
-import styles from '../../styles/Home.module.scss';
+import { useStoreState } from '@/hooks/Hooks';
+import styles from '@/styles/Home.module.scss';
 
 declare const window: any;
 

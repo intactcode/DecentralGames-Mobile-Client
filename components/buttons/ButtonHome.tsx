@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useStoreState } from '../../hooks/Hooks';
+import { useStoreState } from '@/hooks/Hooks';
 import styles from './Button.module.scss';
 
 declare const window: any;
