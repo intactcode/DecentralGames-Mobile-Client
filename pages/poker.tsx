@@ -1,15 +1,12 @@
 import PokerGame from '@/components/games/poker/PokerGame';
-import Layout from '@/components/common/Layout';
-import Header from '@/components/common/Header';
-import constants from '@/components/common/Constants';
-import images from '@/components/common/Images';
+import { Layout, Header, Constants, Images } from '@/components/common';
 
-const Poker = () => {
+const Poker: React.FC = () => {
   return (
     <Layout>
       <Header
-        title={constants.TITLE + ' | ICE Poker'}
-        image={images.SOCIAL_SHARE}
+        title={Constants.TITLE + ' | ICE Poker'}
+        image={Images.SOCIAL_SHARE}
       />
 
       <PokerGame />

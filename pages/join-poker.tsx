@@ -1,7 +1,7 @@
 import { JoinGame } from '@/components/games/poker';
 import { Layout, Header, Constants, Images } from '@/components/common';
 
-const Join = () => {
+const Join: React.FC = () => {
   return (
     <Layout>
       <Header

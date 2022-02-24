@@ -1,6 +1,6 @@
 import styles from './CardSpot.module.scss';
 
-const CardSpot = () => {
+const CardSpot: React.FC = () => {
   return <section className={styles.cardBody}></section>;
 };
 

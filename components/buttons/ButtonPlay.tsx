@@ -4,7 +4,7 @@ import styles from './Button.module.scss';
 
 declare const window: any;
 
-const ButtonPlay = () => {
+const ButtonPlay: React.FC = () => {
   const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 

@@ -4,15 +4,20 @@ import styles from './Button.module.scss';
 
 declare const window: any;
 
-const ButtonHome = (props: { page: string }) => {
+interface ButtonHomeProps {
+  page: string;
+}
+
+const ButtonHome: React.FC<ButtonHomeProps> = (props) => {
+  const { page } = props;
   const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 
   async function clickedHome() {
-    console.log('Clicked home: ' + props.page);
+    console.log('Clicked home: ' + page);
 
     // Segment: track home button event
-    window.analytics.track('Clicked home: ' + props.page, {
+    window.analytics.track('Clicked home: ' + page, {
       userAddress: state.userAddress,
     });
 

@@ -3,7 +3,7 @@ import { PWAPrompt } from '@/components/content';
 
 import styles from './HomePage.module.scss';
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div className={styles.main}>
       <div className={styles.gradient} />

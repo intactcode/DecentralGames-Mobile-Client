@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
-const Hamburger = () => {
+const Hamburger: React.FC = () => {
   const menuRef = useRef<any>(null);
 
   /////////////////////////////////////////////////////////////////////////////////////////
