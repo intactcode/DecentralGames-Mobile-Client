@@ -1,7 +1,7 @@
 import { Layout, Header, Constants, Images } from '@/components/common';
 import { JoinGameFlow } from '@/components/content';
 
-const Connect = () => {
+const Connect: React.FC = () => {
   return (
     <Layout>
       <Header

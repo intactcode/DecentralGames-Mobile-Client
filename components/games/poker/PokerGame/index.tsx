@@ -177,9 +177,9 @@ const PokerGame: React.FC = () => {
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
-  // helper functions
+  // helper consts
 
-  function waitIndicator() {
+  const WaitIndicator = () => {
     return (
       <>
         {!!state.waitTime && (
@@ -187,9 +187,9 @@ const PokerGame: React.FC = () => {
         )}
       </>
     );
-  }
+  };
 
-  function roundIndicator() {
+  const RoundIndicator = () => {
     return (
       <>
         {overlayTimeout && (
@@ -197,9 +197,9 @@ const PokerGame: React.FC = () => {
         )}
       </>
     );
-  }
+  };
 
-  function topButtons() {
+  const TopButtons = () => {
     return (
       <div className={styles.links}>
         <ButtonRefresh />
@@ -217,9 +217,9 @@ const PokerGame: React.FC = () => {
         </div>
       </div>
     );
-  }
+  };
 
-  function tableAndPot() {
+  const TableAndPot = () => {
     return (
       <>
         <div className={styles.table} />
@@ -232,9 +232,9 @@ const PokerGame: React.FC = () => {
         </div>
       </>
     );
-  }
+  };
 
-  function communityCards() {
+  const CommunityCards = () => {
     const cards = get(state, 'tableData.community', []);
     let spots: number[] = [];
     for (let i = 0; i < 5 - cards.length; i++) {
@@ -275,9 +275,9 @@ const PokerGame: React.FC = () => {
           })}
       </div>
     );
-  }
+  };
 
-  function avatars() {
+  const Avatars = () => {
     return (
       <>
         {new Array(6).fill(0).map((data, i) => {
@@ -300,9 +300,9 @@ const PokerGame: React.FC = () => {
         })}
       </>
     );
-  }
+  };
 
-  function yourTotalAndTurn() {
+  const YourTotalAndTurn = () => {
     return (
       <div className={styles.buttonContainerParentBottom}>
         <div className={styles.turnButtonContainer}>
@@ -348,9 +348,9 @@ const PokerGame: React.FC = () => {
         </div>
       </div>
     );
-  }
+  };
 
-  function activeButtons() {
+  const ActiveButtons = () => {
     return (
       <div className={styles.buttonContainerParentBottom}>
         <div className={styles.actionButtonGroup}>
@@ -384,9 +384,9 @@ const PokerGame: React.FC = () => {
         </div>
       </div>
     );
-  }
+  };
 
-  function inactiveButtons() {
+  const InactiveButtons = () => {
     return (
       <div className={styles.buttonContainerParentBottom}>
         <div className={styles.actionButtonGroup}>
@@ -396,9 +396,9 @@ const PokerGame: React.FC = () => {
         </div>
       </div>
     );
-  }
+  };
 
-  function challenges() {
+  const Challenges = () => {
     return (
       <>
         <div
@@ -423,9 +423,9 @@ const PokerGame: React.FC = () => {
         </div>
       </>
     );
-  }
+  };
 
-  function settings() {
+  const Settings = () => {
     return (
       <>
         <RaiseSetting
@@ -441,9 +441,9 @@ const PokerGame: React.FC = () => {
         <LeaderBoard open={isleaderboard} setOpen={setIsLeaderBoard} />
       </>
     );
-  }
+  };
 
-  // function isWinner() {
+  // const isWinner() {
   //   return (
   //     <>
   //       {isWon && (
@@ -465,20 +465,22 @@ const PokerGame: React.FC = () => {
 
   return (
     <section className={styles.body}>
-      {waitIndicator()}
-      {roundIndicator()}
-      {communityCards()}
-      {tableAndPot()}
-      {topButtons()}
-      {avatars()}
-      {yourTotalAndTurn()}
+      <WaitIndicator />
+      <RoundIndicator />
+      <CommunityCards />
+      <TableAndPot />
+      <TopButtons />
+      <Avatars />
+      <YourTotalAndTurn />
       <div className={styles.lowerContainer}>
-        {activePlayer === currentSeat && !isEmpty(legalActions)
-          ? activeButtons()
-          : inactiveButtons()}
-        {challenges()}
+        {activePlayer === currentSeat && !isEmpty(legalActions) ? (
+          <ActiveButtons />
+        ) : (
+          <InactiveButtons />
+        )}
+        <Challenges />
       </div>
-      {settings()}
+      <Settings />
       {/* {isWinner()} */}
     </section>
   );

@@ -3,7 +3,13 @@ import { Constants } from '@/components/common';
 
 declare const window: any;
 
-const Header = (props: { title: string; image: string }) => {
+interface HeaderProps {
+  title: string;
+  image: string;
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
+  const { title, image } = props;
   function segmentSnippet() {
     if (typeof window === 'undefined') {
       return;
@@ -95,11 +101,11 @@ const Header = (props: { title: string; image: string }) => {
 
   return (
     <Head>
-      <title>{props.title}</title>
+      <title>{title}</title>
 
-      <meta property="og:title" content={props.title} />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={Constants.DESCRIPTION} />
-      <meta property="og:image" content={props.image} />
+      <meta property="og:image" content={image} />
       <meta property="og:url" content={Constants.BASE_URL} />
       <meta
         name="viewport"

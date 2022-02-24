@@ -2,7 +2,7 @@
 import { ButtonHome } from '@/components/buttons';
 import styles from './PageNotFound.module.scss';
 
-const PageNotFound = () => {
+const PageNotFound: React.FC = () => {
   return (
     <div className={styles.main}>
       <div className={styles.gradient} />

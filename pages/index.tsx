@@ -1,7 +1,7 @@
 import { HomePage } from '@/components/content';
 import { Layout, Header, Constants, Images } from '@/components/common';
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <Layout>
       <Header

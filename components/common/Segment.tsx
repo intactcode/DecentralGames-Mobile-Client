@@ -4,7 +4,7 @@ import { useStoreState } from '@/hooks/Hooks';
 
 declare const window: any;
 
-const Segment = () => {
+const Segment: React.FC = () => {
   const state = useStoreState(); // returns global state from Context API store
   const router = useRouter();
 

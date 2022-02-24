@@ -6,7 +6,7 @@ import styles from './Button.module.scss';
 
 declare const window: any;
 
-const ButtonConnect = () => {
+const ButtonConnect: React.FC = () => {
   const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
   const [ethereum, setEthereum] = useState(undefined);

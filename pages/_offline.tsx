@@ -2,7 +2,7 @@ import { Layout } from '@/components/common';
 import { Header, Images, Constants } from '@/components/common';
 import styles from '@/styles/Home.module.scss';
 
-const Offline = () => {
+const Offline: React.FC = () => {
   return (
     <Layout>
       <Header
