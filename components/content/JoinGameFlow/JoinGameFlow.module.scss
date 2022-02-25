@@ -77,6 +77,8 @@
     justify-content: center;
 
     .image_grouping {
+      margin-top: 16px;
+
       .lower_text {
         margin-top: 0px;
         font-family: Larsseit-Bold;
@@ -88,21 +90,21 @@
     }
 
     .wearable_image {
-      width: 106px;
+      width: 100px;
       height: 92px;
       margin: -4px 0px 0px 0px;
     }
 
     .card_image {
       width: 82px;
-      height: 76px;
-      margin: 12px 18px 0px 26px;
+      height: 88px;
+      margin: -4px 18px 4px 26px;
     }
 
     .diamond_image {
       width: 100px;
-      height: 88px;
-      margin: 2px 0px -2px 0px;
+      height: 74px;
+      margin: -6px 0px 20px 0px;
     }
   }
 }
