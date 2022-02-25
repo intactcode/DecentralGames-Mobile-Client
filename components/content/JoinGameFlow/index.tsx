@@ -91,7 +91,9 @@ const ActivateWearable: React.FC = () => {
       </div>
 
       <p className={styles.play_text}>
-        You’re holding an ICE Wearable that has not been activated yet. Activations prevent gameplay abuse. Please activate your wearable to begin playing ICE poker.
+        You’re holding an ICE Wearable that has not been activated yet.
+        Activations prevent gameplay abuse.
+        Please activate your wearable to begin playing ICE poker.
       </p>
 
       <ButtonActivateICEWearable />
@@ -136,7 +138,7 @@ const JoinGameFlow: React.FC = () => {
       <div className={styles.back} />
       <div className={styles.text_container}></div>
 
-      {state.userStatus < 4 ? <ActivateWearable /> : <LoggedIn />}
+      {state.userStatus < 4 ? <NotLoggedIn /> : state.userStatus > 100 ? <ActivateWearable /> : <LoggedIn />}
     </div>
   );
 };
