@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import * as Colyseus from 'colyseus.js';
 import { useStoreState, useStoreDispatch } from '@/hooks/Hooks';
 import { getCachedSession } from '@/api';
@@ -8,7 +7,6 @@ import socketServerURL from './SocketServerURL';
 const Socket = () => {
   const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
-  const router = useRouter();
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +46,10 @@ const Socket = () => {
                 data: [],
               });
 
-              router.push('/');
+              dispatch({
+                type: 'set_is_loading',
+                data: false,
+              });
             });
 
             room.onMessage('tableData', (data: any) => {

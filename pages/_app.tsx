@@ -1,6 +1,6 @@
 import NextNProgress from 'nextjs-progressbar';
 import { Provider } from '@/store/Store';
-import { Segment } from '@/components/common';
+import { Segment, SpinnerAnimation } from '@/components/common';
 import Wallet from '@/store/Wallet';
 import Socket from '@/socket/Socket';
 import '../styles/base.scss';
@@ -19,6 +19,7 @@ const Application: React.FC<ApplicationProps> = (props) => {
       <Segment />
       <NextNProgress />
 
+      <SpinnerAnimation width={80} height={80} />
       <Component {...pageProps} />
 
       <Wallet />
