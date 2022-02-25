@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { FaChevronLeft } from 'react-icons/fa';
-import { ButtonConnect, ButtonJoin } from '@/components/buttons';
+import { ButtonConnect, ButtonJoin, ButtonActivateICEWearable } from '@/components/buttons';
 import { useStoreState } from '@/hooks/Hooks';
 import { Images } from '@/components/common';
 import styles from './JoinGameFlow.module.scss';
@@ -65,6 +65,40 @@ const NotLoggedIn: React.FC = () => {
   );
 };
 
+const ActivateWearable: React.FC = () => {
+  return (
+    <div className={styles.activate_wearable}>
+      <Link href="/" passHref={true}>
+        <div className={styles.close}>
+          <FaChevronLeft fontSize="20px" />
+        </div>
+      </Link>
+
+      <h2 className={styles.welcome}>You Must Activate Your Wearable</h2>
+
+      <div className={styles.locked_wearable}>
+        <img
+          className={styles.locked_wearable_image}
+          src={'/images/img_locked_wearable.png'}
+          alt="wearable"
+        />
+
+        <div className={styles.locked_wearable_amount_container}>
+          <p className={styles.locked_wearable_amount}>
+            1
+          </p>
+        </div>
+      </div>
+
+      <p className={styles.play_text}>
+        You’re holding an ICE Wearable that has not been activated yet. Activations prevent gameplay abuse. Please activate your wearable to begin playing ICE poker.
+      </p>
+
+      <ButtonActivateICEWearable />
+    </div>
+  );
+};
+
 const LoggedIn: React.FC = () => {
   return (
     <div className={styles.button_container_two}>
@@ -102,7 +136,7 @@ const JoinGameFlow: React.FC = () => {
       <div className={styles.back} />
       <div className={styles.text_container}></div>
 
-      {state.userStatus < 4 ? <NotLoggedIn /> : <LoggedIn />}
+      {state.userStatus < 4 ? <ActivateWearable /> : <LoggedIn />}
     </div>
   );
 };
