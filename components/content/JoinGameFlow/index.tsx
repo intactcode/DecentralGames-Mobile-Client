@@ -28,7 +28,7 @@ const NotLoggedIn: React.FC = () => {
           <span className={styles.image_grouping}>
             <img
               className={styles.wearable_image}
-              src={Images.WEARABLES_1}
+              src={'/images/img_wearables.svg'}
               alt="wearables"
             />
 
@@ -37,7 +37,11 @@ const NotLoggedIn: React.FC = () => {
             </p>
           </span>
           <span className={styles.image_grouping}>
-            <img className={styles.card_image} src={Images.CARDS} alt="cards" />
+            <img
+              className={styles.card_image}
+              src={'/images/img_cards.svg'}
+              alt="cards"
+            />
 
             <p className={styles.lower_text}>
               Play Free <br /> Poker
@@ -46,12 +50,12 @@ const NotLoggedIn: React.FC = () => {
           <span className={styles.image_grouping}>
             <img
               className={styles.diamond_image}
-              src={Images.DIAMOND}
+              src={'/images/img_diamond.svg'}
               alt="ice logo"
             />
 
             <p className={styles.lower_text}>
-              Earn <br /> Ice
+              Earn <br /> ICE
             </p>
           </span>
         </span>
