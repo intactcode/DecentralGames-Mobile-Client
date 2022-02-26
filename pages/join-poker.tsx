@@ -1,4 +1,4 @@
-import { JoinGame } from '@/components/games/poker';
+import JoinGame from '@/components/games/JoinGame';
 import { Layout, Header, Constants, Images } from '@/components/common';
 
 const Join: React.FC = () => {

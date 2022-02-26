@@ -66,10 +66,10 @@ const PokerGame: React.FC = () => {
 
   // if user is not logged-in send them to the join page
   useEffect(() => {
-    if (isEmpty(state.socket) && state.game === 'poker') {
-      router.push('/join-poker');
+    if (isEmpty(state.socket)) {
+      router.push('/');
     }
-  }, [state.socket, router, state.game]);
+  }, [state.socket, router]);
 
   useEffect(() => {
     if (!isNaN(state.tableData.callAmount)) {

@@ -72,6 +72,10 @@ const Character: React.FC<CharacterProps> = ({
                   });
                 } else {
                   state.socket.leave();
+                  dispatch({
+                    type: 'set_is_loading',
+                    data: true,
+                  });
                 }
               }
             }}
