@@ -2,6 +2,7 @@ import NextNProgress from 'nextjs-progressbar';
 import { Provider } from '@/store/Store';
 import { Segment, SpinnerAnimation } from '@/components/common';
 import Wallet from '@/store/Wallet';
+import TokenBalances from '@/store/TokenBalances';
 import Socket from '@/socket/Socket';
 import '../styles/base.scss';
 import '../styles/globals.css';
@@ -23,6 +24,7 @@ const Application: React.FC<ApplicationProps> = (props) => {
       <Component {...pageProps} />
 
       <Wallet />
+      <TokenBalances />
       <Socket />
     </Provider>
   );
