@@ -18,6 +18,9 @@ const constants = {
     'Straight flush',
     'Royal flush',
   ],
+  CHILD_TOKEN_ADDRESS_DG: '0xef938b6da8576a896f6E0321ef80996F4890f9c4',
+  CHILD_TOKEN_ADDRESS_ICE: '0xc6c855ad634dcdad23e64da71ba85b8c51e5ad7c',
+  FACTOR: 1000000000000000000, // ETH-to-WEI multiplication factor
 };
 
 export default constants;
