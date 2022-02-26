@@ -5,31 +5,18 @@ import { AbiItem } from 'web3-utils';
 import BigNumber from 'bignumber.js';
 import { Constants } from '@/components/common';
 import { ABI_CHILD_TOKEN_DG, ABI_CHILD_TOKEN_ICE } from '@/components/abi';
-// import ABI_CHILD_TOKEN_DG from '@/components/abi/ABI_CHILD_TOKEN_DG.json';
-// import ABI_CHILD_TOKEN_ICE from '@/components/abi/ABI_CHILD_TOKEN_DG.json';
 
 function TokenBalances() {
   const state = useStoreState(); // returns global state from Context API store
   const dispatch = useStoreDispatch(); // returns dispatch method from Context API store
-
-  const [dgContract, setDgContract] = useState({});
-  const [iceContract, setIceContract] = useState({});
-
+  const [dgContract, setDgContract] = useState({} as any);
+  const [iceContract, setIceContract] = useState({} as any);
   const [instances, setInstances] = useState(false);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////
-
-  // async function fetchData() {
-  // const web3 = new Web3(window.ethereum); // pass MetaMask provider to Web3 constructor
-
-  // }
-
   useEffect(() => {
     if (state.userStatus >= 4) {
-      // console.log('matic rpc... ');
-      // console.log(Constants.MATIC_RPC[137]);
-
       const maticWeb3 = new Web3(Constants.MATIC_RPC[137]); // pass Matic provider URL to Web3 constructor
 
       const dgContract = new maticWeb3.eth.Contract(
@@ -38,25 +25,15 @@ function TokenBalances() {
       );
       setDgContract(dgContract);
 
-      // console.log('dg contract instance...');
-      // console.log(dgContract);
-
       const iceContract = new maticWeb3.eth.Contract(
         ABI_CHILD_TOKEN_ICE as AbiItem[],
         Constants.CHILD_TOKEN_ADDRESS_ICE
       );
       setIceContract(iceContract);
 
-      // console.log('ice contract instance...');
-      // console.log(iceContract);
-
       setInstances(true); // contract instantiation complete
     }
   }, [state.userStatus]);
-
-  // useCallback(() => {
-
-  // }, [dgContract.methods, iceContract.methods, state.userAddress]);
 
   // anytime user clicks token refresh button this code will execute
   useEffect(() => {

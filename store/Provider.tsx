@@ -21,6 +21,7 @@ const initialState = {
   winners: {},
   foldedUser: [],
   isWon: false,
+  isLoading: false,
   refreshBalances: false,
 };
 
@@ -110,6 +111,12 @@ const reducer = (state: any, action: { type: any; data: any }) => {
         ...state,
         winners: action.data,
         isWon: true,
+      };
+    }
+    case 'set_is_loading': {
+      return {
+        ...state,
+        isLoading: action.data,
       };
     }
     case 'refresh_balances':
