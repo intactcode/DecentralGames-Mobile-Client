@@ -3,7 +3,6 @@ export { default as CardBack } from './CardBack';
 export { default as CardSpot } from './CardSpot';
 export { default as Character } from './Character';
 export { default as InfoDialog } from './InfoDialog';
-export { default as JoinGame } from './JoinGame';
 export { default as LeaderBoard } from './LeaderBoard';
 export { default as PokerGame } from './PokerGame';
 export { default as ProgressBar } from './ProgressBar';

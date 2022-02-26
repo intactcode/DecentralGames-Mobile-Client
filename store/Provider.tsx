@@ -22,6 +22,7 @@ const initialState = {
   foldedUser: [],
   isWon: false,
   refreshBalances: false,
+  isLoading: false,
 };
 
 const reducer = (state: any, action: { type: any; data: any }) => {
@@ -117,6 +118,12 @@ const reducer = (state: any, action: { type: any; data: any }) => {
         ...state,
         refreshBalances: action.data,
       };
+    case 'set_is_loading': {
+      return {
+        ...state,
+        isLoading: action.data,
+      };
+    }
     default: {
       throw new Error('Wrong action type got dispatched');
     }
