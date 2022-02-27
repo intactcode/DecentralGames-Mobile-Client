@@ -8,9 +8,9 @@ interface UserInfoDialogProps {
   open: boolean;
   setOpen?: any;
   items?: any;
-  ice?: number;
-  xp?: number;
-  dg?: number;
+  ice?: any;
+  xp?: any;
+  dg?: any;
 }
 
 const UserInfoDialog: React.FC<UserInfoDialogProps> = (props) => {
