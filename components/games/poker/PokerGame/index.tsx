@@ -90,20 +90,11 @@ const PokerGame: React.FC = () => {
     }
   }, [state.tableData.round]);
 
-  // ********** later we will fetch the ICE/DG amounts from the smart contract and the XP amount from the server **********
   useEffect(() => {
-    const iceAmount = 1000;
-    const xpAmount = 22;
-    const dgAmount = 0.01;
-
-    setICEAmount(iceAmount);
-    setXPAmount(xpAmount);
-    setDGAmount(dgAmount);
-
-    console.log('ICE amount: ' + iceAmount);
-    console.log('XP amount: ' + xpAmount);
-    console.log('DG amount: ' + dgAmount);
-  }, []);
+    setICEAmount(state.tokenAmounts.ICE_AMOUNT);
+    setXPAmount(state.tokenAmounts.XP_AMOUNT);
+    setDGAmount(state.tokenAmounts.DG_AMOUNT);
+  }, [state.tokenAmounts]);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////

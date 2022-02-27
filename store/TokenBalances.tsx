@@ -35,41 +35,54 @@ function TokenBalances() {
     }
   }, [state.userStatus]);
 
+  function formatNumber(amount: number, decimals: number) {
+    const redenominated = new BigNumber(amount)
+      .div(Constants.FACTOR)
+      .toFixed(decimals);
+
+    const decimalPoint = redenominated.indexOf('.');
+    const decimalLength =
+      decimalPoint < 0 ? 1 : redenominated.length - decimalPoint;
+
+    const amountAdjusted = new BigNumber(redenominated).toFormat(
+      Math.min(decimals, decimalLength - 1)
+    );
+
+    return amountAdjusted;
+  }
+
   // anytime user clicks token refresh button this code will execute
   useEffect(() => {
     if (instances) {
       (async function () {
         async function getTokenBalances() {
           try {
-            const DG_AMOUNT = await dgContract.methods
-              .balanceOf(state.userAddress)
-              .call();
-
-            const DG_AMOUNT_ADJUSTED = new BigNumber(DG_AMOUNT)
-              .div(Constants.FACTOR)
-              .toFixed(0);
-
             const ICE_AMOUNT = await iceContract.methods
               .balanceOf(state.userAddress)
               .call();
 
-            const ICE_AMOUNT_ADJUSTED = new BigNumber(ICE_AMOUNT)
-              .div(Constants.FACTOR)
-              .toFixed(0);
+            const ICE_AMOUNT_ADJUSTED = formatNumber(ICE_AMOUNT, 0);
 
+            const DG_AMOUNT = await dgContract.methods
+              .balanceOf(state.userAddress)
+              .call();
+
+            const DG_AMOUNT_ADJUSTED = formatNumber(DG_AMOUNT, 0);
+
+            console.log('ICE amount: ' + ICE_AMOUNT_ADJUSTED);
+            console.log('XP amount: ' + 0);
             console.log('DG amount (Polygon): ' + DG_AMOUNT_ADJUSTED);
-            console.log('ICE amount (Polygon): ' + ICE_AMOUNT_ADJUSTED);
 
             return {
-              DG_AMOUNT: DG_AMOUNT_ADJUSTED,
               ICE_AMOUNT: ICE_AMOUNT_ADJUSTED,
+              XP_AMOUNT: 0,
+              DG_AMOUNT: DG_AMOUNT_ADJUSTED,
             };
           } catch (error) {
             console.log('Token balances error: ' + error);
           }
         }
 
-        // update global state unclaimed DG points balances
         const tokenBalances = await getTokenBalances();
 
         dispatch({
