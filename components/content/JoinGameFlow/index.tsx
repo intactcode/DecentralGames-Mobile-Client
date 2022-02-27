@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { FaChevronLeft } from 'react-icons/fa';
-import { ButtonConnect, ButtonJoin, ButtonActivateICEWearable } from '@/components/buttons';
+import Image from 'next/image';
+import { ButtonConnect, ButtonJoin, ButtonActivateICEWearable, ButtonJoinWithChips } from '@/components/buttons';
 import { useStoreState } from '@/hooks/Hooks';
 import { Images } from '@/components/common';
 import styles from './JoinGameFlow.module.scss';
@@ -101,6 +102,156 @@ const ActivateWearable: React.FC = () => {
   );
 };
 
+interface WearItemProps {
+  chipAmount?: number;
+  status?: string;
+  quantity?: number;
+  diamond?: number;
+  image?: string;
+  index?: number;
+}
+
+const WearItem: React.FC<WearItemProps> = (props) => {
+  const { chipAmount, status, quantity, diamond, image, index } = props;
+
+  return (
+    <div
+      className={styles.wear_item}
+      style={{marginLeft: index === 0 ? '0px' : '10px', opacity: image ? '1' : '0.5'}}
+    >
+      <div className={styles.chip}>
+        <p className={styles.chip_amount}>
+          +{chipAmount}
+        </p>
+        <div className={styles.chip_image}>
+          <Image
+            src="/images/freecoin.svg"
+            width="11px"
+            height="11px"
+            alt="chipImage"
+          />
+        </div>
+      </div>
+
+      <div className={styles.wear_item_image_container}>
+        <img
+          className={styles.wear_item_image}
+          src={image ? `/images/${image}` : '/images/img_wear_empty.svg'}
+          alt="wearItem"
+        />
+
+        {quantity && (
+          <div className={styles.wear_item_quantity_container}>
+            <p className={styles.wear_item_quantity}>
+              {quantity}
+            </p>
+          </div>
+        )}
+
+        {status && (
+          <div
+            className={styles.wear_item_status_container}
+            style={{backgroundColor: status === 'NOT ACTIVE' ? 'rgba(215, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.75)'}}
+          >
+            <p className={styles.wear_item_status}>
+              {status}
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className={styles.diamond}>
+        <p className={styles.diamond_amount}>
+          +{diamond}%
+        </p>
+        <div className={styles.diamond_image}>
+          <Image
+            src="/images/diamond.svg"
+            width="12px"
+            height="12px"
+            alt="diamondImage"
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const NoWearablesCheckIn: React.FC = () => {
+  return (
+    <div className={styles.no_wearables_check_in}>
+      <Link href="/" passHref={true}>
+        <div className={styles.close}>
+          <FaChevronLeft fontSize="20px" />
+        </div>
+      </Link>
+
+      <h2 className={styles.welcome}>Check-In To Play ICE Poker</h2>
+
+      <div className={styles.titles}>
+        <p className={styles.title}>
+          YOU&apos;RE WEARING:
+        </p>
+      </div>
+
+      <div className={styles.wear_items}>
+        <WearItem
+          chipAmount={3000}
+          status={'DELEGATED'}
+          quantity={3}
+          diamond={31}
+          image={'img_wear_upper.svg'}
+          index={0}
+        />
+        <WearItem
+          chipAmount={500}
+          status={''}
+          quantity={3}
+          diamond={21}
+          image={'img_wear_lower.svg'}
+          index={1}
+        />
+        <WearItem
+          chipAmount={500}
+          status={''}
+          diamond={0}
+          index={2}
+        />
+      </div>
+
+      <div className={styles.titles}>
+        <p className={styles.title}>
+          YOU&apos;RE NOT WEARING:
+        </p>
+
+        <p className={styles.highlighted_title}>
+          HOW DO I EQUIP?
+        </p>
+      </div>
+
+      <div className={styles.wear_items}>
+        <WearItem
+          chipAmount={500}
+          status={'NOT ACTIVE'}
+          quantity={1}
+          diamond={6}
+          image={'img_wear_glasses.svg'}
+          index={0}
+        />
+      </div>
+
+      <p className={styles.play_text}>
+        Your starting chip stack (and ICE bonus) is based on the total wearables you wear at check-in.
+        You only get one check-in per day!
+      </p>
+
+      <ButtonJoinWithChips
+        chipAmount={3000}
+      />
+    </div>
+  );
+};
+
 const LoggedIn: React.FC = () => {
   return (
     <div className={styles.button_container_two}>
@@ -138,7 +289,13 @@ const JoinGameFlow: React.FC = () => {
       <div className={styles.back} />
       <div className={styles.text_container}></div>
 
-      {state.userStatus < 4 ? <NotLoggedIn /> : state.userStatus > 100 ? <ActivateWearable /> : <LoggedIn />}
+      {state.userStatus < 4 ? <NotLoggedIn /> : <LoggedIn />}
+      {false && (
+        <>
+          <ActivateWearable />
+          <NoWearablesCheckIn />
+        </>
+      )}
     </div>
   );
 };
