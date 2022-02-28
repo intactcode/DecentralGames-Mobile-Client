@@ -231,16 +231,17 @@
       border-style: solid;
       border-width: 2px;
       border-radius: 7px;
+      border-color: transparent;
       @include media-desktop768-pwa {
         margin-left: 15px;
       }
 
-      &.borderTransparent {
-        border-color: transparent;
+      &.opacity20 {
+        opacity: 0.2;
       }
 
-      &.borderRed {
-        border-color: red;
+      &.opacity100 {
+        opacity: 1;
       }
     }
   }
@@ -341,7 +342,7 @@
           color: rgba(255, 255, 255, 0.8);
         }
       }
-    
+
       @include media-tablet768 {
         margin-top: 0px;
       }
@@ -372,7 +373,7 @@
       align-items: center;
       padding: 8px 11px;
 
-      width: 110px;
+      width: auto;
       height: 31px;
 
       border: 1px solid #67dd6c;
@@ -423,7 +424,7 @@
         font-size: 11px;
       }
 
-      &.redBorder {
+      &.greyBorder {
         border-color: #2a2a2a;
       }
     }
