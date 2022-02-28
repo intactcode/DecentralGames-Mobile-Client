@@ -133,7 +133,7 @@ const PlayerAvatar = (
     infomodalopen,
     setInfoModalOpen,
     dealerxIndex,
-    dealeryIndex
+    dealeryIndex,
   }: PlayerAvatarProps) => {
   return (
     <>

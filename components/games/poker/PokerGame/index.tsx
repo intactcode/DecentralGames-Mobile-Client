@@ -354,7 +354,7 @@ const Settings = (
     issetting,
     setIsLeaderBoard,
     isleaderboard,
-    maxBalanceStack
+    maxBalanceStack,
   }: SettingProps) => {
   return (
     <>
