@@ -13,6 +13,304 @@ import {
 import { useStoreDispatch, useStoreState } from '@/hooks/Hooks';
 import styles from './Character.module.scss';
 
+interface TimerIndicatorProps {
+  index: number
+  activePlayer: number
+  isWon: boolean
+  currentPlayer: number
+  foldedUser: any
+  onLeave: () => void
+  dispatch: ({ }: any) => void
+}
+
+const TimerIndicator = ({ index, activePlayer, isWon, currentPlayer, foldedUser, onLeave, dispatch }: TimerIndicatorProps) => {
+  return index === activePlayer && !isWon ? (
+    <>
+      <div className={styles.gradient} />
+      <div className={styles.spinCircle}>
+        <CountdownCircleTimer
+          isPlaying
+          duration={15}
+          strokeWidth={10}
+          colors={[['#FFFFFF', 1]]}
+          size={90}
+          onComplete={() => {
+            if (currentPlayer === index) {
+              // already folded once
+              if (!!foldedUser && !foldedUser.includes(index)) {
+                dispatch({
+                  type: 'set_folded_user',
+                  data: [...foldedUser, index],
+                });
+              } else {
+                onLeave();
+                dispatch({
+                  type: 'set_is_loading',
+                  data: true,
+                });
+              }
+            }
+          }}
+          trailColor="transparent"
+        />
+      </div>
+    </>
+  ) : (
+    <></>
+  );
+};
+
+interface ModalIndicatorProps {
+  index: number
+  user: any
+  infomodalopen: boolean
+  setInfoModalOpen: any
+  items: any
+  ice?: number;
+  xp?: number;
+  dg?: number;
+}
+const ModalIndicator = ({ index, user, infomodalopen, setInfoModalOpen, items, ice, xp, dg }: ModalIndicatorProps) => {
+  return user ? (
+    <UserInfoDialog
+      open={infomodalopen}
+      setOpen={setInfoModalOpen}
+      items={items}
+      ice={ice}
+      xp={xp}
+      dg={dg}
+    />
+  ) : (
+    <InfoDialog
+      open={infomodalopen}
+      setOpen={setInfoModalOpen}
+      items={items}
+      index={index}
+    />
+  );
+};
+
+interface BetSizeProps {
+  data: any;
+}
+const BetSize = ({ data }: BetSizeProps) => {
+  return data && data?.betSize > 0 ? (
+    <div className={styles.chipForBetContainer}>
+      <div className={styles.chipForBet}>
+        <div className={styles.betAmount}>{data?.betSize}</div>
+        <div className={styles.chipImage}>
+          <Image
+            src="/images/freecoin.svg"
+            width="12px"
+            height="12px"
+            alt="chipImage"
+          />
+        </div>
+      </div>
+    </div>
+  ) : (
+    <></>
+  );
+};
+
+interface PlayerAvatarProps {
+  index: number
+  winnerIndex: number
+  isHandIndex: any
+  data: any
+  infomodalopen: boolean
+  setInfoModalOpen: any
+  dealerxIndex: any
+  dealeryIndex: any
+
+}
+const PlayerAvatar = (
+  {
+    index,
+    winnerIndex,
+    isHandIndex,
+    data,
+    infomodalopen,
+    setInfoModalOpen,
+    dealerxIndex,
+    dealeryIndex
+  }: PlayerAvatarProps) => {
+  return (
+    <>
+      <div
+        className={cn(
+          styles.playerCircle,
+          index === winnerIndex ? styles.whiteBorder : null
+        )}
+        onClick={() => setInfoModalOpen(!infomodalopen)}
+      >
+        <div className={isHandIndex ? '' : styles.inactivePlayer}>
+          <Image
+            src={data?.image ?? '/images/character.png'}
+            width="60px"
+            height="60px"
+            alt="player-circle"
+          />
+        </div>
+      </div>
+      <div
+        className={styles.dealerChip}
+        style={{ left: dealerxIndex, top: dealeryIndex }}
+      >
+        <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
+      </div>
+      <div className={styles.playerInfo}>
+        <div className={isHandIndex ? '' : styles.inactiveColor}>
+          {data?.name ?? `Waiting...${index}`}
+        </div>
+        {data && (
+          <div className={styles.chipForStack}>
+            <div
+              className={styles.betAmount}
+              style={{ color: isHandIndex ? 'white' : '#9A9A9A' }}
+            >
+              {data?.stack}
+            </div>
+            <div className={styles.chipImage}>
+              <Image
+                className={`${isHandIndex ? '' : styles.inactivePlayer}`}
+                src="/images/freecoin.svg"
+                width="12px"
+                height="12px"
+                alt="chipImage"
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+interface CardBackIndicatorProps {
+  isWon: boolean
+  user: any
+  isHandIndex: any
+  cardsLength: number
+}
+const CardBackIndicator = ({ isWon, user, isHandIndex, cardsLength }: CardBackIndicatorProps) => {
+  return !isWon && !user && isHandIndex && !!cardsLength ? (
+    <div className={styles.cardBackContainer}>
+      <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
+      <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
+    </div>
+  ) : (
+    <></>
+  );
+};
+
+interface CardFrontIndicatorProps {
+  isWon: boolean
+  user: any
+  isHandIndex: any
+  index: number
+  cards: any
+  winnersCards: any
+  winnerIndex: number
+}
+const CardFrontIndicator = ({ isWon, user, isHandIndex, index, cards, winnersCards, winnerIndex }: CardFrontIndicatorProps) => {
+  return (
+    <>
+      {!isWon && user && isHandIndex && !!cards.length && (
+        <div className={styles.cardContainer}>
+          <Card
+            type={cards[0].suit}
+            number={cards[0].rank}
+            transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)"
+          />
+          <Card
+            type={cards[1].suit}
+            number={cards[1].rank}
+            transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)"
+          />
+        </div>
+      )}
+      {isWon && winnersCards[index] && (
+        <div
+          className={styles.winnerCardContainer}
+          key={`winner_card_${index}`}
+        >
+          <div
+            className={styles.winnerCardFrame}
+            style={{
+              transform: `scale(${index === winnerIndex ? 1 : 0.75
+                }) translateX(${index === winnerIndex ? 0 : '8px'})`,
+            }}
+          >
+            <Card
+              type={winnersCards[index][0].suit}
+              number={winnersCards[index][0].rank}
+            />
+          </div>
+          <div
+            className={styles.winnerCardFrame}
+            style={{
+              transform: `scale(${index === winnerIndex ? 1 : 0.75
+                }) translateX(${index === winnerIndex ? 0 : '-8px'})`,
+            }}
+          >
+            <Card
+              type={winnersCards[index][1].suit}
+              number={winnersCards[index][1].rank}
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+interface WinnerShowProps {
+  isWon: boolean
+  data: any
+  index: number
+  winnerIndex: number
+  ranking: any
+}
+const WinnerShow = ({ isWon, data, index, winnerIndex, ranking }: WinnerShowProps) => {
+  return isWon && data?.name ? (
+    <div
+      className={cn(
+        styles.fullhouse,
+        index === winnerIndex ? '' : styles.blueBackground
+      )}
+    >
+      {Constants.RESULTS[ranking]}
+    </div>
+  ) : (
+    <></>
+  );
+};
+
+interface WinnerChipsProps {
+  index: number
+  winnerIndex: number
+  tableDataPot: number
+}
+const WinnerChips = ({ index, winnerIndex, tableDataPot }: WinnerChipsProps) => {
+  return index === winnerIndex ? (
+    <div className={styles.chipsForEarning}>
+      <div className={styles.chipsEarnAmount}>+{tableDataPot}</div>
+      <div className={styles.chipImage}>
+        <Image
+          src="/images/freecoin.svg"
+          width="12px"
+          height="12px"
+          alt="chipImage"
+        />
+      </div>
+    </div>
+  ) : (
+    <></>
+  );
+};
+
+
 interface CharacterProps {
   user?: any;
   index: number;
@@ -51,233 +349,7 @@ const Character: React.FC<CharacterProps> = ({
 
   const [infomodalopen, setInfoModalOpen] = useState(false);
 
-  const TimerIndicator: React.FC = () => {
-    return index === activePlayer && !isWon ? (
-      <>
-        <div className={styles.gradient} />
-        <div className={styles.spinCircle}>
-          <CountdownCircleTimer
-            isPlaying
-            duration={15}
-            strokeWidth={10}
-            colors={[['#FFFFFF', 1]]}
-            size={90}
-            onComplete={() => {
-              if (currentPlayer === index) {
-                // already folded once
-                if (!!state.foldedUser && !state.foldedUser.includes(index)) {
-                  dispatch({
-                    type: 'set_folded_user',
-                    data: [...state.foldedUser, index],
-                  });
-                } else {
-                  state.socket.leave();
-                  dispatch({
-                    type: 'set_is_loading',
-                    data: true,
-                  });
-                }
-              }
-            }}
-            trailColor="transparent"
-          />
-        </div>
-      </>
-    ) : (
-      <></>
-    );
-  };
 
-  const ModalIndicator: React.FC = () => {
-    return user ? (
-      <UserInfoDialog
-        open={infomodalopen}
-        setOpen={setInfoModalOpen}
-        items={items}
-        ice={ice}
-        xp={xp}
-        dg={dg}
-      />
-    ) : (
-      <InfoDialog
-        open={infomodalopen}
-        setOpen={setInfoModalOpen}
-        items={items}
-        index={index}
-      />
-    );
-  };
-
-  const BetSize: React.FC = () => {
-    return data && data?.betSize > 0 ? (
-      <div className={styles.chipForBetContainer}>
-        <div className={styles.chipForBet}>
-          <div className={styles.betAmount}>{data?.betSize}</div>
-          <div className={styles.chipImage}>
-            <Image
-              src="/images/freecoin.svg"
-              width="12px"
-              height="12px"
-              alt="chipImage"
-            />
-          </div>
-        </div>
-      </div>
-    ) : (
-      <></>
-    );
-  };
-
-  const PlayerAvatar: React.FC = () => {
-    return (
-      <>
-        <div
-          className={cn(
-            styles.playerCircle,
-            index === winnerIndex && isWon ? styles.whiteBorder : null
-          )}
-          onClick={() => setInfoModalOpen(!infomodalopen)}
-        >
-          <div className={isInHand[index] ? '' : styles.inactivePlayer}>
-            <Image
-              src={data?.image ?? '/images/character.png'}
-              width="60px"
-              height="60px"
-              alt="player-circle"
-            />
-          </div>
-        </div>
-        <div
-          className={styles.dealerChip}
-          style={{ left: dealerx[index], top: dealery[index] }}
-        >
-          <Image src="/images/DealerChip.svg" layout="fill" alt="dealer-chip" />
-        </div>
-        <div className={styles.playerInfo}>
-          <div className={isInHand[index] ? '' : styles.inactiveColor}>
-            {data?.name ?? `Waiting...${index}`}
-          </div>
-          {data && (
-            <div className={styles.chipForStack}>
-              <div
-                className={styles.betAmount}
-                style={{ color: isInHand[index] ? 'white' : '#9A9A9A' }}
-              >
-                {data?.stack}
-              </div>
-              <div className={styles.chipImage}>
-                <Image
-                  className={`${isInHand[index] ? '' : styles.inactivePlayer}`}
-                  src="/images/freecoin.svg"
-                  width="12px"
-                  height="12px"
-                  alt="chipImage"
-                />
-              </div>
-            </div>
-          )}
-        </div>
-      </>
-    );
-  };
-
-  const CardBackIndicator = () => {
-    return !isWon && !user && isInHand[index] && !!state.cards.length ? (
-      <div className={styles.cardBackContainer}>
-        <CardBack transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)" />
-        <CardBack transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)" />
-      </div>
-    ) : (
-      <></>
-    );
-  };
-
-  const CardFrontIndicator: React.FC = () => {
-    return (
-      <>
-        {!isWon && user && isInHand[index] && !!state.cards.length && (
-          <div className={styles.cardContainer}>
-            <Card
-              type={state.cards[0].suit}
-              number={state.cards[0].rank}
-              transform="matrix(0.99, -0.14, 0.14, 0.99, 0, 0)"
-            />
-            <Card
-              type={state.cards[1].suit}
-              number={state.cards[1].rank}
-              transform="matrix(0.99, 0.14, -0.14, 0.99, 0, 0)"
-            />
-          </div>
-        )}
-        {isWon && winners.cards[index] && (
-          <div
-            className={styles.winnerCardContainer}
-            key={`winner_card_${index}`}
-          >
-            <div
-              className={styles.winnerCardFrame}
-              style={{
-                transform: `scale(${
-                  index === winnerIndex ? 1 : 0.75
-                }) translateX(${index === winnerIndex ? 0 : '8px'})`,
-              }}
-            >
-              <Card
-                type={winners.cards[index][0].suit}
-                number={winners.cards[index][0].rank}
-              />
-            </div>
-            <div
-              className={styles.winnerCardFrame}
-              style={{
-                transform: `scale(${
-                  index === winnerIndex ? 1 : 0.75
-                }) translateX(${index === winnerIndex ? 0 : '-8px'})`,
-              }}
-            >
-              <Card
-                type={winners.cards[index][1].suit}
-                number={winners.cards[index][1].rank}
-              />
-            </div>
-          </div>
-        )}
-      </>
-    );
-  };
-
-  const WinnerShow: React.FC = () => {
-    return isWon && data?.name ? (
-      <div
-        className={cn(
-          styles.fullhouse,
-          index === winnerIndex ? '' : styles.blueBackground
-        )}
-      >
-        {Constants.RESULTS[ranking]}
-      </div>
-    ) : (
-      <></>
-    );
-  };
-
-  const WinnerChips: React.FC = () => {
-    return index === winnerIndex && isWon ? (
-      <div className={styles.chipsForEarning}>
-        <div className={styles.chipsEarnAmount}>+{state.tableData?.pot}</div>
-        <div className={styles.chipImage}>
-          <Image
-            src="/images/freecoin.svg"
-            width="12px"
-            height="12px"
-            alt="chipImage"
-          />
-        </div>
-      </div>
-    ) : (
-      <></>
-    );
-  };
 
   return (
     <section
@@ -287,14 +359,63 @@ const Character: React.FC<CharacterProps> = ({
       }}
       className={styles[classString]}
     >
-      <TimerIndicator />
-      <ModalIndicator />
-      <BetSize />
-      <PlayerAvatar />
-      <CardBackIndicator />
-      <CardFrontIndicator />
-      <WinnerShow />
-      <WinnerChips />
+      <TimerIndicator
+        index={index}
+        activePlayer={activePlayer}
+        isWon={isWon}
+        currentPlayer={currentPlayer}
+        foldedUser={state.foldedUser}
+        onLeave={state.socket.leave}
+        dispatch={dispatch}
+      />
+      <ModalIndicator
+        index={index}
+        user={user}
+        infomodalopen={infomodalopen}
+        setInfoModalOpen={setInfoModalOpen}
+        items={items}
+        ice={ice}
+        xp={xp}
+        dg={dg}
+      />
+      <BetSize data={data} />
+      <PlayerAvatar
+        index={index}
+        winnerIndex={winnerIndex}
+        isHandIndex={isInHand[index]}
+        data={data}
+        infomodalopen={infomodalopen}
+        setInfoModalOpen={setInfoModalOpen}
+        dealerxIndex={dealerx[index]}
+        dealeryIndex={dealery[index]}
+      />
+      <CardBackIndicator
+        isWon={isWon}
+        user={user}
+        isHandIndex={isInHand[index]}
+        cardsLength={state.cards.length}
+      />
+      <CardFrontIndicator
+        isWon={isWon}
+        user={user}
+        isHandIndex={isInHand[index]}
+        index={index}
+        cards={state.cards}
+        winnersCards={winners.cards}
+        winnerIndex={winnerIndex}
+      />
+      <WinnerShow
+        isWon={isWon}
+        data={data}
+        index={index}
+        winnerIndex={winnerIndex}
+        ranking={ranking}
+      />
+      <WinnerChips
+        index={index}
+        winnerIndex={winnerIndex}
+        tableDataPot={state.tableData?.pot}
+      />
     </section>
   );
 };
