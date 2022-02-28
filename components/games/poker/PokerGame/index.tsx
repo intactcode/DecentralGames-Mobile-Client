@@ -239,12 +239,13 @@ const PokerGame: React.FC = () => {
             <div
               className={cn(
                 styles.cardContainer,
-                winnerPair.find(
-                  (winner: any) =>
-                    winner.suit === card.suit && winner.rank === card.rank
-                )
-                  ? styles.borderRed
-                  : styles.borderTransparent
+                !isWon ||
+                  winnerPair.find(
+                    (winner: any) =>
+                      winner.suit === card.suit && winner.rank === card.rank
+                  )
+                  ? styles.opacity100
+                  : styles.opacity20
               )}
               key={`card_${index}`}
             >
@@ -322,7 +323,7 @@ const PokerGame: React.FC = () => {
                 <div className={styles.dot} />
               </div>
             ) : (
-              <div className={cn(styles.turnButton, styles.redBorder)}>
+              <div className={cn(styles.turnButton, styles.greyBorder)}>
                 <div className={styles.title}>
                   {`${players[activePlayer]?.name}'s Turn`}
                 </div>
@@ -330,7 +331,7 @@ const PokerGame: React.FC = () => {
             ))}
 
           {isWon && (
-            <div className={styles.turnButton}>
+            <div className={cn(styles.turnButton, styles.greyBorder)}>
               <div className={styles.title} style={{ marginRight: '5px' }}>
                 {`${players[winnerIndex]?.name} wins`}
               </div>
