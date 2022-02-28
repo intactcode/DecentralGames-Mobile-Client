@@ -17,7 +17,7 @@ const NotLoggedIn: React.FC = () => {
           </div>
         </Link>
 
-        <h2 className={styles.welcome}>
+        <h2 className={styles.welcome_text}>
           Welcome to Free to Play <br /> Play-to-Earn ICE Poker!
         </h2>
 
@@ -75,7 +75,7 @@ const ActivateWearable: React.FC = () => {
         </div>
       </Link>
 
-      <h2 className={styles.welcome}>You Must Activate Your Wearable</h2>
+      <h2 className={styles.welcome_text}>You Must Activate Your Wearable</h2>
 
       <div className={styles.locked_wearable}>
         <img
@@ -186,7 +186,7 @@ const NoWearablesCheckIn: React.FC = () => {
         </div>
       </Link>
 
-      <h2 className={styles.welcome}>Check-In To Play ICE Poker</h2>
+      <h2 className={styles.welcome_text}>Check-In To Play ICE Poker</h2>
 
       <div className={styles.titles}>
         <p className={styles.title}>
@@ -261,7 +261,7 @@ const LoggedIn: React.FC = () => {
         </div>
       </Link>
 
-      <h2 className={styles.welcome}>Ice Wearable Required!</h2>
+      <h2 className={styles.welcome_text}>Ice Wearable Required!</h2>
 
       <img
         className={styles.wearable_image_two}
