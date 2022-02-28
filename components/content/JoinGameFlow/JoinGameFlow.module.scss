@@ -1,3 +1,21 @@
+@mixin mixin_dialog {
+  max-width: 448px;
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  background: #1f1f1f;
+  border-radius: 16px 16px 0px 0px;
+  padding: 0px 24px 0px 24px;
+}
+
+@mixin mixin_play_text {
+  font-family: Larsseit;
+  font-size: 18px;
+  text-align: center;
+  color: white;
+}
+
 .main {
   max-width: 100vw;
   min-height: 100vh;
@@ -29,47 +47,38 @@
   color: white;
 }
 
-.button_container {
-  max-width: 448px;
-  position: absolute;
-  bottom: 0;
-  height: 433px;
-  z-index: 10;
-  width: 100%;
-  background: #1f1f1f;
-  border-radius: 16px 16px 0px 0px;
-  .close {
-    top: -55px;
-    left: 15px;
-    position: absolute;
-    background: #1f1f1f;
-    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
-    border-radius: 24px;
-    width: 48px;
-    height: 48px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    color: white;
-  }
+.welcome_text {
+  margin: 24px 0px 24px 0px;
+  font-family: Larsseit-ExtraBold;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  line-height: 32px;
+  height: fit-content;
+}
 
-  .welcome {
-    padding: 0px 24px 16px 24px;
-    margin-bottom: 0px;
-    font-family: Larsseit-ExtraBold;
-    font-size: 24px;
-    text-align: center;
-    color: white;
-    line-height: 32px;
-  }
+.close {
+  top: -55px;
+  left: 10px;
+  position: absolute;
+  background: #1f1f1f;
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
+  border-radius: 24px;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  color: white;
+}
+
+.button_container {
+  @include mixin_dialog;
+  height: 433px;
 
   .play_text {
-    margin-top: 0px;
-    font-family: Larsseit;
-    font-size: 18px;
-    text-align: center;
-    color: white;
+    @include mixin_play_text;
   }
 
   .image_span {
@@ -110,97 +119,28 @@
 }
 
 .button_container_two {
-  max-width: 448px;
-  position: absolute;
-  bottom: 0;
+  @include mixin_dialog;
   height: 518px;
-  z-index: 10;
-  width: 100%;
-  background: #1f1f1f;
-  border-radius: 16px 16px 0px 0px;
-
-  .close {
-    top: -55px;
-    left: 15px;
-    position: absolute;
-    background: #1f1f1f;
-    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
-    border-radius: 24px;
-    width: 48px;
-    height: 48px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    color: white;
-  }
-
-  .welcome {
-    padding: 0px 24px 0px 24px;
-    margin-bottom: 0px;
-    font-family: Larsseit-ExtraBold;
-    font-size: 24px;
-    text-align: center;
-    color: white;
-    line-height: 32px;
-  }
 
   .wearable_image_two {
-    margin-top: 0px;
-    margin-bottom: 0px;
     display: flex;
-    margin-left: 20px;
-    width: calc(100% - 40px);
+    margin: -10px 0px -10px 0px;
+    width: 100%;
   }
 
   .play_text {
+    @include mixin_play_text;
     margin-top: -4px;
-    font-family: Larsseit;
-    font-size: 18px;
-    text-align: center;
-    color: white;
-    padding: 0px 24px 24px 24px;
   }
 }
 
 .activate_wearable {
-  max-width: 448px;
-  position: absolute;
-  bottom: 0;
+  @include mixin_dialog;
   height: 520px;
-  z-index: 10;
-  width: 100%;
-  background: #1f1f1f;
-  border-radius: 16px 16px 0px 0px;
-
-  .close {
-    top: -55px;
-    left: 15px;
-    position: absolute;
-    background: #1f1f1f;
-    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
-    border-radius: 24px;
-    width: 48px;
-    height: 48px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    color: white;
-  }
-
-  .welcome {
-    padding: 0px 24px 0px 24px;
-    margin-bottom: 12px;
-    font-family: Larsseit-ExtraBold;
-    font-size: 24px;
-    text-align: center;
-    color: white;
-    line-height: 32px;
-  }
 
   .locked_wearable {
     margin-left: calc(50% - 95px);
+    margin-top: -10px;
     width: 190px;
     height: 190px;
     position: relative;
@@ -234,55 +174,39 @@
   }
 
   .play_text {
+    @include mixin_play_text;
     margin-top: 16px;
     margin-bottom: 8px;
-    font-family: Larsseit;
-    font-size: 18px;
-    text-align: center;
-    color: white;
-    padding: 0px 24px 24px 24px;
   }
 }
 
 .no_wearables_check_in {
-  max-width: 448px;
-  position: absolute;
-  bottom: 0;
+  @include mixin_dialog;
   height: 590px;
-  z-index: 10;
-  width: 100%;
-  background: #1f1f1f;
-  border-radius: 16px 16px 0px 0px;
 
-  .close {
-    top: -55px;
-    left: 15px;
-    position: absolute;
-    background: #1f1f1f;
-    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.24);
-    border-radius: 24px;
-    width: 48px;
-    height: 48px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  .titles {
     display: flex;
-    color: white;
-  }
+    justify-content: space-between;
 
-  .welcome {
-    padding: 0px 24px 0px 24px;
-    margin: 24px 0px 22px 0px;
-    font-family: Larsseit-ExtraBold;
-    font-size: 24px;
-    text-align: center;
-    color: white;
-    line-height: 32px;
+    .title {
+      margin-top: 2px;
+      font-family: Larsseit-Bold;
+      font-size: 15px;
+      color: white;
+    }
+  
+    .highlighted_title {
+      display: flex;
+      margin-top: 2px;
+      font-family: Larsseit-Bold;
+      font-size: 12px;
+      color: #509bff;
+    }
   }
 
   .wear_items {
-    padding: 0px 24px 24px 24px;
     display: flex;
+    margin-bottom: 20px;
 
     .wear_item {
       width: 60px;
@@ -390,35 +314,9 @@
     }
   }
 
-  .titles {
-    display: flex;
-    justify-content: space-between;
-
-    .title {
-      margin-top: 2px;
-      font-family: Larsseit-Bold;
-      font-size: 15px;
-      color: white;
-      padding: 0px 0px 0px 24px;
-    }
-  
-    .highlighted_title {
-      display: flex;
-      margin-top: 2px;
-      font-family: Larsseit-Bold;
-      font-size: 12px;
-      color: #509bff;
-      padding: 0px 24px 0px 0px;
-    }
-  }
-
   .play_text {
+    @include mixin_play_text;
     margin-top: 4px;
     margin-bottom: 4px;
-    font-family: Larsseit;
-    font-size: 18px;
-    text-align: center;
-    color: white;
-    padding: 0px 24px 24px 24px;
   }
 }
