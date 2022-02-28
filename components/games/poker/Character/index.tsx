@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { get } from 'lodash';
+import cn from 'classnames';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import Image from 'next/image';
 import { Constants } from '@/components/common';
@@ -40,7 +41,6 @@ const Character: React.FC<CharacterProps> = ({
   const isInHand =
     state.tableData?.seats?.map((el: any) => el && el.isInHand) ?? [];
   const winners = state.winners;
-  const winnerPair = get(winners, 'winners.0.0.1.cards', []);
   const ranking = get(winners, 'winners.0.0.1.ranking', 0);
   const winnerIndex = get(winners, 'winners.0.0.0', isInHand.indexOf(true));
 
@@ -132,7 +132,10 @@ const Character: React.FC<CharacterProps> = ({
     return (
       <>
         <div
-          className={styles.playerCircle}
+          className={cn(
+            styles.playerCircle,
+            index === winnerIndex && isWon ? styles.whiteBorder : null
+          )}
           onClick={() => setInfoModalOpen(!infomodalopen)}
         >
           <div className={isInHand[index] ? '' : styles.inactivePlayer}>
@@ -214,13 +217,9 @@ const Character: React.FC<CharacterProps> = ({
             <div
               className={styles.winnerCardFrame}
               style={{
-                borderColor: winnerPair.find(
-                  (winner: any) =>
-                    winner.suit === winners.cards[index][0].suit &&
-                    winner.rank === winners.cards[index][0].rank
-                )
-                  ? 'red'
-                  : 'transparent',
+                transform: `scale(${
+                  index === winnerIndex ? 1 : 0.75
+                }) translateX(${index === winnerIndex ? 0 : '8px'})`,
               }}
             >
               <Card
@@ -231,13 +230,9 @@ const Character: React.FC<CharacterProps> = ({
             <div
               className={styles.winnerCardFrame}
               style={{
-                borderColor: winnerPair.find(
-                  (winner: any) =>
-                    winner.suit === winners.cards[index][1].suit &&
-                    winner.rank === winners.cards[index][1].rank
-                )
-                  ? 'red'
-                  : 'transparent',
+                transform: `scale(${
+                  index === winnerIndex ? 1 : 0.75
+                }) translateX(${index === winnerIndex ? 0 : '-8px'})`,
               }}
             >
               <Card
@@ -252,8 +247,33 @@ const Character: React.FC<CharacterProps> = ({
   };
 
   const WinnerShow: React.FC = () => {
-    return isWon && index === winnerIndex ? (
-      <div className={styles.fullhouse}>{Constants.RESULTS[ranking]}</div>
+    return isWon && data?.name ? (
+      <div
+        className={cn(
+          styles.fullhouse,
+          index === winnerIndex ? '' : styles.blueBackground
+        )}
+      >
+        {Constants.RESULTS[ranking]}
+      </div>
+    ) : (
+      <></>
+    );
+  };
+
+  const WinnerChips: React.FC = () => {
+    return index === winnerIndex && isWon ? (
+      <div className={styles.chipsForEarning}>
+        <div className={styles.chipsEarnAmount}>+{state.tableData?.pot}</div>
+        <div className={styles.chipImage}>
+          <Image
+            src="/images/freecoin.svg"
+            width="12px"
+            height="12px"
+            alt="chipImage"
+          />
+        </div>
+      </div>
     ) : (
       <></>
     );
@@ -274,6 +294,7 @@ const Character: React.FC<CharacterProps> = ({
       <CardBackIndicator />
       <CardFrontIndicator />
       <WinnerShow />
+      <WinnerChips />
     </section>
   );
 };

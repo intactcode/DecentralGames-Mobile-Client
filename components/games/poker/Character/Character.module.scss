@@ -1,4 +1,4 @@
-@import "/styles/mixins";
+@import '/styles/mixins';
 
 .playerCircle {
   cursor: pointer;
@@ -15,6 +15,10 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+
+  &.whiteBorder {
+    border-color: white;
+  }
 }
 
 .inactivePlayer {
@@ -118,7 +122,8 @@
   position: absolute;
   display: flex;
   margin-top: -135px;
-  margin-left: -20px;
+  margin-left: 50%;
+  transform: translateX(-50%);
   @include media-tablet768-pwa {
     margin-top: -118px;
     margin-left: -6px;
@@ -128,6 +133,7 @@
     border-style: solid;
     border-width: 2px;
     border-radius: 7px;
+    border-color: transparent;
   }
 }
 
@@ -161,6 +167,10 @@
   //  white-space: nowrap;
   //  transform: translateX(-50%);
   // }
+
+  &.blueBackground {
+    background: #2684ff;
+  }
 }
 
 .chipForBet {
@@ -179,7 +189,7 @@
     margin-left: 3px !important;
     margin-top: 2px !important;
   }
-  
+
   &:nth-of-type(1) {
     display: flex;
   }
@@ -229,7 +239,6 @@
     @include media-tablet768 {
       top: -80px;
     }
-
   }
 }
 
@@ -332,7 +341,7 @@
   left: calc(50% + 110px);
   top: 55px;
   @include media-tablet768 {
-    left: calc(50% + 70px);
+    left: calc(50% + 90px);
     top: 190px;
   }
   @include media-phone428 {
@@ -340,7 +349,7 @@
   }
   @include media-phone390 {
     top: 150px;
-    left: calc(50% + 70px);
+    left: calc(50% + 90px);
   }
   @include media-tablet768-pwa {
     top: 24vh !important;
@@ -363,7 +372,7 @@
   left: calc(50% + 230px);
   top: 200px;
   @include media-tablet768 {
-    left: calc(50% + 70px);
+    left: calc(50% + 90px);
     top: 380px;
   }
   @include media-phone428 {
@@ -371,7 +380,7 @@
   }
   @include media-phone390 {
     top: 340px;
-    left: calc(50% + 70px);
+    left: calc(50% + 90px);
   }
   @include media-tablet768-pwa {
     left: calc(50% + 80px) !important;
@@ -390,5 +399,28 @@
     position: absolute;
     display: flex;
     justify-content: center;
+  }
+}
+
+.chipsForEarning {
+  background: white;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  font-family: Larsseit-Bold;
+  border-radius: 30px;
+  padding: 1px 8px;
+  top: calc(50% - 11px);
+  left: calc(100% - 10px);
+  z-index: 30;
+
+  .chipsEarnAmount {
+    color: black;
+    font-size: 14px;
+    line-height: 19px;
+  }
+
+  .chipImage {
+    width: 12px;
   }
 }
